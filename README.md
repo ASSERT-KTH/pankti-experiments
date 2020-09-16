@@ -53,7 +53,7 @@ Add the following xml code into the pom file of the target project.
 </plugin>
 ```
 
-Then run `mvn test`. The JaCoCo report will be generated at `./target/site/jacoco`. If the project contains multiple modules, the plugin can be declared in the root pom file. Run `mvn jacoco:report-aggregate` after `mvn test` to get an aggregated report.
+Then run `mvn test` and `mvn jacoco:report`. The JaCoCo report will be generated at `./target/site/jacoco`. If the project contains multiple modules, the plugin can be declared in the root pom file. Run `mvn jacoco:report-aggregate` after `mvn test` to get an aggregated report.
 
 #### WL (workload) Method Cov. and WL Line Cov.
 
