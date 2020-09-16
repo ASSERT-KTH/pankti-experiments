@@ -16,7 +16,7 @@ There are 4 projects selected for the experiments. The following table shows the
 | PDFBox        | xx | xx | xx | xx | xx | xx | xx |
 | ttorrent      | xx | xx | xx | xx | xx | xx | xx |
 | jitsi         | xx | xx | xx | xx | xx | xx | xx |
-| [hedwig](http://hwmail.sourceforge.net/) | 0.7 | Sum: 66,539 <br> Java: 21,444 | 2,303 | 14.9% | 11% | 36.9% | 25% |
+| [hedwig](http://hwmail.sourceforge.net/) | 0.7 | Sum: 66,539 <br> Java: 21,444 | 2,303 | 14.9% <br> 343/2,303 | 12.2% <br> 1,250/10,266 | 36.9% <br> 850/2,303 | 25% <br> 3,002/10,266 |
 
 ### The Commands for Descriptive Metrics Measurement
 
