@@ -15,7 +15,7 @@ There are 4 projects selected for the experiments. The following table shows the
 | ------------- | ------------- | ----- | ------- | -------------- | ------------ | -------------- | ------------ |
 | PDFBox        | xx | xx | xx | xx | xx | xx | xx |
 | ttorrent      | xx | xx | xx | xx | xx | xx | xx |
-| jitsi         | xx | xx | xx | xx | xx | xx | xx |
+| [jitsi-videobridge](https://github.com/jitsi/jitsi-videobridge/tree/v2.1) | v2.1 | Sum: 22,826 <br> Java: 18,926 | 163 | 31.4% <br> 393/1,253 | 27.5% <br> 2,145/7,791 | xx | xx |
 | [hedwig](http://hwmail.sourceforge.net/) | 0.7 | Sum: 66,539 <br> Java: 21,444 | 446 | 14.9% <br> 343/2,303 | 12.2% <br> 1,250/10,266 | 36.9% <br> 850/2,303 | 25% <br> 3,002/10,266 |
 
 ### The Commands for Descriptive Metrics Measurement
