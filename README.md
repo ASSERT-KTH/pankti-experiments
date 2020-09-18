@@ -11,12 +11,14 @@ Regarding the experimental targets, the following criteria is applied:
 
 There are 4 projects selected for the experiments. The following table shows the descriptive metrics of each project.
 
-| project       | Version       | LOC   | Classes | TS Method Cov. | TS Line Cov. | WL Method Cov. | WL Line Cov. |
-| ------------- | ------------- | ----- | ------- | -------------- | ------------ | -------------- | ------------ |
-| PDFBox        | xx | xx | xx | xx | xx | xx | xx |
-| ttorrent      | xx | xx | xx | xx | xx | xx | xx |
-| [jitsi-videobridge](https://github.com/jitsi/jitsi-videobridge/tree/v2.1) | v2.1 | Sum: 22,826 <br> Java: 18,926 | 163 | 31.4% <br> 393/1,253 | 27.5% <br> 2,145/7,791 | xx | xx |
-| [hedwig](http://hwmail.sourceforge.net/) | 0.7 | Sum: 66,539 <br> Java: 21,444 | 446 | 14.9% <br> 343/2,303 | 12.2% <br> 1,250/10,266 | 36.9% <br> 850/2,303 | 25% <br> 3,002/10,266 |
+| project       | Version       | LOC   | Classes | App. Methods | Test Methods | TS Method Cov. | TS Line Cov. | WL Method Cov. | WL Line Cov. |
+| ------------- | ------------- | ----- | ------- | -------------| ------------ | -------------- | ------------ | -------------- | ------------ |
+| PDFBox        | xx | xx | xx | xx | xx | xx | xx | xx | xx |
+| [ttorrent-cli](https://github.com/mpetazzoni/ttorrent/tree/ttorrent-2.0) | 2.0 | Sum: 14,269 <br> Java: 13,573 | 191 | 943 | 268 | 71.4% <br> 673/943 | 68.7% <br> 2,837/4,130<sup>*</sup> | 52.8% <br> 542/1,026 | 50.1% <br> 2535/5064 |
+| [jitsi-videobridge](https://github.com/jitsi/jitsi-videobridge/tree/v2.1) | v2.1 | Sum: 22,826 <br> Java: 18,926 | 163 | 1,012 | 89 | 31.4% <br> 393/1,253 | 27.5% <br> 2,145/7,791 | xx | xx |
+| [hedwig](http://hwmail.sourceforge.net/) | 0.7 | Sum: 66,539 <br> Java: 21,444 | 446 | 2,287 | 85 | 14.9% <br> 343/2,303 | 12.2% <br> 1,250/10,266 | 36.9% <br> 850/2,303 | 25% <br> 3,002/10,266 |
+
+<sup>*</sup>The metric is statement coverage mesured by OpenClover.
 
 ### The Commands for Descriptive Metrics Measurement
 
