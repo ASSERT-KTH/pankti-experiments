@@ -15,7 +15,7 @@ There are 4 projects selected for the experiments. The following table shows the
 | ------------- | ------------- | ----- | ------- | -------------| ------------ | -------------- | ------------ | -------------- | ------------ |
 | PDFBox        | xx | xx | xx | xx | xx | xx | xx | xx | xx |
 | [ttorrent-cli](https://github.com/mpetazzoni/ttorrent/tree/ttorrent-2.0) | 2.0 | Sum: 14,269 <br> Java: 13,573 | 191 | 943 | 268 | 71.4% <br> 673/943 | 68.7% <br> 2,837/4,130<sup>*</sup> | 52.8% <br> 542/1,026 | 50.1% <br> 2535/5064 |
-| [jitsi-videobridge](https://github.com/jitsi/jitsi-videobridge/tree/v2.1) | v2.1 | Sum: 22,826 <br> Java: 18,926 | 163 | 1,012 | 89 | 31.4% <br> 393/1,253 | 27.5% <br> 2,145/7,791 | xx | xx |
+| [jitsi-videobridge](https://github.com/jitsi/jitsi-videobridge/tree/stable/jitsi-meet_4857) | stable-4857 | Sum: 22,826 <br> Java: 18,926 | 154 | 874 | 101 | 40.0% <br> 652/1,627 | 33.6% <br> 2,706/8,048 | 50.4% <br> 842/1,671 | 49.0% <br> 3,995/8,148 |
 | [hedwig](http://hwmail.sourceforge.net/) | 0.7 | Sum: 66,539 <br> Java: 21,444 | 446 | 2,287 | 85 | 14.9% <br> 343/2,303 | 12.2% <br> 1,250/10,266 | 36.9% <br> 850/2,303 | 25% <br> 3,002/10,266 |
 
 <sup>*</sup>The metric is statement coverage mesured by OpenClover.
@@ -32,27 +32,31 @@ cloc .
 
 #### Classes, TS Method Cov., and TS Line Cov.
 
-Add the following xml code into the pom file of the target project.
+Add the following xml code into the pom file of the target project within `<project></project>`.
 ```
-<plugin>
-	<groupId>org.jacoco</groupId>
-	<artifactId>jacoco-maven-plugin</artifactId>
-	<version>0.8.5</version>
-	<executions>
-		<execution>
-			<id>default-prepare-agent</id>
-			<goals>
-				<goal>prepare-agent</goal>
-			</goals>
-		</execution>
-		<execution>
-			<id>default-report</id>
-			<goals>
-				<goal>report</goal>
-			</goals>
-		</execution>
-	</executions>
-</plugin>
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.jacoco</groupId>
+      <artifactId>jacoco-maven-plugin</artifactId>
+      <version>0.8.5</version>
+      <executions>
+        <execution>
+          <id>default-prepare-agent</id>
+          <goals>
+            <goal>prepare-agent</goal>
+          </goals>
+        </execution>
+        <execution>
+          <id>default-report</id>
+          <goals>
+            <goal>report</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
 ```
 
 Then run `mvn test` and `mvn jacoco:report`. The JaCoCo report will be generated at `./target/site/jacoco`. If the project contains multiple modules, the plugin can be declared in the root pom file. Run `mvn jacoco:report-aggregate` after `mvn test` to get an aggregated report.
