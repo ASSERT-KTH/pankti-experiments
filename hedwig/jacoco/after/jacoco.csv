@@ -1,0 +1,447 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Hedwig::Assembly/hedwig-api,com.hs.mail.smtp.message,HostAddress,10,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.smtp.message,MailAddress,102,115,15,9,25,30,18,7,6,7
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message,MessageMetaData,19,0,0,0,7,0,4,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message,MessageHeader.new AbstractContentHandler() {...},24,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message,FetchData,38,0,0,0,17,0,11,0,11,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message,MailMessage,102,0,2,0,30,0,11,0,10,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message,MessageHeader,586,0,86,0,148,0,59,0,16,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message,FetchData.FetchProfileItem,35,0,0,0,8,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message,PhysMessage,37,0,2,0,14,0,7,0,6,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message,SequenceRange,54,44,8,4,8,10,10,4,4,4
+Hedwig::Assembly/hedwig-api,com.hs.mail.security.login,PropertiesLoginModule,258,0,20,0,50,0,14,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security.login,CryptPasswordEncoder,5015,0,84,0,169,0,56,0,14,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security.login,MD5PasswordEncoder,711,0,32,0,83,0,26,0,10,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security.login,BasicLoginModule,225,0,16,0,58,0,18,0,10,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security.login,BasicCallbackHandler,46,0,6,0,12,0,5,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security.login,PlaintextPasswordEncoder,14,0,0,0,4,0,3,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security.login,JdbcLoginModule,227,0,26,0,50,0,16,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security.login,JndiLoginModule,334,0,28,0,80,0,21,0,7,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.container.config,HedwigVersion,35,0,4,0,15,0,4,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.container.config,Config,708,0,48,0,163,0,65,0,41,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.container.config,ComponentManager,14,0,0,0,5,0,4,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.container.server,SSLContextFactory,48,0,0,0,12,0,3,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,RollingPrintStream,162,0,16,0,52,0,17,0,9,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,MailUtils,31,0,4,0,8,0,6,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,BASE64,539,0,26,0,50,0,16,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,WildcardMatch,19,74,8,18,4,21,7,8,1,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,MessageIDGenerator,70,0,2,0,17,0,3,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,CaseInsensitiveMap.CaseInsensitiveString,16,27,4,2,3,9,3,4,0,4
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,Log4jUtils,27,22,1,1,8,8,2,1,1,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,EhCacheWrapper,59,3,9,1,19,2,11,1,6,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,CaseInsensitiveMap.HashIterator,4,36,0,2,2,9,1,4,1,3
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,CaseInsensitiveMap.KeyIterator,0,12,0,0,0,4,0,2,0,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,InetAddressMatcher,272,113,26,14,54,28,22,7,7,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,FileUtils,234,60,14,0,59,10,15,2,8,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,CaseInsensitiveMap.KeySet,0,15,0,0,0,3,0,3,0,3
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,CaseInsensitiveMap.EntryIterator,11,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,CaseInsensitiveMap,57,111,3,9,14,24,10,13,8,9
+Hedwig::Assembly/hedwig-api,com.hs.mail.util,CaseInsensitiveMap.EntrySet,15,0,0,0,3,0,3,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.io,LineReader,52,0,8,0,16,0,7,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.io,LineReader.TerminationException,7,0,0,0,3,0,1,0,1,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.io,LineReader.LineLengthExceededException,7,0,0,0,3,0,1,0,1,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.io,MessageSizeException,4,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.io,InternetPrintWriter,176,0,2,0,64,0,16,0,15,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.io,DotStuffingInputStream,10,116,10,18,3,26,10,7,0,3
+Hedwig::Assembly/hedwig-api,com.hs.mail.io,CharTerminatedInputStream,35,173,7,21,11,39,7,11,1,3
+Hedwig::Assembly/hedwig-api,com.hs.mail.io,ExtraDotOutputStream,61,0,12,0,20,0,10,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.io,CountingInputStream,0,40,0,6,0,14,0,8,0,5
+Hedwig::Assembly/hedwig-api,com.hs.mail.io,SizeLimitedInputStream,77,0,8,0,17,0,8,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security,UserPrincipal,18,0,0,0,8,0,4,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security,RolePrincipal,4,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security,BasicPrincipal,66,0,10,0,14,0,10,0,5,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiACLDao,307,55,20,0,53,3,18,2,8,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,OracleMessageDao.new PreparedStatementCreator() {...},68,0,2,0,11,0,3,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,OracleMessageDao.new PreparedStatementCreator() {...},28,0,0,0,5,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiACLDao.new RowMapper() {...},43,3,4,0,8,1,3,1,1,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,MySqlSearchDao,10,0,0,0,3,0,3,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiSearchDao.new RowCallbackHandler() {...},36,0,4,0,7,0,4,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,MySqlMailboxDao,230,0,10,0,41,0,13,0,8,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiSearchDao,519,3,70,0,97,1,50,1,15,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,OracleSearchDao.new SearchQuery() {...},28,3,0,0,3,1,1,1,1,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiMailboxDao.new RowMapper() {...},52,3,0,0,10,1,1,1,1,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,MySqlDaoFactory,23,0,0,0,7,0,1,0,1,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,PlatformUtils,30,85,5,3,14,15,4,3,0,3
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiUserDao.new RowMapper() {...},31,3,0,0,7,1,1,1,1,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiUserDao.new RowMapper() {...},21,3,0,0,5,1,1,1,1,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,OracleMessageDao,215,3,2,0,33,1,8,1,7,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,MySqlUserDao,37,0,2,0,6,0,3,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiMessageDao.new RowMapper() {...},34,3,0,0,7,1,1,1,1,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiMessageDao.new RowMapper() {...},9,0,0,0,2,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,OracleMailboxDao,283,3,14,0,52,1,14,1,7,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiMessageDao.new RowCallbackHandler() {...},32,0,0,0,6,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiMessageDao.new RowMapper() {...},20,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,OracleDaoFactory,0,23,0,0,0,7,0,1,0,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,MySqlSearchDao.new SearchQuery() {...},26,0,0,0,3,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AbstractDao,91,3,2,0,20,1,8,1,7,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,MySqlACLDao,3,0,0,0,1,0,1,0,1,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,MySqlMailboxDao.new PreparedStatementCreator() {...},53,0,2,0,8,0,3,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,DaoFactory,24,56,4,2,8,20,8,5,5,5
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,OracleUserDao,34,3,2,0,5,1,2,1,1,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,FlagUtils,163,0,22,0,20,0,17,0,6,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,SearchQuery.Query,12,0,0,0,4,0,1,0,1,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,SearchQuery,314,3,38,0,62,1,30,1,9,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,OracleMailboxDao.new PreparedStatementCreator() {...},58,0,2,0,8,0,3,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,MySqlMessageDao.new PreparedStatementCreator() {...},63,0,2,0,11,0,3,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,MySqlMessageDao.new PreparedStatementCreator() {...},23,0,0,0,5,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,OracleSearchDao,6,8,0,0,2,2,2,2,2,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiMessageDao,656,8,48,0,121,2,49,2,25,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiMailboxDao,472,8,16,0,73,2,26,2,18,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,AnsiUserDao,138,12,4,0,21,3,8,2,6,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,MySqlMessageDao,184,0,0,0,29,0,7,0,7,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.dao,OracleACLDao,0,3,0,0,0,1,0,1,0,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallback() {...},21,0,0,0,6,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},27,0,0,0,8,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},58,0,4,0,9,0,4,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},37,0,0,0,8,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,MailboxACL.MailboxACLEntry,17,0,0,0,8,0,5,0,5,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,Mailbox,192,3,10,0,56,1,32,1,27,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,SelectedMailbox,137,0,16,0,34,0,22,0,14,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,MailboxACL,40,0,0,0,18,0,6,0,6,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new MessageDao.PhysMessageCallback() {...},11,0,0,0,3,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,UidToMsnMapper,245,19,42,0,51,7,29,1,8,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},22,0,0,0,8,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,MailboxACL.EditMode,34,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},34,0,2,0,10,0,3,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallback() {...},39,0,0,0,8,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},27,0,0,0,8,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},27,0,0,0,8,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},32,0,0,0,8,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},16,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},46,0,2,0,11,0,3,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallbackWithoutResult() {...},27,0,0,0,8,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager.new TransactionCallback() {...},26,0,0,0,6,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.mailbox,DefaultMailboxManager,906,29,102,0,205,9,100,4,49,4
+Hedwig::Assembly/hedwig-api,com.hs.mail.dns,DnsServer.1.new Iterator() {...},57,0,4,0,5,0,6,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.dns,DnsServer,150,323,25,29,41,75,23,19,4,11
+Hedwig::Assembly/hedwig-api,com.hs.mail.dns,DnsServer.new Iterator() {...},91,0,16,0,16,0,12,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.dns,DnsServer.MXRecordComparator,3,21,1,1,0,4,1,2,0,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.thread,DummyThreadable,7,0,0,0,3,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.thread,ThreadableMessage.AllEnumerator,83,0,16,0,21,0,11,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.thread,ThreadableMessage,112,0,0,0,26,0,18,0,18,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.thread,ThreadableMeta,343,0,80,0,81,0,50,0,10,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap,ImapSession.State,3,56,0,0,1,8,1,2,1,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap,ImapSession,48,24,2,0,21,8,10,3,9,3
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap,UnsupportedRightException,19,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.security.config,JaasLoginSupport,17,0,0,0,7,0,3,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.event,EventDispatcher,85,8,2,0,22,2,8,1,7,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.event,MessageExpungedEvent,11,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.event,FlagUpdatedEvent,11,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.event,MailboxEvent,15,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.event,MessageEvent,15,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.event,MailboxDeletedEvent,5,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.event,MessageAddedEvent,5,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.event,EventTracker,132,0,14,0,41,0,20,0,13,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,KeywordKey,34,0,6,0,9,0,7,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,HeaderKey,16,26,3,3,4,6,6,2,3,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,TextKey,38,0,6,0,11,0,8,0,5,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,OrKey,27,0,2,0,9,0,5,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,AndKey,27,3,2,0,9,2,5,1,4,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,SubjectKey,15,0,2,0,6,0,4,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,SentDateKey,16,0,2,0,6,0,4,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,SortKey,20,0,0,0,7,0,4,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,AddressStringKey,2,12,1,1,1,4,1,2,0,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,NotKey,31,0,2,0,10,0,6,0,5,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,StringKey,37,41,10,4,5,12,10,3,3,3
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,IntegerComparisonKey,37,0,6,0,9,0,7,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,SequenceKey,11,38,3,3,4,10,6,3,3,3
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,SearchKeyList,0,25,0,0,0,9,0,5,0,5
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,RecipientStringKey,41,0,6,0,10,0,8,0,5,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,FromStringKey,4,11,1,1,2,4,2,2,1,2
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,SizeKey,16,0,2,0,6,0,4,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,CompositeKey,11,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,ComparisonKey,29,0,4,0,9,0,6,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,AllKey,8,0,0,0,4,0,3,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,FlagKey,53,0,8,0,12,0,10,0,6,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,SearchKey,0,3,0,0,0,1,0,1,0,1
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,DateKey,43,0,6,0,9,0,7,0,4,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.message.search,InternalDateKey,16,0,2,0,6,0,4,0,3,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.user,Alias,34,0,0,0,13,0,9,0,9,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.user,DefaultUserManager.new TransactionCallbackWithoutResult() {...},25,0,0,0,7,0,2,0,2,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.user,User,48,0,0,0,19,0,13,0,13,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.imap.user,DefaultUserManager,208,0,14,0,50,0,18,0,11,0
+Hedwig::Assembly/hedwig-api,com.hs.mail.smtp,SmtpException,16,0,0,0,8,0,4,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message,BodyFetchItem,112,0,2,0,39,0,18,0,17,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message,ImapRequestFactory,23,262,3,1,2,41,3,3,1,3
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3,POP3Session,70,0,0,0,27,0,14,0,14,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3,POP3Exception,27,0,0,0,10,0,5,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3,POP3Session.State,48,0,0,0,8,0,3,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.parser,CommandParser,1200,504,657,119,164,76,419,38,34,35
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.parser,Token,27,9,4,0,2,4,4,1,2,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.parser,Token.Type,0,224,0,0,0,2,0,1,0,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.parser,AbstractImapCommandParser,580,515,181,91,124,116,131,61,23,33
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.parser,LiteralException,15,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.parser,ParseException,51,0,2,0,14,0,7,0,6,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder,StoreResponder,47,0,2,0,15,0,4,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder,DefaultImapResponder,5,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder,StatusResponder,102,0,10,0,33,0,12,0,7,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder,FetchResponder,476,0,42,0,143,0,41,0,20,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder,UnsolicitedResponder,82,0,10,0,14,0,7,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder,AbstractImapResponder,385,0,26,0,83,0,40,0,27,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder,SelectResponder,93,0,4,0,13,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder,ListResponder,56,0,6,0,19,0,6,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,RsetProcessor,39,0,4,0,12,0,5,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,POP3Utils,84,0,6,0,23,0,6,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,POP3ProcessorFactory,117,0,2,0,19,0,4,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,StatProcessor,68,0,8,0,22,0,6,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,TopProcessor,101,0,6,0,30,0,6,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,CapaProcessor,57,0,2,0,11,0,4,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,TopProcessor.CountingBodyInputStream,111,0,22,0,30,0,19,0,8,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,RetrProcessor,159,0,12,0,48,0,11,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,PassProcessor,86,0,8,0,27,0,7,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,DeleProcessor,57,0,4,0,19,0,5,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,UidlProcessor,121,0,10,0,36,0,9,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,QuitProcessor,49,0,8,0,17,0,6,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,NoopProcessor,14,0,2,0,5,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,AbstractPOP3Processor,52,0,4,0,14,0,7,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,ListProcessor,150,0,12,0,46,0,10,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.processor,UserProcessor,25,0,4,0,8,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.server,ImapServerHandler,82,0,8,0,27,0,11,0,7,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.server,DebuggingHandler,74,0,10,0,25,0,12,0,7,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.server,ImapServer,195,0,8,0,47,0,16,0,12,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.server,ImapServer.new ChannelPipelineFactory() {...},67,0,4,0,14,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.server,POP3ConnectionHandler,129,0,8,0,49,0,8,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.pop3.server,POP3Server,54,0,2,0,13,0,5,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,CheckRequestBuilder,6,3,0,0,1,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,AppendRequestBuilder,51,3,2,0,14,1,2,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,CloseRequestBuilder,6,3,0,0,1,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,LogoutRequestBuilder,6,3,0,0,1,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,AbstractUidRequestBuilder,0,10,0,0,0,2,0,2,0,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,StoreRequestBuilder,71,3,10,0,17,1,6,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,AuthenticateRequestBuilder,15,3,0,0,3,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,DeleteRequestBuilder,13,3,0,0,2,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,CapabilityRequestBuilder,6,3,0,0,1,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,ListRequestBuilder,21,3,0,0,4,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,ImapRequestBuilder,33,44,5,3,10,10,4,3,1,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,ExpungeRequestBuilder,6,3,0,0,1,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,SearchRequestBuilder,428,287,49,45,65,68,44,10,0,7
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,CopyRequestBuilder,21,3,0,0,4,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,SubscribeRequestBuilder,13,3,0,0,2,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,RenameRequestBuilder,21,3,0,0,4,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,UidRequestBuilder,21,3,0,0,5,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,StatusRequestBuilder,32,3,2,0,8,1,2,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,ExamineRequestBuilder,13,3,0,0,2,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,LsubRequestBuilder,21,3,0,0,4,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,CreateRequestBuilder,13,3,0,0,2,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,UnsubscribeRequestBuilder,13,3,0,0,2,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,LoginRequestBuilder,21,3,0,0,4,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,FetchRequestBuilder,526,9,83,1,114,1,48,2,6,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,SelectRequestBuilder,13,3,0,0,2,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder,NoopRequestBuilder,6,3,0,0,1,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.fetch,Address,48,0,0,0,14,0,7,0,7,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.fetch,EnvelopeBuilder,229,50,16,0,47,3,13,2,5,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.fetch,Envelope,79,0,0,0,30,0,15,0,15,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.fetch,FetchProcessor,109,0,12,0,23,0,10,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.fetch,BodyStructureBuilder,219,195,26,14,55,54,22,10,5,6
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.fetch,PartContentBuilder,137,166,27,27,44,49,25,18,6,7
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.fetch,PartContentBuilder.UnexpectedEOFException,4,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.fetch,PartContentBuilder.PartNotFoundException,25,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.fetch,MimeDescriptor,42,68,0,0,14,25,13,7,13,7
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.fetch,Content,35,0,0,0,13,0,5,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response.custom,XRevokeResponseBuilder,353,0,46,0,78,0,35,0,12,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,FetchRequest,30,0,2,0,9,0,6,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,RenameRequest,27,0,4,0,7,0,6,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,CopyRequest,30,0,2,0,9,0,6,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,CapabilityRequest,7,0,0,0,3,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,Status,53,0,0,0,21,0,11,0,11,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,LogoutRequest,7,0,0,0,3,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,LoginRequest,24,0,2,0,7,0,5,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,SearchRequest,10,20,2,0,2,7,3,3,2,3
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,AuthenticateRequest,18,0,2,0,5,0,4,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,StoreRequest,72,0,14,0,16,0,16,0,9,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,SubscribeRequest,6,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,AppendRequest,39,0,4,0,11,0,8,0,6,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,UnsubscribeRequest,6,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,CheckRequest,12,0,2,0,3,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,DeleteRequest,6,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,ListRequest,0,7,0,0,0,2,0,1,0,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,SelectRequest,0,6,0,0,0,2,0,1,0,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,NoopRequest,7,0,0,0,3,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,ImapRequest,7,9,0,0,2,4,2,1,2,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,ExamineRequest,6,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,ExpungeRequest,12,0,2,0,3,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,AbstractMailboxRequest,10,11,4,0,1,4,3,2,1,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,StatusRequest,27,0,4,0,7,0,6,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,CloseRequest,7,5,2,0,1,2,2,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,AbstractListRequest,10,17,4,0,1,6,3,3,1,3
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,LsubRequest,7,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request,CreateRequest,0,6,0,0,0,2,0,1,0,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,SpamAssassin,181,0,20,0,47,0,15,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,RemoteDelivery.new Iterator() {...},84,0,10,0,20,0,9,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,LocalDelivery,130,0,20,0,37,0,17,0,7,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,RemoteDelivery,995,0,130,0,235,0,79,0,14,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,DefaultMailetContext,90,0,2,0,25,0,9,0,8,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,RemoteDelivery.1.new Iterator() {...},66,0,2,0,6,0,5,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,AliasingForwarding,241,0,26,0,62,0,17,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,AbstractMailet,20,0,0,0,7,0,5,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,SpamAssassin.Action,34,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,ToRepository,206,0,20,0,56,0,16,0,6,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.mailet,SpamAssassinInvoker,220,0,6,0,56,0,8,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.mailbox,MailboxQuery,22,119,9,17,3,30,8,11,1,5
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.mailbox,MailboxPath,7,103,2,10,2,29,3,11,1,7
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,CopyProcessor,96,0,10,0,19,0,7,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,ExpungeProcessor,91,0,8,0,21,0,6,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,AuthenticateProcessor,12,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,StatusProcessor,59,0,2,0,15,0,5,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,SubscribeProcessor,39,0,2,0,11,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,CapabilityProcessor,69,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,LoginProcessor,55,0,2,0,17,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,UnsubscribeProcessor,22,0,0,0,7,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,NoopProcessor,15,0,0,0,5,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,AbstractExpungeProcessor,0,14,0,0,0,5,0,2,0,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,SearchProcessor,58,43,7,1,11,10,4,3,0,3
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,SelectProcessor,2,3,0,0,1,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,CheckProcessor,11,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,ListProcessor,17,44,3,3,5,10,3,3,1,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,StoreProcessor,131,0,10,0,28,0,10,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,AppendProcessor,85,0,2,0,29,0,5,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,CloseProcessor,4,57,2,6,1,17,2,4,0,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,AbstractListProcessor,69,83,9,5,14,21,7,5,1,4
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,LsubProcessor,107,0,14,0,23,0,11,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,AbstractSelectProcessor,102,51,15,3,20,13,10,4,2,3
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,AbstractImapProcessor,126,12,12,0,31,4,13,2,7,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,CreateProcessor,6,53,1,5,1,13,1,4,0,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,RenameProcessor,67,0,6,0,15,0,5,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,ImapProcessorFactory,196,0,2,0,41,0,6,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,ExamineProcessor,5,0,0,0,2,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,LogoutProcessor,41,0,6,0,12,0,5,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor,DeleteProcessor,95,0,14,0,27,0,10,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext.thread,ThreadProcessor,106,0,10,0,29,0,11,0,6,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext.thread,OrderedSubjectThreader,87,0,14,0,26,0,9,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext.thread,ReferencesThreader,830,0,156,0,199,0,87,0,9,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext.thread,AbstractThreader,38,0,4,0,11,0,5,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext.thread,AbstractThreader.new Comparator() {...},24,0,4,0,6,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext.thread,ThreaderFactory,33,0,4,0,6,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext.thread,ThreadContainer,134,0,28,0,30,0,18,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext.thread,OrderedSubjectThreader.new Comparator() {...},24,0,4,0,8,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap,ImapException,15,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.deliver,Deliver,342,0,28,0,100,0,22,0,8,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.exception,MailboxNotFoundException,28,0,2,0,4,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.exception,ConfigException,8,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.exception,MailboxException,4,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.exception,LookupException,16,0,0,0,8,0,4,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.sieve,Actions,157,0,8,0,45,0,10,0,6,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.sieve,SieveMailAdapter,214,0,8,0,70,0,30,0,26,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.sieve,ActionDispatcher,201,0,6,0,41,0,15,0,12,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.sieve,Sieve,111,0,8,0,31,0,8,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp,SmtpSession,136,0,6,0,45,0,23,0,20,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.server,SmtpConnectionHandler,173,0,18,0,60,0,14,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.server,SmtpServer,55,0,2,0,14,0,5,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.message,SmtpMessage,405,0,14,0,109,0,41,0,34,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.message,Recipient,52,0,0,0,13,0,7,0,7,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.message,DeliveryStatusNotifier,141,0,14,0,28,0,11,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.message,DeliveryStatusNotifier.MultipartReport,41,0,2,0,12,0,2,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,AccessTable.new Comparator() {...},0,13,0,0,0,2,0,2,0,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,AccessTable.new Comparator() {...},0,12,0,0,0,2,0,2,0,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,AuthRequired,22,0,4,0,4,0,5,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,HookResult,37,0,0,0,11,0,6,0,6,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,MailLog,135,0,4,0,33,0,10,0,8,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,AccessTable.Action,3,47,0,0,2,3,0,2,0,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,AccessTableHook,86,0,8,0,22,0,8,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,AccessTable,32,241,9,23,7,57,9,16,0,9
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,DNSRBLHandler,109,0,8,0,25,0,8,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,RemoteAddrInNetwork,21,0,4,0,7,0,5,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,HookFactory,226,0,32,0,36,0,19,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,ValidRcptHook,84,0,14,0,22,0,12,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,AccessTable.Access,0,9,0,0,0,4,0,1,0,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor.hook,RejectHook,50,0,2,0,14,0,4,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,NamespaceRequest,15,0,4,0,3,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,SortRequest,14,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,SetQuotaRequest,21,0,4,0,5,0,5,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,GetQuotaRootRequest,6,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,ListRightsRequest,12,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,GetQuotaRequest,21,0,4,0,5,0,5,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,SetACLRequest,18,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,GetACLRequest,6,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,DeleteACLRequest,12,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,ThreadRequest,14,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,IdRequest,19,0,0,0,7,0,4,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.ext,MyRightsRequest,6,0,0,0,2,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.container.server.socket,DefaultServerSocketFactory,21,0,0,0,4,0,4,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.container.server.socket,SocketConnection,56,0,2,0,17,0,4,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.container.server.socket,TcpTransport,78,0,0,0,24,0,10,0,10,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.container.server.socket,TLSServerSocketFactory,61,0,0,0,20,0,6,0,6,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.container.server.socket,TcpSocketChannel,31,0,0,0,8,0,5,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.request.custom,XRevokeRequest,38,0,2,0,13,0,9,0,8,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.custom,XRevokeProcessor,122,0,8,0,33,0,7,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.custom,XRevokeRequestBuilder,49,3,6,0,12,1,4,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.container.server,DefaultServer.MainSocketThread,158,0,14,0,51,0,11,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.container.server,DefaultServer,157,0,8,0,53,0,28,0,24,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,SelectResponse,48,0,0,0,18,0,10,0,10,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,UnsolicitedResponseBuilder,141,7,26,0,37,2,17,2,4,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,FetchResponseBuilder,659,0,80,0,148,0,68,0,25,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,FetchResponse,65,0,0,0,28,0,18,0,18,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,StatusResponse,45,0,0,0,17,0,11,0,11,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,StoreResponse,15,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,UnsolicitedResponse,72,0,0,0,23,0,10,0,10,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,SelectResponseBuilder,39,3,4,0,11,1,3,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,ListResponse,3,6,0,0,1,3,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,StatusResponseBuilder,40,0,6,0,13,0,5,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response,AbstractImapResponse,0,3,0,0,0,1,0,1,0,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.schedule,DiskCleanupJob,58,0,4,0,13,0,6,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.schedule,MessageExpunger,164,0,20,0,37,0,16,0,6,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.schedule,MessageCompressor.new FilenameFilter() {...},14,0,2,0,2,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.schedule,MessageCompressor,208,0,32,0,50,0,24,0,8,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.schedule,ScheduleUtils,109,0,20,0,29,0,15,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.container.simple,SimpleSpringContainer.SpringContainerShutdownHook,13,0,0,0,5,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.container.simple,SimpleSpringContainer,140,0,0,0,39,0,7,0,7,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.spool,FileWatcher,111,0,4,0,36,0,14,0,12,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.spool,SmtpMessageConsumer,240,0,32,0,70,0,28,0,12,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.spool,SpoolRepository,11,0,0,0,5,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.spool,FileWatcher.MainJob,209,0,26,0,63,0,19,0,6,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,ListRightsProcessor,68,0,4,0,16,0,7,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,IdProcessor,49,0,0,0,12,0,4,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,NamespaceProcessor,35,0,0,0,8,0,5,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,SortProcessor,15,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,MyRightsProcessor,73,0,6,0,18,0,7,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,GetQuotaProcessor,40,0,2,0,10,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,SetQuotaProcessor,39,0,2,0,10,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,SetACLProcessor,59,0,3,0,18,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,GetQuotaRootProcessor,60,0,4,0,18,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,AbstractQuotaProcessor,16,0,0,0,4,0,3,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,GetACLProcessor,84,0,6,0,20,0,7,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,AbstractACLProcessor,86,0,10,0,21,0,8,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.processor.ext,DeleteACLProcessor,37,0,0,0,10,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.server.codec,ImapRequestDecoder,67,0,4,0,18,0,7,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.server.codec,DefaultImapMessage,74,21,10,0,18,8,14,2,9,2
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.server.codec,ImapMessageEncoder,40,0,6,0,14,0,7,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.server.codec,DecoderUtils,159,71,25,5,34,14,18,5,5,3
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.server.codec,ImapMessageDecoder.State,34,0,0,0,4,0,1,0,1,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.server.codec,ImapMessageDecoder,234,0,26,0,61,0,21,0,7,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response.ext,ACLResponse,9,0,0,0,4,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response.ext,ListRightsResponse,21,0,0,0,8,0,4,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response.ext,QuotaResponse,20,0,0,0,8,0,4,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.response.ext,MyRightsResponse,15,0,0,0,6,0,3,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder.ext,ThreadResponder,60,0,12,0,19,0,9,0,3,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder.ext,NamespaceResponder,68,0,4,0,20,0,6,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder.ext,IdResponder,42,0,2,0,11,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder.ext,ListRightsResponder,30,0,2,0,8,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder.ext,QuotaResponder,82,0,6,0,24,0,8,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder.ext,ACLResponder,45,0,4,0,11,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.responder.ext,MyRightsResponder,26,0,2,0,7,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,VrfyProcessor,8,0,0,0,2,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,HelpProcessor,13,0,0,0,5,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,AbstractSmtpProcessor,47,0,4,0,14,0,9,0,7,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,DataProcessor,244,0,14,0,62,0,11,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,EhloProcessor,112,0,10,0,27,0,7,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,NoopProcessor,7,0,0,0,3,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,QuitProcessor,26,0,2,0,6,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,SmtpProcessorFactory,132,0,4,0,23,0,6,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,ExpnProcessor,8,0,0,0,2,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,RsetProcessor,18,0,2,0,6,0,3,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,AuthProcessor,208,0,18,0,61,0,15,0,6,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,HeloProcessor,56,0,4,0,17,0,4,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,MailProcessor,303,0,38,0,78,0,24,0,5,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.smtp.processor,RcptProcessor,189,0,28,0,44,0,18,0,4,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,IdRequestBuilder,62,3,8,0,14,1,5,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,NamespaceRequestBuilder,6,3,0,0,1,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,GetACLRequestBuilder,16,0,0,0,3,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,SetQuotaRequestBuilder,52,3,4,0,12,1,3,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,ListRightsRequestBuilder,24,0,0,0,5,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,SetACLRequestBuilder,30,0,0,0,6,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,GetQuotaRequestBuilder,15,3,0,0,3,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,ThreadRequestBuilder,30,3,0,0,5,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,SortRequestBuilder,82,3,6,0,16,1,5,1,2,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,MyRightsRequestBuilder,16,0,0,0,3,0,2,0,2,0
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,GetQuotaRootRequestBuilder,13,3,0,0,2,1,1,1,1,1
+Hedwig::Assembly/hedwig-server,com.hs.mail.imap.message.builder.ext,DeleteACLRequestBuilder,24,0,0,0,5,0,2,0,2,0
