@@ -1,0 +1,48 @@
+<object-array>
+  <long>39</long>
+  <javax.mail.FetchProfile>
+    <specials>
+      <com.hs.mail.imap.message.BodyFetchItem>
+        <name defined-in="javax.mail.FetchProfile$Item">RFC822</name>
+        <name>RFC822</name>
+        <peek>false</peek>
+        <sectionType>5</sectionType>
+        <firstOctet>-1</firstOctet>
+        <numberOfOctets>-1</numberOfOctets>
+      </com.hs.mail.imap.message.BodyFetchItem>
+    </specials>
+  </javax.mail.FetchProfile>
+  <com.hs.mail.imap.message.FetchData>
+    <messageID>882</messageID>
+    <physMessageID>824</physMessageID>
+    <size>16530</size>
+    <flags>
+      <system__flags>16</system__flags>
+    </flags>
+    <internalDate>2020-09-23 10:08:55.0 UTC</internalDate>
+  </com.hs.mail.imap.message.FetchData>
+</object-array>
+<object-array>
+  <long>40</long>
+  <javax.mail.FetchProfile>
+    <specials>
+      <com.hs.mail.imap.message.BodyFetchItem>
+        <name defined-in="javax.mail.FetchProfile$Item">RFC822</name>
+        <name>RFC822</name>
+        <peek>false</peek>
+        <sectionType>5</sectionType>
+        <firstOctet>-1</firstOctet>
+        <numberOfOctets>-1</numberOfOctets>
+      </com.hs.mail.imap.message.BodyFetchItem>
+    </specials>
+  </javax.mail.FetchProfile>
+  <com.hs.mail.imap.message.FetchData>
+    <messageID>883</messageID>
+    <physMessageID>825</physMessageID>
+    <size>10317</size>
+    <flags>
+      <system__flags>16</system__flags>
+    </flags>
+    <internalDate>2020-09-23 10:09:56.0 UTC</internalDate>
+  </com.hs.mail.imap.message.FetchData>
+</object-array>

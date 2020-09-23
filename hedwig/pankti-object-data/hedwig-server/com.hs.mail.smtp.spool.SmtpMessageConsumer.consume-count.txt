@@ -1,0 +1,1 @@
+Invocation count for com.hs.mail.smtp.spool.SmtpMessageConsumer.consume : 2

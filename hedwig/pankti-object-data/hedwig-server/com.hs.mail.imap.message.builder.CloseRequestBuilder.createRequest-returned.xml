@@ -1,0 +1,8 @@
+<com.hs.mail.imap.message.request.CloseRequest>
+  <tag>BHEM5</tag>
+  <command>CLOSE</command>
+</com.hs.mail.imap.message.request.CloseRequest>
+<com.hs.mail.imap.message.request.CloseRequest>
+  <tag>CCNC5</tag>
+  <command>CLOSE</command>
+</com.hs.mail.imap.message.request.CloseRequest>

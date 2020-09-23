@@ -1,0 +1,26 @@
+<java.io.FileInputStream>
+  <fd>
+    <fd>130</fd>
+    <handle>-1</handle>
+    <parent class="java.io.FileInputStream" reference="../.."/>
+    <closed>false</closed>
+    <append>false</append>
+    <cleanup class="java.io.FileCleanable"/>
+  </fd>
+  <path>../spool/1600853481206-0</path>
+  <closeLock/>
+  <closed>false</closed>
+</java.io.FileInputStream>
+<java.io.FileInputStream>
+  <fd>
+    <fd>130</fd>
+    <handle>-1</handle>
+    <parent class="java.io.FileInputStream" reference="../.."/>
+    <closed>false</closed>
+    <append>false</append>
+    <cleanup class="java.io.FileCleanable"/>
+  </fd>
+  <path>../spool/1600853557618-1</path>
+  <closeLock/>
+  <closed>false</closed>
+</java.io.FileInputStream>

@@ -1,0 +1,50 @@
+<object-array>
+  <string>BHEM1</string>
+  <string>LOGIN</string>
+  <com.hs.mail.imap.server.codec.DefaultImapMessage>
+    <literal class="org.jboss.netty.buffer.EmptyChannelBuffer">
+      <readerIndex>0</readerIndex>
+      <writerIndex>0</writerIndex>
+      <markedReaderIndex>0</markedReaderIndex>
+      <markedWriterIndex>0</markedWriterIndex>
+      <array></array>
+    </literal>
+    <literalLength>-1</literalLength>
+    <needContinuationRequest>false</needContinuationRequest>
+    <tokens>
+      <com.hs.mail.imap.parser.Token>
+        <type>QUOTED</type>
+        <value>test-receiver@localhost</value>
+      </com.hs.mail.imap.parser.Token>
+      <com.hs.mail.imap.parser.Token>
+        <type>QUOTED</type>
+        <value>654321</value>
+      </com.hs.mail.imap.parser.Token>
+    </tokens>
+  </com.hs.mail.imap.server.codec.DefaultImapMessage>
+</object-array>
+<object-array>
+  <string>CCNC1</string>
+  <string>LOGIN</string>
+  <com.hs.mail.imap.server.codec.DefaultImapMessage>
+    <literal class="org.jboss.netty.buffer.EmptyChannelBuffer">
+      <readerIndex>0</readerIndex>
+      <writerIndex>0</writerIndex>
+      <markedReaderIndex>0</markedReaderIndex>
+      <markedWriterIndex>0</markedWriterIndex>
+      <array></array>
+    </literal>
+    <literalLength>-1</literalLength>
+    <needContinuationRequest>false</needContinuationRequest>
+    <tokens>
+      <com.hs.mail.imap.parser.Token>
+        <type>QUOTED</type>
+        <value>test-receiver@localhost</value>
+      </com.hs.mail.imap.parser.Token>
+      <com.hs.mail.imap.parser.Token>
+        <type>QUOTED</type>
+        <value>654321</value>
+      </com.hs.mail.imap.parser.Token>
+    </tokens>
+  </com.hs.mail.imap.server.codec.DefaultImapMessage>
+</object-array>

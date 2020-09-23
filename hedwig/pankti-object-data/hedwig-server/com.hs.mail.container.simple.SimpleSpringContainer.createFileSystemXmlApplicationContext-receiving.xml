@@ -1,0 +1,5 @@
+<com.hs.mail.container.simple.SimpleSpringContainer>
+  <configLocations>
+    <string>../conf/applicationContext.xml</string>
+  </configLocations>
+</com.hs.mail.container.simple.SimpleSpringContainer>

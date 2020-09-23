@@ -1,0 +1,1 @@
+Invocation count for com.hs.mail.mailet.LocalDelivery.accept : 2

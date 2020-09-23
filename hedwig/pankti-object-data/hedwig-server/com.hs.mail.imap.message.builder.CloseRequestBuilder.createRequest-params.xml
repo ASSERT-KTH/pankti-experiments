@@ -1,0 +1,32 @@
+<object-array>
+  <string>BHEM5</string>
+  <string>CLOSE</string>
+  <com.hs.mail.imap.server.codec.DefaultImapMessage>
+    <literal class="org.jboss.netty.buffer.EmptyChannelBuffer">
+      <readerIndex>0</readerIndex>
+      <writerIndex>0</writerIndex>
+      <markedReaderIndex>0</markedReaderIndex>
+      <markedWriterIndex>0</markedWriterIndex>
+      <array></array>
+    </literal>
+    <literalLength>-1</literalLength>
+    <needContinuationRequest>false</needContinuationRequest>
+    <tokens/>
+  </com.hs.mail.imap.server.codec.DefaultImapMessage>
+</object-array>
+<object-array>
+  <string>CCNC5</string>
+  <string>CLOSE</string>
+  <com.hs.mail.imap.server.codec.DefaultImapMessage>
+    <literal class="org.jboss.netty.buffer.EmptyChannelBuffer">
+      <readerIndex>0</readerIndex>
+      <writerIndex>0</writerIndex>
+      <markedReaderIndex>0</markedReaderIndex>
+      <markedWriterIndex>0</markedWriterIndex>
+      <array></array>
+    </literal>
+    <literalLength>-1</literalLength>
+    <needContinuationRequest>false</needContinuationRequest>
+    <tokens/>
+  </com.hs.mail.imap.server.codec.DefaultImapMessage>
+</object-array>

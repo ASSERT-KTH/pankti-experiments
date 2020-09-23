@@ -1,0 +1,48 @@
+<com.hs.mail.imap.mailbox.Mailbox>
+  <mailboxID>4</mailboxID>
+  <name>INBOX</name>
+  <ownerID>4</ownerID>
+  <nextUID>880</nextUID>
+  <uidValidity>1600194306829</uidValidity>
+  <noInferiors>false</noInferiors>
+  <noSelect>false</noSelect>
+  <readOnly>false</readOnly>
+  <marked>false</marked>
+  <hasChildren>false</hasChildren>
+</com.hs.mail.imap.mailbox.Mailbox>
+<com.hs.mail.imap.mailbox.Mailbox>
+  <mailboxID>4</mailboxID>
+  <name>INBOX</name>
+  <ownerID>4</ownerID>
+  <nextUID>881</nextUID>
+  <uidValidity>1600194306829</uidValidity>
+  <noInferiors>false</noInferiors>
+  <noSelect>false</noSelect>
+  <readOnly>false</readOnly>
+  <marked>false</marked>
+  <hasChildren>false</hasChildren>
+</com.hs.mail.imap.mailbox.Mailbox>
+<com.hs.mail.imap.mailbox.Mailbox>
+  <mailboxID>4</mailboxID>
+  <name>INBOX</name>
+  <ownerID>4</ownerID>
+  <nextUID>881</nextUID>
+  <uidValidity>1600194306829</uidValidity>
+  <noInferiors>false</noInferiors>
+  <noSelect>false</noSelect>
+  <readOnly>false</readOnly>
+  <marked>false</marked>
+  <hasChildren>false</hasChildren>
+</com.hs.mail.imap.mailbox.Mailbox>
+<com.hs.mail.imap.mailbox.Mailbox>
+  <mailboxID>4</mailboxID>
+  <name>INBOX</name>
+  <ownerID>4</ownerID>
+  <nextUID>882</nextUID>
+  <uidValidity>1600194306829</uidValidity>
+  <noInferiors>false</noInferiors>
+  <noSelect>false</noSelect>
+  <readOnly>false</readOnly>
+  <marked>false</marked>
+  <hasChildren>false</hasChildren>
+</com.hs.mail.imap.mailbox.Mailbox>

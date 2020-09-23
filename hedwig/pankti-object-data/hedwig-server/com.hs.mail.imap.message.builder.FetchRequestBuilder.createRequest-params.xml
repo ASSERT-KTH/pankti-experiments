@@ -1,0 +1,68 @@
+<object-array>
+  <string>BHEM4</string>
+  <string>FETCH</string>
+  <com.hs.mail.imap.server.codec.DefaultImapMessage>
+    <literal class="org.jboss.netty.buffer.EmptyChannelBuffer">
+      <readerIndex>0</readerIndex>
+      <writerIndex>0</writerIndex>
+      <markedReaderIndex>0</markedReaderIndex>
+      <markedWriterIndex>0</markedWriterIndex>
+      <array></array>
+    </literal>
+    <literalLength>-1</literalLength>
+    <needContinuationRequest>false</needContinuationRequest>
+    <tokens>
+      <com.hs.mail.imap.parser.Token>
+        <type>SEQ_NUMBER</type>
+        <value>39</value>
+      </com.hs.mail.imap.parser.Token>
+      <com.hs.mail.imap.parser.Token>
+        <type>LPAREN</type>
+        <value>(</value>
+      </com.hs.mail.imap.parser.Token>
+      <com.hs.mail.imap.parser.Token>
+        <type>KEYWORD</type>
+        <value>RFC822</value>
+      </com.hs.mail.imap.parser.Token>
+      <com.hs.mail.imap.parser.Token>
+        <type>RPAREN</type>
+        <value>)</value>
+      </com.hs.mail.imap.parser.Token>
+    </tokens>
+  </com.hs.mail.imap.server.codec.DefaultImapMessage>
+  <boolean>false</boolean>
+</object-array>
+<object-array>
+  <string>CCNC4</string>
+  <string>FETCH</string>
+  <com.hs.mail.imap.server.codec.DefaultImapMessage>
+    <literal class="org.jboss.netty.buffer.EmptyChannelBuffer">
+      <readerIndex>0</readerIndex>
+      <writerIndex>0</writerIndex>
+      <markedReaderIndex>0</markedReaderIndex>
+      <markedWriterIndex>0</markedWriterIndex>
+      <array></array>
+    </literal>
+    <literalLength>-1</literalLength>
+    <needContinuationRequest>false</needContinuationRequest>
+    <tokens>
+      <com.hs.mail.imap.parser.Token>
+        <type>SEQ_NUMBER</type>
+        <value>40</value>
+      </com.hs.mail.imap.parser.Token>
+      <com.hs.mail.imap.parser.Token>
+        <type>LPAREN</type>
+        <value>(</value>
+      </com.hs.mail.imap.parser.Token>
+      <com.hs.mail.imap.parser.Token>
+        <type>KEYWORD</type>
+        <value>RFC822</value>
+      </com.hs.mail.imap.parser.Token>
+      <com.hs.mail.imap.parser.Token>
+        <type>RPAREN</type>
+        <value>)</value>
+      </com.hs.mail.imap.parser.Token>
+    </tokens>
+  </com.hs.mail.imap.server.codec.DefaultImapMessage>
+  <boolean>false</boolean>
+</object-array>

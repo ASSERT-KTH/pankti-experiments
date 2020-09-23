@@ -1,0 +1,12 @@
+<com.hs.mail.imap.user.User>
+  <id>4</id>
+  <userID>test-receiver@localhost</userID>
+  <passwd>654321</passwd>
+  <quota>0</quota>
+</com.hs.mail.imap.user.User>
+<com.hs.mail.imap.user.User>
+  <id>4</id>
+  <userID>test-receiver@localhost</userID>
+  <passwd>654321</passwd>
+  <quota>0</quota>
+</com.hs.mail.imap.user.User>

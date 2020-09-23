@@ -1,0 +1,60 @@
+<object-array>
+  <com.hs.mail.imap.mailbox.UidToMsnMapper>
+    <selected>
+      <sessionID>4405955356756322956</sessionID>
+      <mailboxID>4</mailboxID>
+      <readOnly>false</readOnly>
+      <recent>false</recent>
+      <converter serialization="custom">
+        <unserializable-parents/>
+        <org.apache.commons.collections.bidimap.DualHashBidiMap>
+          <default/>
+          <map/>
+        </org.apache.commons.collections.bidimap.DualHashBidiMap>
+      </converter>
+    </selected>
+    <useUID>false</useUID>
+  </com.hs.mail.imap.mailbox.UidToMsnMapper>
+  <com.hs.mail.imap.mailbox.Mailbox>
+    <mailboxID>4</mailboxID>
+    <name>INBOX</name>
+    <ownerID>4</ownerID>
+    <nextUID>883</nextUID>
+    <uidValidity>1600194306829</uidValidity>
+    <noInferiors>false</noInferiors>
+    <noSelect>false</noSelect>
+    <readOnly>false</readOnly>
+    <marked>false</marked>
+    <hasChildren>false</hasChildren>
+  </com.hs.mail.imap.mailbox.Mailbox>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.mailbox.UidToMsnMapper>
+    <selected>
+      <sessionID>-2772295120921817616</sessionID>
+      <mailboxID>4</mailboxID>
+      <readOnly>false</readOnly>
+      <recent>false</recent>
+      <converter serialization="custom">
+        <unserializable-parents/>
+        <org.apache.commons.collections.bidimap.DualHashBidiMap>
+          <default/>
+          <map/>
+        </org.apache.commons.collections.bidimap.DualHashBidiMap>
+      </converter>
+    </selected>
+    <useUID>false</useUID>
+  </com.hs.mail.imap.mailbox.UidToMsnMapper>
+  <com.hs.mail.imap.mailbox.Mailbox>
+    <mailboxID>4</mailboxID>
+    <name>INBOX</name>
+    <ownerID>4</ownerID>
+    <nextUID>884</nextUID>
+    <uidValidity>1600194306829</uidValidity>
+    <noInferiors>false</noInferiors>
+    <noSelect>false</noSelect>
+    <readOnly>false</readOnly>
+    <marked>false</marked>
+    <hasChildren>false</hasChildren>
+  </com.hs.mail.imap.mailbox.Mailbox>
+</object-array>

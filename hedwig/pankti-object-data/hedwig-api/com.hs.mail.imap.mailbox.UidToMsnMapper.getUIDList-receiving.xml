@@ -1,0 +1,42 @@
+<com.hs.mail.imap.mailbox.UidToMsnMapper>
+  <selected>
+    <sessionID>-7091255062154486704</sessionID>
+    <mailboxID>4</mailboxID>
+    <readOnly>false</readOnly>
+    <recent>true</recent>
+    <converter serialization="custom">
+      <unserializable-parents/>
+      <org.apache.commons.collections.bidimap.DualHashBidiMap>
+        <default/>
+        <map>
+          <entry>
+            <int>2</int>
+            <long>845</long>
+          </entry>
+        </map>
+      </org.apache.commons.collections.bidimap.DualHashBidiMap>
+    </converter>
+  </selected>
+  <useUID>false</useUID>
+</com.hs.mail.imap.mailbox.UidToMsnMapper>
+<com.hs.mail.imap.mailbox.UidToMsnMapper>
+  <selected>
+    <sessionID>8262323712137915342</sessionID>
+    <mailboxID>4</mailboxID>
+    <readOnly>false</readOnly>
+    <recent>true</recent>
+    <converter serialization="custom">
+      <unserializable-parents/>
+      <org.apache.commons.collections.bidimap.DualHashBidiMap>
+        <default/>
+        <map>
+          <entry>
+            <int>2</int>
+            <long>845</long>
+          </entry>
+        </map>
+      </org.apache.commons.collections.bidimap.DualHashBidiMap>
+    </converter>
+  </selected>
+  <useUID>false</useUID>
+</com.hs.mail.imap.mailbox.UidToMsnMapper>

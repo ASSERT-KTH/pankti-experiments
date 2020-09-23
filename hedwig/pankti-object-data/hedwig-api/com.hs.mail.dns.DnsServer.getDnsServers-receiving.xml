@@ -1,0 +1,8 @@
+<com.hs.mail.dns.DnsServer>
+  <maxCacheSize>50000</maxCacheSize>
+  <dnsCredibility>3</dnsCredibility>
+  <dnsServers>
+    <string>127.0.0.53</string>
+  </dnsServers>
+  <mxComparator class="com.hs.mail.dns.DnsServer$MXRecordComparator"/>
+</com.hs.mail.dns.DnsServer>

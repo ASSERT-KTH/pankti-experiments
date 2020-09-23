@@ -1,0 +1,1 @@
+Invocation count for com.hs.mail.mailet.RemoteDelivery.accept : 2

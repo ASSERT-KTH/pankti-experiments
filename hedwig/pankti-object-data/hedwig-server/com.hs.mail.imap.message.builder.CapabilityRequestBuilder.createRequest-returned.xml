@@ -1,0 +1,8 @@
+<com.hs.mail.imap.message.request.CapabilityRequest>
+  <tag>BHEM0</tag>
+  <command>CAPABILITY</command>
+</com.hs.mail.imap.message.request.CapabilityRequest>
+<com.hs.mail.imap.message.request.CapabilityRequest>
+  <tag>CCNC0</tag>
+  <command>CAPABILITY</command>
+</com.hs.mail.imap.message.request.CapabilityRequest>

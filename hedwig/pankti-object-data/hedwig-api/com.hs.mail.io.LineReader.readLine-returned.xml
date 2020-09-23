@@ -1,0 +1,8 @@
+<string>ehlo [127.0.1.1]</string>
+<string>mail FROM:&lt;test-sender@localhost&gt;</string>
+<string>rcpt TO:&lt;test-receiver@localhost&gt;</string>
+<string>data</string>
+<string>ehlo [127.0.1.1]</string>
+<string>mail FROM:&lt;test-sender@localhost&gt;</string>
+<string>rcpt TO:&lt;test-receiver@localhost&gt;</string>
+<string>data</string>

@@ -1,0 +1,10 @@
+<com.hs.mail.imap.message.request.SelectRequest>
+  <tag>BHEM2</tag>
+  <command>SELECT</command>
+  <mailbox>INBOX</mailbox>
+</com.hs.mail.imap.message.request.SelectRequest>
+<com.hs.mail.imap.message.request.SelectRequest>
+  <tag>CCNC2</tag>
+  <command>SELECT</command>
+  <mailbox>INBOX</mailbox>
+</com.hs.mail.imap.message.request.SelectRequest>

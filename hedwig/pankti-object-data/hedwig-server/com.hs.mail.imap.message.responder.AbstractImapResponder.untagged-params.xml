@@ -1,0 +1,46 @@
+<object-array>
+  <string>CAPABILITY IMAP4rev1 CHILDREN LITERAL+ NAMESPACE QUOTA SORT THREAD=ORDEREDSUBJECT THREAD=REFERENCES XREVOKE&amp;#xd;
+</string>
+</object-array>
+<object-array>
+  <string>FLAGS (\Answered \Flagged \Deleted \Seen \Draft)&amp;#xd;
+</string>
+</object-array>
+<object-array>
+  <string>39 EXISTS&amp;#xd;
+</string>
+</object-array>
+<object-array>
+  <string>1 RECENT&amp;#xd;
+</string>
+</object-array>
+<object-array>
+  <string>SEARCH 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39&amp;#xd;
+</string>
+</object-array>
+<object-array>
+  <string>39 FETCH</string>
+</object-array>
+<object-array>
+  <string>CAPABILITY IMAP4rev1 CHILDREN LITERAL+ NAMESPACE QUOTA SORT THREAD=ORDEREDSUBJECT THREAD=REFERENCES XREVOKE&amp;#xd;
+</string>
+</object-array>
+<object-array>
+  <string>FLAGS (\Answered \Flagged \Deleted \Seen \Draft)&amp;#xd;
+</string>
+</object-array>
+<object-array>
+  <string>40 EXISTS&amp;#xd;
+</string>
+</object-array>
+<object-array>
+  <string>1 RECENT&amp;#xd;
+</string>
+</object-array>
+<object-array>
+  <string>SEARCH 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40&amp;#xd;
+</string>
+</object-array>
+<object-array>
+  <string>40 FETCH</string>
+</object-array>

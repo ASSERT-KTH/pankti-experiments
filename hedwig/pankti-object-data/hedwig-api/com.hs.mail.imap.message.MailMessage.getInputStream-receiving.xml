@@ -1,0 +1,1207 @@
+<com.hs.mail.imap.message.MailMessage>
+  <messageID>0</messageID>
+  <physMessageID>822</physMessageID>
+  <size>16530</size>
+  <internalDate>2020-09-23 09:31:29.652 UTC</internalDate>
+  <header>
+    <header class="org.apache.james.mime4j.message.HeaderImpl">
+      <fields class="linked-list">
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gWzEyNy4wLjEuMV0gKGxvY2FsaG9zdCBbMTI3LjAuMC4xXSkNCglieSBsb2NhbGhvc3Qgd2l0aCBFU01UUCBpZCA0MTQ7DQoJV2VkLCAyMyBTZXAgMjAyMCAxMTozMToyMSArMDIwMCAoQ0VTVCk=</buffer>
+              <len>125</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmV0dXJuLVBhdGg6IDx0ZXN0LXNlbmRlckBsb2NhbGhvc3Q+DQo=</buffer>
+              <len>38</len>
+            </raw>
+            <delimiterIdx>11</delimiterIdx>
+            <name>Return-Path</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gYWNtLXgubXRhLmxzb2Z0LnVzIChhY20teC5tdGEubHNvZnQudXMgWzIwOS4xMTkuNS4xMzNdKQ0KIGJ5IG1haWwua3RoLWFzc2VydC5uZXQgd2l0aCBFU01UUCBpZCA5OTk7DQogU3VuLCAyMyBGZWIgMjAyMCAyMTo0MjowNCArMDAwMCAoVVRDKQ==</buffer>
+              <len>154</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gWzIwOS4xMTkuMC4zXSAoWzIwOS4xMTkuMC4zOjQ5MzQ3XSBoZWxvPUxPSVJFKQ0KIGJ5IHRlc2xhLmRjLmxzb2Z0LmNvbSAoZW52ZWxvcGUtZnJvbQ0KIDxvd25lci1zZXdvcmxkKmxvbmd6KipLVEgtQVNTRVJUKi1ORVRAbGlzdHNlcnYuYWNtLm9yZz4pDQogKGVjZWxlcml0eSA0LjIuMzguNjIzNzAgcig6KSkgd2l0aCBFU01UUA0KIGlkIEIyL0NCLTIyODg2LUNBMUYyNUU1OyBTdW4sIDIzIEZlYiAyMDIwIDE2OjQyOjA0IC0wNTAw</buffer>
+              <len>261</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGJ5IExJU1RTRVJWLkFDTS5PUkcgKExJU1RTRVJWLVRDUC9JUCByZWxlYXNlIDE3LjApIHdpdGggc3Bvb2wgaWQNCiA1MzkxNjY5MDMgZm9yIFNFV09STERATElTVFNFUlYuQUNNLk9SRzsgU3VuLCAyMyBGZWIgMjAyMCAxNjo0MTo0OA0KIC0wNTAw</buffer>
+              <len>150</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gaW4tMDExLmxheC5tYWlscm91dGUubmV0ICgwMTEubGF4Lm1haWxyb3V0ZS5uZXQgWzE5OS44OS4xLjE0XSkNCiBieSBMT0lSRS5FQVNFLkxTT0ZULkNPTSAoU01UUEwgcmVsZWFzZSAxLjFkKSAoZW52ZWxvcGUtZnJvbQ0KIDxzZXdvcmxkQHZvbHVudGVlci5hY20ub3JnPikgZm9yIHNld29ybGRAbGlzdHNlcnYuYWNtLm9yZyB3aXRoIFRDUDsNCiBTdW4sIDIzIEZlYiAyMDIwIDE2OjQxOjQ2IC0wNTAw</buffer>
+              <len>243</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gbG9jYWxob3N0ICgwMTEubGF4Lm1haWxyb3V0ZS5uZXQgWzEyNy4wLjAuMV0pIGJ5DQogaW4tMDExLmxheC5tYWlscm91dGUubmV0IChQb3N0Zml4KSB3aXRoIEVTTVRQIGlkIDQ4UWR0eTExYmd6MUpCWmwgZm9yDQogPHNld29ybGRAc2lnc29mdC5vcmc+OyBTdW4sIDIzIEZlYiAyMDIwIDIxOjQxOjQ2ICswMDAwIChVVEMp</buffer>
+              <len>198</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gaW4tMDExLmxheC5tYWlscm91dGUubmV0IChbMTk5Ljg5LjEuMTRdKSBieSBsb2NhbGhvc3QgKDAxMS5sYXgNCiBbMTI3LjAuMC4xXSkgKG1yb3V0ZV9tYWlsc2Nhbm5lciwNCiBwb3J0IDEwMDI0KSB3aXRoIExNVFAgaWQgV0k5NWdjUE5jTGhmIGZvciA8c2V3b3JsZEBzaWdzb2Z0Lm9yZz47IFN1biwNCiAyMyBGZWIgMjAyMCAyMTo0MTo0NiArMDAwMCAoVVRDKQ==</buffer>
+              <len>220</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gbWFpbC15dzEtZjUwLmdvb2dsZS5jb20gKG1haWwteXcxLWY1MC5nb29nbGUuY29tDQogWzIwOS44NS4xNjEuNTBdKSAodXNpbmcgVExTdjEuMiB3aXRoIGNpcGhlcg0KIEVDREhFLVJTQS1BRVMxMjgtR0NNLVNIQTI1NiAoMTI4LzEyOCBiaXRzKSkgKE5vIGNsaWVudCBjZXJ0aWZpY2F0ZQ0KIHJlcXVlc3RlZCkgYnkgaW4tMDExLmxheC5tYWlscm91dGUubmV0IChQb3N0Zml4KSB3aXRoIEVTTVRQUyBpZA0KIDQ4UWR0eDRYM0h6MUpCU0ggZm9yIDxzZXdvcmxkQHNpZ3NvZnQub3JnPjsgU3VuLCAyMyBGZWIgMjAyMCAyMTo0MTo0NQ0KICswMDAwIChVVEMp</buffer>
+              <len>330</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGJ5IG1haWwteXcxLWY1MC5nb29nbGUuY29tIHdpdGggU01UUCBpZCBoMTI2c280MzU4NTU5eXdjLjYgZm9yDQogPHNld29ybGRAc2lnc29mdC5vcmc+OyBTdW4sIDIzIEZlYiAyMDIwIDEzOjQxOjQ1IC0wODAwIChQU1Qp</buffer>
+              <len>135</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gWmlqaWFuZ3MtaU1hYy5sb2NhbCAoWzI2MDM6OTAwOTo4MDc6ZmQwMDozZDA5OmViNjE6YjdmODplMzZkXSkNCiBieSBzbXRwLmdtYWlsLmNvbSB3aXRoIEVTTVRQU0EgaWQNCiBvNjlzbTQzMzg0NTR5d2QuMzguMjAyMC4wMi4yMy4xMy40MS40MyBmb3IgPHNld29ybGRAc2lnc29mdC5vcmc+DQogKHZlcnNpb249VExTMV8yIGNpcGhlcj1FQ0RIRS1SU0EtQUVTMTI4LUdDTS1TSEEyNTYgYml0cz0xMjgvMTI4KTsNCiBTdW4sIDIzIEZlYiAyMDIwIDEzOjQxOjQzIC0wODAwIChQU1Qp</buffer>
+              <len>288</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gaW4tMDExLmxheC5tYWlscm91dGUubmV0ICgwMTEubGF4Lm1haWxyb3V0ZS5uZXQgWzE5OS44OS4xLjE0XSkNCiBieSBMT0lSRS5FQVNFLkxTT0ZULkNPTSAoU01UUEwgcmVsZWFzZSAxLjFkKSAoZW52ZWxvcGUtZnJvbQ0KIDx3YWhhYi5oYW1vdS1saGFkakBjb25jb3JkaWEuY2E+KSBmb3Igc2V3b3JsZEBsaXN0c2Vydi5hY20ub3JnIHdpdGgNCiBUQ1A7IEZyaSwgMjEgRmViIDIwMjAgMTA6MTQ6MDAgLTA1MDA=</buffer>
+              <len>248</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gbG9jYWxob3N0ICgwMTEubGF4Lm1haWxyb3V0ZS5uZXQgWzEyNy4wLjAuMV0pIGJ5DQogaW4tMDExLmxheC5tYWlscm91dGUubmV0IChQb3N0Zml4KSB3aXRoIEVTTVRQIGlkIDQ4UEZOUzRMUnJ6MUpCWXIgZm9yDQogPHNld29ybGRAc2lnc29mdC5vcmc+OyBGcmksIDIxIEZlYiAyMDIwIDE1OjE0OjAwICswMDAwIChVVEMp</buffer>
+              <len>198</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gaW4tMDExLmxheC5tYWlscm91dGUubmV0IChbMTk5Ljg5LjEuMTRdKSBieSBsb2NhbGhvc3QgKDAxMS5sYXgNCiBbMTI3LjAuMC4xXSkgKG1yb3V0ZV9tYWlsc2Nhbm5lciwNCiBwb3J0IDEwMDI0KSB3aXRoIExNVFAgaWQgVzJVRUhzT29uZkdNIGZvciA8c2V3b3JsZEBzaWdzb2Z0Lm9yZz47IEZyaSwNCiAyMSBGZWIgMjAyMCAxNToxNDowMCArMDAwMCAoVVRDKQ==</buffer>
+              <len>220</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gdW1zLXNndy1ndzEuY29uY29yZGlhLmNhICh1bXMtc2d3LWd3MS5jb25jb3JkaWEuY2ENCiBbMTMyLjIwNS4xNTMuMjBdKSAodXNpbmcgVExTdjEuMiB3aXRoIGNpcGhlcg0KIEVDREhFLVJTQS1BRVMyNTYtR0NNLVNIQTM4NCAoMjU2LzI1NiBiaXRzKSkgKE5vIGNsaWVudCBjZXJ0aWZpY2F0ZQ0KIHJlcXVlc3RlZCkgYnkgaW4tMDExLmxheC5tYWlscm91dGUubmV0IChQb3N0Zml4KSB3aXRoIEVTTVRQUyBpZA0KIDQ4UEZOUzFQeXF6MUpCWTMgZm9yIDxzZXdvcmxkQHNpZ3NvZnQub3JnPjsgRnJpLCAyMSBGZWIgMjAyMCAxNToxNDowMA0KICswMDAwIChVVEMp</buffer>
+              <len>333</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gYWxnb2wuY29uY29yZGlhLmNhICh1bXMtc2d3LW1iczEuY29uY29yZGlhLmNhIFsxMzIuMjA1LjEyMy4xMzBdKQ0KIGJ5IHVtcy1zZ3ctZ3cxLmNvbmNvcmRpYS5jYSAgd2l0aCBFU01UUCBpZA0KIDAxTEZEbEx4MDExODIzLTAxTEZEbE00MDExODIzICh2ZXJzaW9uPVRMU3YxLjINCiBjaXBoZXI9RUNESEUtUlNBLUFFUzI1Ni1TSEEzODQgYml0cz0yNTYgdmVyaWZ5PU9LKSBmb3INCiA8c2V3b3JsZEBzaWdzb2Z0Lm9yZz47IEZyaSwgMjEgRmViIDIwMjAgMTA6MTM6NTcgLTA1MDA=</buffer>
+              <len>287</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gVU1TLUxPWS1NQlMxLmNvbmNvcmRpYS5jYSAoMTMyLjIwNS4xMjMuMTQwKSBieQ0KIHVtcy1zZ3ctbWJzMS5jb25jb3JkaWEuY2EgKDEzMi4yMDUuMTIzLjEzMCkgd2l0aCBNaWNyb3NvZnQgU01UUA0KIFNlcnZlciAoVExTKSBpZCAxNS4wLjE0NzMuMzsgRnJpLCAyMSBGZWIgMjAyMCAxMDoxMjo0NiAtMDUwMA==</buffer>
+              <len>190</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gVU1TLUxPWS1NQlMxLmNvbmNvcmRpYS5jYSAoWzo6MV0pIGJ5IFVNUy1MT1ktTUJTMS5jb25jb3JkaWEuY2ENCiAoW2ZlODA6Ojk0NWM6NGRlNzo0NWIyOmE0YjMlMTVdKSB3aXRoIG1hcGkgaWQgMTUuMDAuMTQ3My4wMDM7IEZyaSwgMjENCiBGZWIgMjAyMCAxMDoxMjo0NiAtMDUwMA==</buffer>
+              <len>175</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>WC1WaXJ1cy1TY2FubmVkOiBieSBNYWlsUm91dGU=</buffer>
+              <len>29</len>
+            </raw>
+            <delimiterIdx>15</delimiterIdx>
+            <name>X-Virus-Scanned</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>RE1BUkMtRmlsdGVyOiBPcGVuRE1BUkMgRmlsdGVyIHYxLjMuMiBpbi0wMTEubGF4Lm1haWxyb3V0ZS5uZXQgNDhRZHR4NFgzSHoxSkJTSA==</buffer>
+              <len>79</len>
+            </raw>
+            <delimiterIdx>12</delimiterIdx>
+            <name>DMARC-Filter</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>WC1Hb29nbGUtREtJTS1TaWduYXR1cmU6IHY9MTsgYT1yc2Etc2hhMjU2OyBjPXJlbGF4ZWQvcmVsYXhlZDsgZD0xZTEwMC5uZXQ7DQogcz0yMDE2MTAyNTsNCiBoPXgtZ20tbWVzc2FnZS1zdGF0ZTpzZW5kZXI6ZG1hcmMtZmlsdGVyOmZyb206dG86c3ViamVjdDp0aHJlYWQtdG9waWMNCiA6dGhyZWFkLWluZGV4OmRhdGU6bWVzc2FnZS1pZDphY2NlcHQtbGFuZ3VhZ2U6bWltZS12ZXJzaW9uDQogOmRraW0tc2lnbmF0dXJlOmNvbnRlbnQtdHJhbnNmZXItZW5jb2Rpbmc6cmVzZW50LXRvOnJlc2VudC1kYXRlDQogOnJlc2VudC1mcm9tOnJlc2VudC1tZXNzYWdlLWlkOw0KIGJoPXVzRUtLZWxtZU0xNm1tWWVBRzZrbE5jb2N6OXNEcUpiRTRqRW0wYkgwTGc9Ow0KIGI9QTBxNE51dUdId3B3UVQ5ZjNTNmMvM3BCYWUyUmNiY0Y2QlB2eDVMRDBWQit5Rmd4cmpLeGYyRWNiMjZoMEZpYkR2DQogUWNmWkZJVk5wa05EYk5lMm50M3kzTVhmd1E0NDlrSGxLcjRqRGtRb1U5NUxNVFNGWUtOTFUyTnpnMXpUcVRudkE1SkUNCiBSdUx6bWJFZ045dnhJbXpRRkpsVjNReSt3WDBDOXVYZnhhdWxQUXc3ZStaODU5OUhzc29mM0dzMHpFelh0WkpFNllpSQ0KIEV0Q0srYUdjSFdwcDZvbm1reS9sQS9pczRkekpUM012cysxMEFGaFlPNVZaVld0Y0dKRHJUdWZieFRLTDNUZmhtUGREDQogdFRDMmFVOWFTUGZpOTVMdkhpK28vMFpkR2dVNCtaWWRVN2N2RHY5OUxBbkhQZFFFL1ZMNDJlZEw1WllUVWdJT21ybkINCiBmZzdnPT0=</buffer>
+              <len>737</len>
+            </raw>
+            <delimiterIdx>23</delimiterIdx>
+            <name>X-Google-DKIM-Signature</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>WC1HbS1NZXNzYWdlLVN0YXRlOiBBUGpBQUFWSnVaL1QwS1RjTm1EQ2dXdlBrUnNDdEoySVZwQjNPSXFKdk11dTdzQkx1R2dJUDhaNQ0KIGNvNHhmUTJkajh1Y25oNnpNRW1DQWdwaVJyNjhESUE9</buffer>
+              <len>111</len>
+            </raw>
+            <delimiterIdx>18</delimiterIdx>
+            <name>X-Gm-Message-State</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>WC1Hb29nbGUtU210cC1Tb3VyY2U6IEFQWHZZcXpjNTNvZS92OXlFS1hQeDdQa2ZoTEp0VllUaEtDSFdJZDA2MXVScFU2K2kvdktiM21KYVh2VXM0UjR1aEpTU3ZkQVdGdm5SUT09</buffer>
+              <len>102</len>
+            </raw>
+            <delimiterIdx>20</delimiterIdx>
+            <name>X-Google-Smtp-Source</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>WC1SZWNlaXZlZDogYnkgMjAwMjphODE6OWMxNDo6IHdpdGggU01UUCBpZCBtMjBtcjM4NzE2NDg3eXdhLjE0My4xNTgyNDk0MTA0MjYzOyANCiBTdW4sIDIzIEZlYiAyMDIwIDEzOjQxOjQ0IC0wODAwIChQU1Qp</buffer>
+              <len>120</len>
+            </raw>
+            <delimiterIdx>10</delimiterIdx>
+            <name>X-Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>RE1BUkMtRmlsdGVyOiBPcGVuRE1BUkMgRmlsdGVyIHYxLjMuMiBpbi0wMTEubGF4Lm1haWxyb3V0ZS5uZXQgNDhQRk5TMVB5cXoxSkJZMw==</buffer>
+              <len>79</len>
+            </raw>
+            <delimiterIdx>12</delimiterIdx>
+            <name>DMARC-Filter</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.MailboxListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>RnJvbTogV2FoYWIgSGFtb3UtTGhhZGogPHdhaGFiLmhhbW91LWxoYWRqQGNvbmNvcmRpYS5jYT4=</buffer>
+              <len>56</len>
+            </raw>
+            <delimiterIdx>4</delimiterIdx>
+            <name>From</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.MailboxListFieldLenientImpl>
+        <org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>VG86ICJzZXdvcmxkQHNpZ3NvZnQub3JnIiA8c2V3b3JsZEBzaWdzb2Z0Lm9yZz4=</buffer>
+              <len>47</len>
+            </raw>
+            <delimiterIdx>2</delimiterIdx>
+            <name>To</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>U3ViamVjdDogW1NFV09STERdIFRlbnVyZS10cmFjayBvciBUZW51cmVkIFBvc2l0aW9uIC0gQ1JDIFRpZXIgSUkgaW4gUGVydmFzaXZlDQogQ29tcHV0aW5nIGZvciBIZWFsdGggYW5kIEhlYWx0aHkgQWdpbmcgLSBDb25jb3JkaWEgVW5pdi4sIE1vbnRyZWFsLCBRQywNCiBDYW5hZGE=</buffer>
+              <len>161</len>
+            </raw>
+            <delimiterIdx>7</delimiterIdx>
+            <name>Subject</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>true</parsed>
+          <value>[SEWORLD] Tenure-track or Tenured Position - CRC Tier II in Pervasive Computing for Health and Healthy Aging - Concordia Univ., Montreal, QC, Canada</value>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>VGhyZWFkLVRvcGljOiBUZW51cmUtdHJhY2sgb3IgVGVudXJlZCBQb3NpdGlvbiAtIENSQyBUaWVyIElJIGluIFBlcnZhc2l2ZQ0KIENvbXB1dGluZyBmb3IgSGVhbHRoIGFuZCBIZWFsdGh5IEFnaW5nIC0gQ29uY29yZGlhIFVuaXYuLA0KIE1vbnRyZWFsLCBRQywgQ2FuYWRh</buffer>
+              <len>156</len>
+            </raw>
+            <delimiterIdx>12</delimiterIdx>
+            <name>Thread-Topic</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>VGhyZWFkLUluZGV4OiBBZFhveVR1MlloMllhTjE1UUV1USs5M1pUSjZpeEE9PQ==</buffer>
+              <len>46</len>
+            </raw>
+            <delimiterIdx>12</delimiterIdx>
+            <name>Thread-Index</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.DateTimeFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>RGF0ZTogRnJpLCAyMSBGZWIgMjAyMCAxNToxMjo0NiArMDAwMA==</buffer>
+              <len>37</len>
+            </raw>
+            <delimiterIdx>4</delimiterIdx>
+            <name>Date</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <datePatterns>
+            <string>EEE, dd MMM yyyy HH:mm:ss ZZZZ</string>
+            <string>dd MMM yyyy HH:mm:ss ZZZZ</string>
+            <string>EEE, dd MMM yyyy HH:mm:ss.SSS 0000</string>
+          </datePatterns>
+          <parsed>true</parsed>
+          <date>2020-02-21 15:12:46.0 UTC</date>
+        </org.apache.james.mime4j.field.DateTimeFieldLenientImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>TWVzc2FnZS1JRDogPDM1NDM5NDc1ZDAxMzQxYzNhM2ZjZmI4M2UyNDA5ZjNmQFVNUy1MT1ktTUJTMS5jb25jb3JkaWEuY2E+</buffer>
+              <len>72</len>
+            </raw>
+            <delimiterIdx>10</delimiterIdx>
+            <name>Message-ID</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>QWNjZXB0LUxhbmd1YWdlOiBlbi1VUw==</buffer>
+              <len>22</len>
+            </raw>
+            <delimiterIdx>15</delimiterIdx>
+            <name>Accept-Language</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>WC1NUy1IYXMtQXR0YWNoOiA=</buffer>
+              <len>17</len>
+            </raw>
+            <delimiterIdx>15</delimiterIdx>
+            <name>X-MS-Has-Attach</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>WC1NUy1UTkVGLUNvcnJlbGF0b3I6IA==</buffer>
+              <len>22</len>
+            </raw>
+            <delimiterIdx>20</delimiterIdx>
+            <name>X-MS-TNEF-Correlator</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>eC1tcy1leGNoYW5nZS10cmFuc3BvcnQtZnJvbWVudGl0eWhlYWRlcjogSG9zdGVk</buffer>
+              <len>48</len>
+            </raw>
+            <delimiterIdx>40</delimiterIdx>
+            <name>x-ms-exchange-transport-fromentityheader</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>eC1vcmlnaW5hdGluZy1pcDogWzEzMi4yMDUuMjQ0LjZd</buffer>
+              <len>33</len>
+            </raw>
+            <delimiterIdx>16</delimiterIdx>
+            <name>x-originating-ip</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>eC1wbXdpbi12ZXJzaW9uOiA0LjAuMiwgQW50aXZpcnVzLUVuZ2luZTogMy43Ny4xLCBBbnRpdmlydXMtRGF0YTogNS43Mg==</buffer>
+              <len>70</len>
+            </raw>
+            <delimiterIdx>15</delimiterIdx>
+            <name>x-pmwin-version</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>eC1wdXJlbWVzc2FnZTogW1NjYW5uZWRd</buffer>
+              <len>24</len>
+            </raw>
+            <delimiterIdx>13</delimiterIdx>
+            <name>x-puremessage</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.MimeVersionFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>TUlNRS1WZXJzaW9uOiAxLjA=</buffer>
+              <len>17</len>
+            </raw>
+            <delimiterIdx>12</delimiterIdx>
+            <name>MIME-Version</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+          <major>1</major>
+          <minor>0</minor>
+        </org.apache.james.mime4j.field.MimeVersionFieldImpl>
+        <org.apache.james.mime4j.field.ContentTypeFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>Q29udGVudC1UeXBlOiB0ZXh0L3BsYWluOyBjaGFyc2V0PSJ1cy1hc2NpaSI=</buffer>
+              <len>44</len>
+            </raw>
+            <delimiterIdx>12</delimiterIdx>
+            <name>Content-Type</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+          <parameters/>
+        </org.apache.james.mime4j.field.ContentTypeFieldLenientImpl>
+        <org.apache.james.mime4j.field.ContentTransferEncodingFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>Q29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogcXVvdGVkLXByaW50YWJsZQ==</buffer>
+              <len>43</len>
+            </raw>
+            <delimiterIdx>25</delimiterIdx>
+            <name>Content-Transfer-Encoding</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.ContentTransferEncodingFieldImpl>
+        <org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVzZW50LVRvOiBzZXdvcmxkQHNpZ3NvZnQub3Jn</buffer>
+              <len>30</len>
+            </raw>
+            <delimiterIdx>9</delimiterIdx>
+            <name>Resent-To</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+        <org.apache.james.mime4j.field.DateTimeFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVzZW50LURhdGU6IFN1biwgMjMgRmViIDIwMjAgMjE6NDE6NDIgLTAwMDA=</buffer>
+              <len>44</len>
+            </raw>
+            <delimiterIdx>11</delimiterIdx>
+            <name>Resent-Date</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <datePatterns>
+            <string>EEE, dd MMM yyyy HH:mm:ss ZZZZ</string>
+            <string>dd MMM yyyy HH:mm:ss ZZZZ</string>
+            <string>EEE, dd MMM yyyy HH:mm:ss.SSS 0000</string>
+          </datePatterns>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.DateTimeFieldLenientImpl>
+        <org.apache.james.mime4j.field.MailboxListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVzZW50LUZyb206IFNFV09STEQgTW9kZXJhdG9yIDxzZXdvcmxkLW1vZGVyYXRvckBzaWdzb2Z0Lm9yZz4=</buffer>
+              <len>62</len>
+            </raw>
+            <delimiterIdx>11</delimiterIdx>
+            <name>Resent-From</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.MailboxListFieldLenientImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVzZW50LU1lc3NhZ2UtSWQ6IDwxNTgyNDk0MTAyNTUuMzM5NC45ODYzNzM4MDM3OTM0MDY2OTkyLnNpZ3NvZnQub3JnQFppamlhbmdzLWlNYWMubG9jYWw+</buffer>
+              <len>90</len>
+            </raw>
+            <delimiterIdx>17</delimiterIdx>
+            <name>Resent-Message-Id</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.MailboxFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>U2VuZGVyOiBvd25lci1zZXdvcmxkQGxpc3RzZXJ2LmFjbS5vcmc=</buffer>
+              <len>38</len>
+            </raw>
+            <delimiterIdx>6</delimiterIdx>
+            <name>Sender</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.MailboxFieldLenientImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UHJlY2VkZW5jZTogbGlzdA==</buffer>
+              <len>16</len>
+            </raw>
+            <delimiterIdx>10</delimiterIdx>
+            <name>Precedence</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>TGlzdC1IZWxwOiA8aHR0cHM6Ly9MSVNUU0VSVi5BQ00uT1JHL1NDUklQVFMvV0EtQUNNTFBYLkNHST9MSVNUPVNFV09STEQ+LA0KIDxtYWlsdG86TElTVFNFUlZATElTVFNFUlYuQUNNLk9SRz9ib2R5PUlORk8lMjBTRVdPUkxEPg==</buffer>
+              <len>130</len>
+            </raw>
+            <delimiterIdx>9</delimiterIdx>
+            <name>List-Help</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>TGlzdC1VbnN1YnNjcmliZTogPG1haWx0bzpTRVdPUkxELXVuc3Vic2NyaWJlLXJlcXVlc3RATElTVFNFUlYuQUNNLk9SRz4=</buffer>
+              <len>71</len>
+            </raw>
+            <delimiterIdx>16</delimiterIdx>
+            <name>List-Unsubscribe</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>TGlzdC1TdWJzY3JpYmU6IDxtYWlsdG86U0VXT1JMRC1zdWJzY3JpYmUtcmVxdWVzdEBMSVNUU0VSVi5BQ00uT1JHPg==</buffer>
+              <len>67</len>
+            </raw>
+            <delimiterIdx>14</delimiterIdx>
+            <name>List-Subscribe</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>TGlzdC1Pd25lcjogPG1haWx0bzpTRVdPUkxELXJlcXVlc3RATElTVFNFUlYuQUNNLk9SRz4=</buffer>
+              <len>53</len>
+            </raw>
+            <delimiterIdx>10</delimiterIdx>
+            <name>List-Owner</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>TGlzdC1BcmNoaXZlOiA8aHR0cHM6Ly9MSVNUU0VSVi5BQ00uT1JHL1NDUklQVFMvV0EtQUNNTFBYLkNHST9MSVNUPVNFV09STEQ+</buffer>
+              <len>75</len>
+            </raw>
+            <delimiterIdx>12</delimiterIdx>
+            <name>List-Archive</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.MailboxListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>RnJvbTogPT91dGYtOD9xP3Rlc3Qtc2VuZGVyPz0gPHRlc3Qtc2VuZGVyQGxvY2FsaG9zdD4=</buffer>
+              <len>53</len>
+            </raw>
+            <delimiterIdx>4</delimiterIdx>
+            <name>From</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.MailboxListFieldLenientImpl>
+        <org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>VG86ID0/dXRmLTg/cT90ZXN0LXJlY2VpdmVyPz0gPHRlc3QtcmVjZWl2ZXJAbG9jYWxob3N0Pg==</buffer>
+              <len>55</len>
+            </raw>
+            <delimiterIdx>2</delimiterIdx>
+            <name>To</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+      </fields>
+      <fieldMap>
+        <entry>
+          <string>date</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.DateTimeFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.DateTimeFieldLenientImpl"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>mime-version</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.MimeVersionFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.MimeVersionFieldImpl"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>resent-from</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.MailboxListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.MailboxListFieldLenientImpl[2]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>return-path</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[2]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-puremessage</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[36]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>subject</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[26]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-google-dkim-signature</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[21]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>precedence</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[38]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>list-subscribe</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[41]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>thread-topic</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[27]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>list-help</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[39]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>content-transfer-encoding</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.ContentTransferEncodingFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.ContentTransferEncodingFieldImpl"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-received</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[24]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>message-id</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[29]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-pmwin-version</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[35]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>resent-message-id</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[37]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>from</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.MailboxListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.MailboxListFieldLenientImpl"/>
+            <org.apache.james.mime4j.field.MailboxListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.MailboxListFieldLenientImpl[3]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>content-type</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.ContentTypeFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.ContentTypeFieldLenientImpl"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>resent-date</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.DateTimeFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.DateTimeFieldLenientImpl[2]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>list-owner</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[42]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>accept-language</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[30]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>resent-to</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.AddressListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.AddressListFieldLenientImpl[2]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>list-unsubscribe</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[40]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-ms-has-attach</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[31]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>received</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[3]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[4]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[5]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[6]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[7]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[8]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[9]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[10]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[11]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[12]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[13]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[14]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[15]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[16]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[17]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[18]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-originating-ip</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[34]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>thread-index</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[28]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-google-smtp-source</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[23]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>list-archive</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[43]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-virus-scanned</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[19]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-ms-tnef-correlator</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[32]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>sender</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.MailboxFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.MailboxFieldLenientImpl"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-ms-exchange-transport-fromentityheader</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[33]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>dmarc-filter</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[20]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[25]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-gm-message-state</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[22]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>to</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.AddressListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.AddressListFieldLenientImpl"/>
+            <org.apache.james.mime4j.field.AddressListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.AddressListFieldLenientImpl[3]"/>
+          </linked-list>
+        </entry>
+      </fieldMap>
+    </header>
+    <source>../spool/1600853481206-0</source>
+  </header>
+  <file>../spool/1600853481206-0</file>
+</com.hs.mail.imap.message.MailMessage>
+<com.hs.mail.imap.message.MailMessage>
+  <messageID>0</messageID>
+  <physMessageID>823</physMessageID>
+  <size>337700</size>
+  <internalDate>2020-09-23 09:33:01.693 UTC</internalDate>
+  <header>
+    <header class="org.apache.james.mime4j.message.HeaderImpl">
+      <fields class="linked-list">
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gWzEyNy4wLjEuMV0gKGxvY2FsaG9zdCBbMTI3LjAuMC4xXSkNCglieSBsb2NhbGhvc3Qgd2l0aCBFU01UUCBpZCA1MTY7DQoJV2VkLCAyMyBTZXAgMjAyMCAxMTozMjozNyArMDIwMCAoQ0VTVCk=</buffer>
+              <len>125</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmV0dXJuLVBhdGg6IDx0ZXN0LXNlbmRlckBsb2NhbGhvc3Q+DQo=</buffer>
+              <len>38</len>
+            </raw>
+            <delimiterIdx>11</delimiterIdx>
+            <name>Return-Path</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gbGliLWFyeGl2LTAxNS5zZXJ2ZXJmYXJtLmNvcm5lbGwuZWR1IChtYWlsLmFyeGl2Lm9yZw0KIFsxMjguODQuNC4xMV0pIGJ5IG1haWwua3RoLWFzc2VydC5uZXQgd2l0aCBFU01UUCBpZCA2MjU7DQogRnJpLCAxMyBNYXIgMjAyMCAwODoyMDoyMCArMDAwMCAoVVRDKQ==</buffer>
+              <len>166</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gbGliLWFyeGl2LTAwNy5zZXJ2ZXJmYXJtLmNvcm5lbGwuZWR1DQogKGxpYi1hcnhpdi0wMDcuc2VydmVyZmFybS5jb3JuZWxsLmVkdSBbMTI4Ljg0LjQuMTJdKQ0KIGJ5IGxpYi1hcnhpdi0wMTUuc2VydmVyZmFybS5jb3JuZWxsLmVkdSAoOC4xNC40LzguMTQuNCkgd2l0aCBFU01UUCBpZA0KIDAyRDhISmdHMDM1NTU0OyBGcmksIDEzIE1hciAyMDIwIDA0OjE3OjE5IC0wNDAw</buffer>
+              <len>228</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IGZyb20gbGliLWFyeGl2LTAwNy5zZXJ2ZXJmYXJtLmNvcm5lbGwuZWR1IChsb2NhbGhvc3QgWzEyNy4wLjAuMV0pDQogYnkgbGliLWFyeGl2LTAwNy5zZXJ2ZXJmYXJtLmNvcm5lbGwuZWR1ICg4LjE0LjQvOC4xNC40KSB3aXRoIEVTTVRQIGlkDQogMDJEOEhKb1cwMTE0NTI7IEZyaSwgMTMgTWFyIDIwMjAgMDQ6MTc6MTkgLTA0MDA=</buffer>
+              <len>197</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVjZWl2ZWQ6IChmcm9tIGUtcHJpbnRzQGxvY2FsaG9zdCkNCiBieSBsaWItYXJ4aXYtMDA3LnNlcnZlcmZhcm0uY29ybmVsbC5lZHUgKDguMTQuNC84LjE0LjQvU3VibWl0KSBpZA0KIDAyRDhIQ0xjMDExMzg3OyBGcmksIDEzIE1hciAyMDIwIDA0OjE3OjEyIC0wNDAw</buffer>
+              <len>153</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Received</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.DateTimeFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>RGF0ZTogRnJpLCAxMyBNYXIgMjAyMCAwNDoxNzoxMiAtMDQwMA==</buffer>
+              <len>37</len>
+            </raw>
+            <delimiterIdx>4</delimiterIdx>
+            <name>Date</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <datePatterns>
+            <string>EEE, dd MMM yyyy HH:mm:ss ZZZZ</string>
+            <string>dd MMM yyyy HH:mm:ss ZZZZ</string>
+            <string>EEE, dd MMM yyyy HH:mm:ss.SSS 0000</string>
+          </datePatterns>
+          <parsed>true</parsed>
+          <date>2020-03-13 08:17:12.0 UTC</date>
+        </org.apache.james.mime4j.field.DateTimeFieldLenientImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>TWVzc2FnZS1JZDogPDIwMjAwMzEzMDgxNy4wMkQ4SENMYzAxMTM4N0BsaWItYXJ4aXYtMDA3LnNlcnZlcmZhcm0uY29ybmVsbC5lZHU+</buffer>
+              <len>78</len>
+            </raw>
+            <delimiterIdx>10</delimiterIdx>
+            <name>Message-Id</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>WC1BdXRoZW50aWNhdGlvbi1XYXJuaW5nOiBsaWItYXJ4aXYtMDA3LnNlcnZlcmZhcm0uY29ybmVsbC5lZHU6IGUtcHJpbnRzIHNldA0KIHNlbmRlciB0byBuby1yZXBseUBhclhpdi5vcmcgdXNpbmcgLWY=</buffer>
+              <len>116</len>
+            </raw>
+            <delimiterIdx>24</delimiterIdx>
+            <name>X-Authentication-Warning</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UHJlY2VkZW5jZTogYnVsaw==</buffer>
+              <len>16</len>
+            </raw>
+            <delimiterIdx>10</delimiterIdx>
+            <name>Precedence</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.MailboxListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>RnJvbTogbm8tcmVwbHlAYXJYaXYub3JnIChzZW5kIG1haWwgT05MWSB0byBjcyk=</buffer>
+              <len>47</len>
+            </raw>
+            <delimiterIdx>4</delimiterIdx>
+            <name>From</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.MailboxListFieldLenientImpl>
+        <org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>UmVwbHktVG86IGNzQGFyWGl2Lm9yZw==</buffer>
+              <len>22</len>
+            </raw>
+            <delimiterIdx>8</delimiterIdx>
+            <name>Reply-To</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+        <org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>VG86IHJhYmJsZUBhclhpdi5vcmcgKGNzIGRhaWx5IHRpdGxlL2Fic3RyYWN0IGRpc3RyaWJ1dGlvbik=</buffer>
+              <len>59</len>
+            </raw>
+            <delimiterIdx>2</delimiterIdx>
+            <name>To</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+        <org.apache.james.mime4j.field.UnstructuredFieldImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>U3ViamVjdDogY3MgZGFpbHkgU3Viai1jbGFzcyBtYWlsaW5nIGZmZmZmZmZmIDEyNg==</buffer>
+              <len>49</len>
+            </raw>
+            <delimiterIdx>7</delimiterIdx>
+            <name>Subject</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>true</parsed>
+          <value>cs daily Subj-class mailing ffffffff 126</value>
+        </org.apache.james.mime4j.field.UnstructuredFieldImpl>
+        <org.apache.james.mime4j.field.MailboxListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>RnJvbTogPT91dGYtOD9xP3Rlc3Qtc2VuZGVyPz0gPHRlc3Qtc2VuZGVyQGxvY2FsaG9zdD4=</buffer>
+              <len>53</len>
+            </raw>
+            <delimiterIdx>4</delimiterIdx>
+            <name>From</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.MailboxListFieldLenientImpl>
+        <org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+          <rawField class="org.apache.james.mime4j.stream.RawField">
+            <raw class="org.apache.james.mime4j.util.ByteArrayBuffer">
+              <buffer>VG86ID0/dXRmLTg/cT90ZXN0LXJlY2VpdmVyPz0gPHRlc3QtcmVjZWl2ZXJAbG9jYWxob3N0Pg==</buffer>
+              <len>55</len>
+            </raw>
+            <delimiterIdx>2</delimiterIdx>
+            <name>To</name>
+          </rawField>
+          <monitor reference="../../org.apache.james.mime4j.field.UnstructuredFieldImpl/monitor"/>
+          <parsed>false</parsed>
+        </org.apache.james.mime4j.field.AddressListFieldLenientImpl>
+      </fields>
+      <fieldMap>
+        <entry>
+          <string>date</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.DateTimeFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.DateTimeFieldLenientImpl"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>return-path</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[2]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>subject</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[10]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>message-id</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[7]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>received</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[3]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[4]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[5]"/>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[6]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>from</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.MailboxListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.MailboxListFieldLenientImpl"/>
+            <org.apache.james.mime4j.field.MailboxListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.MailboxListFieldLenientImpl[2]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>x-authentication-warning</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[8]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>to</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.AddressListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.AddressListFieldLenientImpl[2]"/>
+            <org.apache.james.mime4j.field.AddressListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.AddressListFieldLenientImpl[3]"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>reply-to</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.AddressListFieldLenientImpl reference="../../../../fields/org.apache.james.mime4j.field.AddressListFieldLenientImpl"/>
+          </linked-list>
+        </entry>
+        <entry>
+          <string>precedence</string>
+          <linked-list>
+            <org.apache.james.mime4j.field.UnstructuredFieldImpl reference="../../../../fields/org.apache.james.mime4j.field.UnstructuredFieldImpl[9]"/>
+          </linked-list>
+        </entry>
+      </fieldMap>
+    </header>
+    <source>../spool/1600853557618-1</source>
+  </header>
+  <file>../spool/1600853557618-1</file>
+</com.hs.mail.imap.message.MailMessage>

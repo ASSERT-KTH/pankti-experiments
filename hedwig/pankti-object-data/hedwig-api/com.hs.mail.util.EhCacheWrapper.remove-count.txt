@@ -1,0 +1,1 @@
+Invocation count for com.hs.mail.util.EhCacheWrapper.remove : 2

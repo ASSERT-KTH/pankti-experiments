@@ -1,0 +1,16 @@
+<java.net.Inet4Address resolves-to="java.net.InetAddress" serialization="custom">
+  <java.net.InetAddress>
+    <default>
+      <address>2130706433</address>
+      <family>2</family>
+    </default>
+  </java.net.InetAddress>
+</java.net.Inet4Address>
+<java.net.Inet4Address resolves-to="java.net.InetAddress" serialization="custom">
+  <java.net.InetAddress>
+    <default>
+      <address>2130706433</address>
+      <family>2</family>
+    </default>
+  </java.net.InetAddress>
+</java.net.Inet4Address>

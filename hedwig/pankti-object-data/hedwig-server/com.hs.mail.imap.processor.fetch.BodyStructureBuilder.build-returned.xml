@@ -1,0 +1,52 @@
+<com.hs.mail.imap.processor.fetch.MimeDescriptor>
+  <bodyOctets>9531</bodyOctets>
+  <lines>160</lines>
+  <type>text</type>
+  <subType>plain</subType>
+  <encoding>quoted-printable</encoding>
+  <parameters>
+    <string>charset</string>
+    <string>us-ascii</string>
+  </parameters>
+  <languages class="empty-list"/>
+  <parts/>
+</com.hs.mail.imap.processor.fetch.MimeDescriptor>
+<com.hs.mail.imap.processor.fetch.MimeDescriptor>
+  <bodyOctets>9531</bodyOctets>
+  <lines>160</lines>
+  <type>text</type>
+  <subType>plain</subType>
+  <encoding>quoted-printable</encoding>
+  <parameters>
+    <string>charset</string>
+    <string>us-ascii</string>
+  </parameters>
+  <languages class="empty-list"/>
+  <parts/>
+</com.hs.mail.imap.processor.fetch.MimeDescriptor>
+<com.hs.mail.imap.processor.fetch.MimeDescriptor>
+  <bodyOctets>2898</bodyOctets>
+  <lines>68</lines>
+  <type>text</type>
+  <subType>plain</subType>
+  <encoding>quoted-printable</encoding>
+  <parameters>
+    <string>charset</string>
+    <string>us-ascii</string>
+  </parameters>
+  <languages class="empty-list"/>
+  <parts/>
+</com.hs.mail.imap.processor.fetch.MimeDescriptor>
+<com.hs.mail.imap.processor.fetch.MimeDescriptor>
+  <bodyOctets>2898</bodyOctets>
+  <lines>68</lines>
+  <type>text</type>
+  <subType>plain</subType>
+  <encoding>quoted-printable</encoding>
+  <parameters>
+    <string>charset</string>
+    <string>us-ascii</string>
+  </parameters>
+  <languages class="empty-list"/>
+  <parts/>
+</com.hs.mail.imap.processor.fetch.MimeDescriptor>

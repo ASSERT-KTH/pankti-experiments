@@ -1,0 +1,34 @@
+<com.hs.mail.imap.message.response.SelectResponse>
+  <mailbox>
+    <mailboxID>4</mailboxID>
+    <name>INBOX</name>
+    <ownerID>4</ownerID>
+    <nextUID>883</nextUID>
+    <uidValidity>1600194306829</uidValidity>
+    <noInferiors>false</noInferiors>
+    <noSelect>false</noSelect>
+    <readOnly>false</readOnly>
+    <marked>false</marked>
+    <hasChildren>false</hasChildren>
+  </mailbox>
+  <firstUnseen>2</firstUnseen>
+  <messageCount>39</messageCount>
+  <recentMessageCount>1</recentMessageCount>
+</com.hs.mail.imap.message.response.SelectResponse>
+<com.hs.mail.imap.message.response.SelectResponse>
+  <mailbox>
+    <mailboxID>4</mailboxID>
+    <name>INBOX</name>
+    <ownerID>4</ownerID>
+    <nextUID>884</nextUID>
+    <uidValidity>1600194306829</uidValidity>
+    <noInferiors>false</noInferiors>
+    <noSelect>false</noSelect>
+    <readOnly>false</readOnly>
+    <marked>false</marked>
+    <hasChildren>false</hasChildren>
+  </mailbox>
+  <firstUnseen>2</firstUnseen>
+  <messageCount>40</messageCount>
+  <recentMessageCount>1</recentMessageCount>
+</com.hs.mail.imap.message.response.SelectResponse>

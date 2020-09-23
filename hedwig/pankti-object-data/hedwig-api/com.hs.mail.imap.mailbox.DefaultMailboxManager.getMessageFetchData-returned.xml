@@ -1,0 +1,18 @@
+<com.hs.mail.imap.message.FetchData>
+  <messageID>880</messageID>
+  <physMessageID>822</physMessageID>
+  <size>16530</size>
+  <flags>
+    <system__flags>16</system__flags>
+  </flags>
+  <internalDate>2020-09-23 09:31:29.0 UTC</internalDate>
+</com.hs.mail.imap.message.FetchData>
+<com.hs.mail.imap.message.FetchData>
+  <messageID>881</messageID>
+  <physMessageID>823</physMessageID>
+  <size>337700</size>
+  <flags>
+    <system__flags>16</system__flags>
+  </flags>
+  <internalDate>2020-09-23 09:33:01.0 UTC</internalDate>
+</com.hs.mail.imap.message.FetchData>

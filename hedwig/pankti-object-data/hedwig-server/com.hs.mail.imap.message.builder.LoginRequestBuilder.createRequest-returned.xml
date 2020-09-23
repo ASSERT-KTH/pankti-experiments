@@ -1,0 +1,12 @@
+<com.hs.mail.imap.message.request.LoginRequest>
+  <tag>BHEM1</tag>
+  <command>LOGIN</command>
+  <username>test-receiver@localhost</username>
+  <password>654321</password>
+</com.hs.mail.imap.message.request.LoginRequest>
+<com.hs.mail.imap.message.request.LoginRequest>
+  <tag>CCNC1</tag>
+  <command>LOGIN</command>
+  <username>test-receiver@localhost</username>
+  <password>654321</password>
+</com.hs.mail.imap.message.request.LoginRequest>

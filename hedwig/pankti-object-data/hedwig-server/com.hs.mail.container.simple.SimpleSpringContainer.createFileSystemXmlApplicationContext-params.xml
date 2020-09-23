@@ -1,0 +1,5 @@
+<object-array>
+  <string-array>
+    <string>../conf/applicationContext.xml</string>
+  </string-array>
+</object-array>

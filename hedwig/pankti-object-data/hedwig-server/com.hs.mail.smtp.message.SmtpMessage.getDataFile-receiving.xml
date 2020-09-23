@@ -1,0 +1,70 @@
+<com.hs.mail.smtp.message.SmtpMessage>
+  <name>1600855714294-0</name>
+  <node>3</node>
+  <from>
+    <address>test-sender@localhost</address>
+  </from>
+  <recipients class="sorted-set">
+    <com.hs.mail.smtp.message.Recipient>
+      <address>test-receiver@localhost</address>
+      <id>-1</id>
+    </com.hs.mail.smtp.message.Recipient>
+  </recipients>
+  <retryCount>0</retryCount>
+  <lastUpdate>2020-09-23 10:08:34.294 UTC</lastUpdate>
+</com.hs.mail.smtp.message.SmtpMessage>
+<com.hs.mail.smtp.message.SmtpMessage>
+  <name>1600855714294-0</name>
+  <node>3</node>
+  <from>
+    <address>test-sender@localhost</address>
+  </from>
+  <recipients class="sorted-set"/>
+  <retryCount>0</retryCount>
+  <lastUpdate>2020-09-23 10:08:34.294 UTC</lastUpdate>
+</com.hs.mail.smtp.message.SmtpMessage>
+<com.hs.mail.smtp.message.SmtpMessage>
+  <name>1600855714294-0</name>
+  <node>3</node>
+  <from>
+    <address>test-sender@localhost</address>
+  </from>
+  <recipients class="sorted-set"/>
+  <retryCount>0</retryCount>
+  <lastUpdate>2020-09-23 10:08:34.294 UTC</lastUpdate>
+</com.hs.mail.smtp.message.SmtpMessage>
+<com.hs.mail.smtp.message.SmtpMessage>
+  <name>1600855789988-1</name>
+  <node>3</node>
+  <from>
+    <address>test-sender@localhost</address>
+  </from>
+  <recipients class="sorted-set">
+    <com.hs.mail.smtp.message.Recipient>
+      <address>test-receiver@localhost</address>
+      <id>-1</id>
+    </com.hs.mail.smtp.message.Recipient>
+  </recipients>
+  <retryCount>0</retryCount>
+  <lastUpdate>2020-09-23 10:09:49.988 UTC</lastUpdate>
+</com.hs.mail.smtp.message.SmtpMessage>
+<com.hs.mail.smtp.message.SmtpMessage>
+  <name>1600855789988-1</name>
+  <node>3</node>
+  <from>
+    <address>test-sender@localhost</address>
+  </from>
+  <recipients class="sorted-set"/>
+  <retryCount>0</retryCount>
+  <lastUpdate>2020-09-23 10:09:49.988 UTC</lastUpdate>
+</com.hs.mail.smtp.message.SmtpMessage>
+<com.hs.mail.smtp.message.SmtpMessage>
+  <name>1600855789988-1</name>
+  <node>3</node>
+  <from>
+    <address>test-sender@localhost</address>
+  </from>
+  <recipients class="sorted-set"/>
+  <retryCount>0</retryCount>
+  <lastUpdate>2020-09-23 10:09:49.988 UTC</lastUpdate>
+</com.hs.mail.smtp.message.SmtpMessage>

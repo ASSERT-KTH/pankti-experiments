@@ -1,0 +1,56 @@
+<com.hs.mail.imap.parser.Token>
+  <type>KEYWORD</type>
+  <value>CAPABILITY</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>QUOTED</type>
+  <value>654321</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>KEYWORD</type>
+  <value>INBOX</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>KEYWORD</type>
+  <value>ALL</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>RPAREN</type>
+  <value>)</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>KEYWORD</type>
+  <value>CLOSE</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>KEYWORD</type>
+  <value>LOGOUT</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>KEYWORD</type>
+  <value>CAPABILITY</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>QUOTED</type>
+  <value>654321</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>KEYWORD</type>
+  <value>INBOX</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>KEYWORD</type>
+  <value>ALL</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>RPAREN</type>
+  <value>)</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>KEYWORD</type>
+  <value>CLOSE</value>
+</com.hs.mail.imap.parser.Token>
+<com.hs.mail.imap.parser.Token>
+  <type>KEYWORD</type>
+  <value>LOGOUT</value>
+</com.hs.mail.imap.parser.Token>

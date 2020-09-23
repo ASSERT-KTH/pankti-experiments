@@ -1,0 +1,268 @@
+<object-array>
+  <com.hs.mail.imap.message.request.CapabilityRequest>
+    <tag>BHEM0</tag>
+    <command>CAPABILITY</command>
+  </com.hs.mail.imap.message.request.CapabilityRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.CapabilityRequest>
+    <tag>BHEM0</tag>
+    <command>CAPABILITY</command>
+  </com.hs.mail.imap.message.request.CapabilityRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.LoginRequest>
+    <tag>BHEM1</tag>
+    <command>LOGIN</command>
+    <username>test-receiver@localhost</username>
+    <password>654321</password>
+  </com.hs.mail.imap.message.request.LoginRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.LoginRequest>
+    <tag>BHEM1</tag>
+    <command>LOGIN</command>
+    <username>test-receiver@localhost</username>
+    <password>654321</password>
+  </com.hs.mail.imap.message.request.LoginRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.SelectRequest>
+    <tag>BHEM2</tag>
+    <command>SELECT</command>
+    <mailbox>INBOX</mailbox>
+  </com.hs.mail.imap.message.request.SelectRequest>
+  <string>[READ-WRITE]</string>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.SelectRequest>
+    <tag>BHEM2</tag>
+    <command>SELECT</command>
+    <mailbox>INBOX</mailbox>
+  </com.hs.mail.imap.message.request.SelectRequest>
+  <string>[READ-WRITE]</string>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.SearchRequest>
+    <tag>BHEM3</tag>
+    <command>SEARCH</command>
+    <searchKey class="com.hs.mail.imap.message.search.AllKey"/>
+    <useUID>false</useUID>
+  </com.hs.mail.imap.message.request.SearchRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.SearchRequest>
+    <tag>BHEM3</tag>
+    <command>SEARCH</command>
+    <searchKey class="com.hs.mail.imap.message.search.AllKey"/>
+    <useUID>false</useUID>
+  </com.hs.mail.imap.message.request.SearchRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.FetchRequest>
+    <tag>BHEM4</tag>
+    <command>FETCH</command>
+    <sequenceSet>
+      <com.hs.mail.imap.message.SequenceRange>
+        <min>39</min>
+        <max>39</max>
+      </com.hs.mail.imap.message.SequenceRange>
+    </sequenceSet>
+    <fetchProfile>
+      <specials>
+        <com.hs.mail.imap.message.BodyFetchItem>
+          <name defined-in="javax.mail.FetchProfile$Item">RFC822</name>
+          <name>RFC822</name>
+          <peek>false</peek>
+          <sectionType>5</sectionType>
+          <firstOctet>-1</firstOctet>
+          <numberOfOctets>-1</numberOfOctets>
+        </com.hs.mail.imap.message.BodyFetchItem>
+      </specials>
+    </fetchProfile>
+    <useUID>false</useUID>
+  </com.hs.mail.imap.message.request.FetchRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.FetchRequest>
+    <tag>BHEM4</tag>
+    <command>FETCH</command>
+    <sequenceSet>
+      <com.hs.mail.imap.message.SequenceRange>
+        <min>39</min>
+        <max>39</max>
+      </com.hs.mail.imap.message.SequenceRange>
+    </sequenceSet>
+    <fetchProfile>
+      <specials>
+        <com.hs.mail.imap.message.BodyFetchItem>
+          <name defined-in="javax.mail.FetchProfile$Item">RFC822</name>
+          <name>RFC822</name>
+          <peek>false</peek>
+          <sectionType>5</sectionType>
+          <firstOctet>-1</firstOctet>
+          <numberOfOctets>-1</numberOfOctets>
+        </com.hs.mail.imap.message.BodyFetchItem>
+      </specials>
+    </fetchProfile>
+    <useUID>false</useUID>
+  </com.hs.mail.imap.message.request.FetchRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.CloseRequest>
+    <tag>BHEM5</tag>
+    <command>CLOSE</command>
+  </com.hs.mail.imap.message.request.CloseRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.CloseRequest>
+    <tag>BHEM5</tag>
+    <command>CLOSE</command>
+  </com.hs.mail.imap.message.request.CloseRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.LogoutRequest>
+    <tag>BHEM6</tag>
+    <command>LOGOUT</command>
+  </com.hs.mail.imap.message.request.LogoutRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.LogoutRequest>
+    <tag>BHEM6</tag>
+    <command>LOGOUT</command>
+  </com.hs.mail.imap.message.request.LogoutRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.CapabilityRequest>
+    <tag>CCNC0</tag>
+    <command>CAPABILITY</command>
+  </com.hs.mail.imap.message.request.CapabilityRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.CapabilityRequest>
+    <tag>CCNC0</tag>
+    <command>CAPABILITY</command>
+  </com.hs.mail.imap.message.request.CapabilityRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.LoginRequest>
+    <tag>CCNC1</tag>
+    <command>LOGIN</command>
+    <username>test-receiver@localhost</username>
+    <password>654321</password>
+  </com.hs.mail.imap.message.request.LoginRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.LoginRequest>
+    <tag>CCNC1</tag>
+    <command>LOGIN</command>
+    <username>test-receiver@localhost</username>
+    <password>654321</password>
+  </com.hs.mail.imap.message.request.LoginRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.SelectRequest>
+    <tag>CCNC2</tag>
+    <command>SELECT</command>
+    <mailbox>INBOX</mailbox>
+  </com.hs.mail.imap.message.request.SelectRequest>
+  <string>[READ-WRITE]</string>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.SelectRequest>
+    <tag>CCNC2</tag>
+    <command>SELECT</command>
+    <mailbox>INBOX</mailbox>
+  </com.hs.mail.imap.message.request.SelectRequest>
+  <string>[READ-WRITE]</string>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.SearchRequest>
+    <tag>CCNC3</tag>
+    <command>SEARCH</command>
+    <searchKey class="com.hs.mail.imap.message.search.AllKey"/>
+    <useUID>false</useUID>
+  </com.hs.mail.imap.message.request.SearchRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.SearchRequest>
+    <tag>CCNC3</tag>
+    <command>SEARCH</command>
+    <searchKey class="com.hs.mail.imap.message.search.AllKey"/>
+    <useUID>false</useUID>
+  </com.hs.mail.imap.message.request.SearchRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.FetchRequest>
+    <tag>CCNC4</tag>
+    <command>FETCH</command>
+    <sequenceSet>
+      <com.hs.mail.imap.message.SequenceRange>
+        <min>40</min>
+        <max>40</max>
+      </com.hs.mail.imap.message.SequenceRange>
+    </sequenceSet>
+    <fetchProfile>
+      <specials>
+        <com.hs.mail.imap.message.BodyFetchItem>
+          <name defined-in="javax.mail.FetchProfile$Item">RFC822</name>
+          <name>RFC822</name>
+          <peek>false</peek>
+          <sectionType>5</sectionType>
+          <firstOctet>-1</firstOctet>
+          <numberOfOctets>-1</numberOfOctets>
+        </com.hs.mail.imap.message.BodyFetchItem>
+      </specials>
+    </fetchProfile>
+    <useUID>false</useUID>
+  </com.hs.mail.imap.message.request.FetchRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.FetchRequest>
+    <tag>CCNC4</tag>
+    <command>FETCH</command>
+    <sequenceSet>
+      <com.hs.mail.imap.message.SequenceRange>
+        <min>40</min>
+        <max>40</max>
+      </com.hs.mail.imap.message.SequenceRange>
+    </sequenceSet>
+    <fetchProfile>
+      <specials>
+        <com.hs.mail.imap.message.BodyFetchItem>
+          <name defined-in="javax.mail.FetchProfile$Item">RFC822</name>
+          <name>RFC822</name>
+          <peek>false</peek>
+          <sectionType>5</sectionType>
+          <firstOctet>-1</firstOctet>
+          <numberOfOctets>-1</numberOfOctets>
+        </com.hs.mail.imap.message.BodyFetchItem>
+      </specials>
+    </fetchProfile>
+    <useUID>false</useUID>
+  </com.hs.mail.imap.message.request.FetchRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.CloseRequest>
+    <tag>CCNC5</tag>
+    <command>CLOSE</command>
+  </com.hs.mail.imap.message.request.CloseRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.CloseRequest>
+    <tag>CCNC5</tag>
+    <command>CLOSE</command>
+  </com.hs.mail.imap.message.request.CloseRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.LogoutRequest>
+    <tag>CCNC6</tag>
+    <command>LOGOUT</command>
+  </com.hs.mail.imap.message.request.LogoutRequest>
+</object-array>
+<object-array>
+  <com.hs.mail.imap.message.request.LogoutRequest>
+    <tag>CCNC6</tag>
+    <command>LOGOUT</command>
+  </com.hs.mail.imap.message.request.LogoutRequest>
+</object-array>

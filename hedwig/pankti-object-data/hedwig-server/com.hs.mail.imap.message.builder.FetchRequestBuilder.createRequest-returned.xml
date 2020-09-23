@@ -1,0 +1,46 @@
+<com.hs.mail.imap.message.request.FetchRequest>
+  <tag>BHEM4</tag>
+  <command>FETCH</command>
+  <sequenceSet>
+    <com.hs.mail.imap.message.SequenceRange>
+      <min>39</min>
+      <max>39</max>
+    </com.hs.mail.imap.message.SequenceRange>
+  </sequenceSet>
+  <fetchProfile>
+    <specials>
+      <com.hs.mail.imap.message.BodyFetchItem>
+        <name defined-in="javax.mail.FetchProfile$Item">RFC822</name>
+        <name>RFC822</name>
+        <peek>false</peek>
+        <sectionType>5</sectionType>
+        <firstOctet>-1</firstOctet>
+        <numberOfOctets>-1</numberOfOctets>
+      </com.hs.mail.imap.message.BodyFetchItem>
+    </specials>
+  </fetchProfile>
+  <useUID>false</useUID>
+</com.hs.mail.imap.message.request.FetchRequest>
+<com.hs.mail.imap.message.request.FetchRequest>
+  <tag>CCNC4</tag>
+  <command>FETCH</command>
+  <sequenceSet>
+    <com.hs.mail.imap.message.SequenceRange>
+      <min>40</min>
+      <max>40</max>
+    </com.hs.mail.imap.message.SequenceRange>
+  </sequenceSet>
+  <fetchProfile>
+    <specials>
+      <com.hs.mail.imap.message.BodyFetchItem>
+        <name defined-in="javax.mail.FetchProfile$Item">RFC822</name>
+        <name>RFC822</name>
+        <peek>false</peek>
+        <sectionType>5</sectionType>
+        <firstOctet>-1</firstOctet>
+        <numberOfOctets>-1</numberOfOctets>
+      </com.hs.mail.imap.message.BodyFetchItem>
+    </specials>
+  </fetchProfile>
+  <useUID>false</useUID>
+</com.hs.mail.imap.message.request.FetchRequest>

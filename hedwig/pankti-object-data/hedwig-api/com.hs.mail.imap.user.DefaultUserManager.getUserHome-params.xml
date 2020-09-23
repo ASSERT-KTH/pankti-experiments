@@ -1,0 +1,12 @@
+<object-array>
+  <com.hs.mail.smtp.message.Recipient>
+    <address>test-receiver@localhost</address>
+    <id>4</id>
+  </com.hs.mail.smtp.message.Recipient>
+</object-array>
+<object-array>
+  <com.hs.mail.smtp.message.Recipient>
+    <address>test-receiver@localhost</address>
+    <id>4</id>
+  </com.hs.mail.smtp.message.Recipient>
+</object-array>

@@ -1,0 +1,8 @@
+<com.hs.mail.imap.message.request.LogoutRequest>
+  <tag>BHEM6</tag>
+  <command>LOGOUT</command>
+</com.hs.mail.imap.message.request.LogoutRequest>
+<com.hs.mail.imap.message.request.LogoutRequest>
+  <tag>CCNC6</tag>
+  <command>LOGOUT</command>
+</com.hs.mail.imap.message.request.LogoutRequest>

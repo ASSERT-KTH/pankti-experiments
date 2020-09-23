@@ -1,0 +1,150 @@
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Return-Path</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>Received</string>
+</object-array>
+<object-array>
+  <string>X-Virus-Scanned</string>
+</object-array>
+<object-array>
+  <string>DMARC-Filter</string>
+</object-array>
+<object-array>
+  <string>X-Google-DKIM-Signature</string>
+</object-array>
+<object-array>
+  <string>X-Gm-Message-State</string>
+</object-array>
+<object-array>
+  <string>X-Google-Smtp-Source</string>
+</object-array>
+<object-array>
+  <string>X-Received</string>
+</object-array>
+<object-array>
+  <string>DMARC-Filter</string>
+</object-array>
+<object-array>
+  <string>From</string>
+</object-array>
+<object-array>
+  <string>To</string>
+</object-array>
+<object-array>
+  <string>Subject</string>
+</object-array>
+<object-array>
+  <string>Thread-Topic</string>
+</object-array>
+<object-array>
+  <string>Thread-Index</string>
+</object-array>
+<object-array>
+  <string>Date</string>
+</object-array>
+<object-array>
+  <string>Message-ID</string>
+</object-array>
+<object-array>
+  <string>Accept-Language</string>
+</object-array>
+<object-array>
+  <string>X-MS-Has-Attach</string>
+</object-array>
+<object-array>
+  <string>X-MS-TNEF-Correlator</string>
+</object-array>
+<object-array>
+  <string>x-ms-exchange-transport-fromentityheader</string>
+</object-array>
+<object-array>
+  <string>x-originating-ip</string>
+</object-array>
+<object-array>
+  <string>x-pmwin-version</string>
+</object-array>
+<object-array>
+  <string>x-puremessage</string>
+</object-array>
+<object-array>
+  <string>MIME-Version</string>
+</object-array>
+<object-array>
+  <string>Content-Type</string>
+</object-array>
+<object-array>
+  <string>Content-Transfer-Encoding</string>
+</object-array>
+<object-array>
+  <string>Resent-To</string>
+</object-array>
+<object-array>
+  <string>Resent-Date</string>
+</object-array>
+<object-array>
+  <string>Resent-From</string>
+</object-array>
+<object-array>
+  <string>Resent-Message-Id</string>
+</object-array>
+<object-array>
+  <string>Sender</string>
+</object-array>
+<object-array>
+  <string>Precedence</string>
+</object-array>
+<object-array>
+  <string>List-Help</string>
+</object-array>
+<object-array>
+  <string>List-Unsubscribe</string>
+</object-array>
