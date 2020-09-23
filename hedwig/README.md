@@ -1,33 +1,41 @@
 # Experiments on HedWig
 
-## Extracted pure methods:
+## Extracted methods:
 
-- hedwig-api: 139
-- hedwig-server: 229
-- TOTAL: 368
+- hedwig-api: 320
+- hedwig-server: 345
+- TOTAL: 665
 
 ## Instrumentation candidates:
 
-- hedwig-api: 6
-- hedwig-server: 26
-- TOTAL: 32
+- hedwig-api: 205
+- hedwig-server: 138
+- TOTAL: 343
 
 ## Covered by the workload:
 
-- hedwig-api: 0
-- hedwig-server: 5
-- TOTAL: 5
+- hedwig-api: 47
+- hedwig-server: 28
+- TOTAL: 75
 
 ## Number of generated test cases:
 
-- hedwig-api: 0
-- hedwig-server: 220
-- TOTAL: 220
+- hedwig-api: 262
+- hedwig-server: 47
+- TOTAL: 309
 
-## Number of passed test cases:
+## Result of executing the test cases:
 
-- hedwig-api: 0
-- hedwig-server: 220 (100%)
-- TOTAL: 220 (100%)
+- hedwig-api: https://github.com/gluckzhang/hedwig-pankti/tree/pankti-hedwig-api
+  - failures: 131
+  - errors: 120
+  - passed: 11
+- hedwig-server: https://github.com/gluckzhang/hedwig-pankti/tree/pankti-hedwig-server
+  - failures: 26
+  - errors: 10
+  - passed: 7
 
-However, after comparing the JaCoCo report we find that the method/line under test has been covered by the original test suite already.
+## Notes
+
+- If there is any 'java.lang.NoClassDefFoundError: javax/transaction/TransactionManager' exception after starting HedWig, download [javaee-api-8.0.jar](https://repo1.maven.org/maven2/javax/javaee-api/8.0/javaee-api-8.0.jar) and put it into folder `hedwig-0.7-binary/lib`.
+- A try/catch block needs to be added for some of the test cases.
