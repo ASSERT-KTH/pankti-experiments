@@ -13,7 +13,7 @@ There are 4 projects selected for the experiments. The following table shows the
 
 | project       | Version       | LOC   | Classes | App. Methods | Test Methods | TS Method Cov. | TS Line Cov. | WL Method Cov. | WL Line Cov. |
 | ------------- | ------------- | ----- | ------- | -------------| ------------ | -------------- | ------------ | -------------- | ------------ |
-| PDFBox        | xx | xx | xx | xx | xx | xx | xx | xx | xx |
+| [PDFBox](https://github.com/apache/pdfbox/tree/2.0.21) | 2.0.21 | Sum: 728,812 <br> Java: 161,976 | 1,278 | xx | xx | 54.8% <br> 6,049/11,042 | 53.5% <br> 34,653/64,787 | xx | xx |
 | [ttorrent-cli](https://github.com/mpetazzoni/ttorrent/tree/ttorrent-2.0) | 2.0 | Sum: 14,269 <br> Java: 13,573 | 191 | 943 | 268 | 71.4% <br> 673/943 | 68.7% <br> 2,837/4,130<sup>*</sup> | 52.8% <br> 542/1,026 | 50.1% <br> 2535/5064 |
 | [jitsi-videobridge](https://github.com/jitsi/jitsi-videobridge/tree/stable/jitsi-meet_4857) | stable-4857 | Sum: 22,826 <br> Java: 18,926 | 154 | 874 | 101 | 40.0% <br> 652/1,627 | 33.6% <br> 2,706/8,048 | 50.4% <br> 842/1,671 | 49.0% <br> 3,995/8,148 |
 | [hedwig](http://hwmail.sourceforge.net/) | 0.7 | Sum: 66,539 <br> Java: 21,444 | 446 | 2,287 | 85 | 14.9% <br> 343/2,303 | 12.2% <br> 1,250/10,266 | 36.9% <br> 850/2,303 | 25% <br> 3,002/10,266 |
@@ -60,6 +60,24 @@ Add the following xml code into the pom file of the target project within `<proj
 ```
 
 Then run `mvn test` and `mvn jacoco:report`. The JaCoCo report will be generated at `./target/site/jacoco`. If the project contains multiple modules, the plugin can be declared in the root pom file. Run `mvn jacoco:report-aggregate` after `mvn test` to get an aggregated report.
+
+##### JaCoCo for Maven Multi-Module Builds
+
+If a project contains multiple sub-modules, some extra work might be needed in order to generate an aggrated JaCoCo report. (https://github.com/jacoco/jacoco/wiki/MavenMultiModule)
+
+- Create a dedicated module in your project for generation of the report. This module should depend on all or some other modules in the project. [Here](https://github.com/gluckzhang/pdfbox/tree/2.0.21-jacoco/aggregate-report) is an example for PDFBox.
+- Run `mvn jacoco:report-aggregate` after `mvn test` to get an aggregated report.
+- If your project already defines VM arguments for test execution, be sure that they will include property defined by JaCoCo. (https://www.jacoco.org/jacoco/trunk/doc/prepare-agent-mojo.html)
+
+```xml
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-surefire-plugin</artifactId>
+  <configuration>
+    <argLine>@{argLine} -your -extra -arguments</argLine>
+  </configuration>
+</plugin>
+```
 
 #### WL (workload) Method Cov. and WL Line Cov.
 
