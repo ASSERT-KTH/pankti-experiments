@@ -47,7 +47,7 @@ def health_checking(dataset):
     global SENDER
     global RECEIVER
 
-    sleep_time_after_sending = 40
+    sleep_time_after_sending = 60
 
     #   randomly pickup an email from the dataset
     original_email = randomly_pickup(dataset)
@@ -55,7 +55,8 @@ def health_checking(dataset):
     try:
         send_email(SENDER, RECEIVER, original_email)
         logging.info("send an email to the receiver")
-    except:
+    except Exception as e:
+        logging.info(e)
         logging.info("failed to send!")
         return "sending_failure"
 
@@ -64,7 +65,8 @@ def health_checking(dataset):
     try:
         fetched_email = fetch_email(RECEIVER)
         logging.info("fetch the email from the receiver")
-    except:
+    except Exception as e:
+        logging.info(e)
         logging.info("failed to fetch!")
         return "fetching_failure"
 
@@ -100,7 +102,7 @@ def fetch_email(receiver):
     global IMAP_SERVER_PORT
 
     server = imaplib.IMAP4(IMAP_SERVER, IMAP_SERVER_PORT)
-    server.login(receiver["address"],receiver["password"])
+    server.login(receiver["address"], receiver["password"])
     server.select("INBOX")
     typ, data = server.search(None, "ALL")
 
