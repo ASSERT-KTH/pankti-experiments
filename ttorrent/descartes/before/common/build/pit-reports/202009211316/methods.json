@@ -1,0 +1,4868 @@
+{
+  "methods": [
+    {
+      "name": "addFile",
+      "description": "(Ljava/io/File;)Lcom/turn/ttorrent/common/creation/MetadataBuilder;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 219,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "setCreationTime",
+      "description": "(I)Lcom/turn/ttorrent/common/creation/MetadataBuilder;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 133,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "dropEmptyTiersFromAnnounce",
+      "description": "()V",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 374,
+      "classification": "pseudo-tested",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "SURVIVED",
+          "mutator": "void",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getFilesList",
+      "description": "(Lcom/turn/ttorrent/common/creation/HashingResult;)Ljava/util/List;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 329,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest.testMultiFileWithOneFileValues",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "initFirstTier",
+      "description": "()V",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 395,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "newTier",
+      "description": "()Lcom/turn/ttorrent/common/creation/MetadataBuilder;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 122,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "addDataSource",
+      "description": "(Ljava/io/InputStream;Ljava/lang/String;)Lcom/turn/ttorrent/common/creation/MetadataBuilder;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 197,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "buildAndCloseResources",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 272,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest.testMultiFileWithOneFileValues",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "addTrackers",
+      "description": "(Ljava/util/Collection;)Lcom/turn/ttorrent/common/creation/MetadataBuilder;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 110,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "doPublic",
+      "description": "()V",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 238,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "closeAllSources",
+      "description": "()V",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 384,
+      "classification": "pseudo-tested",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "SURVIVED",
+          "mutator": "void",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "addDataSource",
+      "description": "(Ljava/io/InputStream;Ljava/lang/String;Z)Lcom/turn/ttorrent/common/creation/MetadataBuilder;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 189,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest.testMultiFileWithOneFileValues",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "doBuild",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 279,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest.testMultiFileWithOneFileValues",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "concatHashes",
+      "description": "(Ljava/util/List;)Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 346,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest.testMultiFileWithOneFileValues",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "doPrivate",
+      "description": "()V",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 229,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "mapSources",
+      "description": "(Ljava/util/List;)Ljava/util/List;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 354,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest.testMultiFileWithOneFileValues",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "buildBinary",
+      "description": "()[B",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 256,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "empty",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "empty",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "addFile",
+      "description": "(Ljava/io/File;Ljava/lang/String;)Lcom/turn/ttorrent/common/creation/MetadataBuilder;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 207,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "wrapAnnounceList",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 362,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "build",
+      "description": "()Lcom/turn/ttorrent/common/TorrentMetadata;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 247,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "addTracker",
+      "description": "(Ljava/lang/String;)Lcom/turn/ttorrent/common/creation/MetadataBuilder;",
+      "class": "MetadataBuilder",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MetadataBuilder.java",
+      "line-number": 96,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "setPeerId",
+      "description": "(Ljava/nio/ByteBuffer;)V",
+      "class": "Peer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Peer.java",
+      "line-number": 117,
+      "classification": "pseudo-tested",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [
+        "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "SURVIVED",
+          "mutator": "void",
+          "tests-run": 4,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getPeerIdArray",
+      "description": "()[B",
+      "class": "Peer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Peer.java",
+      "line-number": 108,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "empty",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "empty",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getStringPeerId",
+      "description": "()Ljava/lang/String;",
+      "class": "Peer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Peer.java",
+      "line-number": 128,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "\"A\"",
+        "\"\"",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "equals",
+      "description": "(Ljava/lang/Object;)Z",
+      "class": "Peer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Peer.java",
+      "line-number": 210,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "true",
+        "false"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "true",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "false",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "hasPeerId",
+      "description": "()Z",
+      "class": "Peer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Peer.java",
+      "line-number": 97,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "false",
+        "true"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "false",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "true",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getIp",
+      "description": "()Ljava/lang/String;",
+      "class": "Peer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Peer.java",
+      "line-number": 154,
+      "classification": "tested",
+      "detected": [
+        "\"A\"",
+        "null",
+        "\"\""
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "\"A\"",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "\"\"",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "looksLike",
+      "description": "(Lcom/turn/ttorrent/common/Peer;)Z",
+      "class": "Peer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Peer.java",
+      "line-number": 193,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "true",
+        "false"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "true",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "false",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getRawIp",
+      "description": "()[B",
+      "class": "Peer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Peer.java",
+      "line-number": 182,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "empty",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "empty",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getShortHexPeerId",
+      "description": "()Ljava/lang/String;",
+      "class": "Peer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Peer.java",
+      "line-number": 146,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "\"\"",
+        "\"A\"",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getShort",
+      "description": "()S",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 134,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "(short)1",
+        "(short)0"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "(short)1",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "(short)0",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getNumber",
+      "description": "()Ljava/lang/Number;",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 122,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getMap",
+      "description": "()Ljava/util/Map;",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 177,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getList",
+      "description": "()Ljava/util/List;",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 163,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentParserTest.parseTest",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getString",
+      "description": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 94,
+      "classification": "tested",
+      "detected": [
+        "\"A\"",
+        "\"\"",
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "\"A\"",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "\"\"",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getInt",
+      "description": "()I",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 143,
+      "classification": "tested",
+      "detected": [
+        "0",
+        "1"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "0",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "1",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getString",
+      "description": "()Ljava/lang/String;",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 81,
+      "classification": "tested",
+      "detected": [
+        "\"A\"",
+        "null",
+        "\"\""
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "\"A\"",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "\"\"",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getBytes",
+      "description": "()[B",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 109,
+      "classification": "tested",
+      "detected": [
+        "empty",
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "empty",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getLong",
+      "description": "()J",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 152,
+      "classification": "pseudo-tested",
+      "detected": [],
+      "not-detected": [
+        "1L",
+        "0L"
+      ],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._"
+      ],
+      "mutations": [
+        {
+          "status": "SURVIVED",
+          "mutator": "1L",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "SURVIVED",
+          "mutator": "0L",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecode",
+      "description": "(Ljava/nio/ByteBuffer;)Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 100,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getNextIndicator",
+      "description": "()I",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 115,
+      "classification": "tested",
+      "detected": [
+        "1",
+        "0"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "1",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "0",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecodeNumber",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 181,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecodeMap",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 264,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecode",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 127,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecodeList",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 239,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentParserTest.parseTest",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecode",
+      "description": "(Ljava/io/InputStream;)Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 86,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "read",
+      "description": "()I",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 293,
+      "classification": "tested",
+      "detected": [
+        "0",
+        "1"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "0",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "1",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "read",
+      "description": "(I)[B",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 308,
+      "classification": "tested",
+      "detected": [
+        "empty",
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "empty",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecodeBytes",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 150,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parseFiles",
+      "description": "(Ljava/util/Map;ZLjava/lang/String;)Ljava/util/List;",
+      "class": "TorrentParser",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentParser.java",
+      "line-number": 90,
+      "classification": "pseudo-tested",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._"
+      ],
+      "mutations": [
+        {
+          "status": "SURVIVED",
+          "mutator": "null",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getTrackers",
+      "description": "(Ljava/util/Map;)Ljava/util/List;",
+      "class": "TorrentParser",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentParser.java",
+      "line-number": 128,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentParserTest.parseTest",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getStringOrNull",
+      "description": "(Ljava/util/Map;Ljava/lang/String;)Ljava/lang/String;",
+      "class": "TorrentParser",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentParser.java",
+      "line-number": 121,
+      "classification": "tested",
+      "detected": [
+        "\"A\"",
+        "\"\"",
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "\"A\"",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentParserTest.parseTest",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "\"\"",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentParserTest.parseTest",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentParserTest.parseTest",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getRequiredValueOrThrowException",
+      "description": "(Ljava/util/Map;Ljava/lang/String;)Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "TorrentParser",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentParser.java",
+      "line-number": 157,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentParserTest.missingRequiredFieldTest",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "([B)Lcom/turn/ttorrent/common/TorrentMetadata;",
+      "class": "TorrentParser",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentParser.java",
+      "line-number": 37,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentParserTest.badBEPFormatTest",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parseFromFile",
+      "description": "(Ljava/io/File;)Lcom/turn/ttorrent/common/TorrentMetadata;",
+      "class": "TorrentParser",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentParser.java",
+      "line-number": 22,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getHexPeerId",
+      "description": "()Ljava/lang/String;",
+      "class": "UDPAnnounceRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPAnnounceRequestMessage.java",
+      "line-number": 102,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "\"\"",
+        "null",
+        "\"A\""
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;)Lcom/turn/ttorrent/common/protocol/udp/UDPAnnounceRequestMessage;",
+      "class": "UDPAnnounceRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPAnnounceRequestMessage.java",
+      "line-number": 162,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getHexInfoHash",
+      "description": "()Ljava/lang/String;",
+      "class": "UDPAnnounceRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPAnnounceRequestMessage.java",
+      "line-number": 92,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null",
+        "\"A\"",
+        "\"\""
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(JI[B[BJJJLcom/turn/ttorrent/common/protocol/AnnounceRequestMessage$RequestEvent;Ljava/net/InetAddress;III)Lcom/turn/ttorrent/common/protocol/udp/UDPAnnounceRequestMessage;",
+      "class": "UDPAnnounceRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPAnnounceRequestMessage.java",
+      "line-number": 222,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/util/List;Ljava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 78,
+      "classification": "tested",
+      "detected": [
+        "void"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "void",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentParserTest.parseTest",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/lang/Number;Ljava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 70,
+      "classification": "tested",
+      "detected": [
+        "void"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "void",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "([BLjava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 86,
+      "classification": "tested",
+      "detected": [
+        "void"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "void",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/lang/Object;Ljava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 44,
+      "classification": "tested",
+      "detected": [
+        "void"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "void",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/lang/String;Ljava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 65,
+      "classification": "tested",
+      "detected": [
+        "void"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "void",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/util/Map;)Ljava/nio/ByteBuffer;",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 112,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/util/Map;Ljava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 94,
+      "classification": "tested",
+      "detected": [
+        "void"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "void",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getTorrentFileNames",
+      "description": "(Lcom/turn/ttorrent/common/TorrentMetadata;)Ljava/util/List;",
+      "class": "TorrentUtils",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentUtils.java",
+      "line-number": 41,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "isTrackerLessInfo",
+      "description": "(Lcom/turn/ttorrent/common/AnnounceableInformation;)Z",
+      "class": "TorrentUtils",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentUtils.java",
+      "line-number": 37,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "true",
+        "false"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "true",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "false",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "byteArrayToHexString",
+      "description": "([B)Ljava/lang/String;",
+      "class": "TorrentUtils",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentUtils.java",
+      "line-number": 27,
+      "classification": "tested",
+      "detected": [
+        "\"\"",
+        "\"A\"",
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._",
+        "com.turn.ttorrent.common.TorrentUtilsTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "\"\"",
+          "tests-run": 8,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentUtilsTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentUtilsTest.testBytesToHexAllSymbols",
+            "com.turn.ttorrent.common.TorrentUtilsTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "\"A\"",
+          "tests-run": 8,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentUtilsTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentUtilsTest.testBytesToHexAllSymbols",
+            "com.turn.ttorrent.common.TorrentUtilsTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 8,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentUtilsTest._",
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.TorrentUtilsTest.testBytesToHexAllSymbols",
+            "com.turn.ttorrent.common.TorrentUtilsTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Lcom/turn/ttorrent/bcodec/BEValue;)Lcom/turn/ttorrent/common/protocol/http/HTTPAnnounceRequestMessage;",
+      "class": "HTTPAnnounceRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPAnnounceRequestMessage.java",
+      "line-number": 192,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "buildAnnounceURL",
+      "description": "(Ljava/net/URL;)Ljava/net/URL;",
+      "class": "HTTPAnnounceRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPAnnounceRequestMessage.java",
+      "line-number": 160,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getHexInfoHash",
+      "description": "()Ljava/lang/String;",
+      "class": "HTTPAnnounceRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPAnnounceRequestMessage.java",
+      "line-number": 84,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "\"A\"",
+        "null",
+        "\"\""
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "([B[BIJJJZZLcom/turn/ttorrent/common/protocol/AnnounceRequestMessage$RequestEvent;Ljava/lang/String;I)Lcom/turn/ttorrent/common/protocol/http/HTTPAnnounceRequestMessage;",
+      "class": "HTTPAnnounceRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPAnnounceRequestMessage.java",
+      "line-number": 279,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "orElse",
+      "description": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "class": "Optional",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Optional.java",
+      "line-number": 43,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "of",
+      "description": "(Ljava/lang/Object;)Lcom/turn/ttorrent/common/Optional;",
+      "class": "Optional",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Optional.java",
+      "line-number": 26,
+      "classification": "pseudo-tested",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [
+        "com.turn.ttorrent.common.TorrentParserTest._"
+      ],
+      "mutations": [
+        {
+          "status": "SURVIVED",
+          "mutator": "null",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.TorrentParserTest._"
+          ],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "get",
+      "description": "()Ljava/lang/Object;",
+      "class": "Optional",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Optional.java",
+      "line-number": 31,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "isPresent",
+      "description": "()Z",
+      "class": "Optional",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Optional.java",
+      "line-number": 38,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "true",
+        "false"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "true",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "false",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "putOptionalIfPresent",
+      "description": "(Ljava/util/Map;Ljava/lang/String;Lcom/turn/ttorrent/common/Optional;)V",
+      "class": "TorrentSerializer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentSerializer.java",
+      "line-number": 89,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "serialize",
+      "description": "(Lcom/turn/ttorrent/common/TorrentMetadata;)[B",
+      "class": "TorrentSerializer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentSerializer.java",
+      "line-number": 20,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "empty",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "empty",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "mapStringListToBEValueList",
+      "description": "(Ljava/util/List;)Ljava/util/List;",
+      "class": "TorrentSerializer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentSerializer.java",
+      "line-number": 81,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getAnnounceListAsBEValues",
+      "description": "(Ljava/util/List;)Ljava/util/List;",
+      "class": "TorrentSerializer",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentSerializer.java",
+      "line-number": 67,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getByName",
+      "description": "(Ljava/lang/String;)Lcom/turn/ttorrent/common/protocol/AnnounceRequestMessage$RequestEvent;",
+      "class": "AnnounceRequestMessage$RequestEvent",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "AnnounceRequestMessage.java",
+      "line-number": 58,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getById",
+      "description": "(I)Lcom/turn/ttorrent/common/protocol/AnnounceRequestMessage$RequestEvent;",
+      "class": "AnnounceRequestMessage$RequestEvent",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "AnnounceRequestMessage.java",
+      "line-number": 67,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getEventName",
+      "description": "()Ljava/lang/String;",
+      "class": "AnnounceRequestMessage$RequestEvent",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "AnnounceRequestMessage.java",
+      "line-number": 50,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null",
+        "\"\"",
+        "\"A\""
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "createBufferWithHeaderForMessage",
+      "description": "(III)Ljava/nio/ByteBuffer;",
+      "class": "PeerMessage$PieceMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 607,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(IILjava/nio/ByteBuffer;)Lcom/turn/ttorrent/common/protocol/PeerMessage$PieceMessage;",
+      "class": "PeerMessage$PieceMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 603,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "validate",
+      "description": "(Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$PieceMessage;",
+      "class": "PeerMessage$PieceMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 583,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$PieceMessage;",
+      "class": "PeerMessage$PieceMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 594,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(I)Lcom/turn/ttorrent/common/protocol/udp/UDPConnectRequestMessage;",
+      "class": "UDPConnectRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPConnectRequestMessage.java",
+      "line-number": 81,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;)Lcom/turn/ttorrent/common/protocol/udp/UDPConnectRequestMessage;",
+      "class": "UDPConnectRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPConnectRequestMessage.java",
+      "line-number": 60,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getConnectionId",
+      "description": "()J",
+      "class": "UDPConnectRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPConnectRequestMessage.java",
+      "line-number": 45,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "1L",
+        "0L"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "1L",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "0L",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "renew",
+      "description": "()V",
+      "class": "PeerMessage$RequestMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 506,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(III)Lcom/turn/ttorrent/common/protocol/PeerMessage$RequestMessage;",
+      "class": "PeerMessage$RequestMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 531,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$RequestMessage;",
+      "class": "PeerMessage$RequestMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 523,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "validate",
+      "description": "(Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$RequestMessage;",
+      "class": "PeerMessage$RequestMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 512,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "toPeerList",
+      "description": "(Ljava/util/List;)Ljava/util/List;",
+      "class": "HTTPAnnounceResponseMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPAnnounceResponseMessage.java",
+      "line-number": 146,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Lcom/turn/ttorrent/bcodec/BEValue;)Lcom/turn/ttorrent/common/protocol/http/HTTPAnnounceResponseMessage;",
+      "class": "HTTPAnnounceResponseMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPAnnounceResponseMessage.java",
+      "line-number": 89,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(IIILjava/util/List;Ljava/lang/String;)Lcom/turn/ttorrent/common/protocol/http/HTTPAnnounceResponseMessage;",
+      "class": "HTTPAnnounceResponseMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPAnnounceResponseMessage.java",
+      "line-number": 201,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "toPeerList",
+      "description": "([B)Ljava/util/List;",
+      "class": "HTTPAnnounceResponseMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPAnnounceResponseMessage.java",
+      "line-number": 169,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(Lcom/turn/ttorrent/common/protocol/TrackerMessage$ErrorMessage$FailureReason;)Lcom/turn/ttorrent/common/protocol/http/HTTPTrackerErrorMessage;",
+      "class": "HTTPTrackerErrorMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPTrackerErrorMessage.java",
+      "line-number": 72,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Lcom/turn/ttorrent/bcodec/BEValue;)Lcom/turn/ttorrent/common/protocol/http/HTTPTrackerErrorMessage;",
+      "class": "HTTPTrackerErrorMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPTrackerErrorMessage.java",
+      "line-number": 52,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(Ljava/lang/String;)Lcom/turn/ttorrent/common/protocol/http/HTTPTrackerErrorMessage;",
+      "class": "HTTPTrackerErrorMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPTrackerErrorMessage.java",
+      "line-number": 77,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "call",
+      "description": "()Ljava/lang/String;",
+      "class": "TorrentCreator$CallableChunkHasher",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentCreator.java",
+      "line-number": 372,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "\"A\"",
+        "\"\"",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "validate",
+      "description": "(Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$HaveMessage;",
+      "class": "PeerMessage$HaveMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 364,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$HaveMessage;",
+      "class": "PeerMessage$HaveMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 373,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(I)Lcom/turn/ttorrent/common/protocol/PeerMessage$HaveMessage;",
+      "class": "PeerMessage$HaveMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 378,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(III)Lcom/turn/ttorrent/common/protocol/PeerMessage$CancelMessage;",
+      "class": "PeerMessage$CancelMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 677,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$CancelMessage;",
+      "class": "PeerMessage$CancelMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 669,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "validate",
+      "description": "(Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$CancelMessage;",
+      "class": "PeerMessage$CancelMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 658,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "call",
+      "description": "()Ljava/lang/String;",
+      "class": "TorrentCreator$2",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentCreator.java",
+      "line-number": 292,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "\"\"",
+        "\"A\"",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "join",
+      "description": "(Ljava/lang/String;Ljava/lang/Iterable;)Ljava/lang/String;",
+      "class": "StringUtils",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "StringUtils.java",
+      "line-number": 24,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "\"\"",
+        "\"A\"",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getRelativePathAsString",
+      "description": "()Ljava/lang/String;",
+      "class": "TorrentFile",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentFile.java",
+      "line-number": 30,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "\"A\"",
+        "\"\"",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "get",
+      "description": "(B)Lcom/turn/ttorrent/common/protocol/PeerMessage$Type;",
+      "class": "PeerMessage$Type",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 81,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "equals",
+      "description": "(B)Z",
+      "class": "PeerMessage$Type",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 73,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "true",
+        "false"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "true",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "false",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getCreatedBy",
+      "description": "()Lcom/turn/ttorrent/common/Optional;",
+      "class": "TorrentMetadataImpl",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentMetadataImpl.java",
+      "line-number": 83,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getCreationDate",
+      "description": "()Lcom/turn/ttorrent/common/Optional;",
+      "class": "TorrentMetadataImpl",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentMetadataImpl.java",
+      "line-number": 73,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getComment",
+      "description": "()Lcom/turn/ttorrent/common/Optional;",
+      "class": "TorrentMetadataImpl",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentMetadataImpl.java",
+      "line-number": 78,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "addLeft",
+      "description": "(J)V",
+      "class": "TorrentStatistic",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentStatistic.java",
+      "line-number": 41,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "addDownloaded",
+      "description": "(J)V",
+      "class": "TorrentStatistic",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentStatistic.java",
+      "line-number": 37,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "addUploaded",
+      "description": "(J)V",
+      "class": "TorrentStatistic",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentStatistic.java",
+      "line-number": 33,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "validate",
+      "description": "(Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$BitfieldMessage;",
+      "class": "PeerMessage$BitfieldMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 414,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(Ljava/util/BitSet;)Lcom/turn/ttorrent/common/protocol/PeerMessage$BitfieldMessage;",
+      "class": "PeerMessage$BitfieldMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 435,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$BitfieldMessage;",
+      "class": "PeerMessage$BitfieldMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 423,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;)Lcom/turn/ttorrent/common/protocol/udp/UDPTrackerErrorMessage;",
+      "class": "UDPTrackerErrorMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPTrackerErrorMessage.java",
+      "line-number": 64,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(ILjava/lang/String;)Lcom/turn/ttorrent/common/protocol/udp/UDPTrackerErrorMessage;",
+      "class": "UDPTrackerErrorMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPTrackerErrorMessage.java",
+      "line-number": 91,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(IIIILjava/util/List;)Lcom/turn/ttorrent/common/protocol/udp/UDPAnnounceResponseMessage;",
+      "class": "UDPAnnounceResponseMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPAnnounceResponseMessage.java",
+      "line-number": 135,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;)Lcom/turn/ttorrent/common/protocol/udp/UDPAnnounceResponseMessage;",
+      "class": "UDPAnnounceResponseMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPAnnounceResponseMessage.java",
+      "line-number": 92,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.udp.UDPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$InterestedMessage;",
+      "class": "PeerMessage$InterestedMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 300,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "()Lcom/turn/ttorrent/common/protocol/PeerMessage$InterestedMessage;",
+      "class": "PeerMessage$InterestedMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 305,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "equals",
+      "description": "(Ljava/lang/Object;)Z",
+      "class": "PeerUID",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "PeerUID.java",
+      "line-number": 25,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "false",
+        "true"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "false",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "true",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "()Lcom/turn/ttorrent/common/protocol/PeerMessage$UnchokeMessage;",
+      "class": "PeerMessage$UnchokeMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 277,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$UnchokeMessage;",
+      "class": "PeerMessage$UnchokeMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 272,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "()Lcom/turn/ttorrent/common/protocol/PeerMessage$KeepAliveMessage;",
+      "class": "PeerMessage$KeepAliveMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 222,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$KeepAliveMessage;",
+      "class": "PeerMessage$KeepAliveMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 217,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "()Lcom/turn/ttorrent/common/protocol/PeerMessage$NotInterestedMessage;",
+      "class": "PeerMessage$NotInterestedMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 333,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$NotInterestedMessage;",
+      "class": "PeerMessage$NotInterestedMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 328,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "(IJ)Lcom/turn/ttorrent/common/protocol/udp/UDPConnectResponseMessage;",
+      "class": "UDPConnectResponseMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPConnectResponseMessage.java",
+      "line-number": 79,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;)Lcom/turn/ttorrent/common/protocol/udp/UDPConnectResponseMessage;",
+      "class": "UDPConnectResponseMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPConnectResponseMessage.java",
+      "line-number": 61,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getLogger",
+      "description": "(Ljava/lang/Class;)Lorg/slf4j/Logger;",
+      "class": "TorrentLoggerFactory",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentLoggerFactory.java",
+      "line-number": 14,
+      "classification": "pseudo-tested",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "SURVIVED",
+          "mutator": "null",
+          "tests-run": 5,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "setStaticLoggersName",
+      "description": "(Ljava/lang/String;)V",
+      "class": "TorrentLoggerFactory",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentLoggerFactory.java",
+      "line-number": 22,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/io/InputStream;)Lcom/turn/ttorrent/common/protocol/http/HTTPTrackerMessage;",
+      "class": "HTTPTrackerMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPTrackerMessage.java",
+      "line-number": 41,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Lcom/turn/ttorrent/bcodec/BEValue;)Lcom/turn/ttorrent/common/protocol/http/HTTPTrackerMessage;",
+      "class": "HTTPTrackerMessage",
+      "package": "com/turn/ttorrent/common/protocol/http",
+      "file-name": "HTTPTrackerMessage.java",
+      "line-number": 49,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 2,
+          "tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest.parseTest",
+            "com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessageTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "calculateHashes",
+      "description": "(Ljava/util/List;I)Lcom/turn/ttorrent/common/creation/HashingResult;",
+      "class": "MultiThreadHashesCalculator",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MultiThreadHashesCalculator.java",
+      "line-number": 42,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 4,
+          "tests": [
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest.testOneLargeSource",
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "awaitHashesCalculationAndStore",
+      "description": "(Ljava/util/List;Ljava/util/List;I)V",
+      "class": "MultiThreadHashesCalculator",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MultiThreadHashesCalculator.java",
+      "line-number": 68,
+      "classification": "tested",
+      "detected": [
+        "void"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "void",
+          "tests-run": 4,
+          "tests": [
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest.testOneLargeSource",
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "equals",
+      "description": "(Ljava/lang/Object;)Z",
+      "class": "Pair",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "Pair.java",
+      "line-number": 23,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "true",
+        "false"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "true",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "false",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "craft",
+      "description": "()Lcom/turn/ttorrent/common/protocol/PeerMessage$ChokeMessage;",
+      "class": "PeerMessage$ChokeMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 249,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage$ChokeMessage;",
+      "class": "PeerMessage$ChokeMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 244,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "call",
+      "description": "()[B",
+      "class": "MultiThreadHashesCalculator$1$1",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MultiThreadHashesCalculator.java",
+      "line-number": 56,
+      "classification": "tested",
+      "detected": [
+        "null",
+        "empty"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 4,
+          "tests": [
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest.testOneLargeSource",
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "succeeding-tests": []
+        },
+        {
+          "status": "KILLED",
+          "mutator": "empty",
+          "tests-run": 4,
+          "tests": [
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest.testOneLargeSource",
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getStream",
+      "description": "()Ljava/io/InputStream;",
+      "class": "Source$1",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "Source.java",
+      "line-number": 43,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "close",
+      "description": "()V",
+      "class": "Source$1",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "Source.java",
+      "line-number": 51,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getInfoHash",
+      "description": "()[B",
+      "class": "ImmutableTorrentHash",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "ImmutableTorrentHash.java",
+      "line-number": 17,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "empty",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "empty",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;)Lcom/turn/ttorrent/common/protocol/udp/UDPTrackerMessage$UDPTrackerRequestMessage;",
+      "class": "UDPTrackerMessage$UDPTrackerRequestMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPTrackerMessage.java",
+      "line-number": 48,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "processDataSources",
+      "description": "(Ljava/util/List;Ljava/util/List;ILcom/turn/ttorrent/common/creation/CommonHashingCalculator$Processor;)Ljava/util/List;",
+      "class": "CommonHashingCalculator",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "CommonHashingCalculator.java",
+      "line-number": 33,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._",
+        "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._",
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest.testMultiFileWithOneFileValues",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "calculateHashes",
+      "description": "(Ljava/util/List;I)Lcom/turn/ttorrent/common/creation/HashingResult;",
+      "class": "SingleThreadHashesCalculator",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "SingleThreadHashesCalculator.java",
+      "line-number": 29,
+      "classification": "tested",
+      "detected": [
+        "null"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._",
+        "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "null",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._",
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest.testMultiFileWithOneFileValues",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "process",
+      "description": "([B)V",
+      "class": "SingleThreadHashesCalculator$1",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "SingleThreadHashesCalculator.java",
+      "line-number": 37,
+      "classification": "tested",
+      "detected": [
+        "void"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._",
+        "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "void",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._",
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest.testMultiFileWithOneFileValues",
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "newThread",
+      "description": "(Ljava/lang/Runnable;)Ljava/lang/Thread;",
+      "class": "TorrentCreator$1",
+      "package": "com/turn/ttorrent/common",
+      "file-name": "TorrentCreator.java",
+      "line-number": 54,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;Lcom/turn/ttorrent/common/TorrentInfo;)Lcom/turn/ttorrent/common/protocol/PeerMessage;",
+      "class": "PeerMessage",
+      "package": "com/turn/ttorrent/common/protocol",
+      "file-name": "PeerMessage.java",
+      "line-number": 152,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "process",
+      "description": "([B)V",
+      "class": "MultiThreadHashesCalculator$1",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "MultiThreadHashesCalculator.java",
+      "line-number": 51,
+      "classification": "tested",
+      "detected": [
+        "void"
+      ],
+      "not-detected": [],
+      "tests": [
+        "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+      ],
+      "mutations": [
+        {
+          "status": "KILLED",
+          "mutator": "void",
+          "tests-run": 4,
+          "tests": [
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "killing-tests": [
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest.testOneLargeSource",
+            "com.turn.ttorrent.common.creation.HashesCalculatorsTest._"
+          ],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "description": "(Ljava/nio/ByteBuffer;)Lcom/turn/ttorrent/common/protocol/udp/UDPTrackerMessage$UDPTrackerResponseMessage;",
+      "class": "UDPTrackerMessage$UDPTrackerResponseMessage",
+      "package": "com/turn/ttorrent/common/protocol/udp",
+      "file-name": "UDPTrackerMessage.java",
+      "line-number": 84,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "close",
+      "description": "()V",
+      "class": "Source$2",
+      "package": "com/turn/ttorrent/common/creation",
+      "file-name": "Source.java",
+      "line-number": 73,
+      "classification": "pseudo-tested",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [
+        "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+      ],
+      "mutations": [
+        {
+          "status": "SURVIVED",
+          "mutator": "void",
+          "tests-run": 3,
+          "tests": [
+            "com.turn.ttorrent.common.creation.MetadataBuilderTest._"
+          ],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    }
+  ],
+  "analysis": {
+    "time": 18539,
+    "mutators": [
+      "void",
+      "null",
+      "empty",
+      "true",
+      "false",
+      "0",
+      "1",
+      "(short)0",
+      "(short)1",
+      "(byte)0",
+      "(byte)1",
+      "0L",
+      "1L",
+      "0.0",
+      "1.0",
+      "0.0f",
+      "1.0f",
+      "'\\40'",
+      "'A'",
+      "\"\"",
+      "\"A\""
+    ]
+  }
+}

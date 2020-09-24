@@ -1,0 +1,753 @@
+{
+  "methods": [
+    {
+      "name": "getShort",
+      "description": "()S",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 134,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "(short)1",
+        "(short)0"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "(short)1",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "(short)0",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getNumber",
+      "description": "()Ljava/lang/Number;",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 122,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getMap",
+      "description": "()Ljava/util/Map;",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 177,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getList",
+      "description": "()Ljava/util/List;",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 163,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getString",
+      "description": "(Ljava/lang/String;)Ljava/lang/String;",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 94,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "\"\"",
+        "\"A\"",
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getInt",
+      "description": "()I",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 143,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "0",
+        "1"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "0",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "1",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getString",
+      "description": "()Ljava/lang/String;",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 81,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "\"A\"",
+        "null",
+        "\"\""
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"A\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "\"\"",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getBytes",
+      "description": "()[B",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 109,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null",
+        "empty"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "empty",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getLong",
+      "description": "()J",
+      "class": "BEValue",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEValue.java",
+      "line-number": 152,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "0L",
+        "1L"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "0L",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "1L",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecode",
+      "description": "(Ljava/nio/ByteBuffer;)Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 100,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "getNextIndicator",
+      "description": "()I",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 115,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "0",
+        "1"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "0",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "1",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecodeNumber",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 181,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecodeMap",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 264,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecode",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 127,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecodeList",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 239,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecode",
+      "description": "(Ljava/io/InputStream;)Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 86,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "read",
+      "description": "()I",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 293,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "0",
+        "1"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "0",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "1",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "read",
+      "description": "(I)[B",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 308,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null",
+        "empty"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        },
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "empty",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bdecodeBytes",
+      "description": "()Lcom/turn/ttorrent/bcodec/BEValue;",
+      "class": "BDecoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BDecoder.java",
+      "line-number": 150,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/util/List;Ljava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 78,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/lang/Number;Ljava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 70,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "([BLjava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 86,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/lang/Object;Ljava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 44,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/lang/String;Ljava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 65,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/util/Map;)Ljava/nio/ByteBuffer;",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 112,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "null"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "null",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    },
+    {
+      "name": "bencode",
+      "description": "(Ljava/util/Map;Ljava/io/OutputStream;)V",
+      "class": "BEncoder",
+      "package": "com/turn/ttorrent/bcodec",
+      "file-name": "BEncoder.java",
+      "line-number": 94,
+      "classification": "not-covered",
+      "detected": [],
+      "not-detected": [
+        "void"
+      ],
+      "tests": [],
+      "mutations": [
+        {
+          "status": "NO_COVERAGE",
+          "mutator": "void",
+          "tests-run": 0,
+          "tests": [],
+          "killing-tests": [],
+          "succeeding-tests": []
+        }
+      ]
+    }
+  ],
+  "analysis": {
+    "time": 407,
+    "mutators": [
+      "void",
+      "null",
+      "empty",
+      "true",
+      "false",
+      "0",
+      "1",
+      "(short)0",
+      "(short)1",
+      "(byte)0",
+      "(byte)1",
+      "0L",
+      "1L",
+      "0.0",
+      "1.0",
+      "0.0f",
+      "1.0f",
+      "'\\40'",
+      "'A'",
+      "\"\"",
+      "\"A\""
+    ]
+  }
+}

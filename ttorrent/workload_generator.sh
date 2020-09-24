@@ -1,0 +1,1 @@
+java -jar ttorrent-cli-2.0-shaded.jar -o . debian-9.9.0-amd64-netinst.torrent
