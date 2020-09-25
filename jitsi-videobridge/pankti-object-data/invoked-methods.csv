@@ -1,0 +1,4 @@
+visibility,parent-FQN,method-name,param-list,return-type,local-variables,conditionals,multiple-statements,loops,parameters,returns,switches,ifs,static,returns-primitives,classification
+public,org.jitsi.videobridge.ConferenceSpeechActivity,getDominantEndpoint,,org.jitsi.videobridge.AbstractEndpoint,False,True,False,False,False,True,False,False,False,False,pseudo-tested
+public,org.jitsi.videobridge.shim.ChannelShim,allowsSendingMedia,,boolean,False,False,False,False,False,True,False,False,False,True,pseudo-tested
+public,org.jitsi.videobridge.Conference,getBundleContext,,org.jitsi.videobridge.util.BundleContext,False,False,False,False,False,True,False,False,False,False,pseudo-tested

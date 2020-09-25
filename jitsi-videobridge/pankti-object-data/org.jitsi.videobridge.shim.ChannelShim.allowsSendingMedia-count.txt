@@ -1,0 +1,1 @@
+Invocation count for org.jitsi.videobridge.shim.ChannelShim.allowsSendingMedia: 18
