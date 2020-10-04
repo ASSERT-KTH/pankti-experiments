@@ -16,6 +16,7 @@ There are 4 projects selected for the experiments. The following table shows the
 | [PDFBox](https://github.com/apache/pdfbox/tree/2.0.21) | 2.0.21 | Sum: 728,812 <br> Java: 161,976 | 1,278 | xx | xx | 54.8% <br> 6,049/11,042 | 53.5% <br> 34,653/64,787 | xx | xx |
 | [ttorrent-cli](https://github.com/mpetazzoni/ttorrent/tree/ttorrent-2.0) | 2.0 | Sum: 14,269 <br> Java: 13,573 | 191 | 943 | 268 | 71.4% <br> 673/943 | 68.7% <br> 2,837/4,130<sup>*</sup> | 52.8% <br> 542/1,026 | 50.1% <br> 2535/5064 |
 | [jitsi-videobridge](https://github.com/jitsi/jitsi-videobridge/tree/stable/jitsi-meet_4857) | stable-4857 | Sum: 22,826 <br> Java: 18,926 | 154 | 874 | 101 | 40.0% <br> 652/1,627 | 33.6% <br> 2,706/8,048 | 50.4% <br> 842/1,671 | 49.0% <br> 3,995/8,148 |
+| [jitsi-jicofo](https://github.com/jitsi/jicofo/tree/stable/jitsi-meet_4857) | stable-4857 | Sum: 28,318 <br> Java: 25,165 | 146 | 1,157 | 594 | 49.4% <br> 667/1,350 | 46.7% <br> 3,537/7,571 | 48.9% <br> 660/1,350 | 46.2% <br> 3,500/7,571 |
 | [hedwig](http://hwmail.sourceforge.net/) | 0.7 | Sum: 66,539 <br> Java: 21,444 | 446 | 2,287 | 85 | 14.9% <br> 343/2,303 | 12.2% <br> 1,250/10,266 | 36.9% <br> 850/2,303 | 25% <br> 3,002/10,266 |
 
 <sup>*</sup>The metric is statement coverage mesured by OpenClover.
