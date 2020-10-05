@@ -84,7 +84,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -143,7 +143,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -213,7 +213,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -322,7 +322,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>true</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -408,7 +408,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -478,7 +478,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -587,7 +587,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -646,10 +646,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<float>0.02</float>";
-        java.lang.Float expectedObject = (java.lang.Float) xStream.fromXML(returnedXML);
+        Float expectedObject = (Float) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getSmoothnessTolerance());
     }
 
@@ -732,10 +732,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<float>0.02</float>";
-        java.lang.Float expectedObject = (java.lang.Float) xStream.fromXML(returnedXML);
+        Float expectedObject = (Float) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getSmoothnessTolerance());
     }
 
@@ -802,10 +802,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<float>0.02</float>";
-        java.lang.Float expectedObject = (java.lang.Float) xStream.fromXML(returnedXML);
+        Float expectedObject = (Float) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getSmoothnessTolerance());
     }
 
@@ -888,7 +888,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -958,7 +958,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -1067,7 +1067,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -1137,10 +1137,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<float>1.0</float>";
-        java.lang.Float expectedObject = (java.lang.Float) xStream.fromXML(returnedXML);
+        Float expectedObject = (Float) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getOverprintMode());
     }
 
@@ -1223,10 +1223,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<float>1.0</float>";
-        java.lang.Float expectedObject = (java.lang.Float) xStream.fromXML(returnedXML);
+        Float expectedObject = (Float) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getOverprintMode());
     }
 
@@ -1332,10 +1332,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<float>1.0</float>";
-        java.lang.Float expectedObject = (java.lang.Float) xStream.fromXML(returnedXML);
+        Float expectedObject = (Float) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getOverprintMode());
     }
 
@@ -1402,10 +1402,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<null/>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDSoftMask expectedObject = (org.apache.pdfbox.pdmodel.graphics.state.PDSoftMask) xStream.fromXML(returnedXML);
+        PDSoftMask expectedObject = (PDSoftMask) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getSoftMask());
     }
 
@@ -1461,10 +1461,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<null/>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDSoftMask expectedObject = (org.apache.pdfbox.pdmodel.graphics.state.PDSoftMask) xStream.fromXML(returnedXML);
+        PDSoftMask expectedObject = (PDSoftMask) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getSoftMask());
     }
 
@@ -1547,10 +1547,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<null/>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDSoftMask expectedObject = (org.apache.pdfbox.pdmodel.graphics.state.PDSoftMask) xStream.fromXML(returnedXML);
+        PDSoftMask expectedObject = (PDSoftMask) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getSoftMask());
     }
 
@@ -1656,10 +1656,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<null/>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDSoftMask expectedObject = (org.apache.pdfbox.pdmodel.graphics.state.PDSoftMask) xStream.fromXML(returnedXML);
+        PDSoftMask expectedObject = (PDSoftMask) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getSoftMask());
     }
 
@@ -1765,10 +1765,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<float>1.0</float>";
-        java.lang.Float expectedObject = (java.lang.Float) xStream.fromXML(returnedXML);
+        Float expectedObject = (Float) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getStrokingAlphaConstant());
     }
 
@@ -1874,10 +1874,10 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<float>1.0</float>";
-        java.lang.Float expectedObject = (java.lang.Float) xStream.fromXML(returnedXML);
+        Float expectedObject = (Float) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getNonStrokingAlphaConstant());
     }
 
@@ -1983,7 +1983,7 @@ public class TestPDExtendedGraphicsStatePanktiGen {
         "    </items>" +
         "  </dict>" +
         "</org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState>";
-        org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState receivingObject = (org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState) xStream.fromXML(receivingXML);
+        PDExtendedGraphicsState receivingObject = (PDExtendedGraphicsState) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);

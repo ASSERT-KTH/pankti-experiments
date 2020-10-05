@@ -2,27 +2,34 @@ package org.apache.pdfbox.pdmodel.font;
 import com.thoughtworks.xstream.XStream;
 import java.io.File;
 import java.util.Scanner;
+
+import org.apache.pdfbox.pdfparser.CleanerImplConverter;
+import org.apache.pdfbox.pdfparser.FileCleanableConverter;
+import org.apache.pdfbox.pdfparser.InflaterConverter;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 public class TestPDFontDescriptorPanktiGen {
     static XStream xStream = new XStream();
 
+    @Before
+    public void setxStream() {
+        xStream.registerConverter(new FileCleanableConverter());
+        xStream.registerConverter(new CleanerImplConverter());
+        xStream.registerConverter(new InflaterConverter());
+    }
+
     @Test
-    public void testGetFlags1() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags1-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<int>32</int>";
-            int expectedObject = (Integer) xStream.fromXML(returnedXML);
-            Assert.assertEquals(32, receivingObject.getFlags());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags1() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags1-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<int>32</int>";
+        int expectedObject = (Integer) xStream.fromXML(returnedXML);
+        Assert.assertEquals(32, receivingObject.getFlags());
     }
 
     @Test
@@ -180,7 +187,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -342,7 +349,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -504,7 +511,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -512,21 +519,16 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testGetFlags5() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags5-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<int>96</int>";
-            int expectedObject = (Integer) xStream.fromXML(returnedXML);
-            Assert.assertEquals(96, receivingObject.getFlags());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags5() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags5-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<int>96</int>";
+        int expectedObject = (Integer) xStream.fromXML(returnedXML);
+        Assert.assertEquals(96, receivingObject.getFlags());
     }
 
     @Test
@@ -584,7 +586,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -746,7 +748,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -808,7 +810,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -971,7 +973,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>98</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -979,21 +981,16 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testGetFlags10() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags10-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<int>34</int>";
-            int expectedObject = (Integer) xStream.fromXML(returnedXML);
-            Assert.assertEquals(34, receivingObject.getFlags());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags10() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags10-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<int>34</int>";
+        int expectedObject = (Integer) xStream.fromXML(returnedXML);
+        Assert.assertEquals(34, receivingObject.getFlags());
     }
 
     @Test
@@ -1151,7 +1148,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -1204,7 +1201,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -1212,21 +1209,16 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testGetFlags13() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags13-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<int>32</int>";
-            int expectedObject = (Integer) xStream.fromXML(returnedXML);
-            Assert.assertEquals(32, receivingObject.getFlags());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags13() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags13-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<int>32</int>";
+        int expectedObject = (Integer) xStream.fromXML(returnedXML);
+        Assert.assertEquals(32, receivingObject.getFlags());
     }
 
     @Test
@@ -1284,7 +1276,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -1292,21 +1284,16 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testGetFlags15() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags15-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<int>32</int>";
-            int expectedObject = (Integer) xStream.fromXML(returnedXML);
-            Assert.assertEquals(32, receivingObject.getFlags());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags15() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags15-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<int>32</int>";
+        int expectedObject = (Integer) xStream.fromXML(returnedXML);
+        Assert.assertEquals(32, receivingObject.getFlags());
     }
 
     @Test
@@ -1364,7 +1351,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -1526,7 +1513,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -1689,7 +1676,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>98</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>98</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -1742,7 +1729,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -1804,7 +1791,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -1857,7 +1844,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -1910,7 +1897,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -1972,7 +1959,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2025,7 +2012,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2078,7 +2065,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2240,7 +2227,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2402,7 +2389,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>96</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2464,7 +2451,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2626,7 +2613,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2688,7 +2675,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2750,7 +2737,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2812,7 +2799,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2874,7 +2861,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -2927,7 +2914,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3089,7 +3076,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3142,7 +3129,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3204,7 +3191,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>0</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3366,7 +3353,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3374,21 +3361,16 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testGetFlags39() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags39-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<int>96</int>";
-            int expectedObject = (Integer) xStream.fromXML(returnedXML);
-            Assert.assertEquals(96, receivingObject.getFlags());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags39() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags39-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<int>96</int>";
+        int expectedObject = (Integer) xStream.fromXML(returnedXML);
+        Assert.assertEquals(96, receivingObject.getFlags());
     }
 
     @Test
@@ -3437,7 +3419,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3490,7 +3472,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3552,7 +3534,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>0</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3711,7 +3693,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>34</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3764,7 +3746,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3926,7 +3908,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -3934,21 +3916,16 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testGetFlags46() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags46-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<int>96</int>";
-            int expectedObject = (Integer) xStream.fromXML(returnedXML);
-            Assert.assertEquals(96, receivingObject.getFlags());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags46() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags46-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<int>96</int>";
+        int expectedObject = (Integer) xStream.fromXML(returnedXML);
+        Assert.assertEquals(96, receivingObject.getFlags());
     }
 
     @Test
@@ -3997,7 +3974,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -4005,21 +3982,16 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testGetFlags48() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags48-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<int>34</int>";
-            int expectedObject = (Integer) xStream.fromXML(returnedXML);
-            Assert.assertEquals(34, receivingObject.getFlags());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags48() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags48-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<int>34</int>";
+        int expectedObject = (Integer) xStream.fromXML(returnedXML);
+        Assert.assertEquals(34, receivingObject.getFlags());
     }
 
     @Test
@@ -4068,7 +4040,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -4230,7 +4202,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -4283,7 +4255,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>0</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -4345,7 +4317,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>32</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -4504,7 +4476,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>34</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<int>34</int>";
         int expectedObject = (Integer) xStream.fromXML(returnedXML);
@@ -4512,39 +4484,29 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testGetFlags54() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags54-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<int>32</int>";
-            int expectedObject = (Integer) xStream.fromXML(returnedXML);
-            Assert.assertEquals(32, receivingObject.getFlags());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags54() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags54-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<int>32</int>";
+        int expectedObject = (Integer) xStream.fromXML(returnedXML);
+        Assert.assertEquals(32, receivingObject.getFlags());
     }
 
     @Test
-    public void testIsSymbolic1() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic1-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<boolean>false</boolean>";
-            boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
-            Assert.assertEquals(false, receivingObject.isSymbolic());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testIsSymbolic1() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic1-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<boolean>false</boolean>";
+        boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
+        Assert.assertEquals(false, receivingObject.isSymbolic());
     }
 
     @Test
@@ -4702,7 +4664,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -4710,21 +4672,16 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testIsSymbolic3() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic3-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<boolean>false</boolean>";
-            boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
-            Assert.assertEquals(false, receivingObject.isSymbolic());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testIsSymbolic3() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic3-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<boolean>false</boolean>";
+        boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
+        Assert.assertEquals(false, receivingObject.isSymbolic());
     }
 
     @Test
@@ -4882,7 +4839,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -4890,39 +4847,29 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testIsSymbolic5() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic5-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<boolean>false</boolean>";
-            boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
-            Assert.assertEquals(false, receivingObject.isSymbolic());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testIsSymbolic5() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic5-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<boolean>false</boolean>";
+        boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
+        Assert.assertEquals(false, receivingObject.isSymbolic());
     }
 
     @Test
-    public void testIsSymbolic6() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic6-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<boolean>false</boolean>";
-            boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
-            Assert.assertEquals(false, receivingObject.isSymbolic());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testIsSymbolic6() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic6-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<boolean>false</boolean>";
+        boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
+        Assert.assertEquals(false, receivingObject.isSymbolic());
     }
 
     @Test
@@ -5080,7 +5027,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -5239,7 +5186,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>34</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -5247,75 +5194,55 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testIsSymbolic9() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic9-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<boolean>false</boolean>";
-            boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
-            Assert.assertEquals(false, receivingObject.isSymbolic());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testIsSymbolic9() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic9-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<boolean>false</boolean>";
+        boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
+        Assert.assertEquals(false, receivingObject.isSymbolic());
     }
 
     @Test
-    public void testIsSymbolic10() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic10-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<boolean>false</boolean>";
-            boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
-            Assert.assertEquals(false, receivingObject.isSymbolic());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testIsSymbolic10() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic10-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<boolean>false</boolean>";
+        boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
+        Assert.assertEquals(false, receivingObject.isSymbolic());
     }
 
     @Test
-    public void testIsSymbolic11() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic11-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<boolean>false</boolean>";
-            boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
-            Assert.assertEquals(false, receivingObject.isSymbolic());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testIsSymbolic11() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic11-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<boolean>false</boolean>";
+        boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
+        Assert.assertEquals(false, receivingObject.isSymbolic());
     }
 
     @Test
-    public void testIsSymbolic12() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic12-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<boolean>false</boolean>";
-            boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
-            Assert.assertEquals(false, receivingObject.isSymbolic());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testIsSymbolic12() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic12-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<boolean>false</boolean>";
+        boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
+        Assert.assertEquals(false, receivingObject.isSymbolic());
     }
 
     @Test
@@ -5473,7 +5400,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -5635,7 +5562,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -5798,7 +5725,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>98</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -5806,21 +5733,16 @@ public class TestPDFontDescriptorPanktiGen {
     }
 
     @Test
-    public void testIsSymbolic16() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic16-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
-            String returnedXML = 
-            "<boolean>false</boolean>";
-            boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
-            Assert.assertEquals(false, receivingObject.isSymbolic());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testIsSymbolic16() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic16-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
+        String returnedXML = 
+        "<boolean>false</boolean>";
+        boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
+        Assert.assertEquals(false, receivingObject.isSymbolic());
     }
 
     @Test
@@ -5978,7 +5900,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -6140,7 +6062,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -6302,7 +6224,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -6464,7 +6386,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -6626,7 +6548,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -6788,7 +6710,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -6950,7 +6872,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -7112,7 +7034,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -7271,7 +7193,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -7434,7 +7356,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>-1</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -7597,7 +7519,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>98</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>true</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -7759,7 +7681,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -7921,7 +7843,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -8083,7 +8005,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -8242,7 +8164,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>34</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>true</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -8404,7 +8326,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -8567,7 +8489,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>98</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>true</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -8729,7 +8651,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -8891,7 +8813,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -9050,7 +8972,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>34</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -9212,7 +9134,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);
@@ -9374,7 +9296,7 @@ public class TestPDFontDescriptorPanktiGen {
         "  <capHeight>-Infinity</capHeight>" +
         "  <flags>32</flags>" +
         "</org.apache.pdfbox.pdmodel.font.PDFontDescriptor>";
-        org.apache.pdfbox.pdmodel.font.PDFontDescriptor receivingObject = (org.apache.pdfbox.pdmodel.font.PDFontDescriptor) xStream.fromXML(receivingXML);
+        PDFontDescriptor receivingObject = (PDFontDescriptor) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<boolean>false</boolean>";
         boolean expectedObject = (Boolean) xStream.fromXML(returnedXML);

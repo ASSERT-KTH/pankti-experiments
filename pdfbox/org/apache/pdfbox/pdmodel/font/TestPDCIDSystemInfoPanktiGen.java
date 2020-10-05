@@ -1,9 +1,20 @@
 package org.apache.pdfbox.pdmodel.font;
 import com.thoughtworks.xstream.XStream;
+import org.apache.pdfbox.pdfparser.CleanerImplConverter;
+import org.apache.pdfbox.pdfparser.FileCleanableConverter;
+import org.apache.pdfbox.pdfparser.InflaterConverter;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 public class TestPDCIDSystemInfoPanktiGen {
     static XStream xStream = new XStream();
+
+    @Before
+    public void setxStream() {
+        xStream.registerConverter(new FileCleanableConverter());
+        xStream.registerConverter(new CleanerImplConverter());
+        xStream.registerConverter(new InflaterConverter());
+    }
 
     @Test
     public void testGetRegistry1() {
@@ -47,10 +58,10 @@ public class TestPDCIDSystemInfoPanktiGen {
         "    </items>" +
         "  </dictionary>" +
         "</org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo>";
-        org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo receivingObject = (org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo) xStream.fromXML(receivingXML);
+        PDCIDSystemInfo receivingObject = (PDCIDSystemInfo) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<string>Adobe</string>";
-        java.lang.String expectedObject = (java.lang.String) xStream.fromXML(returnedXML);
+        String expectedObject = (String) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getRegistry());
     }
 
@@ -96,10 +107,10 @@ public class TestPDCIDSystemInfoPanktiGen {
         "    </items>" +
         "  </dictionary>" +
         "</org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo>";
-        org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo receivingObject = (org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo) xStream.fromXML(receivingXML);
+        PDCIDSystemInfo receivingObject = (PDCIDSystemInfo) xStream.fromXML(receivingXML);
         String returnedXML = 
         "<string>Identity</string>";
-        java.lang.String expectedObject = (java.lang.String) xStream.fromXML(returnedXML);
+        String expectedObject = (String) xStream.fromXML(returnedXML);
         Assert.assertEquals(expectedObject, receivingObject.getOrdering());
     }
 }

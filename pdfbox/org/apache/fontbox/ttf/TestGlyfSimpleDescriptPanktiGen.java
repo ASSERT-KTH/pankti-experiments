@@ -1,12 +1,11 @@
 package org.apache.fontbox.ttf;
 
 import com.thoughtworks.xstream.XStream;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.io.File;
 import java.util.Scanner;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 public class TestGlyfSimpleDescriptPanktiGen {
     static XStream xStream = new XStream();
@@ -1922,27 +1921,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags6() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags6-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>39</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>5</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(39, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags6() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags6-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>39</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>5</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(39, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -2235,27 +2229,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags8() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags8-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>38</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>50</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(38, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags8() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags8-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>38</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>50</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(38, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -2522,27 +2511,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags10() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags10-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>35</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>29</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(35, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags10() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags10-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>35</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>29</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(35, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -3409,27 +3393,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags14() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags14-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>39</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>12</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(39, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags14() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags14-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>39</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>12</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(39, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -5473,51 +5452,41 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags21() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags21-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>34</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>49</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(34, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags21() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags21-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>34</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>49</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(34, receivingObject.getFlags(paramObject1));
     }
 
     @Test
-    public void testGetFlags22() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags22-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>52</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>52</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(52, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags22() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags22-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>52</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>52</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(52, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -8116,51 +8085,41 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags33() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags33-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>50</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>43</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(50, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags33() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags33-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>50</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>43</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(50, receivingObject.getFlags(paramObject1));
     }
 
     @Test
-    public void testGetFlags34() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags34-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>52</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>32</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(52, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags34() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags34-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>52</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>32</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(52, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -9293,27 +9252,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags39() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags39-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>1</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>7</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(1, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags39() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags39-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>1</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>7</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(1, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -9508,27 +9462,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags41() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags41-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>14</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>3</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(14, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags41() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags41-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>14</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>3</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(14, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -13945,27 +13894,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags55() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags55-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>38</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>25</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(38, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags55() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags55-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>38</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>25</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(38, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -14657,51 +14601,41 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags59() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags59-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>18</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>11</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(18, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags59() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags59-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>18</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>11</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(18, receivingObject.getFlags(paramObject1));
     }
 
     @Test
-    public void testGetFlags60() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags60-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>54</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>10</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(54, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags60() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags60-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>54</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>10</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(54, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -17343,27 +17277,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags69() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags69-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>19</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>30</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(19, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags69() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags69-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>19</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>30</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(19, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -17797,51 +17726,41 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags71() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags71-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>21</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>17</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(21, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags71() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags71-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>21</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>17</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(21, receivingObject.getFlags(paramObject1));
     }
 
     @Test
-    public void testGetFlags72() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags72-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>34</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>2</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(34, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags72() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags72-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>34</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>2</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(34, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -18171,51 +18090,41 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags74() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags74-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>21</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>12</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(21, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags74() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags74-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>21</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>12</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(21, receivingObject.getFlags(paramObject1));
     }
 
     @Test
-    public void testGetFlags75() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags75-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>38</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>35</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(38, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags75() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags75-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>38</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>35</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(38, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -20428,27 +20337,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags82() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags82-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>6</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>8</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(6, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags82() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags82-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>6</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>8</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(6, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -20814,27 +20718,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags84() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags84-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>53</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>59</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(53, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags84() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags84-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>53</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>59</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(53, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -21638,27 +21537,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags88() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags88-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>20</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>42</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(20, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags88() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags88-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>20</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>42</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(20, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -22699,27 +22593,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags92() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags92-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>20</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>5</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(20, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags92() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags92-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>20</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>5</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(20, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -24745,27 +24634,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags101() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags101-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>38</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>35</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(38, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags101() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags101-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>38</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>35</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(38, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -27844,27 +27728,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags111() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags111-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>14</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>10</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(14, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags111() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags111-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>14</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>10</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(14, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -28074,51 +27953,41 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags113() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags113-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>30</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>20</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(30, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags113() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags113-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>30</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>20</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(30, receivingObject.getFlags(paramObject1));
     }
 
     @Test
-    public void testGetFlags114() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags114-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>50</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>12</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(50, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags114() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags114-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>50</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>12</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(50, receivingObject.getFlags(paramObject1));
     }
 
     @Test
@@ -28204,27 +28073,22 @@ public class TestGlyfSimpleDescriptPanktiGen {
     }
 
     @Test
-    public void testGetFlags116() {
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File filereceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags116-receiving.xml").getFile());
-            Scanner scannerreceiving = new Scanner(filereceiving);
-            String receivingXML = scannerreceiving.useDelimiter("\\A").next();
-            org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
-            String returnedXML =
-                    "<byte>17</byte>";
-            byte expectedObject = (Byte) xStream.fromXML(returnedXML);
-            String paramsXML =
-                    "<object-array>" +
-                            "  <int>48</int>" +
-                            "</object-array>";
-            Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
-            int paramObject1 = (Integer) paramObjects[0];
-            Assert.assertEquals(17, receivingObject.getFlags(paramObject1));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
+    public void testGetFlags116() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File fileReceiving = new File(classLoader.getResource("org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags116-receiving.xml").getFile());
+        Scanner scannerReceiving = new Scanner(fileReceiving);
+        String receivingXML = scannerReceiving.useDelimiter("\\A").next();
+        org.apache.fontbox.ttf.GlyfSimpleDescript receivingObject = (org.apache.fontbox.ttf.GlyfSimpleDescript) xStream.fromXML(receivingXML);
+        String returnedXML =
+                "<byte>17</byte>";
+        byte expectedObject = (Byte) xStream.fromXML(returnedXML);
+        String paramsXML =
+                "<object-array>" +
+                        "  <int>48</int>" +
+                        "</object-array>";
+        Object[] paramObjects = (Object[]) xStream.fromXML(paramsXML);
+        int paramObject1 = (Integer) paramObjects[0];
+        Assert.assertEquals(17, receivingObject.getFlags(paramObject1));
     }
 
     @Test
