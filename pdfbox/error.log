@@ -1,0 +1,245 @@
+[ERROR] Failures: 
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption10:208 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@512baff6> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@632ceb35>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption11:227 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@56928307> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@3899782c>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption13:264 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@e57b96d> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@32c726ee>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption14:283 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@528c868> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@466276d8>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption15:302 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@3ad2e17> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@8c3619e>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption16:321 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@5a1de7fb> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@335b5620>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption18:358 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@a87f8ec> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@5443d039>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption22:431 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@47f9738> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@6155d082>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption23:450 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@3f270e0a> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@1a760689>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption24:469 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@2e2ff723> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@324a0017>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption25:488 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@55322aab> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@2b4c1d96>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption26:507 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@2eee3069> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@2da59753>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption27:526 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@4dd02341> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@3212a8d7>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption29:563 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@1c32386d> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@6399551e>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption3:77 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@11bb571c> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@7c51f34b>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption31:600 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@73a2e526> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@7d64e326>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption32:619 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@5ef6ae06> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@55dfebeb>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption37:710 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@9ef8eb7> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@34cdeda2>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption5:114 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@6f7923a5> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@74a6f9c1>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption6:133 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@1e44b638> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@7393222f>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption7:152 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@432038ec> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@7daa0fbd>
+[ERROR]   TestCOSParserPanktiGen.testGetEncryption9:189 expected:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@1984b1f> but was:<org.apache.pdfbox.pdmodel.encryption.PDEncryption@3bd323e9>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace1:4202 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace10:4417 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace11:4441 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace12:4465 expected:<Indexed{base:ICCBased{numberOfComponents: 3} hival:255 lookup:(256 entries)}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace13:4489 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace14:4513 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace16:4560 expected:<Indexed{base:ICCBased{numberOfComponents: 3} hival:255 lookup:(256 entries)}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace18:4607 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace19:4631 expected:<Indexed{base:ICCBased{numberOfComponents: 3} hival:255 lookup:(256 entries)}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace2:4226 expected:<Indexed{base:ICCBased{numberOfComponents: 3} hival:255 lookup:(256 entries)}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace20:4655 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace21:4679 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace22:4703 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace23:4727 expected:<Indexed{base:ICCBased{numberOfComponents: 3} hival:255 lookup:(256 entries)}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace24:4751 expected:<Indexed{base:ICCBased{numberOfComponents: 3} hival:255 lookup:(256 entries)}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace25:4775 expected:<Indexed{base:ICCBased{numberOfComponents: 3} hival:255 lookup:(256 entries)}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace26:4799 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace3:4250 expected:<Indexed{base:ICCBased{numberOfComponents: 3} hival:255 lookup:(256 entries)}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace4:4274 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace5:4298 expected:<Indexed{base:ICCBased{numberOfComponents: 3} hival:255 lookup:(256 entries)}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace6:4322 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace7:4346 expected:<Indexed{base:ICCBased{numberOfComponents: 3} hival:255 lookup:(256 entries)}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetColorSpace9:4393 expected:<ICCBased{numberOfComponents: 3}> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState1:127 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@650eab8> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState10:1397 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@10fde30a> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState11:1521 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@74e47444> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState13:1721 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@72a85671> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState14:1899 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@34a75079> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState16:2181 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@132ddbab> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState17:2359 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@68d6972f> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState19:2614 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@3faf2e7d> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState2:403 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@4f2c9ba6> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState20:2792 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@2a39fe6a> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState21:2916 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@44c79f32> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState22:3040 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@5241cf67> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState4:599 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@30990c1b> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState5:723 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@62fe6067> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState6:847 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@6cbcf243> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState7:1025 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@7e38a7fe> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState8:1149 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@36676c1a> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetExtGState9:1273 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@65a4798f> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont1:3064 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont10:3279 expected:<PDTrueTypeFont BJEDHC+Arial-ItalicMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont11:3303 expected:<PDTrueTypeFont BJEDHC+Arial-ItalicMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont12:3327 expected:<PDTrueTypeFont BJEDHC+Arial-ItalicMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont13:3351 expected:<PDTrueTypeFont BJEDEG+Arial-BoldMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont15:3398 expected:<PDTrueTypeFont BJEDHC+Arial-ItalicMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont16:3422 expected:<PDTrueTypeFont BJEFFP+TimesNewRomanPSMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont18:3469 expected:<PDTrueTypeFont BJEDEG+Arial-BoldMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont19:3493 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont2:3088 expected:<PDTrueTypeFont BJEDHC+Arial-ItalicMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont20:3517 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont21:3541 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont22:3565 expected:<PDTrueTypeFont BJEDEG+Arial-BoldMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont24:3712 expected:<PDTrueTypeFont BJEDEG+Arial-BoldMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont26:3759 expected:<PDTrueTypeFont BJEDHC+Arial-ItalicMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont27:3783 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont28:3807 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont29:3831 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont4:3135 expected:<PDTrueTypeFont BJEDHC+Arial-ItalicMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont5:3159 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont6:3183 expected:<PDTrueTypeFont BJEDHC+Arial-ItalicMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont7:3207 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont8:3231 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetFont9:3255 expected:<PDTrueTypeFont BJEDFM+ArialMT> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetXObject13:4131 expected:<org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject@1c98290c> but was:<null>
+[ERROR]   TestDefaultResourceCachePanktiGen.testGetXObject14:4155 expected:<org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject@5f2606b> but was:<null>
+[ERROR]   TestPDDocumentCatalogPanktiGen.testGetViewerPreferences3:104 expected:<org.apache.pdfbox.pdmodel.interactive.viewerpreferences.PDViewerPreferences@289fdb08> but was:<org.apache.pdfbox.pdmodel.interactive.viewerpreferences.PDViewerPreferences@7a231dfd>
+[ERROR]   TestPDDocumentCatalogPanktiGen.testGetViewerPreferences5:174 expected:<org.apache.pdfbox.pdmodel.interactive.viewerpreferences.PDViewerPreferences@1ab6718> but was:<org.apache.pdfbox.pdmodel.interactive.viewerpreferences.PDViewerPreferences@3910fe11>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState10:899 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@62c5bbdc> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@7bdf6bb7>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState11:975 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@1e392345> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@12f3afb5>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState12:1051 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@6754ef00> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@619bd14c>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState13:1154 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@33d05366> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@27a0a5a2>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState14:1257 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@33aa93c> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@32c0915e>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState15:1333 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@1968a49c> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@6a1ebcff>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState16:1436 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@e041f0c> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@6a175569>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState17:1539 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@77b325b3> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@63a5e46c>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState18:1615 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@51abf713> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@eadb475>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState2:183 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@30c0ccff> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@581d969c>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState3:259 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@5851bd4f> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@7cd1ac19>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState4:335 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@2024293c> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@7048f722>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState5:438 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@7728643a> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@320e400>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState6:514 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@1af7f54a> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@6ebd78d1>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState7:617 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@4d157787> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@68ed96ca>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState8:720 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@3228d990> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@54e7391d>
+[ERROR]   TestPDResourcesPanktiGen.testGetExtGState9:823 expected:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@40e4ea87> but was:<org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState@58783f6c>
+[ERROR]   TestFontCachePanktiGen.testGetFont100:2342 expected:<(null - Bad file descriptor)> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont102:2389 expected:<(null - Bad file descriptor)> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont18:435 expected:<(null - Bad file descriptor)> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont24:574 expected:<(null - Bad file descriptor)> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont28:667 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont29:691 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont31:738 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont40:947 expected:<(null - Bad file descriptor)> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont43:1017 expected:<LiberationSans> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont45:1064 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont51:1203 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont52:1227 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont54:1274 expected:<LiberationSans> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont55:1298 expected:<(null - Bad file descriptor)> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont58:1368 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont63:1484 expected:<(null - Bad file descriptor)> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont7:179 expected:<LiberationSans> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont8:203 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont80:1878 expected:<(null - Bad file descriptor)> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont88:2063 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont9:227 expected:<(null - Bad file descriptor)> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont94:2202 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestFontCachePanktiGen.testGetFont97:2272 expected:<LiberationSans-Bold> but was:<null>
+[ERROR]   TestPDCIDFontType2PanktiGen.testGetPath1:208 expected:<java.awt.geom.GeneralPath@518cf84a> but was:<java.awt.geom.GeneralPath@62e7dffa>
+[ERROR]   TestPDCIDFontType2PanktiGen.testGetPath2:286 expected:<java.awt.geom.GeneralPath@6edcd0d8> but was:<java.awt.geom.GeneralPath@6136998b>
+[ERROR]   TestPDCIDFontType2PanktiGen.testGetPath3:364 expected:<java.awt.geom.GeneralPath@57ce634f> but was:<java.awt.geom.GeneralPath@b8a7e43>
+[ERROR]   TestPDCIDFontType2PanktiGen.testGetPath4:398 expected:<java.awt.geom.GeneralPath@35835fa> but was:<java.awt.geom.GeneralPath@56f71edb>
+[ERROR]   TestPDCIDFontType2PanktiGen.testGetPath5:432 expected:<java.awt.geom.GeneralPath@7207cb51> but was:<java.awt.geom.GeneralPath@2a27cb34>
+[ERROR]   TestPDCIDFontType2PanktiGen.testGetPath6:510 expected:<java.awt.geom.GeneralPath@6892cc6f> but was:<java.awt.geom.GeneralPath@6fd1660>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int1:120 expected:<java.awt.geom.GeneralPath@1500e009> but was:<java.awt.geom.GeneralPath@1fd386c3>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int10:956 expected:<java.awt.geom.GeneralPath@3dedb4a6> but was:<java.awt.geom.GeneralPath@57f64f5e>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int11:1087 expected:<java.awt.geom.GeneralPath@415e0bcb> but was:<java.awt.geom.GeneralPath@194152cf>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int12:1159 expected:<java.awt.geom.GeneralPath@49d98dc5> but was:<java.awt.geom.GeneralPath@2c30b71f>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int13:1253 expected:<java.awt.geom.GeneralPath@1d81e101> but was:<java.awt.geom.GeneralPath@ec50f54>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int14:1372 expected:<java.awt.geom.GeneralPath@bf71cec> but was:<java.awt.geom.GeneralPath@22d6cac2>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int15:1457 expected:<java.awt.geom.GeneralPath@30cdae70> but was:<java.awt.geom.GeneralPath@1654a892>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int16:1583 expected:<java.awt.geom.GeneralPath@2577d6c8> but was:<java.awt.geom.GeneralPath@3163987e>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int17:1651 expected:<java.awt.geom.GeneralPath@6c000e0c> but was:<java.awt.geom.GeneralPath@5f233b26>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int18:1725 expected:<java.awt.geom.GeneralPath@44f9779c> but was:<java.awt.geom.GeneralPath@6974a715>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int19:1934 expected:<java.awt.geom.GeneralPath@5e8a459> but was:<java.awt.geom.GeneralPath@43d455c9>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int2:154 expected:<java.awt.geom.GeneralPath@edf4f36> but was:<java.awt.geom.GeneralPath@29d334c>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int20:2000 expected:<java.awt.geom.GeneralPath@4c9e9fb8> but was:<java.awt.geom.GeneralPath@9ec531>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int21:2202 expected:<java.awt.geom.GeneralPath@40147317> but was:<java.awt.geom.GeneralPath@210f0cc1>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int22:2309 expected:<java.awt.geom.GeneralPath@19542407> but was:<java.awt.geom.GeneralPath@6f95cd51>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int23:2473 expected:<java.awt.geom.GeneralPath@c7a977f> but was:<java.awt.geom.GeneralPath@55caeb35>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int24:2548 expected:<java.awt.geom.GeneralPath@6d868997> but was:<java.awt.geom.GeneralPath@2c383e33>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int25:2693 expected:<java.awt.geom.GeneralPath@2fa3be26> but was:<java.awt.geom.GeneralPath@4287d447>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int26:2784 expected:<java.awt.geom.GeneralPath@3af37506> but was:<java.awt.geom.GeneralPath@4e6d7365>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int27:2852 expected:<java.awt.geom.GeneralPath@7c0da600> but was:<java.awt.geom.GeneralPath@d4602a>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int28:2989 expected:<java.awt.geom.GeneralPath@21ae6e73> but was:<java.awt.geom.GeneralPath@47dd778>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int29:3106 expected:<java.awt.geom.GeneralPath@15515c51> but was:<java.awt.geom.GeneralPath@36a7abe1>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int3:243 expected:<java.awt.geom.GeneralPath@100f9bbe> but was:<java.awt.geom.GeneralPath@13e9f2e2>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int30:3272 expected:<java.awt.geom.GeneralPath@64a896b0> but was:<java.awt.geom.GeneralPath@e044b4a>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int31:3306 expected:<java.awt.geom.GeneralPath@11a82d0f> but was:<java.awt.geom.GeneralPath@1adb7478>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int32:3438 expected:<java.awt.geom.GeneralPath@3ae66c85> but was:<java.awt.geom.GeneralPath@16943e88>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int33:3555 expected:<java.awt.geom.GeneralPath@4604b900> but was:<java.awt.geom.GeneralPath@73d6d0c>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int34:3629 expected:<java.awt.geom.GeneralPath@e36bb2a> but was:<java.awt.geom.GeneralPath@3961a41a>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int35:3760 expected:<java.awt.geom.GeneralPath@5a4ed68f> but was:<java.awt.geom.GeneralPath@367795c7>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int36:3944 expected:<java.awt.geom.GeneralPath@d2387c8> but was:<java.awt.geom.GeneralPath@3956b302>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int4:375 expected:<java.awt.geom.GeneralPath@673bb956> but was:<java.awt.geom.GeneralPath@cd7f1ae>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int5:530 expected:<java.awt.geom.GeneralPath@60e949e1> but was:<java.awt.geom.GeneralPath@3c4bc9fc>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int6:604 expected:<java.awt.geom.GeneralPath@680362a> but was:<java.awt.geom.GeneralPath@3569edd5>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int7:666 expected:<java.awt.geom.GeneralPath@1f651cd8> but was:<java.awt.geom.GeneralPath@7d0332e1>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int8:802 expected:<java.awt.geom.GeneralPath@7a356a0d> but was:<java.awt.geom.GeneralPath@c827db>
+[ERROR]   TestPDTrueTypeFontPanktiGen.testGetPath_int9:879 expected:<java.awt.geom.GeneralPath@377c68c6> but was:<java.awt.geom.GeneralPath@538cd0f2>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode1:3611 expected:<java.awt.geom.GeneralPath@5f7b97da> but was:<java.awt.geom.GeneralPath@18b0930f>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode10:4463 expected:<java.awt.geom.GeneralPath@5cbe877d> but was:<java.awt.geom.GeneralPath@5c08c46a>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode11:4594 expected:<java.awt.geom.GeneralPath@4cf8b2dc> but was:<java.awt.geom.GeneralPath@708400f6>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode12:4731 expected:<java.awt.geom.GeneralPath@4566d049> but was:<java.awt.geom.GeneralPath@61ce23ac>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode13:4886 expected:<java.awt.geom.GeneralPath@3668d4> but was:<java.awt.geom.GeneralPath@1c3b9394>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode14:5050 expected:<java.awt.geom.GeneralPath@6f2cfcc2> but was:<java.awt.geom.GeneralPath@7f6f61c8>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode15:5116 expected:<java.awt.geom.GeneralPath@4c2cc639> but was:<java.awt.geom.GeneralPath@ccb4b1b>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode16:5242 expected:<java.awt.geom.GeneralPath@4097cac> but was:<java.awt.geom.GeneralPath@ec2cc4>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode17:5379 expected:<java.awt.geom.GeneralPath@333dd51e> but was:<java.awt.geom.GeneralPath@52d645b1>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode18:5454 expected:<java.awt.geom.GeneralPath@2101b44a> but was:<java.awt.geom.GeneralPath@2cc3ad05>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode19:5638 expected:<java.awt.geom.GeneralPath@710b18a6> but was:<java.awt.geom.GeneralPath@119020fb>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode2:3679 expected:<java.awt.geom.GeneralPath@6b7906b3> but was:<java.awt.geom.GeneralPath@3a1dd365>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode20:5755 expected:<java.awt.geom.GeneralPath@3d9f6567> but was:<java.awt.geom.GeneralPath@c055c54>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode21:5789 expected:<java.awt.geom.GeneralPath@25e2ab5a> but was:<java.awt.geom.GeneralPath@35e5d0e5>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode22:5863 expected:<java.awt.geom.GeneralPath@73173f63> but was:<java.awt.geom.GeneralPath@55562aa9>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode23:6029 expected:<java.awt.geom.GeneralPath@655ef322> but was:<java.awt.geom.GeneralPath@7e276594>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode24:6148 expected:<java.awt.geom.GeneralPath@3401a114> but was:<java.awt.geom.GeneralPath@5066d65f>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode25:6239 expected:<java.awt.geom.GeneralPath@555cf22> but was:<java.awt.geom.GeneralPath@6bb2d00b>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode26:6370 expected:<java.awt.geom.GeneralPath@3c9bfddc> but was:<java.awt.geom.GeneralPath@1a9c38eb>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode27:6461 expected:<java.awt.geom.GeneralPath@319bc845> but was:<java.awt.geom.GeneralPath@4c5474f5>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode28:6645 expected:<java.awt.geom.GeneralPath@2f4205be> but was:<java.awt.geom.GeneralPath@54e22bdd>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode29:6719 expected:<java.awt.geom.GeneralPath@3bd418e4> but was:<java.awt.geom.GeneralPath@544820b7>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode3:3770 expected:<java.awt.geom.GeneralPath@395b56bb> but was:<java.awt.geom.GeneralPath@256f8274>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode30:6753 expected:<java.awt.geom.GeneralPath@6b98a075> but was:<java.awt.geom.GeneralPath@2e61d218>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode31:6787 expected:<java.awt.geom.GeneralPath@3569fc08> but was:<java.awt.geom.GeneralPath@20b12f8a>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode32:6861 expected:<java.awt.geom.GeneralPath@e84a8e1> but was:<java.awt.geom.GeneralPath@2e554a3b>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode33:6895 expected:<java.awt.geom.GeneralPath@54a67a45> but was:<java.awt.geom.GeneralPath@7d42c224>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode34:7014 expected:<java.awt.geom.GeneralPath@56aaaecd> but was:<java.awt.geom.GeneralPath@522a32b1>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode4:3845 expected:<java.awt.geom.GeneralPath@68044f4> but was:<java.awt.geom.GeneralPath@52d239ba>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode5:3962 expected:<java.awt.geom.GeneralPath@315f43d5> but was:<java.awt.geom.GeneralPath@68fa0ba8>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode6:4093 expected:<java.awt.geom.GeneralPath@6c5945a7> but was:<java.awt.geom.GeneralPath@2f05be7f>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode7:4165 expected:<java.awt.geom.GeneralPath@640f11a1> but was:<java.awt.geom.GeneralPath@5c10f1c3>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode8:4199 expected:<java.awt.geom.GeneralPath@7ac2e39b> but was:<java.awt.geom.GeneralPath@78365cfa>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForCharacterCode9:4331 expected:<java.awt.geom.GeneralPath@64a8c844> but was:<java.awt.geom.GeneralPath@3f6db3fb>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID1:123 expected:<java.awt.geom.GeneralPath@35390ee3> but was:<java.awt.geom.GeneralPath@5e01a982>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID10:1012 expected:<java.awt.geom.GeneralPath@52de51b6> but was:<java.awt.geom.GeneralPath@18c5069b>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID11:1146 expected:<java.awt.geom.GeneralPath@3a0d172f> but was:<java.awt.geom.GeneralPath@68ad99fe>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID12:1239 expected:<java.awt.geom.GeneralPath@485e36bc> but was:<java.awt.geom.GeneralPath@781f10f2>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID13:1358 expected:<java.awt.geom.GeneralPath@2a79d4b1> but was:<java.awt.geom.GeneralPath@2e9fda69>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID14:1497 expected:<java.awt.geom.GeneralPath@17cdf2d0> but was:<java.awt.geom.GeneralPath@1755e85b>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID15:1533 expected:<java.awt.geom.GeneralPath@736d6a5c> but was:<java.awt.geom.GeneralPath@2371aaca>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID16:1569 expected:<java.awt.geom.GeneralPath@5b529706> but was:<java.awt.geom.GeneralPath@63fdab07>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID17:1637 expected:<java.awt.geom.GeneralPath@7b5a12ae> but was:<java.awt.geom.GeneralPath@5553d0f5>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID18:1794 expected:<java.awt.geom.GeneralPath@1af687fe> but was:<java.awt.geom.GeneralPath@14dda234>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID19:1871 expected:<java.awt.geom.GeneralPath@3f390d63> but was:<java.awt.geom.GeneralPath@74a6a609>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID2:159 expected:<java.awt.geom.GeneralPath@5ddea849> but was:<java.awt.geom.GeneralPath@5ee2b6f9>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID20:2057 expected:<java.awt.geom.GeneralPath@5a411614> but was:<java.awt.geom.GeneralPath@2374d36a>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID21:2131 expected:<java.awt.geom.GeneralPath@54d18072> but was:<java.awt.geom.GeneralPath@1506f20f>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID22:2317 expected:<java.awt.geom.GeneralPath@47a5b70d> but was:<java.awt.geom.GeneralPath@424fd310>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID23:2393 expected:<java.awt.geom.GeneralPath@1a45193b> but was:<java.awt.geom.GeneralPath@38f116f6>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID24:2521 expected:<java.awt.geom.GeneralPath@5286c33a> but was:<java.awt.geom.GeneralPath@6e6d5d29>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID25:2654 expected:<java.awt.geom.GeneralPath@5c530d1e> but was:<java.awt.geom.GeneralPath@6c25e6c4>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID26:2724 expected:<java.awt.geom.GeneralPath@85e6769> but was:<java.awt.geom.GeneralPath@c5ee75e>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID27:2817 expected:<java.awt.geom.GeneralPath@48a12036> but was:<java.awt.geom.GeneralPath@bf1ec20>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID28:2985 expected:<java.awt.geom.GeneralPath@70efb718> but was:<java.awt.geom.GeneralPath@b70da4c>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID29:3021 expected:<java.awt.geom.GeneralPath@4a11eb84> but was:<java.awt.geom.GeneralPath@4e858e0a>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID3:280 expected:<java.awt.geom.GeneralPath@23d1e5d0> but was:<java.awt.geom.GeneralPath@704f1591>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID30:3091 expected:<java.awt.geom.GeneralPath@435fb7b5> but was:<java.awt.geom.GeneralPath@4e70a728>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID31:3167 expected:<java.awt.geom.GeneralPath@b7838a9> but was:<java.awt.geom.GeneralPath@696f0212>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID32:3243 expected:<java.awt.geom.GeneralPath@5733f295> but was:<java.awt.geom.GeneralPath@1c3146bc>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID33:3377 expected:<java.awt.geom.GeneralPath@56c698e3> but was:<java.awt.geom.GeneralPath@47a86fbb>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID34:3543 expected:<java.awt.geom.GeneralPath@f478a81> but was:<java.awt.geom.GeneralPath@19553973>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID4:373 expected:<java.awt.geom.GeneralPath@58fb7731> but was:<java.awt.geom.GeneralPath@13e547a9>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID5:506 expected:<java.awt.geom.GeneralPath@3fb6cf60> but was:<java.awt.geom.GeneralPath@37ddb69a>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID6:627 expected:<java.awt.geom.GeneralPath@349c1daf> but was:<java.awt.geom.GeneralPath@dfddc9a>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID7:663 expected:<java.awt.geom.GeneralPath@4b9df8a> but was:<java.awt.geom.GeneralPath@5e8ac0e1>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID8:740 expected:<java.awt.geom.GeneralPath@aafcffa> but was:<java.awt.geom.GeneralPath@6955cb39>
+[ERROR]   TestTTFGlyph2DPanktiGen.testGetPathForGID9:879 expected:<java.awt.geom.GeneralPath@235a0c16> but was:<java.awt.geom.GeneralPath@2b5f4d54>
+[INFO] 
+[ERROR] Tests run: 1839, Failures: 241, Errors: 0, Skipped: 0
+
