@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommunicationManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client</a> &gt; <span class="el_source">CommunicationManager.java</span></div><h1>CommunicationManager.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ * &lt;p&gt;
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * &lt;p&gt;
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * &lt;p&gt;
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.client;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.client.announce.*;
+import com.turn.ttorrent.client.network.CountLimitConnectionAllower;
+import com.turn.ttorrent.client.network.OutgoingConnectionListener;
+import com.turn.ttorrent.client.network.StateChannelListener;
+import com.turn.ttorrent.client.peer.PeerActivityListener;
+import com.turn.ttorrent.client.peer.SharingPeer;
+import com.turn.ttorrent.client.storage.FairPieceStorageFactory;
+import com.turn.ttorrent.client.storage.FileCollectionStorage;
+import com.turn.ttorrent.client.storage.PieceStorage;
+import com.turn.ttorrent.client.storage.PieceStorageFactory;
+import com.turn.ttorrent.common.*;
+import com.turn.ttorrent.common.protocol.AnnounceRequestMessage;
+import com.turn.ttorrent.common.protocol.PeerMessage;
+import com.turn.ttorrent.network.*;
+import org.slf4j.Logger;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.URI;
+import java.nio.ByteBuffer;
+import java.nio.channels.ByteChannel;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static com.turn.ttorrent.Constants.DEFAULT_SOCKET_CONNECTION_TIMEOUT_MILLIS;
+import static com.turn.ttorrent.common.protocol.AnnounceRequestMessage.RequestEvent.*;
+
+/**
+ * A pure-java BitTorrent client.
+ * &lt;p/&gt;
+ * &lt;p&gt;
+ * A BitTorrent client in its bare essence shares a given torrent. If the
+ * torrent is not complete locally, it will continue to download it. If or
+ * after the torrent is complete, the client may eventually continue to seed it
+ * for other clients.
+ * &lt;/p&gt;
+ * &lt;p/&gt;
+ * &lt;p&gt;
+ * This BitTorrent client implementation is made to be simple to embed and
+ * simple to use. First, initialize a ShareTorrent object from a torrent
+ * meta-info source (either a file or a byte array, see
+ * com.turn.ttorrent.SharedTorrent for how to create a SharedTorrent object).
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ */
+public class CommunicationManager implements AnnounceResponseListener, PeerActivityListener, Context, ConnectionManagerContext {
+
+<span class="fc" id="L75">  protected static final Logger logger = TorrentLoggerFactory.getLogger(CommunicationManager.class);</span>
+
+  public static final String BITTORRENT_ID_PREFIX = &quot;-TO0042-&quot;;
+
+<span class="fc" id="L79">  private AtomicBoolean stop = new AtomicBoolean(false);</span>
+
+  private Announce announce;
+
+<span class="fc" id="L83">  private volatile boolean myStarted = false;</span>
+  private final TorrentLoader myTorrentLoader;
+  private final TorrentsStorage torrentsStorage;
+  private final CountLimitConnectionAllower myInConnectionAllower;
+  private final CountLimitConnectionAllower myOutConnectionAllower;
+  private final AtomicInteger mySendBufferSize;
+  private final AtomicInteger myReceiveBufferSize;
+  private final PeersStorage peersStorage;
+  private volatile ConnectionManager myConnectionManager;
+  private final ExecutorService myExecutorService;
+  private final ExecutorService myPieceValidatorExecutor;
+
+  /**
+   * @param workingExecutor        executor service for run connection worker and process incoming data. Must have a pool size at least 2
+   * @param pieceValidatorExecutor executor service for calculation sha1 hashes of downloaded pieces
+   */
+  public CommunicationManager(ExecutorService workingExecutor, ExecutorService pieceValidatorExecutor) {
+<span class="fc" id="L100">    this(workingExecutor, pieceValidatorExecutor, new TrackerClientFactoryImpl());</span>
+<span class="fc" id="L101">  }</span>
+
+  /**
+   * @param workingExecutor        executor service for run connection worker and process incoming data. Must have a pool size at least 2
+   * @param pieceValidatorExecutor executor service for calculation sha1 hashes of downloaded pieces
+   * @param trackerClientFactory   factory which creates instances for communication with tracker
+   */
+<span class="fc" id="L108">  public CommunicationManager(ExecutorService workingExecutor, ExecutorService pieceValidatorExecutor, TrackerClientFactory trackerClientFactory) {</span>
+<span class="fc" id="L109">    this.announce = new Announce(this, trackerClientFactory);</span>
+<span class="fc" id="L110">    this.torrentsStorage = new TorrentsStorage();</span>
+<span class="fc" id="L111">    this.peersStorage = new PeersStorage();</span>
+<span class="fc" id="L112">    this.mySendBufferSize = new AtomicInteger();</span>
+<span class="fc" id="L113">    this.myTorrentLoader = new TorrentLoaderImpl(this.torrentsStorage);</span>
+<span class="fc" id="L114">    this.myReceiveBufferSize = new AtomicInteger();</span>
+<span class="fc" id="L115">    this.myInConnectionAllower = new CountLimitConnectionAllower(peersStorage);</span>
+<span class="fc" id="L116">    this.myOutConnectionAllower = new CountLimitConnectionAllower(peersStorage);</span>
+<span class="fc" id="L117">    this.myExecutorService = workingExecutor;</span>
+<span class="fc" id="L118">    myPieceValidatorExecutor = pieceValidatorExecutor;</span>
+<span class="fc" id="L119">  }</span>
+
+  /**
+   * Adds torrent to storage, validate downloaded files and start seeding and leeching the torrent
+   *
+   * @param dotTorrentFilePath path to torrent metadata file
+   * @param downloadDirPath    path to directory where downloaded files are placed
+   * @return {@link TorrentManager} instance for monitoring torrent state
+   * @throws IOException if IO error occurs in reading metadata file
+   */
+  public TorrentManager addTorrent(String dotTorrentFilePath, String downloadDirPath) throws IOException {
+<span class="nc" id="L130">    return addTorrent(dotTorrentFilePath, downloadDirPath, FairPieceStorageFactory.INSTANCE);</span>
+  }
+
+  /**
+   * Adds torrent to storage with specified listeners, validate downloaded files and start seeding and leeching the torrent
+   *
+   * @param dotTorrentFilePath path to torrent metadata file
+   * @param downloadDirPath    path to directory where downloaded files are placed
+   * @param listeners          specified listeners
+   * @return {@link TorrentManager} instance for monitoring torrent state
+   * @throws IOException if IO error occurs in reading metadata file
+   */
+  public TorrentManager addTorrent(String dotTorrentFilePath, String downloadDirPath, List&lt;TorrentListener&gt; listeners) throws IOException {
+<span class="fc" id="L143">    return addTorrent(dotTorrentFilePath, downloadDirPath, FairPieceStorageFactory.INSTANCE, listeners);</span>
+  }
+
+  /**
+   * Adds torrent to storage with specified {@link PieceStorageFactory}.
+   * It can be used for skipping initial validation of data
+   *
+   * @param dotTorrentFilePath path to torrent metadata file
+   * @param downloadDirPath    path to directory where downloaded files are placed
+   * @param pieceStorageFactory factory for creating {@link PieceStorage}.
+   * @return {@link TorrentManager} instance for monitoring torrent state
+   * @throws IOException if IO error occurs in reading metadata file
+   */
+  public TorrentManager addTorrent(String dotTorrentFilePath,
+                                   String downloadDirPath,
+                                   PieceStorageFactory pieceStorageFactory) throws IOException {
+<span class="nc" id="L159">    return addTorrent(dotTorrentFilePath, downloadDirPath, pieceStorageFactory, Collections.&lt;TorrentListener&gt;emptyList());</span>
+  }
+
+  /**
+   * Adds torrent to storage with specified {@link PieceStorageFactory}.
+   * It can be used for skipping initial validation of data
+   *
+   * @param dotTorrentFilePath path to torrent metadata file
+   * @param downloadDirPath    path to directory where downloaded files are placed
+   * @param pieceStorageFactory factory for creating {@link PieceStorage}.
+   * @return {@link TorrentManager} instance for monitoring torrent state
+   * @throws IOException if IO error occurs in reading metadata file
+   */
+  public TorrentManager addTorrent(String dotTorrentFilePath,
+                                   String downloadDirPath,
+                                   PieceStorageFactory pieceStorageFactory,
+                                   List&lt;TorrentListener&gt; listeners) throws IOException {
+<span class="fc" id="L176">    FileMetadataProvider metadataProvider = new FileMetadataProvider(dotTorrentFilePath);</span>
+<span class="fc" id="L177">    TorrentMetadata metadata = metadataProvider.getTorrentMetadata();</span>
+<span class="fc" id="L178">    FileCollectionStorage fileCollectionStorage = FileCollectionStorage.create(metadata, new File(downloadDirPath));</span>
+<span class="fc" id="L179">    PieceStorage pieceStorage = pieceStorageFactory.createStorage(metadata, fileCollectionStorage);</span>
+<span class="fc" id="L180">    return addTorrent(metadataProvider, pieceStorage, listeners);</span>
+  }
+
+  /**
+   * Adds torrent to storage with any storage and metadata source
+   *
+   * @param metadataProvider specified metadata source
+   * @param pieceStorage     specified storage of pieces
+   * @return {@link TorrentManager} instance for monitoring torrent state
+   * @throws IOException if IO error occurs in reading metadata file
+   */
+  public TorrentManager addTorrent(TorrentMetadataProvider metadataProvider, PieceStorage pieceStorage) throws IOException {
+<span class="nc" id="L192">    return addTorrent(metadataProvider, pieceStorage, Collections.&lt;TorrentListener&gt;emptyList());</span>
+  }
+
+  /**
+   * Adds torrent to storage with any storage, metadata source and specified listeners
+   *
+   * @param metadataProvider specified metadata source
+   * @param pieceStorage     specified storage of pieces
+   * @param listeners        specified listeners
+   * @return {@link TorrentManager} instance for monitoring torrent state
+   * @throws IOException if IO error occurs in reading metadata file
+   */
+  public TorrentManager addTorrent(TorrentMetadataProvider metadataProvider,
+                                   PieceStorage pieceStorage,
+                                   List&lt;TorrentListener&gt; listeners) throws IOException {
+<span class="fc" id="L207">    TorrentMetadata torrentMetadata = metadataProvider.getTorrentMetadata();</span>
+<span class="fc" id="L208">    EventDispatcher eventDispatcher = new EventDispatcher();</span>
+<span class="fc bfc" id="L209" title="All 2 branches covered.">    for (TorrentListener listener : listeners) {</span>
+<span class="fc" id="L210">      eventDispatcher.addListener(listener);</span>
+<span class="fc" id="L211">    }</span>
+<span class="fc" id="L212">    final LoadedTorrentImpl loadedTorrent = new LoadedTorrentImpl(</span>
+            new TorrentStatistic(),
+            metadataProvider,
+            torrentMetadata,
+            pieceStorage,
+            eventDispatcher);
+
+<span class="pc bpc" id="L219" title="1 of 2 branches missed.">    if (pieceStorage.isFinished()) {</span>
+<span class="nc" id="L220">      loadedTorrent.getTorrentStatistic().setLeft(0);</span>
+    } else {
+<span class="fc" id="L222">      long left = calculateLeft(pieceStorage, torrentMetadata);</span>
+<span class="fc" id="L223">      loadedTorrent.getTorrentStatistic().setLeft(left);</span>
+    }
+<span class="fc" id="L225">    eventDispatcher.multicaster().validationComplete(pieceStorage.getAvailablePieces().cardinality(), torrentMetadata.getPiecesCount());</span>
+
+<span class="fc" id="L227">    this.torrentsStorage.addTorrent(loadedTorrent.getTorrentHash().getHexInfoHash(), loadedTorrent);</span>
+<span class="pc bpc" id="L228" title="1 of 2 branches missed.">    forceAnnounceAndLogError(loadedTorrent, pieceStorage.isFinished() ? COMPLETED : STARTED);</span>
+<span class="fc" id="L229">    logger.debug(String.format(&quot;Added torrent %s (%s)&quot;, loadedTorrent, loadedTorrent.getTorrentHash().getHexInfoHash()));</span>
+<span class="fc" id="L230">    return new TorrentManagerImpl(eventDispatcher, loadedTorrent.getTorrentHash());</span>
+  }
+
+  private long calculateLeft(PieceStorage pieceStorage, TorrentMetadata torrentMetadata) {
+
+<span class="fc" id="L235">    long size = 0;</span>
+<span class="fc bfc" id="L236" title="All 2 branches covered.">    for (TorrentFile torrentFile : torrentMetadata.getFiles()) {</span>
+<span class="fc" id="L237">      size += torrentFile.size;</span>
+<span class="fc" id="L238">    }</span>
+
+<span class="fc" id="L240">    int pieceLength = torrentMetadata.getPieceLength();</span>
+<span class="fc" id="L241">    long result = 0;</span>
+<span class="fc" id="L242">    BitSet availablePieces = pieceStorage.getAvailablePieces();</span>
+<span class="fc bfc" id="L243" title="All 2 branches covered.">    for (int i = 0; i &lt; torrentMetadata.getPiecesCount(); i++) {</span>
+<span class="fc bfc" id="L244" title="All 2 branches covered.">      if (availablePieces.get(i)) {</span>
+<span class="fc" id="L245">        continue;</span>
+      }
+<span class="fc" id="L247">      result += Math.min(pieceLength, size - i * pieceLength);</span>
+    }
+<span class="fc" id="L249">    return result;</span>
+  }
+
+  private void forceAnnounceAndLogError(LoadedTorrent torrent, AnnounceRequestMessage.RequestEvent event) {
+    try {
+<span class="fc" id="L254">      this.announce.forceAnnounce(torrent.createAnnounceableInformation(), this, event);</span>
+<span class="nc" id="L255">    } catch (IOException e) {</span>
+<span class="nc" id="L256">      logger.warn(&quot;unable to force announce torrent {}&quot;, torrent);</span>
+<span class="nc" id="L257">      logger.debug(&quot;&quot;, e);</span>
+<span class="fc" id="L258">    }</span>
+<span class="fc" id="L259">  }</span>
+
+  /**
+   * Removes specified torrent from storage.
+   *
+   * @param torrentHash specified torrent hash
+   */
+  public void removeTorrent(String torrentHash) {
+<span class="nc" id="L267">    logger.debug(&quot;Stopping seeding &quot; + torrentHash);</span>
+<span class="nc" id="L268">    final Pair&lt;SharedTorrent, LoadedTorrent&gt; torrents = torrentsStorage.remove(torrentHash);</span>
+
+<span class="nc" id="L270">    SharedTorrent torrent = torrents.first();</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">    if (torrent != null) {</span>
+<span class="nc" id="L272">      torrent.setClientState(ClientState.DONE);</span>
+<span class="nc" id="L273">      torrent.close();</span>
+    }
+<span class="nc" id="L275">    List&lt;SharingPeer&gt; peers = getPeersForTorrent(torrentHash);</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">    for (SharingPeer peer : peers) {</span>
+<span class="nc" id="L277">      peer.unbind(true);</span>
+<span class="nc" id="L278">    }</span>
+<span class="nc" id="L279">    sendStopEvent(torrents.second(), torrentHash);</span>
+<span class="nc" id="L280">  }</span>
+
+  private void sendStopEvent(LoadedTorrent loadedTorrent, String torrentHash) {
+<span class="nc bnc" id="L283" title="All 2 branches missed.">    if (loadedTorrent == null) {</span>
+<span class="nc" id="L284">      logger.info(&quot;Announceable torrent {} not found in storage after unsuccessful download attempt&quot;, torrentHash);</span>
+<span class="nc" id="L285">      return;</span>
+    }
+<span class="nc" id="L287">    forceAnnounceAndLogError(loadedTorrent, STOPPED);</span>
+<span class="nc" id="L288">  }</span>
+
+  /**
+   * set specified announce interval between requests to the tracker
+   *
+   * @param announceInterval announce interval in seconds
+   */
+  public void setAnnounceInterval(final int announceInterval) {
+<span class="fc" id="L296">    announce.setAnnounceInterval(announceInterval);</span>
+<span class="fc" id="L297">  }</span>
+
+  /**
+   * Return the torrent this client is exchanging on.
+   */
+  public Collection&lt;SharedTorrent&gt; getTorrents() {
+<span class="nc" id="L303">    return this.torrentsStorage.activeTorrents();</span>
+  }
+
+  @SuppressWarnings(&quot;unused&quot;)
+  public URI getDefaultTrackerURI() {
+<span class="nc" id="L308">    return announce.getDefaultTrackerURI();</span>
+  }
+
+  /**
+   * Returns the set of known peers.
+   */
+  public Set&lt;SharingPeer&gt; getPeers() {
+<span class="nc" id="L315">    return new HashSet&lt;SharingPeer&gt;(this.peersStorage.getSharingPeers());</span>
+  }
+
+  public void setMaxInConnectionsCount(int maxConnectionsCount) {
+<span class="nc" id="L319">    this.myInConnectionAllower.setMyMaxConnectionCount(maxConnectionsCount);</span>
+<span class="nc" id="L320">  }</span>
+
+  /**
+   * set ups new receive buffer size, that will be applied to all new connections.
+   * If value is equal or less, than zero, then method doesn't have effect
+   *
+   * @param newSize new size
+   */
+  public void setReceiveBufferSize(int newSize) {
+<span class="nc" id="L329">    myReceiveBufferSize.set(newSize);</span>
+<span class="nc" id="L330">  }</span>
+
+  /**
+   * set ups new send buffer size, that will be applied to all new connections.
+   * If value is equal or less, than zero, then method doesn't have effect
+   *
+   * @param newSize new size
+   */
+  public void setSendBufferSize(int newSize) {
+<span class="nc" id="L339">    mySendBufferSize.set(newSize);</span>
+<span class="nc" id="L340">  }</span>
+
+  public void setMaxOutConnectionsCount(int maxConnectionsCount) {
+<span class="nc" id="L343">    this.myOutConnectionAllower.setMyMaxConnectionCount(maxConnectionsCount);</span>
+<span class="nc" id="L344">  }</span>
+
+  /**
+   * Runs client instance and starts announcing, seeding and downloading of all torrents from storage
+   *
+   * @param bindAddresses list of addresses which are used for sending to the tracker. Current client
+   *                      must be available for other peers on the addresses
+   * @throws IOException if any io error occurs
+   */
+  public void start(final InetAddress... bindAddresses) throws IOException {
+<span class="fc" id="L354">    start(bindAddresses, Constants.DEFAULT_ANNOUNCE_INTERVAL_SEC, null, new SelectorFactoryImpl());</span>
+<span class="fc" id="L355">  }</span>
+
+  /**
+   * Runs client instance and starts announcing, seeding and downloading of all torrents from storage
+   *
+   * @param bindAddresses     list of addresses which are used for sending to the tracker. Current client
+   *                          must be available for other peers on the addresses
+   * @param defaultTrackerURI default tracker address.
+   *                          All torrents will be announced not only on the trackers from metadata file but also to this tracker
+   * @throws IOException if any io error occurs
+   */
+  public void start(final InetAddress[] bindAddresses, final URI defaultTrackerURI) throws IOException {
+<span class="nc" id="L367">    start(bindAddresses, Constants.DEFAULT_ANNOUNCE_INTERVAL_SEC, defaultTrackerURI, new SelectorFactoryImpl());</span>
+<span class="nc" id="L368">  }</span>
+
+  public Peer[] getSelfPeers(final InetAddress[] bindAddresses) throws UnsupportedEncodingException {
+<span class="fc" id="L371">    Peer self = peersStorage.getSelf();</span>
+
+<span class="pc bpc" id="L373" title="1 of 2 branches missed.">    if (self == null) {</span>
+<span class="nc" id="L374">      return new Peer[0];</span>
+    }
+
+<span class="fc" id="L377">    Peer[] result = new Peer[bindAddresses.length];</span>
+<span class="fc bfc" id="L378" title="All 2 branches covered.">    for (int i = 0; i &lt; bindAddresses.length; i++) {</span>
+<span class="fc" id="L379">      final InetAddress bindAddress = bindAddresses[i];</span>
+<span class="fc" id="L380">      final Peer peer = new Peer(new InetSocketAddress(bindAddress.getHostAddress(), self.getPort()));</span>
+<span class="fc" id="L381">      peer.setTorrentHash(self.getHexInfoHash());</span>
+      //if we have more, that one bind address, then only for first set self peer id. For other generate it
+<span class="pc bpc" id="L383" title="1 of 2 branches missed.">      if (i == 0) {</span>
+<span class="fc" id="L384">        peer.setPeerId(self.getPeerId());</span>
+      } else {
+<span class="nc" id="L386">        final String id = CommunicationManager.BITTORRENT_ID_PREFIX + UUID.randomUUID().toString().split(&quot;-&quot;)[4];</span>
+<span class="nc" id="L387">        byte[] idBytes = id.getBytes(Constants.BYTE_ENCODING);</span>
+<span class="nc" id="L388">        peer.setPeerId(ByteBuffer.wrap(idBytes));</span>
+      }
+<span class="fc" id="L390">      result[i] = peer;</span>
+    }
+<span class="fc" id="L392">    return result;</span>
+  }
+
+  /**
+   * Runs client instance and starts announcing, seeding and downloading of all torrents from storage
+   *
+   * @param bindAddresses       list of addresses which are used for sending to the tracker. Current client
+   *                            must be available for other peers on the addresses
+   * @param announceIntervalSec default announce interval. This interval can be override by tracker
+   * @param defaultTrackerURI   default tracker address.
+   *                            All torrents will be announced not only on the trackers from metadata file but also to this tracker
+   * @param selectorFactory     factory for creating {@link java.nio.channels.Selector} instance.
+   * @throws IOException if any io error occurs
+   */
+  public void start(final InetAddress[] bindAddresses,
+                    final int announceIntervalSec,
+                    final URI defaultTrackerURI,
+                    final SelectorFactory selectorFactory) throws IOException {
+<span class="fc" id="L410">    start(bindAddresses, announceIntervalSec, defaultTrackerURI, selectorFactory,</span>
+            new FirstAvailableChannel(6881, 6889));
+<span class="fc" id="L412">  }</span>
+
+  public void start(final InetAddress[] bindAddresses,
+                    final int announceIntervalSec,
+                    final URI defaultTrackerURI,
+                    final SelectorFactory selectorFactory,
+                    final ServerChannelRegister serverChannelRegister) throws IOException {
+<span class="fc" id="L419">    this.myConnectionManager = new ConnectionManager(</span>
+            this,
+            new SystemTimeService(),
+            myInConnectionAllower,
+            myOutConnectionAllower,
+            selectorFactory,
+            mySendBufferSize,
+            myReceiveBufferSize);
+<span class="fc" id="L427">    this.setSocketConnectionTimeout(DEFAULT_SOCKET_CONNECTION_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);</span>
+    try {
+<span class="fc" id="L429">      this.myConnectionManager.initAndRunWorker(serverChannelRegister);</span>
+<span class="nc" id="L430">    } catch (IOException e) {</span>
+<span class="nc" id="L431">      LoggerUtils.errorAndDebugDetails(logger, &quot;error in initialization server channel&quot;, e);</span>
+<span class="nc" id="L432">      this.stop();</span>
+<span class="nc" id="L433">      return;</span>
+<span class="fc" id="L434">    }</span>
+<span class="fc" id="L435">    final String id = CommunicationManager.BITTORRENT_ID_PREFIX + UUID.randomUUID().toString().split(&quot;-&quot;)[4];</span>
+<span class="fc" id="L436">    byte[] idBytes = id.getBytes(Constants.BYTE_ENCODING);</span>
+<span class="fc" id="L437">    Peer self = new Peer(new InetSocketAddress(myConnectionManager.getBindPort()), ByteBuffer.wrap(idBytes));</span>
+<span class="fc" id="L438">    peersStorage.setSelf(self);</span>
+<span class="fc" id="L439">    logger.info(&quot;BitTorrent client [{}] started and &quot; +</span>
+                    &quot;listening at {}:{}...&quot;,
+            new Object[]{
+<span class="fc" id="L442">                    self.getShortHexPeerId(),</span>
+<span class="fc" id="L443">                    self.getIp(),</span>
+<span class="fc" id="L444">                    self.getPort()</span>
+            });
+
+<span class="fc" id="L447">    announce.start(defaultTrackerURI, this, getSelfPeers(bindAddresses), announceIntervalSec);</span>
+<span class="fc" id="L448">    this.stop.set(false);</span>
+
+<span class="fc" id="L450">    myStarted = true;</span>
+<span class="fc" id="L451">  }</span>
+
+  /**
+   * Immediately but gracefully stop this client.
+   */
+  public void stop() {
+<span class="nc" id="L457">    this.stop(60, TimeUnit.SECONDS);</span>
+<span class="nc" id="L458">  }</span>
+
+  void stop(int timeout, TimeUnit timeUnit) {
+<span class="fc" id="L461">    boolean wasStopped = this.stop.getAndSet(true);</span>
+<span class="pc bpc" id="L462" title="1 of 2 branches missed.">    if (wasStopped) return;</span>
+
+<span class="pc bpc" id="L464" title="1 of 2 branches missed.">    if (!myStarted)</span>
+<span class="nc" id="L465">      return;</span>
+
+<span class="fc" id="L467">    this.myConnectionManager.close();</span>
+
+<span class="fc" id="L469">    logger.trace(&quot;try stop announce thread...&quot;);</span>
+
+<span class="fc" id="L471">    this.announce.stop();</span>
+
+<span class="fc" id="L473">    logger.trace(&quot;announce thread is stopped&quot;);</span>
+
+<span class="pc bpc" id="L475" title="1 of 2 branches missed.">    for (SharedTorrent torrent : this.torrentsStorage.activeTorrents()) {</span>
+<span class="nc" id="L476">      logger.trace(&quot;try close torrent {}&quot;, torrent);</span>
+<span class="nc" id="L477">      torrent.close();</span>
+<span class="nc bnc" id="L478" title="All 2 branches missed.">      if (torrent.isFinished()) {</span>
+<span class="nc" id="L479">        torrent.setClientState(ClientState.DONE);</span>
+      } else {
+<span class="nc" id="L481">        torrent.setClientState(ClientState.ERROR);</span>
+      }
+<span class="nc" id="L483">    }</span>
+
+<span class="fc" id="L485">    logger.debug(&quot;Closing all remaining peer connections...&quot;);</span>
+<span class="pc bpc" id="L486" title="1 of 2 branches missed.">    for (SharingPeer peer : this.peersStorage.getSharingPeers()) {</span>
+<span class="nc" id="L487">      peer.unbind(true);</span>
+<span class="nc" id="L488">    }</span>
+
+<span class="fc" id="L490">    torrentsStorage.clear();</span>
+<span class="fc" id="L491">    logger.info(&quot;BitTorrent client signing off.&quot;);</span>
+<span class="fc" id="L492">  }</span>
+
+  public void setCleanupTimeout(int timeout, TimeUnit timeUnit) throws IllegalStateException {
+<span class="nc" id="L495">    ConnectionManager connectionManager = this.myConnectionManager;</span>
+<span class="nc bnc" id="L496" title="All 2 branches missed.">    if (connectionManager == null) {</span>
+<span class="nc" id="L497">      throw new IllegalStateException(&quot;connection manager is null&quot;);</span>
+    }
+<span class="nc" id="L499">    connectionManager.setCleanupTimeout(timeUnit.toMillis(timeout));</span>
+<span class="nc" id="L500">  }</span>
+
+  public void setSocketConnectionTimeout(int timeout, TimeUnit timeUnit) throws IllegalStateException {
+<span class="fc" id="L503">    ConnectionManager connectionManager = this.myConnectionManager;</span>
+<span class="pc bpc" id="L504" title="1 of 2 branches missed.">    if (connectionManager == null) {</span>
+<span class="nc" id="L505">      throw new IllegalStateException(&quot;connection manager is null&quot;);</span>
+    }
+<span class="fc" id="L507">    connectionManager.setSocketConnectionTimeout(timeUnit.toMillis(timeout));</span>
+<span class="fc" id="L508">  }</span>
+
+  /**
+   * Tells whether we are a seed for the torrent we're sharing.
+   */
+  public boolean isSeed(String hexInfoHash) {
+<span class="nc" id="L514">    SharedTorrent t = this.torrentsStorage.getTorrent(hexInfoHash);</span>
+<span class="nc bnc" id="L515" title="All 4 branches missed.">    return t != null &amp;&amp; t.isComplete();</span>
+  }
+
+  public List&lt;SharingPeer&gt; getPeersForTorrent(String torrentHash) {
+<span class="pc bpc" id="L519" title="1 of 2 branches missed.">    if (torrentHash == null) return new ArrayList&lt;SharingPeer&gt;();</span>
+
+<span class="fc" id="L521">    List&lt;SharingPeer&gt; result = new ArrayList&lt;SharingPeer&gt;();</span>
+<span class="fc bfc" id="L522" title="All 2 branches covered.">    for (SharingPeer sharingPeer : peersStorage.getSharingPeers()) {</span>
+<span class="pc bpc" id="L523" title="1 of 2 branches missed.">      if (torrentHash.equals(sharingPeer.getHexInfoHash())) {</span>
+<span class="fc" id="L524">        result.add(sharingPeer);</span>
+      }
+<span class="fc" id="L526">    }</span>
+<span class="fc" id="L527">    return result;</span>
+  }
+
+  public boolean isRunning() {
+<span class="nc" id="L531">    return myStarted;</span>
+  }
+
+  private Collection&lt;SharingPeer&gt; getConnectedPeers() {
+<span class="fc" id="L535">    Set&lt;SharingPeer&gt; result = new HashSet&lt;SharingPeer&gt;();</span>
+<span class="fc bfc" id="L536" title="All 2 branches covered.">    for (SharingPeer peer : this.peersStorage.getSharingPeers()) {</span>
+<span class="fc bfc" id="L537" title="All 2 branches covered.">      if (peer.isConnected()) {</span>
+<span class="fc" id="L538">        result.add(peer);</span>
+      }
+<span class="fc" id="L540">    }</span>
+<span class="fc" id="L541">    return result;</span>
+  }
+
+  /**
+   * @param hash specified torrent hash
+   * @return true if storage contains specified torrent. False otherwise
+   * @see TorrentsStorage#hasTorrent
+   */
+  @SuppressWarnings(&quot;unused&quot;)
+  public boolean containsTorrentWithHash(String hash) {
+<span class="nc" id="L551">    return torrentsStorage.hasTorrent(hash);</span>
+  }
+
+  @Override
+  public PeersStorage getPeersStorage() {
+<span class="fc" id="L556">    return peersStorage;</span>
+  }
+
+  @Override
+  public TorrentsStorage getTorrentsStorage() {
+<span class="fc" id="L561">    return torrentsStorage;</span>
+  }
+
+  @Override
+  public ExecutorService getExecutor() {
+<span class="fc" id="L566">    return myExecutorService;</span>
+  }
+
+  public ExecutorService getPieceValidatorExecutor() {
+<span class="fc" id="L570">    return myPieceValidatorExecutor;</span>
+  }
+
+  @Override
+  public ConnectionListener newChannelListener() {
+<span class="nc" id="L575">    return new StateChannelListener(this);</span>
+  }
+
+  @Override
+  public SharingPeer createSharingPeer(String host,
+                                       int port,
+                                       ByteBuffer peerId,
+                                       SharedTorrent torrent,
+                                       ByteChannel channel,
+                                       String clientIdentifier,
+                                       int clientVersion) {
+<span class="fc" id="L586">    return new SharingPeer(host, port, peerId, torrent, getConnectionManager(), this, channel, clientIdentifier, clientVersion);</span>
+  }
+
+  @Override
+  public TorrentLoader getTorrentLoader() {
+<span class="fc" id="L591">    return myTorrentLoader;</span>
+  }
+
+
+  /** AnnounceResponseListener handler(s). **********************************/
+
+  /**
+   * Handle an announce response event.
+   *
+   * @param interval   The announce interval requested by the tracker.
+   * @param complete   The number of seeders on this torrent.
+   * @param incomplete The number of leechers on this torrent.
+   */
+  @Override
+  public void handleAnnounceResponse(int interval, int complete, int incomplete, String hexInfoHash) {
+<span class="fc" id="L606">    final SharedTorrent sharedTorrent = this.torrentsStorage.getTorrent(hexInfoHash);</span>
+<span class="fc bfc" id="L607" title="All 2 branches covered.">    if (sharedTorrent != null) {</span>
+<span class="fc" id="L608">      sharedTorrent.setSeedersCount(complete);</span>
+<span class="fc" id="L609">      sharedTorrent.setLastAnnounceTime(System.currentTimeMillis());</span>
+    }
+<span class="fc" id="L611">    setAnnounceInterval(interval);</span>
+<span class="fc" id="L612">  }</span>
+
+  /**
+   * Handle the discovery of new peers.
+   *
+   * @param peers The list of peers discovered (from the announce response or
+   *              any other means like DHT/PEX, etc.).
+   */
+  @Override
+  public void handleDiscoveredPeers(List&lt;Peer&gt; peers, String hexInfoHash) {
+
+<span class="pc bpc" id="L623" title="1 of 2 branches missed.">    if (peers.size() == 0) return;</span>
+
+<span class="fc" id="L625">    SharedTorrent torrent = torrentsStorage.getTorrent(hexInfoHash);</span>
+
+<span class="pc bpc" id="L627" title="3 of 4 branches missed.">    if (torrent != null &amp;&amp; torrent.isFinished()) return;</span>
+
+<span class="fc" id="L629">    final LoadedTorrent announceableTorrent = torrentsStorage.getLoadedTorrent(hexInfoHash);</span>
+<span class="pc bpc" id="L630" title="1 of 2 branches missed.">    if (announceableTorrent == null) {</span>
+<span class="nc" id="L631">      logger.info(&quot;announceable torrent {} is not found in storage. Maybe it was removed&quot;, hexInfoHash);</span>
+<span class="nc" id="L632">      return;</span>
+    }
+
+<span class="pc bpc" id="L635" title="1 of 2 branches missed.">    if (announceableTorrent.getPieceStorage().isFinished()) return;</span>
+
+<span class="fc" id="L637">    logger.debug(&quot;Got {} peer(s) ({}) for {} in tracker response&quot;, new Object[]{peers.size(),</span>
+<span class="fc" id="L638">            Arrays.toString(peers.toArray()), hexInfoHash});</span>
+
+<span class="fc" id="L640">    Map&lt;PeerUID, Peer&gt; uniquePeers = new HashMap&lt;PeerUID, Peer&gt;();</span>
+<span class="fc bfc" id="L641" title="All 2 branches covered.">    for (Peer peer : peers) {</span>
+<span class="fc" id="L642">      final PeerUID peerUID = new PeerUID(peer.getAddress(), hexInfoHash);</span>
+<span class="pc bpc" id="L643" title="1 of 2 branches missed.">      if (uniquePeers.containsKey(peerUID)) continue;</span>
+<span class="fc" id="L644">      uniquePeers.put(peerUID, peer);</span>
+<span class="fc" id="L645">    }</span>
+
+<span class="fc bfc" id="L647" title="All 2 branches covered.">    for (Map.Entry&lt;PeerUID, Peer&gt; e : uniquePeers.entrySet()) {</span>
+
+<span class="fc" id="L649">      PeerUID peerUID = e.getKey();</span>
+<span class="fc" id="L650">      Peer peer = e.getValue();</span>
+<span class="pc bpc" id="L651" title="1 of 2 branches missed.">      boolean alreadyConnectedToThisPeer = peersStorage.getSharingPeer(peerUID) != null;</span>
+
+<span class="pc bpc" id="L653" title="1 of 2 branches missed.">      if (alreadyConnectedToThisPeer) {</span>
+<span class="nc" id="L654">        logger.debug(&quot;skipping peer {}, because we already connected to this peer&quot;, peer);</span>
+<span class="nc" id="L655">        continue;</span>
+      }
+
+<span class="fc" id="L658">      ConnectionListener connectionListener = new OutgoingConnectionListener(</span>
+              this,
+<span class="fc" id="L660">              announceableTorrent.getTorrentHash(),</span>
+<span class="fc" id="L661">              peer.getIp(),</span>
+<span class="fc" id="L662">              peer.getPort());</span>
+
+<span class="fc" id="L664">      logger.debug(&quot;trying to connect to the peer {}&quot;, peer);</span>
+
+<span class="fc" id="L666">      boolean connectTaskAdded = this.myConnectionManager.offerConnect(</span>
+<span class="fc" id="L667">              new ConnectTask(peer.getIp(),</span>
+<span class="fc" id="L668">                      peer.getPort(),</span>
+                      connectionListener,
+<span class="fc" id="L670">                      new SystemTimeService().now(),</span>
+                      Constants.DEFAULT_CONNECTION_TIMEOUT_MILLIS), 1, TimeUnit.SECONDS);
+<span class="pc bpc" id="L672" title="1 of 2 branches missed.">      if (!connectTaskAdded) {</span>
+<span class="nc" id="L673">        logger.info(&quot;can not connect to peer {}. Unable to add connect task to connection manager&quot;, peer);</span>
+      }
+<span class="fc" id="L675">    }</span>
+<span class="fc" id="L676">  }</span>
+
+  /**
+   * PeerActivityListener handler(s). *************************************
+   */
+
+  @Override
+<span class="fc" id="L683">  public void handlePeerChoked(SharingPeer peer) { /* Do nothing */ }</span>
+
+  @Override
+<span class="fc" id="L686">  public void handlePeerReady(SharingPeer peer) { /* Do nothing */ }</span>
+
+  @Override
+  public void handlePieceAvailability(SharingPeer peer,
+<span class="fc" id="L690">                                      Piece piece) { /* Do nothing */ }</span>
+
+  @Override
+  public void handleBitfieldAvailability(SharingPeer peer,
+<span class="fc" id="L694">                                         BitSet availablePieces) { /* Do nothing */ }</span>
+
+  @Override
+  public void handlePieceSent(SharingPeer peer,
+<span class="nc" id="L698">                              Piece piece) { /* Do nothing */ }</span>
+
+  /**
+   * Piece download completion handler.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * When a piece is completed, and valid, we announce to all connected peers
+   * that we now have this piece.
+   * &lt;/p&gt;
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * We use this handler to identify when all of the pieces have been
+   * downloaded. When that's the case, we can start the seeding period, if
+   * any.
+   * &lt;/p&gt;
+   *
+   * @param peer  The peer we got the piece from.
+   * @param piece The piece in question.
+   */
+  @Override
+  public void handlePieceCompleted(final SharingPeer peer, final Piece piece)
+          throws IOException {
+<span class="fc" id="L720">    final SharedTorrent torrent = peer.getTorrent();</span>
+<span class="fc" id="L721">    final String torrentHash = torrent.getHexInfoHash();</span>
+    try {
+<span class="fc" id="L723">      final Future&lt;?&gt; validationFuture = myPieceValidatorExecutor.submit(new Runnable() {</span>
+        @Override
+        public void run() {
+<span class="fc" id="L726">          validatePieceAsync(torrent, piece, torrentHash, peer);</span>
+<span class="fc" id="L727">        }</span>
+      });
+<span class="fc" id="L729">      torrent.markCompletedAndAddValidationFuture(piece, validationFuture);</span>
+<span class="nc" id="L730">    } catch (RejectedExecutionException e) {</span>
+<span class="nc" id="L731">      torrent.markUncompleted(piece);</span>
+<span class="nc" id="L732">      LoggerUtils.warnWithMessageAndDebugDetails(logger, &quot;Unable to submit validation task for torrent {}&quot;, torrentHash, e);</span>
+<span class="fc" id="L733">    }</span>
+<span class="fc" id="L734">  }</span>
+
+  private void validatePieceAsync(final SharedTorrent torrent, final Piece piece, String torrentHash, SharingPeer peer) {
+    try {
+<span class="fc" id="L738">      synchronized (piece) {</span>
+
+<span class="pc bpc" id="L740" title="1 of 2 branches missed.">        if (piece.isValid()) return;</span>
+
+<span class="fc" id="L742">        piece.validate(torrent, piece);</span>
+<span class="pc bpc" id="L743" title="1 of 2 branches missed.">        if (piece.isValid()) {</span>
+<span class="fc" id="L744">          torrent.notifyPieceDownloaded(piece, peer);</span>
+<span class="fc" id="L745">          piece.finish();</span>
+          // Send a HAVE message to all connected peers, which don't have the piece
+<span class="fc" id="L747">          PeerMessage have = PeerMessage.HaveMessage.craft(piece.getIndex());</span>
+<span class="fc bfc" id="L748" title="All 2 branches covered.">          for (SharingPeer remote : getConnectedPeers()) {</span>
+<span class="pc bpc" id="L749" title="1 of 2 branches missed.">            if (remote.getTorrent().getHexInfoHash().equals(torrentHash) &amp;&amp;</span>
+<span class="fc bfc" id="L750" title="All 2 branches covered.">                    !remote.getAvailablePieces().get(piece.getIndex()))</span>
+<span class="fc" id="L751">              remote.send(have);</span>
+<span class="fc" id="L752">          }</span>
+<span class="fc" id="L753">          peer.pieceDownloaded();</span>
+
+          final boolean isTorrentComplete;
+<span class="fc" id="L756">          synchronized (torrent) {</span>
+<span class="fc" id="L757">            torrent.removeValidationFuture(piece);</span>
+
+<span class="pc bpc" id="L759" title="1 of 2 branches missed.">            boolean isCurrentPeerSeeder = peer.getAvailablePieces().cardinality() == torrent.getPieceCount();</span>
+            //if it's seeder we will send not interested message when we download full file
+<span class="pc bpc" id="L761" title="1 of 2 branches missed.">            if (!isCurrentPeerSeeder) {</span>
+<span class="nc bnc" id="L762" title="All 2 branches missed.">              if (torrent.isAllPiecesOfPeerCompletedAndValidated(peer)) {</span>
+<span class="nc" id="L763">                peer.notInteresting();</span>
+              }
+            }
+
+<span class="fc" id="L767">            isTorrentComplete = torrent.isComplete();</span>
+
+<span class="fc bfc" id="L769" title="All 2 branches covered.">            if (isTorrentComplete) {</span>
+<span class="fc" id="L770">              logger.info(&quot;Download of {} complete.&quot;, torrent.getDirectoryName());</span>
+
+<span class="fc" id="L772">              torrent.finish();</span>
+            }
+<span class="fc" id="L774">          }</span>
+
+<span class="fc bfc" id="L776" title="All 2 branches covered.">          if (isTorrentComplete) {</span>
+
+<span class="fc" id="L778">            LoadedTorrent announceableTorrent = torrentsStorage.getLoadedTorrent(torrentHash);</span>
+
+<span class="pc bpc" id="L780" title="1 of 2 branches missed.">            if (announceableTorrent == null) return;</span>
+
+<span class="fc" id="L782">            AnnounceableInformation announceableInformation = announceableTorrent.createAnnounceableInformation();</span>
+
+<span class="pc bpc" id="L784" title="1 of 2 branches missed.">            if (!TorrentUtils.isTrackerLessInfo(announceableInformation)) {</span>
+              try {
+<span class="fc" id="L786">                announce.getCurrentTrackerClient(announceableInformation)</span>
+<span class="fc" id="L787">                        .announceAllInterfaces(COMPLETED, true, announceableInformation);</span>
+<span class="nc" id="L788">              } catch (AnnounceException e) {</span>
+<span class="nc" id="L789">                logger.debug(&quot;unable to announce torrent {} on tracker {}&quot;, torrent, torrent.getAnnounce());</span>
+<span class="fc" id="L790">              }</span>
+            }
+
+<span class="fc bfc" id="L793" title="All 2 branches covered.">            for (SharingPeer remote : getPeersForTorrent(torrentHash)) {</span>
+<span class="fc" id="L794">              remote.notInteresting();</span>
+<span class="fc" id="L795">            }</span>
+
+          }
+<span class="fc" id="L798">        } else {</span>
+<span class="nc" id="L799">          torrent.markUncompleted(piece);</span>
+<span class="nc" id="L800">          logger.info(&quot;Downloaded piece #{} from {} was not valid ;-(. Trying another peer&quot;, piece.getIndex(), peer);</span>
+<span class="nc" id="L801">          peer.getPoorlyAvailablePieces().set(piece.getIndex());</span>
+        }
+<span class="fc" id="L803">      }</span>
+<span class="nc" id="L804">    } catch (Throwable e) {</span>
+<span class="nc" id="L805">      torrent.markUncompleted(piece);</span>
+<span class="nc" id="L806">      logger.warn(&quot;unhandled exception in piece {} validation task&quot;, e);</span>
+<span class="fc" id="L807">    }</span>
+<span class="fc" id="L808">    torrent.handlePeerReady(peer);</span>
+<span class="fc" id="L809">  }</span>
+
+  @Override
+  public void handlePeerDisconnected(SharingPeer peer) {
+<span class="fc" id="L813">    Peer p = new Peer(peer.getIp(), peer.getPort());</span>
+<span class="fc" id="L814">    p.setPeerId(peer.getPeerId());</span>
+<span class="fc" id="L815">    p.setTorrentHash(peer.getHexInfoHash());</span>
+<span class="fc" id="L816">    logger.trace(&quot;Peer {} disconnected, [{}/{}].&quot;,</span>
+            new Object[]{
+                    peer,
+<span class="fc" id="L819">                    getConnectedPeers().size(),</span>
+<span class="fc" id="L820">                    this.peersStorage.getSharingPeers().size()</span>
+            });
+<span class="fc" id="L822">    PeerUID peerUID = new PeerUID(peer.getAddress(), peer.getHexInfoHash());</span>
+<span class="fc" id="L823">    peersStorage.removeSharingPeer(peerUID);</span>
+<span class="fc" id="L824">  }</span>
+
+  @Override
+  public void afterPeerRemoved(SharingPeer peer) {
+<span class="fc" id="L828">    logger.trace(&quot;disconnected peer &quot; + peer);</span>
+<span class="fc" id="L829">    torrentsStorage.peerDisconnected(peer.getHexInfoHash());</span>
+<span class="fc" id="L830">  }</span>
+
+  @Override
+  public void handleIOException(SharingPeer peer, IOException ioe) {
+<span class="nc" id="L834">    logger.debug(&quot;I/O problem occured when reading or writing piece data for peer {}: {}.&quot;, peer, ioe.getMessage());</span>
+
+<span class="nc" id="L836">    peer.unbind(true);</span>
+<span class="nc" id="L837">  }</span>
+
+  @Override
+  public void handleNewPeerConnected(SharingPeer peer) {
+    //do nothing
+<span class="fc" id="L842">  }</span>
+
+  public ConnectionManager getConnectionManager() throws IllegalStateException {
+<span class="fc" id="L845">    ConnectionManager connectionManager = this.myConnectionManager;</span>
+<span class="pc bpc" id="L846" title="1 of 2 branches missed.">    if (connectionManager == null) {</span>
+<span class="nc" id="L847">      throw new IllegalStateException(&quot;connection manager is null&quot;);</span>
+    }
+<span class="fc" id="L849">    return connectionManager;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

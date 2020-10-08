@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TorrentParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common</a> &gt; <span class="el_source">TorrentParser.java</span></div><h1>TorrentParser.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.common;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.bcodec.BDecoder;
+import com.turn.ttorrent.bcodec.BEValue;
+import com.turn.ttorrent.bcodec.BEncoder;
+import com.turn.ttorrent.bcodec.InvalidBEncodingException;
+import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+
+import static com.turn.ttorrent.common.TorrentMetadataKeys.*;
+
+<span class="fc" id="L19">public class TorrentParser {</span>
+
+  public TorrentMetadata parseFromFile(File torrentFile) throws IOException {
+<span class="fc" id="L22">    byte[] fileContent = FileUtils.readFileToByteArray(torrentFile);</span>
+<span class="fc" id="L23">    return parse(fileContent);</span>
+  }
+
+  /**
+   * @param metadata binary .torrent content
+   * @return parsed metadata object. This parser also wraps single torrent as multi torrent with one file
+   * @throws InvalidBEncodingException if metadata has incorrect BEP format or missing required fields
+   * @throws RuntimeException          It's wrapped io exception from bep decoder.
+   *                                   This exception doesn't must to throw io exception because reading from
+   *                                   byte array input stream cannot throw the exception
+   */
+  public TorrentMetadata parse(byte[] metadata) throws InvalidBEncodingException, RuntimeException {
+    final Map&lt;String, BEValue&gt; dictionaryMetadata;
+    try {
+<span class="fc" id="L37">      dictionaryMetadata = BDecoder.bdecode(new ByteArrayInputStream(metadata)).getMap();</span>
+<span class="fc" id="L38">    } catch (InvalidBEncodingException e) {</span>
+<span class="fc" id="L39">      throw e;</span>
+<span class="nc" id="L40">    } catch (IOException e) {</span>
+<span class="nc" id="L41">      throw new RuntimeException(e);</span>
+<span class="fc" id="L42">    }</span>
+
+<span class="fc" id="L44">    final Map&lt;String, BEValue&gt; infoTable = getRequiredValueOrThrowException(dictionaryMetadata, INFO_TABLE).getMap();</span>
+
+<span class="fc" id="L46">    final BEValue creationDateValue = dictionaryMetadata.get(CREATION_DATE_SEC);</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">    final long creationDate = creationDateValue == null ? -1 : creationDateValue.getLong();</span>
+
+<span class="fc" id="L49">    final String comment = getStringOrNull(dictionaryMetadata, COMMENT);</span>
+<span class="fc" id="L50">    final String createdBy = getStringOrNull(dictionaryMetadata, CREATED_BY);</span>
+<span class="fc" id="L51">    final String announceUrl = getStringOrNull(dictionaryMetadata, ANNOUNCE);</span>
+<span class="fc" id="L52">    final List&lt;List&lt;String&gt;&gt; trackers = getTrackers(dictionaryMetadata);</span>
+<span class="fc" id="L53">    final int pieceLength = getRequiredValueOrThrowException(infoTable, PIECE_LENGTH).getInt();</span>
+<span class="fc" id="L54">    final byte[] piecesHashes = getRequiredValueOrThrowException(infoTable, PIECES).getBytes();</span>
+
+<span class="fc bfc" id="L56" title="All 2 branches covered.">    final boolean torrentContainsManyFiles = infoTable.get(FILES) != null;</span>
+
+<span class="fc" id="L58">    final String dirName = getRequiredValueOrThrowException(infoTable, NAME).getString();</span>
+
+<span class="fc" id="L60">    final List&lt;TorrentFile&gt; files = parseFiles(infoTable, torrentContainsManyFiles, dirName);</span>
+
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">    if (piecesHashes.length % Constants.PIECE_HASH_SIZE != 0)</span>
+<span class="nc" id="L63">      throw new InvalidBEncodingException(&quot;Incorrect size of pieces hashes&quot;);</span>
+
+<span class="fc" id="L65">    final int piecesCount = piecesHashes.length / Constants.PIECE_HASH_SIZE;</span>
+
+    byte[] infoTableBytes;
+    try {
+<span class="fc" id="L69">      infoTableBytes = BEncoder.bencode(infoTable).array();</span>
+<span class="nc" id="L70">    } catch (IOException e) {</span>
+<span class="nc" id="L71">      throw new RuntimeException(e);</span>
+<span class="fc" id="L72">    }</span>
+
+<span class="fc" id="L74">    return new TorrentMetadataImpl(</span>
+<span class="fc" id="L75">            TorrentUtils.calculateSha1Hash(infoTableBytes),</span>
+            trackers,
+            announceUrl,
+            creationDate,
+            comment,
+            createdBy,
+            dirName,
+            files,
+            piecesCount,
+            pieceLength,
+            piecesHashes
+    );
+  }
+
+  private List&lt;TorrentFile&gt; parseFiles(Map&lt;String, BEValue&gt; infoTable, boolean torrentContainsManyFiles, String name) throws InvalidBEncodingException {
+<span class="fc bfc" id="L90" title="All 2 branches covered.">    if (!torrentContainsManyFiles) {</span>
+<span class="fc" id="L91">      final BEValue md5Sum = infoTable.get(MD5_SUM);</span>
+<span class="fc" id="L92">      return Collections.singletonList(new TorrentFile(</span>
+<span class="fc" id="L93">              Collections.singletonList(name),</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">              getRequiredValueOrThrowException(infoTable, FILE_LENGTH).getLong(),</span>
+<span class="pc" id="L95">              md5Sum == null ? null : md5Sum.getString()</span>
+      ));
+    }
+
+<span class="fc" id="L99">    List&lt;TorrentFile&gt; result = new ArrayList&lt;TorrentFile&gt;();</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">    for (BEValue file : infoTable.get(FILES).getList()) {</span>
+<span class="fc" id="L101">      Map&lt;String, BEValue&gt; fileInfo = file.getMap();</span>
+<span class="fc" id="L102">      List&lt;String&gt; path = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L103">      BEValue filePathList = fileInfo.get(FILE_PATH_UTF8);</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">      if (filePathList == null) {</span>
+<span class="fc" id="L105">        filePathList = fileInfo.get(FILE_PATH);</span>
+      }
+<span class="fc bfc" id="L107" title="All 2 branches covered.">      for (BEValue pathElement : filePathList.getList()) {</span>
+<span class="fc" id="L108">        path.add(pathElement.getString());</span>
+<span class="fc" id="L109">      }</span>
+<span class="fc" id="L110">      final BEValue md5Sum = infoTable.get(MD5_SUM);</span>
+<span class="fc" id="L111">      result.add(new TorrentFile(</span>
+              path,
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">              fileInfo.get(FILE_LENGTH).getLong(),</span>
+<span class="pc" id="L114">              md5Sum == null ? null : md5Sum.getString()));</span>
+<span class="fc" id="L115">    }</span>
+<span class="fc" id="L116">    return result;</span>
+  }
+
+  @Nullable
+  private String getStringOrNull(Map&lt;String, BEValue&gt; dictionaryMetadata, String key) throws InvalidBEncodingException {
+<span class="fc" id="L121">    final BEValue value = dictionaryMetadata.get(key);</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">    if (value == null) return null;</span>
+<span class="fc" id="L123">    return value.getString();</span>
+  }
+
+  @Nullable
+  private List&lt;List&lt;String&gt;&gt; getTrackers(Map&lt;String, BEValue&gt; dictionaryMetadata) throws InvalidBEncodingException {
+<span class="fc" id="L128">    final BEValue announceListValue = dictionaryMetadata.get(ANNOUNCE_LIST);</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">    if (announceListValue == null) return null;</span>
+<span class="fc" id="L130">    List&lt;BEValue&gt; announceList = announceListValue.getList();</span>
+<span class="fc" id="L131">    List&lt;List&lt;String&gt;&gt; result = new ArrayList&lt;List&lt;String&gt;&gt;();</span>
+<span class="fc" id="L132">    Set&lt;String&gt; allTrackers = new HashSet&lt;String&gt;();</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">    for (BEValue tv : announceList) {</span>
+<span class="fc" id="L134">      List&lt;BEValue&gt; trackers = tv.getList();</span>
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">      if (trackers.isEmpty()) {</span>
+<span class="nc" id="L136">        continue;</span>
+      }
+
+<span class="fc" id="L139">      List&lt;String&gt; tier = new ArrayList&lt;String&gt;();</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">      for (BEValue tracker : trackers) {</span>
+<span class="fc" id="L141">        final String url = tracker.getString();</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">        if (!allTrackers.contains(url)) {</span>
+<span class="fc" id="L143">          tier.add(url);</span>
+<span class="fc" id="L144">          allTrackers.add(url);</span>
+        }
+<span class="fc" id="L146">      }</span>
+
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">      if (!tier.isEmpty()) {</span>
+<span class="fc" id="L149">        result.add(tier);</span>
+      }
+<span class="fc" id="L151">    }</span>
+<span class="fc" id="L152">    return result;</span>
+  }
+
+  @NotNull
+  private BEValue getRequiredValueOrThrowException(Map&lt;String, BEValue&gt; map, String key) throws InvalidBEncodingException {
+<span class="fc" id="L157">    final BEValue value = map.get(key);</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">    if (value == null)</span>
+<span class="fc" id="L159">      throw new InvalidBEncodingException(&quot;Invalid metadata format. Map doesn't contain required field &quot; + key);</span>
+<span class="fc" id="L160">    return value;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

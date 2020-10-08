@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PeerMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common.protocol</a> &gt; <span class="el_source">PeerMessage.java</span></div><h1>PeerMessage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.common.protocol;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.common.TorrentInfo;
+
+import java.nio.ByteBuffer;
+import java.text.ParseException;
+import java.util.BitSet;
+
+/**
+ * BitTorrent peer protocol messages representations.
+ *
+ * &lt;p&gt;
+ * This class and its &lt;em&gt;*Messages&lt;/em&gt; subclasses provide POJO
+ * representations of the peer protocol messages, along with easy parsing from
+ * an input ByteBuffer to quickly get a usable representation of an incoming
+ * message.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ * @see &lt;a href=&quot;http://wiki.theory.org/BitTorrentSpecification#Peer_wire_protocol_.28TCP.29&quot;&gt;BitTorrent peer wire protocol&lt;/a&gt;
+ */
+public abstract class PeerMessage {
+
+  /**
+   * The size, in bytes, of the length field in a message (one 32-bit
+   * integer).
+   */
+  public static final int MESSAGE_LENGTH_FIELD_SIZE = 4;
+
+  /**
+   * Message type.
+   *
+   * &lt;p&gt;
+   * Note that the keep-alive messages don't actually have an type ID defined
+   * in the protocol as they are of length 0.
+   * &lt;/p&gt;
+   */
+<span class="fc" id="L54">  public enum Type {</span>
+<span class="fc" id="L55">    KEEP_ALIVE(-1),</span>
+<span class="fc" id="L56">    CHOKE(0),</span>
+<span class="fc" id="L57">    UNCHOKE(1),</span>
+<span class="fc" id="L58">    INTERESTED(2),</span>
+<span class="fc" id="L59">    NOT_INTERESTED(3),</span>
+<span class="fc" id="L60">    HAVE(4),</span>
+<span class="fc" id="L61">    BITFIELD(5),</span>
+<span class="fc" id="L62">    REQUEST(6),</span>
+<span class="fc" id="L63">    PIECE(7),</span>
+<span class="fc" id="L64">    CANCEL(8);</span>
+
+    private byte id;
+
+<span class="fc" id="L68">    Type(int id) {</span>
+<span class="fc" id="L69">      this.id = (byte) id;</span>
+<span class="fc" id="L70">    }</span>
+
+    public boolean equals(byte c) {
+<span class="fc bfc" id="L73" title="All 2 branches covered.">      return this.id == c;</span>
+    }
+
+    public byte getTypeByte() {
+<span class="fc" id="L77">      return this.id;</span>
+    }
+
+    public static Type get(byte c) {
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">      for (Type t : Type.values()) {</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (t.equals(c)) {</span>
+<span class="fc" id="L83">          return t;</span>
+        }
+      }
+<span class="nc" id="L86">      return null;</span>
+    }
+  }
+
+  private final Type type;
+  private final ByteBuffer data;
+
+<span class="fc" id="L93">  private PeerMessage(Type type, ByteBuffer data) {</span>
+<span class="fc" id="L94">    this.type = type;</span>
+<span class="fc" id="L95">    this.data = data;</span>
+<span class="fc" id="L96">    this.data.rewind();</span>
+<span class="fc" id="L97">  }</span>
+
+  public Type getType() {
+<span class="fc" id="L100">    return this.type;</span>
+  }
+
+  /**
+   * Returns a {@link ByteBuffer} backed by the same data as this message.
+   *
+   * &lt;p&gt;
+   * This method returns a duplicate of the buffer stored in this {@link
+   * PeerMessage} object to allow for multiple consumers to read from the
+   * same message without conflicting access to the buffer's position, mark
+   * and limit.
+   * &lt;/p&gt;
+   */
+  public ByteBuffer getData() {
+<span class="fc" id="L114">    return this.data.duplicate();</span>
+  }
+
+  /**
+   * Validate that this message makes sense for the torrent it's related to.
+   *
+   * &lt;p&gt;
+   * This method is meant to be overloaded by distinct message types, where
+   * it makes sense. Otherwise, it defaults to true.
+   * &lt;/p&gt;
+   *
+   * @param torrent The torrent this message is about.
+   */
+  public PeerMessage validate(TorrentInfo torrent)
+          throws MessageValidationException {
+<span class="fc" id="L129">    return this;</span>
+  }
+
+  public String toString() {
+<span class="nc" id="L133">    return this.getType().name();</span>
+  }
+
+  /**
+   * Parse the given buffer into a peer protocol message.
+   *
+   * &lt;p&gt;
+   * Parses the provided byte array and builds the corresponding PeerMessage
+   * subclass object.
+   * &lt;/p&gt;
+   *
+   * @param buffer  The byte buffer containing the message data.
+   * @param torrent The torrent this message is about.
+   * @return A PeerMessage subclass instance.
+   * @throws ParseException When the message is invalid, can't be parsed or
+   *                        does not match the protocol requirements.
+   */
+  public static PeerMessage parse(ByteBuffer buffer, TorrentInfo torrent)
+          throws ParseException {
+<span class="fc" id="L152">    int length = buffer.getInt();</span>
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">    if (length == 0) {</span>
+<span class="nc" id="L154">      return KeepAliveMessage.parse(buffer, torrent);</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">    } else if (length != buffer.remaining()) {</span>
+<span class="nc" id="L156">      throw new ParseException(&quot;Message size did not match announced &quot; +</span>
+              &quot;size!&quot;, 0);
+    }
+
+<span class="fc" id="L160">    Type type = Type.get(buffer.get());</span>
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">    if (type == null) {</span>
+<span class="nc" id="L162">      throw new ParseException(&quot;Unknown message ID!&quot;,</span>
+<span class="nc" id="L163">              buffer.position() - 1);</span>
+    }
+
+<span class="pc bpc" id="L166" title="3 of 10 branches missed.">    switch (type) {</span>
+      case CHOKE:
+<span class="nc" id="L168">        return ChokeMessage.parse(buffer.slice(), torrent);</span>
+      case UNCHOKE:
+<span class="fc" id="L170">        return UnchokeMessage.parse(buffer.slice(), torrent);</span>
+      case INTERESTED:
+<span class="fc" id="L172">        return InterestedMessage.parse(buffer.slice(), torrent);</span>
+      case NOT_INTERESTED:
+<span class="fc" id="L174">        return NotInterestedMessage.parse(buffer.slice(), torrent);</span>
+      case HAVE:
+<span class="fc" id="L176">        return HaveMessage.parse(buffer.slice(), torrent);</span>
+      case BITFIELD:
+<span class="fc" id="L178">        return BitfieldMessage.parse(buffer.slice(), torrent);</span>
+      case REQUEST:
+<span class="fc" id="L180">        return RequestMessage.parse(buffer.slice(), torrent);</span>
+      case PIECE:
+<span class="fc" id="L182">        return PieceMessage.parse(buffer.slice(), torrent);</span>
+      case CANCEL:
+<span class="nc" id="L184">        return CancelMessage.parse(buffer.slice(), torrent);</span>
+      default:
+<span class="nc" id="L186">        throw new IllegalStateException(&quot;Message type should have &quot; +</span>
+                &quot;been properly defined by now.&quot;);
+    }
+  }
+
+  public static class MessageValidationException extends ParseException {
+
+    static final long serialVersionUID = -1;
+
+    public MessageValidationException(PeerMessage m) {
+<span class="nc" id="L196">      super(&quot;Message &quot; + m + &quot; is not valid!&quot;, 0);</span>
+<span class="nc" id="L197">    }</span>
+
+  }
+
+
+  /**
+   * Keep alive message.
+   *
+   * &lt;len=0000&gt;
+   */
+  public static class KeepAliveMessage extends PeerMessage {
+
+    private static final int BASE_SIZE = 0;
+
+    private KeepAliveMessage(ByteBuffer buffer) {
+<span class="nc" id="L212">      super(Type.KEEP_ALIVE, buffer);</span>
+<span class="nc" id="L213">    }</span>
+
+    public static KeepAliveMessage parse(ByteBuffer buffer,
+                                         TorrentInfo torrent) throws MessageValidationException {
+<span class="nc" id="L217">      return (KeepAliveMessage) new KeepAliveMessage(buffer)</span>
+<span class="nc" id="L218">              .validate(torrent);</span>
+    }
+
+    public static KeepAliveMessage craft() {
+<span class="nc" id="L222">      ByteBuffer buffer = ByteBuffer.allocate(</span>
+              MESSAGE_LENGTH_FIELD_SIZE + KeepAliveMessage.BASE_SIZE);
+<span class="nc" id="L224">      buffer.putInt(KeepAliveMessage.BASE_SIZE);</span>
+<span class="nc" id="L225">      return new KeepAliveMessage(buffer);</span>
+    }
+  }
+
+  /**
+   * Choke message.
+   *
+   * &lt;len=0001&gt;&lt;id=0&gt;
+   */
+  public static class ChokeMessage extends PeerMessage {
+
+    private static final int BASE_SIZE = 1;
+
+    private ChokeMessage(ByteBuffer buffer) {
+<span class="nc" id="L239">      super(Type.CHOKE, buffer);</span>
+<span class="nc" id="L240">    }</span>
+
+    public static ChokeMessage parse(ByteBuffer buffer,
+                                     TorrentInfo torrent) throws MessageValidationException {
+<span class="nc" id="L244">      return (ChokeMessage) new ChokeMessage(buffer)</span>
+<span class="nc" id="L245">              .validate(torrent);</span>
+    }
+
+    public static ChokeMessage craft() {
+<span class="nc" id="L249">      ByteBuffer buffer = ByteBuffer.allocate(</span>
+              MESSAGE_LENGTH_FIELD_SIZE + ChokeMessage.BASE_SIZE);
+<span class="nc" id="L251">      buffer.putInt(ChokeMessage.BASE_SIZE);</span>
+<span class="nc" id="L252">      buffer.put(PeerMessage.Type.CHOKE.getTypeByte());</span>
+<span class="nc" id="L253">      return new ChokeMessage(buffer);</span>
+    }
+  }
+
+  /**
+   * Unchoke message.
+   *
+   * &lt;len=0001&gt;&lt;id=1&gt;
+   */
+  public static class UnchokeMessage extends PeerMessage {
+
+    private static final int BASE_SIZE = 1;
+
+    private UnchokeMessage(ByteBuffer buffer) {
+<span class="fc" id="L267">      super(Type.UNCHOKE, buffer);</span>
+<span class="fc" id="L268">    }</span>
+
+    public static UnchokeMessage parse(ByteBuffer buffer,
+                                       TorrentInfo torrent) throws MessageValidationException {
+<span class="fc" id="L272">      return (UnchokeMessage) new UnchokeMessage(buffer)</span>
+<span class="fc" id="L273">              .validate(torrent);</span>
+    }
+
+    public static UnchokeMessage craft() {
+<span class="fc" id="L277">      ByteBuffer buffer = ByteBuffer.allocate(</span>
+              MESSAGE_LENGTH_FIELD_SIZE + UnchokeMessage.BASE_SIZE);
+<span class="fc" id="L279">      buffer.putInt(UnchokeMessage.BASE_SIZE);</span>
+<span class="fc" id="L280">      buffer.put(PeerMessage.Type.UNCHOKE.getTypeByte());</span>
+<span class="fc" id="L281">      return new UnchokeMessage(buffer);</span>
+    }
+  }
+
+  /**
+   * Interested message.
+   *
+   * &lt;len=0001&gt;&lt;id=2&gt;
+   */
+  public static class InterestedMessage extends PeerMessage {
+
+    private static final int BASE_SIZE = 1;
+
+    private InterestedMessage(ByteBuffer buffer) {
+<span class="fc" id="L295">      super(Type.INTERESTED, buffer);</span>
+<span class="fc" id="L296">    }</span>
+
+    public static InterestedMessage parse(ByteBuffer buffer,
+                                          TorrentInfo torrent) throws MessageValidationException {
+<span class="fc" id="L300">      return (InterestedMessage) new InterestedMessage(buffer)</span>
+<span class="fc" id="L301">              .validate(torrent);</span>
+    }
+
+    public static InterestedMessage craft() {
+<span class="fc" id="L305">      ByteBuffer buffer = ByteBuffer.allocate(</span>
+              MESSAGE_LENGTH_FIELD_SIZE + InterestedMessage.BASE_SIZE);
+<span class="fc" id="L307">      buffer.putInt(InterestedMessage.BASE_SIZE);</span>
+<span class="fc" id="L308">      buffer.put(PeerMessage.Type.INTERESTED.getTypeByte());</span>
+<span class="fc" id="L309">      return new InterestedMessage(buffer);</span>
+    }
+  }
+
+  /**
+   * Not interested message.
+   *
+   * &lt;len=0001&gt;&lt;id=3&gt;
+   */
+  public static class NotInterestedMessage extends PeerMessage {
+
+    private static final int BASE_SIZE = 1;
+
+    private NotInterestedMessage(ByteBuffer buffer) {
+<span class="fc" id="L323">      super(Type.NOT_INTERESTED, buffer);</span>
+<span class="fc" id="L324">    }</span>
+
+    public static NotInterestedMessage parse(ByteBuffer buffer,
+                                             TorrentInfo torrent) throws MessageValidationException {
+<span class="fc" id="L328">      return (NotInterestedMessage) new NotInterestedMessage(buffer)</span>
+<span class="fc" id="L329">              .validate(torrent);</span>
+    }
+
+    public static NotInterestedMessage craft() {
+<span class="fc" id="L333">      ByteBuffer buffer = ByteBuffer.allocate(</span>
+              MESSAGE_LENGTH_FIELD_SIZE + NotInterestedMessage.BASE_SIZE);
+<span class="fc" id="L335">      buffer.putInt(NotInterestedMessage.BASE_SIZE);</span>
+<span class="fc" id="L336">      buffer.put(PeerMessage.Type.NOT_INTERESTED.getTypeByte());</span>
+<span class="fc" id="L337">      return new NotInterestedMessage(buffer);</span>
+    }
+  }
+
+  /**
+   * Have message.
+   *
+   * &lt;len=0005&gt;&lt;id=4&gt;&lt;piece index=xxxx&gt;
+   */
+  public static class HaveMessage extends PeerMessage {
+
+    private static final int BASE_SIZE = 5;
+
+    private int piece;
+
+    private HaveMessage(ByteBuffer buffer, int piece) {
+<span class="fc" id="L353">      super(Type.HAVE, buffer);</span>
+<span class="fc" id="L354">      this.piece = piece;</span>
+<span class="fc" id="L355">    }</span>
+
+    public int getPieceIndex() {
+<span class="fc" id="L358">      return this.piece;</span>
+    }
+
+    @Override
+    public HaveMessage validate(TorrentInfo torrent)
+            throws MessageValidationException {
+<span class="pc bpc" id="L364" title="2 of 4 branches missed.">      if (this.piece &gt;= 0 &amp;&amp; this.piece &lt; torrent.getPieceCount()) {</span>
+<span class="fc" id="L365">        return this;</span>
+      }
+
+<span class="nc" id="L368">      throw new MessageValidationException(this);</span>
+    }
+
+    public static HaveMessage parse(ByteBuffer buffer,
+                                    TorrentInfo torrent) throws MessageValidationException {
+<span class="fc" id="L373">      return new HaveMessage(buffer, buffer.getInt())</span>
+<span class="fc" id="L374">              .validate(torrent);</span>
+    }
+
+    public static HaveMessage craft(int piece) {
+<span class="fc" id="L378">      ByteBuffer buffer = ByteBuffer.allocate(</span>
+              MESSAGE_LENGTH_FIELD_SIZE + HaveMessage.BASE_SIZE);
+<span class="fc" id="L380">      buffer.putInt(HaveMessage.BASE_SIZE);</span>
+<span class="fc" id="L381">      buffer.put(PeerMessage.Type.HAVE.getTypeByte());</span>
+<span class="fc" id="L382">      buffer.putInt(piece);</span>
+<span class="fc" id="L383">      return new HaveMessage(buffer, piece);</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L387">      return super.toString() + &quot; #&quot; + this.getPieceIndex();</span>
+    }
+  }
+
+  /**
+   * Bitfield message.
+   *
+   * &lt;len=0001+X&gt;&lt;id=5&gt;&lt;bitfield&gt;
+   */
+  public static class BitfieldMessage extends PeerMessage {
+
+    private static final int BASE_SIZE = 1;
+
+    private BitSet bitfield;
+
+    private BitfieldMessage(ByteBuffer buffer, BitSet bitfield) {
+<span class="fc" id="L403">      super(Type.BITFIELD, buffer);</span>
+<span class="fc" id="L404">      this.bitfield = bitfield;</span>
+<span class="fc" id="L405">    }</span>
+
+    public BitSet getBitfield() {
+<span class="fc" id="L408">      return this.bitfield;</span>
+    }
+
+    @Override
+    public BitfieldMessage validate(TorrentInfo torrent)
+            throws MessageValidationException {
+<span class="pc bpc" id="L414" title="1 of 2 branches missed.">      if (this.bitfield.length() &lt;= torrent.getPieceCount()) {</span>
+<span class="fc" id="L415">        return this;</span>
+      }
+
+<span class="nc" id="L418">      throw new MessageValidationException(this);</span>
+    }
+
+    public static BitfieldMessage parse(ByteBuffer buffer,
+                                        TorrentInfo torrent) throws MessageValidationException {
+<span class="fc" id="L423">      BitSet bitfield = new BitSet(buffer.remaining() * 8);</span>
+<span class="fc bfc" id="L424" title="All 2 branches covered.">      for (int i = 0; i &lt; buffer.remaining() * 8; i++) {</span>
+<span class="fc bfc" id="L425" title="All 2 branches covered.">        if ((buffer.get(i / 8) &amp; (1 &lt;&lt; (7 - (i % 8)))) &gt; 0) {</span>
+<span class="fc" id="L426">          bitfield.set(i);</span>
+        }
+      }
+
+<span class="fc" id="L430">      return new BitfieldMessage(buffer, bitfield)</span>
+<span class="fc" id="L431">              .validate(torrent);</span>
+    }
+
+    public static BitfieldMessage craft(BitSet availablePieces) {
+<span class="fc" id="L435">      int len = availablePieces.length() / 8;</span>
+<span class="fc bfc" id="L436" title="All 2 branches covered.">      if (availablePieces.length() % 8 &gt; 0) len++;</span>
+<span class="fc" id="L437">      byte[] bitfield = new byte[len];</span>
+<span class="fc bfc" id="L438" title="All 2 branches covered.">      for (int i = availablePieces.nextSetBit(0); i &gt;= 0;</span>
+<span class="fc" id="L439">           i = availablePieces.nextSetBit(i + 1)) {</span>
+<span class="fc" id="L440">        bitfield[i / 8] |= 1 &lt;&lt; (7 - (i % 8));</span>
+      }
+
+<span class="fc" id="L443">      ByteBuffer buffer = ByteBuffer.allocate(</span>
+              MESSAGE_LENGTH_FIELD_SIZE + BitfieldMessage.BASE_SIZE + bitfield.length);
+<span class="fc" id="L445">      buffer.putInt(BitfieldMessage.BASE_SIZE + bitfield.length);</span>
+<span class="fc" id="L446">      buffer.put(PeerMessage.Type.BITFIELD.getTypeByte());</span>
+<span class="fc" id="L447">      buffer.put(ByteBuffer.wrap(bitfield));</span>
+<span class="fc" id="L448">      return new BitfieldMessage(buffer, availablePieces);</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L452">      return super.toString() + &quot; &quot; + this.getBitfield().cardinality();</span>
+    }
+  }
+
+  /**
+   * Request message.
+   *
+   * &lt;len=00013&gt;&lt;id=6&gt;&lt;piece index&gt;&lt;block offset&gt;&lt;block length&gt;
+   */
+  public static class RequestMessage extends PeerMessage {
+
+    private static final int BASE_SIZE = 13;
+
+    /**
+     * Default block size is 2^14 bytes, or 16kB.
+     */
+    public static final int DEFAULT_REQUEST_SIZE = 16384;
+
+    /**
+     * Max block request size is 2^17 bytes, or 131kB.
+     */
+    public static final int MAX_REQUEST_SIZE = 131072;
+
+    private int piece;
+    private int offset;
+    private int length;
+    private long mySendTime;
+
+    private RequestMessage(ByteBuffer buffer, int piece,
+                           int offset, int length) {
+<span class="fc" id="L482">      super(Type.REQUEST, buffer);</span>
+<span class="fc" id="L483">      this.piece = piece;</span>
+<span class="fc" id="L484">      this.offset = offset;</span>
+<span class="fc" id="L485">      this.length = length;</span>
+<span class="fc" id="L486">      mySendTime = System.currentTimeMillis();</span>
+<span class="fc" id="L487">    }</span>
+
+    public int getPiece() {
+<span class="fc" id="L490">      return this.piece;</span>
+    }
+
+    public int getOffset() {
+<span class="fc" id="L494">      return this.offset;</span>
+    }
+
+    public int getLength() {
+<span class="fc" id="L498">      return this.length;</span>
+    }
+
+    public long getSendTime() {
+<span class="nc" id="L502">      return mySendTime;</span>
+    }
+
+    public void renew() {
+<span class="nc" id="L506">      mySendTime = System.currentTimeMillis();</span>
+<span class="nc" id="L507">    }</span>
+
+    @Override
+    public RequestMessage validate(TorrentInfo torrent)
+            throws MessageValidationException {
+<span class="pc bpc" id="L512" title="2 of 4 branches missed.">      if (this.piece &gt;= 0 &amp;&amp; this.piece &lt; torrent.getPieceCount() &amp;&amp;</span>
+              this.offset + this.length &lt;=
+<span class="pc bpc" id="L514" title="1 of 2 branches missed.">                      torrent.getPieceSize(this.piece)) {</span>
+<span class="fc" id="L515">        return this;</span>
+      }
+
+<span class="nc" id="L518">      throw new MessageValidationException(this);</span>
+    }
+
+    public static RequestMessage parse(ByteBuffer buffer,
+                                       TorrentInfo torrent) throws MessageValidationException {
+<span class="fc" id="L523">      int piece = buffer.getInt();</span>
+<span class="fc" id="L524">      int offset = buffer.getInt();</span>
+<span class="fc" id="L525">      int length = buffer.getInt();</span>
+<span class="fc" id="L526">      return new RequestMessage(buffer, piece,</span>
+<span class="fc" id="L527">              offset, length).validate(torrent);</span>
+    }
+
+    public static RequestMessage craft(int piece, int offset, int length) {
+<span class="fc" id="L531">      ByteBuffer buffer = ByteBuffer.allocate(</span>
+              MESSAGE_LENGTH_FIELD_SIZE + RequestMessage.BASE_SIZE);
+<span class="fc" id="L533">      buffer.putInt(RequestMessage.BASE_SIZE);</span>
+<span class="fc" id="L534">      buffer.put(PeerMessage.Type.REQUEST.getTypeByte());</span>
+<span class="fc" id="L535">      buffer.putInt(piece);</span>
+<span class="fc" id="L536">      buffer.putInt(offset);</span>
+<span class="fc" id="L537">      buffer.putInt(length);</span>
+<span class="fc" id="L538">      return new RequestMessage(buffer, piece, offset, length);</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L542">      return super.toString() + &quot; #&quot; + this.getPiece() +</span>
+<span class="nc" id="L543">              &quot; (&quot; + this.getLength() + &quot;@&quot; + this.getOffset() + &quot;)&quot;;</span>
+    }
+  }
+
+  /**
+   * Piece message.
+   *
+   * &lt;len=0009+X&gt;&lt;id=7&gt;&lt;piece index&gt;&lt;block offset&gt;&lt;block data&gt;
+   */
+  public static class PieceMessage extends PeerMessage {
+
+    private static final int BASE_SIZE = 9;
+
+    private int piece;
+    private int offset;
+    private ByteBuffer block;
+
+    private PieceMessage(ByteBuffer buffer, int piece,
+                         int offset, ByteBuffer block) {
+<span class="fc" id="L562">      super(Type.PIECE, buffer);</span>
+<span class="fc" id="L563">      this.piece = piece;</span>
+<span class="fc" id="L564">      this.offset = offset;</span>
+<span class="fc" id="L565">      this.block = block;</span>
+<span class="fc" id="L566">    }</span>
+
+    public int getPiece() {
+<span class="fc" id="L569">      return this.piece;</span>
+    }
+
+    public int getOffset() {
+<span class="fc" id="L573">      return this.offset;</span>
+    }
+
+    public ByteBuffer getBlock() {
+<span class="fc" id="L577">      return this.block;</span>
+    }
+
+    @Override
+    public PieceMessage validate(TorrentInfo torrent)
+            throws MessageValidationException {
+<span class="pc bpc" id="L583" title="2 of 4 branches missed.">      if (this.piece &gt;= 0 &amp;&amp; this.piece &lt; torrent.getPieceCount() &amp;&amp;</span>
+<span class="fc" id="L584">              this.offset + this.block.limit() &lt;=</span>
+<span class="pc bpc" id="L585" title="1 of 2 branches missed.">                      torrent.getPieceSize(this.piece)) {</span>
+<span class="fc" id="L586">        return this;</span>
+      }
+
+<span class="nc" id="L589">      throw new MessageValidationException(this);</span>
+    }
+
+    public static PieceMessage parse(ByteBuffer buffer,
+                                     TorrentInfo torrent) throws MessageValidationException {
+<span class="fc" id="L594">      int piece = buffer.getInt();</span>
+<span class="fc" id="L595">      int offset = buffer.getInt();</span>
+<span class="fc" id="L596">      ByteBuffer block = buffer.slice();</span>
+<span class="fc" id="L597">      return new PieceMessage(buffer, piece, offset, block)</span>
+<span class="fc" id="L598">              .validate(torrent);</span>
+    }
+
+    public static PieceMessage craft(int piece, int offset,
+                                     ByteBuffer buffer) {
+<span class="fc" id="L603">      return new PieceMessage(buffer, piece, offset, Constants.EMPTY_BUFFER);</span>
+    }
+
+    public static ByteBuffer createBufferWithHeaderForMessage(int piece, int offset, int blockSize) {
+<span class="fc" id="L607">      ByteBuffer result = ByteBuffer.allocate(</span>
+              MESSAGE_LENGTH_FIELD_SIZE + PieceMessage.BASE_SIZE + blockSize);
+<span class="fc" id="L609">      result.putInt(PieceMessage.BASE_SIZE + blockSize);</span>
+<span class="fc" id="L610">      result.put(PeerMessage.Type.PIECE.getTypeByte());</span>
+<span class="fc" id="L611">      result.putInt(piece);</span>
+<span class="fc" id="L612">      result.putInt(offset);</span>
+<span class="fc" id="L613">      return result;</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L617">      return super.toString() + &quot; #&quot; + this.getPiece() +</span>
+<span class="nc" id="L618">              &quot; (&quot; + this.getBlock().capacity() + &quot;@&quot; + this.getOffset() + &quot;)&quot;;</span>
+    }
+  }
+
+  /**
+   * Cancel message.
+   *
+   * &lt;len=00013&gt;&lt;id=8&gt;&lt;piece index&gt;&lt;block offset&gt;&lt;block length&gt;
+   */
+  public static class CancelMessage extends PeerMessage {
+
+    private static final int BASE_SIZE = 13;
+
+    private int piece;
+    private int offset;
+    private int length;
+
+    private CancelMessage(ByteBuffer buffer, int piece,
+                          int offset, int length) {
+<span class="nc" id="L637">      super(Type.CANCEL, buffer);</span>
+<span class="nc" id="L638">      this.piece = piece;</span>
+<span class="nc" id="L639">      this.offset = offset;</span>
+<span class="nc" id="L640">      this.length = length;</span>
+<span class="nc" id="L641">    }</span>
+
+    public int getPiece() {
+<span class="nc" id="L644">      return this.piece;</span>
+    }
+
+    public int getOffset() {
+<span class="nc" id="L648">      return this.offset;</span>
+    }
+
+    public int getLength() {
+<span class="nc" id="L652">      return this.length;</span>
+    }
+
+    @Override
+    public CancelMessage validate(TorrentInfo torrent)
+            throws MessageValidationException {
+<span class="nc bnc" id="L658" title="All 4 branches missed.">      if (this.piece &gt;= 0 &amp;&amp; this.piece &lt; torrent.getPieceCount() &amp;&amp;</span>
+              this.offset + this.length &lt;=
+<span class="nc bnc" id="L660" title="All 2 branches missed.">                      torrent.getPieceSize(this.piece)) {</span>
+<span class="nc" id="L661">        return this;</span>
+      }
+
+<span class="nc" id="L664">      throw new MessageValidationException(this);</span>
+    }
+
+    public static CancelMessage parse(ByteBuffer buffer,
+                                      TorrentInfo torrent) throws MessageValidationException {
+<span class="nc" id="L669">      int piece = buffer.getInt();</span>
+<span class="nc" id="L670">      int offset = buffer.getInt();</span>
+<span class="nc" id="L671">      int length = buffer.getInt();</span>
+<span class="nc" id="L672">      return new CancelMessage(buffer, piece,</span>
+<span class="nc" id="L673">              offset, length).validate(torrent);</span>
+    }
+
+    public static CancelMessage craft(int piece, int offset, int length) {
+<span class="nc" id="L677">      ByteBuffer buffer = ByteBuffer.allocate(</span>
+              MESSAGE_LENGTH_FIELD_SIZE + CancelMessage.BASE_SIZE);
+<span class="nc" id="L679">      buffer.putInt(CancelMessage.BASE_SIZE);</span>
+<span class="nc" id="L680">      buffer.put(PeerMessage.Type.CANCEL.getTypeByte());</span>
+<span class="nc" id="L681">      buffer.putInt(piece);</span>
+<span class="nc" id="L682">      buffer.putInt(offset);</span>
+<span class="nc" id="L683">      buffer.putInt(length);</span>
+<span class="nc" id="L684">      return new CancelMessage(buffer, piece, offset, length);</span>
+    }
+
+    public String toString() {
+<span class="nc" id="L688">      return super.toString() + &quot; #&quot; + this.getPiece() +</span>
+<span class="nc" id="L689">              &quot; (&quot; + this.getLength() + &quot;@&quot; + this.getOffset() + &quot;)&quot;;</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HTTPTrackerErrorMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common.protocol.http</a> &gt; <span class="el_source">HTTPTrackerErrorMessage.java</span></div><h1>HTTPTrackerErrorMessage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.common.protocol.http;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.bcodec.BEValue;
+import com.turn.ttorrent.bcodec.BEncoder;
+import com.turn.ttorrent.bcodec.InvalidBEncodingException;
+import com.turn.ttorrent.common.protocol.TrackerMessage.ErrorMessage;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.HashMap;
+import java.util.Map;
+
+
+/**
+ * An error message from an HTTP tracker.
+ *
+ * @author mpetazzoni
+ */
+public class HTTPTrackerErrorMessage extends HTTPTrackerMessage
+        implements ErrorMessage {
+
+  private final String reason;
+
+  private HTTPTrackerErrorMessage(ByteBuffer data, String reason) {
+<span class="nc" id="L41">    super(Type.ERROR, data);</span>
+<span class="nc" id="L42">    this.reason = reason;</span>
+<span class="nc" id="L43">  }</span>
+
+  @Override
+  public String getReason() {
+<span class="nc" id="L47">    return this.reason;</span>
+  }
+
+  public static HTTPTrackerErrorMessage parse(BEValue decoded)
+          throws IOException, MessageValidationException {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">    if (decoded == null) {</span>
+<span class="nc" id="L53">      throw new MessageValidationException(</span>
+              &quot;Could not decode tracker message (not B-encoded?)!&quot;);
+    }
+
+<span class="nc" id="L57">    Map&lt;String, BEValue&gt; params = decoded.getMap();</span>
+
+    try {
+<span class="nc" id="L60">      return new HTTPTrackerErrorMessage(</span>
+              Constants.EMPTY_BUFFER,
+<span class="nc" id="L62">              params.get(&quot;failure reason&quot;)</span>
+<span class="nc" id="L63">                      .getString(Constants.BYTE_ENCODING));</span>
+<span class="nc" id="L64">    } catch (InvalidBEncodingException ibee) {</span>
+<span class="nc" id="L65">      throw new MessageValidationException(&quot;Invalid tracker error &quot; +</span>
+              &quot;message!&quot;, ibee);
+    }
+  }
+
+  public static HTTPTrackerErrorMessage craft(
+          ErrorMessage.FailureReason reason) throws IOException {
+<span class="nc" id="L72">    return HTTPTrackerErrorMessage.craft(reason.getMessage());</span>
+  }
+
+  public static HTTPTrackerErrorMessage craft(String reason)
+          throws IOException {
+<span class="nc" id="L77">    Map&lt;String, BEValue&gt; params = new HashMap&lt;String, BEValue&gt;();</span>
+<span class="nc" id="L78">    params.put(&quot;failure reason&quot;,</span>
+            new BEValue(reason, Constants.BYTE_ENCODING));
+<span class="nc" id="L80">    return new HTTPTrackerErrorMessage(</span>
+<span class="nc" id="L81">            BEncoder.bencode(params),</span>
+            reason);
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

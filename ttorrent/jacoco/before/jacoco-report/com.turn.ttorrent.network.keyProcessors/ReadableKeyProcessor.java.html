@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReadableKeyProcessor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.network.keyProcessors</a> &gt; <span class="el_source">ReadableKeyProcessor.java</span></div><h1>ReadableKeyProcessor.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.network.keyProcessors;
+
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.network.ConnectionListener;
+import com.turn.ttorrent.network.ReadAttachment;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.nio.channels.SelectableChannel;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.SocketChannel;
+
+public class ReadableKeyProcessor implements KeyProcessor {
+
+<span class="fc" id="L15">  private static final Logger logger = TorrentLoggerFactory.getLogger(ReadableKeyProcessor.class);</span>
+
+  private final String myServerSocketLocalAddress;
+
+<span class="fc" id="L19">  public ReadableKeyProcessor(String serverSocketLocalAddress) {</span>
+<span class="fc" id="L20">    this.myServerSocketLocalAddress = serverSocketLocalAddress;</span>
+<span class="fc" id="L21">  }</span>
+
+  @Override
+  public void process(SelectionKey key) throws IOException {
+<span class="fc" id="L25">    SelectableChannel channel = key.channel();</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">    if (!(channel instanceof SocketChannel)) {</span>
+<span class="nc" id="L27">      logger.warn(&quot;incorrect instance of channel. The key is cancelled&quot;);</span>
+<span class="nc" id="L28">      key.cancel();</span>
+<span class="nc" id="L29">      return;</span>
+    }
+
+<span class="fc" id="L32">    SocketChannel socketChannel = (SocketChannel) channel;</span>
+<span class="fc" id="L33">    logger.trace(&quot;server {} get new data from {}&quot;, myServerSocketLocalAddress, socketChannel);</span>
+
+<span class="fc" id="L35">    Object attachment = key.attachment();</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">    if (!(attachment instanceof ReadAttachment)) {</span>
+<span class="nc" id="L37">      logger.warn(&quot;incorrect instance of attachment for channel {}&quot;, new Object[]{socketChannel.socket()});</span>
+<span class="nc" id="L38">      socketChannel.close();</span>
+<span class="nc" id="L39">      return;</span>
+    }
+<span class="fc" id="L41">    ConnectionListener connectionListener = ((ReadAttachment) attachment).getConnectionListener();</span>
+<span class="fc" id="L42">    connectionListener.onNewDataAvailable(socketChannel);</span>
+<span class="fc" id="L43">  }</span>
+
+  @Override
+  public boolean accept(SelectionKey key) {
+<span class="pc bpc" id="L47" title="1 of 4 branches missed.">    return key.isValid() &amp;&amp; key.isReadable();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MetadataBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common.creation</a> &gt; <span class="el_source">MetadataBuilder.java</span></div><h1>MetadataBuilder.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2000-2018 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.turn.ttorrent.common.creation;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.bcodec.BEValue;
+import com.turn.ttorrent.bcodec.BEncoder;
+import com.turn.ttorrent.common.*;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+
+import java.io.*;
+import java.util.*;
+
+import static com.turn.ttorrent.common.TorrentMetadataKeys.*;
+
+public class MetadataBuilder {
+
+<span class="nc" id="L33">  private final static Logger logger = TorrentLoggerFactory.getLogger(MetadataBuilder.class);</span>
+  private final static String DEFAULT_CREATED_BY = &quot;ttorrent library&quot;;
+
+  private final TimeService timeService;
+
+  //root dictionary
+<span class="nc" id="L39">  @NotNull</span>
+  private String announce = &quot;&quot;;
+<span class="nc" id="L41">  @NotNull</span>
+  private List&lt;List&lt;String&gt;&gt; announceList = new ArrayList&lt;List&lt;String&gt;&gt;();
+<span class="nc" id="L43">  private long creationDate = -1;</span>
+<span class="nc" id="L44">  @NotNull</span>
+  private String comment = &quot;&quot;;
+<span class="nc" id="L46">  @NotNull</span>
+  private String createdBy = DEFAULT_CREATED_BY;
+  //end root dictionary
+
+  //info dictionary
+<span class="nc" id="L51">  private int pieceLength = 512 * 1024;//512kb by default</span>
+<span class="nc" id="L52">  private boolean isPrivate = false;</span>
+<span class="nc" id="L53">  @NotNull</span>
+  private List&lt;Source&gt; sources = new ArrayList&lt;Source&gt;();
+<span class="nc" id="L55">  @NotNull</span>
+  private String directoryName = &quot;&quot;;
+  //end info dictionary
+
+  //fields which store some internal information
+<span class="nc" id="L60">  @NotNull</span>
+  private PiecesHashesCalculator piecesHashesCalculator = new SingleThreadHashesCalculator();
+  //end
+
+  public MetadataBuilder() {
+<span class="nc" id="L65">    this(new SystemTimeService());</span>
+<span class="nc" id="L66">  }</span>
+
+<span class="nc" id="L68">  public MetadataBuilder(TimeService timeService) {</span>
+<span class="nc" id="L69">    this.timeService = timeService;</span>
+<span class="nc" id="L70">  }</span>
+
+  /**
+   * set main announce tracker URL if you use single tracker.
+   * In case with many trackers use {@link #addTracker(String)}
+   * and {@link #newTier()}. Then as main announce will be selected first tracker.
+   * You can specify main announce using this method for override this behaviour
+   * Torrent clients which support BEP12 extension will ignore main announce.
+   *
+   * @param announce announce URL for the tracker
+   */
+  public MetadataBuilder setTracker(String announce) {
+<span class="nc" id="L82">    this.announce = announce;</span>
+<span class="nc" id="L83">    return this;</span>
+  }
+
+
+  /**
+   * Multi-tracker Metadata Extension. Add new tracker URL to current tier.
+   * This method will create first tier automatically if it doesn't exist
+   * You can find more information about this extension in documentation
+   * &lt;a href=&quot;http://bittorrent.org/beps/bep_0012.html&quot;&gt;http://bittorrent.org/beps/bep_0012.html&lt;/a&gt;
+   *
+   * @param url tracker url
+   */
+  public MetadataBuilder addTracker(String url) {
+<span class="nc" id="L96">    initFirstTier();</span>
+<span class="nc" id="L97">    announceList.get(announceList.size() - 1).add(url);</span>
+<span class="nc" id="L98">    return this;</span>
+  }
+
+  /**
+   * Multi-tracker Metadata Extension. Add all trackers to current tier.
+   * This method will create first tier automatically if it doesn't exist
+   * You can find more information about this extension in documentation
+   * &lt;a href=&quot;http://bittorrent.org/beps/bep_0012.html&quot;&gt;http://bittorrent.org/beps/bep_0012.html&lt;/a&gt;
+   *
+   * @param trackers collections of trackers URLs
+   */
+  public MetadataBuilder addTrackers(Collection&lt;String&gt; trackers) {
+<span class="nc" id="L110">    initFirstTier();</span>
+<span class="nc" id="L111">    announceList.get(announceList.size() - 1).addAll(trackers);</span>
+<span class="nc" id="L112">    return this;</span>
+  }
+
+  /**
+   * Multi-tracker Metadata Extension. Create new tier for adding tracker using {@link #addTracker(String)} method
+   * If you don't add at least one tracker on the tier this tier will be removed in building metadata
+   * You can find more information about this extension in documentation
+   * &lt;a href=&quot;http://bittorrent.org/beps/bep_0012.html&quot;&gt;http://bittorrent.org/beps/bep_0012.html&lt;/a&gt;
+   */
+  public MetadataBuilder newTier() {
+<span class="nc" id="L122">    announceList.add(new ArrayList&lt;String&gt;());</span>
+<span class="nc" id="L123">    return this;</span>
+  }
+
+
+  /**
+   * Set the creation time of the torrent in standard UNIX epoch format.
+   *
+   * @param creationTime the seconds since January 1, 1970, 00:00:00 UTC.
+   */
+  public MetadataBuilder setCreationTime(int creationTime) {
+<span class="nc" id="L133">    this.creationDate = creationTime;</span>
+<span class="nc" id="L134">    return this;</span>
+  }
+
+  /**
+   * Set free-form textual comment of the author
+   */
+  public MetadataBuilder setComment(String comment) {
+<span class="nc" id="L141">    this.comment = comment;</span>
+<span class="nc" id="L142">    return this;</span>
+  }
+
+  /**
+   * Set program name which is used for creating torrent file.
+   */
+  public MetadataBuilder setCreatedBy(String createdBy) {
+<span class="nc" id="L149">    this.createdBy = createdBy;</span>
+<span class="nc" id="L150">    return this;</span>
+  }
+
+  /**
+   * Set {@link PiecesHashesCalculator} instance for calculating hashes. In rare cases user's
+   * implementation can be used for increasing hashing performance
+   */
+  public MetadataBuilder setPiecesHashesCalculator(@NotNull PiecesHashesCalculator piecesHashesCalculator) {
+<span class="nc" id="L158">    this.piecesHashesCalculator = piecesHashesCalculator;</span>
+<span class="nc" id="L159">    return this;</span>
+  }
+
+  /**
+   * Set length int bytes of one piece. By default is used 512KB.
+   * Larger piece size reduces size of .torrent file but cause inefficiency
+   * (torrent-client need to download full piece from peer for validating)
+   * and too-small piece sizes cause large .torrent metadata file.
+   * Recommended size is between 256KB and 1MB.
+   */
+  public MetadataBuilder setPieceLength(int pieceLength) {
+<span class="nc" id="L170">    this.pieceLength = pieceLength;</span>
+<span class="nc" id="L171">    return this;</span>
+  }
+
+  /**
+   * Set the name of the directory in which to store all the files.
+   * If {@link #directoryName} isn't empty then multi-file torrent will be created, otherwise single-file
+   */
+  public MetadataBuilder setDirectoryName(@NotNull String directoryName) {
+<span class="nc" id="L179">    this.directoryName = directoryName;</span>
+<span class="nc" id="L180">    return this;</span>
+  }
+
+  /**
+   * add custom source in torrent with custom path. Path can be separated with any slash.
+   *
+   * @param closeAfterBuild if true then source stream will be closed after {@link #build()} invocation
+   */
+  public MetadataBuilder addDataSource(@NotNull InputStream dataSource, String path, boolean closeAfterBuild) {
+<span class="nc" id="L189">    sources.add(new Source(dataSource, path, closeAfterBuild));</span>
+<span class="nc" id="L190">    return this;</span>
+  }
+
+  /**
+   * add custom source in torrent with custom path. Path can be separated with any slash.
+   */
+  public MetadataBuilder addDataSource(@NotNull InputStream dataSource, String path) {
+<span class="nc" id="L197">    addDataSource(dataSource, path, true);</span>
+<span class="nc" id="L198">    return this;</span>
+  }
+
+  /**
+   * add specified file in torrent with custom path. The file will be stored in .torrent
+   * by specified path. Path can be separated with any slash. In case of single-file torrent
+   * this path will be used as name of source file
+   */
+  public MetadataBuilder addFile(@NotNull File source, @NotNull String path) {
+<span class="nc bnc" id="L207" title="All 2 branches missed.">    if (!source.isFile()) {</span>
+<span class="nc" id="L208">      throw new IllegalArgumentException(source + &quot; is not exist&quot;);</span>
+    }
+<span class="nc" id="L210">    sources.add(new Source(source, path));</span>
+<span class="nc" id="L211">    return this;</span>
+  }
+
+  /**
+   * add specified file in torrent. In case of multi-torrent this file will be downloaded to
+   * {@link #directoryName}. In single-file torrent this file will be downloaded in download folder
+   */
+  public MetadataBuilder addFile(@NotNull File source) {
+<span class="nc" id="L219">    sources.add(new Source(source));</span>
+<span class="nc" id="L220">    return this;</span>
+  }
+
+  /**
+   * marks torrent as private
+   *
+   * @see &lt;a href=&quot;http://bittorrent.org/beps/bep_0027.html&quot;&gt;http://bittorrent.org/beps/bep_0027.html&lt;/a&gt;
+   */
+  public void doPrivate() {
+<span class="nc" id="L229">    isPrivate = true;</span>
+<span class="nc" id="L230">  }</span>
+
+  /**
+   * marks torrent as public
+   *
+   * @see &lt;a href=&quot;http://bittorrent.org/beps/bep_0027.html&quot;&gt;http://bittorrent.org/beps/bep_0027.html&lt;/a&gt;
+   */
+  public void doPublic() {
+<span class="nc" id="L238">    isPrivate = false;</span>
+<span class="nc" id="L239">  }</span>
+
+  /**
+   * @return new {@link TorrentMetadata} instance with builder's fields
+   * @throws IOException           if IO error occurs on reading from source streams and files
+   * @throws IllegalStateException if builder's state is incorrect (e.g. missing required fields)
+   */
+  public TorrentMetadata build() throws IOException {
+<span class="nc" id="L247">    return new TorrentParser().parse(buildBinary());</span>
+  }
+
+  /**
+   * @return binary representation of metadata
+   * @throws IOException           if IO error occurs on reading from source streams and files
+   * @throws IllegalStateException if builder's state is incorrect (e.g. missing required fields)
+   */
+  public byte[] buildBinary() throws IOException {
+<span class="nc" id="L256">    ByteArrayOutputStream baos = new ByteArrayOutputStream();</span>
+<span class="nc" id="L257">    BEncoder.bencode(buildBEP(), baos);</span>
+<span class="nc" id="L258">    return baos.toByteArray();</span>
+  }
+
+  /**
+   * @return BEP-encoded dictionary of metadata
+   * @throws IOException           if IO error occurs on reading from source streams and files
+   * @throws IllegalStateException if builder's state is incorrect (e.g. missing required fields)
+   */
+  public BEValue buildBEP() throws IOException {
+<span class="nc" id="L267">    return buildAndCloseResources();</span>
+  }
+
+  private BEValue buildAndCloseResources() throws IOException {
+    try {
+<span class="nc" id="L272">      return doBuild();</span>
+    } finally {
+<span class="nc" id="L274">      closeAllSources();</span>
+    }
+  }
+
+  private BEValue doBuild() throws IOException {
+<span class="nc" id="L279">    dropEmptyTiersFromAnnounce();</span>
+
+<span class="nc bnc" id="L281" title="All 4 branches missed.">    if (announce.isEmpty() &amp;&amp; !announceList.isEmpty()) {</span>
+<span class="nc" id="L282">        announce = announceList.get(0).get(0);</span>
+    }
+<span class="nc bnc" id="L284" title="All 2 branches missed.">    if (sources.size() == 0) {</span>
+<span class="nc" id="L285">      throw new IllegalStateException(&quot;Unable to create metadata without sources. Use addSource() method for adding sources&quot;);</span>
+    }
+<span class="nc bnc" id="L287" title="All 2 branches missed.">    final boolean isSingleMode = sources.size() == 1;</span>
+    final String name;
+<span class="nc bnc" id="L289" title="All 2 branches missed.">    if (!directoryName.isEmpty()) {</span>
+<span class="nc" id="L290">      name = directoryName;</span>
+    } else {
+<span class="nc bnc" id="L292" title="All 2 branches missed.">      if (isSingleMode) {</span>
+<span class="nc" id="L293">        name = sources.get(0).getPath();</span>
+      } else {
+<span class="nc" id="L295">        throw new IllegalStateException(&quot;Missing required field 'name'. Use setDirectoryName() method for specifying name of torrent&quot;);</span>
+      }
+    }
+
+<span class="nc" id="L299">    Map&lt;String, BEValue&gt; torrent = new HashMap&lt;String, BEValue&gt;();</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">    if (!announce.isEmpty()) torrent.put(ANNOUNCE, new BEValue(announce));</span>
+<span class="nc bnc" id="L301" title="All 2 branches missed.">    if (!announceList.isEmpty()) torrent.put(ANNOUNCE_LIST, wrapAnnounceList());</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">    if (creationDate &gt; 0) {</span>
+<span class="nc" id="L303">      torrent.put(CREATION_DATE_SEC, new BEValue(creationDate));</span>
+    }
+
+<span class="nc bnc" id="L306" title="All 2 branches missed.">    if (!comment.isEmpty()) torrent.put(COMMENT, new BEValue(comment));</span>
+<span class="nc bnc" id="L307" title="All 2 branches missed.">    if (!createdBy.isEmpty()) torrent.put(CREATED_BY, new BEValue(createdBy));</span>
+
+<span class="nc" id="L309">    HashingResult hashingResult = piecesHashesCalculator.calculateHashes(mapSources(sources), pieceLength);</span>
+
+<span class="nc" id="L311">    Map&lt;String, BEValue&gt; info = new HashMap&lt;String, BEValue&gt;();</span>
+<span class="nc" id="L312">    info.put(PIECE_LENGTH, new BEValue(pieceLength));</span>
+<span class="nc" id="L313">    info.put(PIECES, concatHashes(hashingResult.getHashes()));</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">    info.put(PRIVATE, new BEValue(isPrivate ? 1 : 0));</span>
+<span class="nc" id="L315">    info.put(NAME, new BEValue(name));</span>
+<span class="nc bnc" id="L316" title="All 2 branches missed.">    if (isSingleMode) {</span>
+<span class="nc" id="L317">      Long sourceSize = hashingResult.getSourceSizes().get(0);</span>
+<span class="nc" id="L318">      info.put(FILE_LENGTH, new BEValue(sourceSize));</span>
+<span class="nc" id="L319">    } else {</span>
+<span class="nc" id="L320">      List&lt;BEValue&gt; files = getFilesList(hashingResult);</span>
+<span class="nc" id="L321">      info.put(FILES, new BEValue(files));</span>
+    }
+<span class="nc" id="L323">    torrent.put(INFO_TABLE, new BEValue(info));</span>
+
+<span class="nc" id="L325">    return new BEValue(torrent);</span>
+  }
+
+  private List&lt;BEValue&gt; getFilesList(HashingResult hashingResult) throws UnsupportedEncodingException {
+<span class="nc" id="L329">    ArrayList&lt;BEValue&gt; result = new ArrayList&lt;BEValue&gt;();</span>
+<span class="nc bnc" id="L330" title="All 2 branches missed.">    for (int i = 0; i &lt; sources.size(); i++) {</span>
+<span class="nc" id="L331">      Map&lt;String, BEValue&gt; file = new HashMap&lt;String, BEValue&gt;();</span>
+<span class="nc" id="L332">      Long sourceSize = hashingResult.getSourceSizes().get(i);</span>
+<span class="nc" id="L333">      Source source = sources.get(i);</span>
+<span class="nc" id="L334">      List&lt;BEValue&gt; filePath = new ArrayList&lt;BEValue&gt;();</span>
+<span class="nc bnc" id="L335" title="All 2 branches missed.">      for (String path : source.getPath().replace(&quot;\\&quot;, &quot;/&quot;).split(&quot;/&quot;)) {</span>
+<span class="nc" id="L336">        filePath.add(new BEValue(path));</span>
+      }
+<span class="nc" id="L338">      file.put(FILE_PATH, new BEValue(filePath));</span>
+<span class="nc" id="L339">      file.put(FILE_LENGTH, new BEValue(sourceSize));</span>
+<span class="nc" id="L340">      result.add(new BEValue(file));</span>
+    }
+<span class="nc" id="L342">    return result;</span>
+  }
+
+  private BEValue concatHashes(List&lt;byte[]&gt; hashes) throws UnsupportedEncodingException {
+<span class="nc" id="L346">    StringBuilder sb = new StringBuilder();</span>
+<span class="nc bnc" id="L347" title="All 2 branches missed.">    for (byte[] hash : hashes) {</span>
+<span class="nc" id="L348">      sb.append(new String(hash, Constants.BYTE_ENCODING));</span>
+<span class="nc" id="L349">    }</span>
+<span class="nc" id="L350">    return new BEValue(sb.toString(), Constants.BYTE_ENCODING);</span>
+  }
+
+  private List&lt;DataSourceHolder&gt; mapSources(List&lt;Source&gt; sources) {
+<span class="nc" id="L354">    List&lt;DataSourceHolder&gt; result = new ArrayList&lt;DataSourceHolder&gt;();</span>
+<span class="nc bnc" id="L355" title="All 2 branches missed.">    for (Source source : sources) {</span>
+<span class="nc" id="L356">      result.add(source.getSourceHolder());</span>
+<span class="nc" id="L357">    }</span>
+<span class="nc" id="L358">    return result;</span>
+  }
+
+  private BEValue wrapAnnounceList() throws UnsupportedEncodingException {
+<span class="nc" id="L362">    List&lt;BEValue&gt; result = new LinkedList&lt;BEValue&gt;();</span>
+<span class="nc bnc" id="L363" title="All 2 branches missed.">    for (List&lt;String&gt; tier : announceList) {</span>
+<span class="nc" id="L364">      List&lt;BEValue&gt; perTier = new LinkedList&lt;BEValue&gt;();</span>
+<span class="nc bnc" id="L365" title="All 2 branches missed.">      for (String trackerURI : tier) {</span>
+<span class="nc" id="L366">        perTier.add(new BEValue(trackerURI));</span>
+<span class="nc" id="L367">      }</span>
+<span class="nc" id="L368">      result.add(new BEValue(perTier));</span>
+<span class="nc" id="L369">    }</span>
+<span class="nc" id="L370">    return new BEValue(result);</span>
+  }
+
+  private void dropEmptyTiersFromAnnounce() {
+<span class="nc" id="L374">    Iterator&lt;List&lt;String&gt;&gt; iterator = announceList.iterator();</span>
+<span class="nc bnc" id="L375" title="All 2 branches missed.">    while (iterator.hasNext()) {</span>
+<span class="nc" id="L376">      List&lt;String&gt; tier = iterator.next();</span>
+<span class="nc bnc" id="L377" title="All 2 branches missed.">      if (tier.isEmpty()) {</span>
+<span class="nc" id="L378">        iterator.remove();</span>
+      }
+<span class="nc" id="L380">    }</span>
+<span class="nc" id="L381">  }</span>
+
+  private void closeAllSources() {
+<span class="nc bnc" id="L384" title="All 2 branches missed.">    for (Source source : sources) {</span>
+<span class="nc" id="L385">      DataSourceHolder sourceHolder = source.getSourceHolder();</span>
+      try {
+<span class="nc" id="L387">        sourceHolder.close();</span>
+<span class="nc" id="L388">      } catch (Throwable e) {</span>
+<span class="nc" id="L389">        logger.error(&quot;Error in closing data source &quot; + sourceHolder, e);</span>
+<span class="nc" id="L390">      }</span>
+<span class="nc" id="L391">    }</span>
+<span class="nc" id="L392">  }</span>
+
+  private void initFirstTier() {
+<span class="nc bnc" id="L395" title="All 2 branches missed.">    if (announceList.isEmpty()) {</span>
+<span class="nc" id="L396">      newTier();</span>
+    }
+<span class="nc" id="L398">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

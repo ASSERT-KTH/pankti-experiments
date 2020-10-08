@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BDecoder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.bcodec</a> &gt; <span class="el_source">BDecoder.java</span></div><h1>BDecoder.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.bcodec;
+
+import java.io.ByteArrayInputStream;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+/**
+ * B-encoding decoder.
+ *
+ * &lt;p&gt;
+ * A b-encoded byte stream can represent byte arrays, numbers, lists and maps
+ * (dictionaries). This class implements a decoder of such streams into
+ * {@link BEValue}s.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;
+ * Inspired by Snark's implementation.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/Bencode&quot;&gt;B-encoding specification&lt;/a&gt;
+ */
+public class BDecoder {
+
+  // The InputStream to BDecode.
+  private final InputStream in;
+
+  // The last indicator read.
+  // Zero if unknown.
+  // '0'..'9' indicates a byte[].
+  // 'i' indicates an Number.
+  // 'l' indicates a List.
+  // 'd' indicates a Map.
+  // 'e' indicates end of Number, List or Map (only used internally).
+  // -1 indicates end of stream.
+  // Call getNextIndicator to get the current value (will never return zero).
+<span class="fc" id="L60">  private int indicator = 0;</span>
+
+  /**
+   * Initializes a new BDecoder.
+   *
+   * &lt;p&gt;
+   * Nothing is read from the given &lt;code&gt;InputStream&lt;/code&gt; yet.
+   * &lt;/p&gt;
+   *
+   * @param in The input stream to read from.
+   */
+<span class="fc" id="L71">  public BDecoder(InputStream in) {</span>
+<span class="fc" id="L72">    this.in = in;</span>
+<span class="fc" id="L73">  }</span>
+
+  /**
+   * Decode a B-encoded stream.
+   *
+   * &lt;p&gt;
+   * Automatically instantiates a new BDecoder for the provided input stream
+   * and decodes its root member.
+   * &lt;/p&gt;
+   *
+   * @param in The input stream to read from.
+   */
+  public static BEValue bdecode(InputStream in) throws IOException {
+<span class="fc" id="L86">    return new BDecoder(in).bdecode();</span>
+  }
+
+  /**
+   * Decode a B-encoded byte buffer.
+   *
+   * &lt;p&gt;
+   * Automatically instantiates a new BDecoder for the provided buffer and
+   * decodes its root member.
+   * &lt;/p&gt;
+   *
+   * @param data The {@link ByteBuffer} to read from.
+   */
+  public static BEValue bdecode(ByteBuffer data) throws IOException {
+<span class="fc" id="L100">    return BDecoder.bdecode(new ByteArrayInputStream(data.array()));</span>
+  }
+
+  /**
+   * Returns what the next b-encoded object will be on the stream or -1
+   * when the end of stream has been reached.
+   *
+   * &lt;p&gt;
+   * Can return something unexpected (not '0' .. '9', 'i', 'l' or 'd') when
+   * the stream isn't b-encoded.
+   * &lt;/p&gt;
+   *
+   * This might or might not read one extra byte from the stream.
+   */
+  private int getNextIndicator() throws IOException {
+<span class="fc bfc" id="L115" title="All 2 branches covered.">    if (this.indicator == 0) {</span>
+<span class="fc" id="L116">      this.indicator = in.read();</span>
+    }
+<span class="fc" id="L118">    return this.indicator;</span>
+  }
+
+  /**
+   * Gets the next indicator and returns either null when the stream
+   * has ended or b-decodes the rest of the stream and returns the
+   * appropriate BEValue encoded object.
+   */
+  public BEValue bdecode() throws IOException {
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">    if (this.getNextIndicator() == -1)</span>
+<span class="nc" id="L128">      return null;</span>
+
+<span class="pc bpc" id="L130" title="1 of 4 branches missed.">    if (this.indicator &gt;= '0' &amp;&amp; this.indicator &lt;= '9')</span>
+<span class="fc" id="L131">      return this.bdecodeBytes();</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">    else if (this.indicator == 'i')</span>
+<span class="fc" id="L133">      return this.bdecodeNumber();</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">    else if (this.indicator == 'l')</span>
+<span class="fc" id="L135">      return this.bdecodeList();</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">    else if (this.indicator == 'd')</span>
+<span class="fc" id="L137">      return this.bdecodeMap();</span>
+    else
+<span class="fc" id="L139">      throw new InvalidBEncodingException</span>
+              (&quot;Unknown indicator '&quot; + this.indicator + &quot;'&quot;);
+  }
+
+  /**
+   * Returns the next b-encoded value on the stream and makes sure it is a
+   * byte array.
+   *
+   * @throws InvalidBEncodingException If it is not a b-encoded byte array.
+   */
+  public BEValue bdecodeBytes() throws IOException {
+<span class="fc" id="L150">    int c = this.getNextIndicator();</span>
+<span class="fc" id="L151">    int num = c - '0';</span>
+<span class="pc bpc" id="L152" title="2 of 4 branches missed.">    if (num &lt; 0 || num &gt; 9)</span>
+<span class="nc" id="L153">      throw new InvalidBEncodingException(&quot;Number expected, not '&quot;</span>
+              + (char) c + &quot;'&quot;);
+<span class="fc" id="L155">    this.indicator = 0;</span>
+
+<span class="fc" id="L157">    c = this.read();</span>
+<span class="fc" id="L158">    int i = c - '0';</span>
+<span class="pc bpc" id="L159" title="1 of 4 branches missed.">    while (i &gt;= 0 &amp;&amp; i &lt;= 9) {</span>
+      // This can overflow!
+<span class="fc" id="L161">      num = num * 10 + i;</span>
+<span class="fc" id="L162">      c = this.read();</span>
+<span class="fc" id="L163">      i = c - '0';</span>
+    }
+
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">    if (c != ':') {</span>
+<span class="nc" id="L167">      throw new InvalidBEncodingException(&quot;Colon expected, not '&quot; +</span>
+              (char) c + &quot;'&quot;);
+    }
+
+<span class="fc" id="L171">    return new BEValue(read(num));</span>
+  }
+
+  /**
+   * Returns the next b-encoded value on the stream and makes sure it is a
+   * number.
+   *
+   * @throws InvalidBEncodingException If it is not a number.
+   */
+  public BEValue bdecodeNumber() throws IOException {
+<span class="fc" id="L181">    int c = this.getNextIndicator();</span>
+<span class="pc bpc" id="L182" title="1 of 2 branches missed.">    if (c != 'i') {</span>
+<span class="nc" id="L183">      throw new InvalidBEncodingException(&quot;Expected 'i', not '&quot; +</span>
+              (char) c + &quot;'&quot;);
+    }
+<span class="fc" id="L186">    this.indicator = 0;</span>
+
+<span class="fc" id="L188">    c = this.read();</span>
+<span class="fc bfc" id="L189" title="All 2 branches covered.">    if (c == '0') {</span>
+<span class="fc" id="L190">      c = this.read();</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">      if (c == 'e')</span>
+<span class="fc" id="L192">        return new BEValue(BigInteger.ZERO);</span>
+      else
+<span class="fc" id="L194">        throw new InvalidBEncodingException(&quot;'e' expected after zero,&quot; +</span>
+                &quot; not '&quot; + (char) c + &quot;'&quot;);
+    }
+
+    // We don't support more the 255 char big integers
+<span class="fc" id="L199">    char[] chars = new char[256];</span>
+<span class="fc" id="L200">    int off = 0;</span>
+
+<span class="fc bfc" id="L202" title="All 2 branches covered.">    if (c == '-') {</span>
+<span class="fc" id="L203">      c = this.read();</span>
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">      if (c == '0')</span>
+<span class="nc" id="L205">        throw new InvalidBEncodingException(&quot;Negative zero not allowed&quot;);</span>
+<span class="fc" id="L206">      chars[off] = '-';</span>
+<span class="fc" id="L207">      off++;</span>
+    }
+
+<span class="pc bpc" id="L210" title="2 of 4 branches missed.">    if (c &lt; '1' || c &gt; '9')</span>
+<span class="nc" id="L211">      throw new InvalidBEncodingException(&quot;Invalid Integer start '&quot;</span>
+              + (char) c + &quot;'&quot;);
+<span class="fc" id="L213">    chars[off] = (char) c;</span>
+<span class="fc" id="L214">    off++;</span>
+
+<span class="fc" id="L216">    c = this.read();</span>
+<span class="fc" id="L217">    int i = c - '0';</span>
+<span class="pc bpc" id="L218" title="1 of 4 branches missed.">    while (i &gt;= 0 &amp;&amp; i &lt;= 9) {</span>
+<span class="fc" id="L219">      chars[off] = (char) c;</span>
+<span class="fc" id="L220">      off++;</span>
+<span class="fc" id="L221">      c = read();</span>
+<span class="fc" id="L222">      i = c - '0';</span>
+    }
+
+<span class="pc bpc" id="L225" title="1 of 2 branches missed.">    if (c != 'e')</span>
+<span class="nc" id="L226">      throw new InvalidBEncodingException(&quot;Integer should end with 'e'&quot;);</span>
+
+<span class="fc" id="L228">    String s = new String(chars, 0, off);</span>
+<span class="fc" id="L229">    return new BEValue(new BigInteger(s));</span>
+  }
+
+  /**
+   * Returns the next b-encoded value on the stream and makes sure it is a
+   * list.
+   *
+   * @throws InvalidBEncodingException If it is not a list.
+   */
+  public BEValue bdecodeList() throws IOException {
+<span class="fc" id="L239">    int c = this.getNextIndicator();</span>
+<span class="pc bpc" id="L240" title="1 of 2 branches missed.">    if (c != 'l') {</span>
+<span class="nc" id="L241">      throw new InvalidBEncodingException(&quot;Expected 'l', not '&quot; +</span>
+              (char) c + &quot;'&quot;);
+    }
+<span class="fc" id="L244">    this.indicator = 0;</span>
+
+<span class="fc" id="L246">    List&lt;BEValue&gt; result = new ArrayList&lt;BEValue&gt;();</span>
+<span class="fc" id="L247">    c = this.getNextIndicator();</span>
+<span class="fc bfc" id="L248" title="All 2 branches covered.">    while (c != 'e') {</span>
+<span class="fc" id="L249">      result.add(this.bdecode());</span>
+<span class="fc" id="L250">      c = this.getNextIndicator();</span>
+    }
+<span class="fc" id="L252">    this.indicator = 0;</span>
+
+<span class="fc" id="L254">    return new BEValue(result);</span>
+  }
+
+  /**
+   * Returns the next b-encoded value on the stream and makes sure it is a
+   * map (dictionary).
+   *
+   * @throws InvalidBEncodingException If it is not a map.
+   */
+  public BEValue bdecodeMap() throws IOException {
+<span class="fc" id="L264">    int c = this.getNextIndicator();</span>
+<span class="pc bpc" id="L265" title="1 of 2 branches missed.">    if (c != 'd') {</span>
+<span class="nc" id="L266">      throw new InvalidBEncodingException(&quot;Expected 'd', not '&quot; +</span>
+              (char) c + &quot;'&quot;);
+    }
+<span class="fc" id="L269">    this.indicator = 0;</span>
+
+<span class="fc" id="L271">    Map&lt;String, BEValue&gt; result = new HashMap&lt;String, BEValue&gt;();</span>
+<span class="fc" id="L272">    c = this.getNextIndicator();</span>
+<span class="fc bfc" id="L273" title="All 2 branches covered.">    while (c != 'e') {</span>
+      // Dictionary keys are always strings.
+<span class="fc" id="L275">      String key = this.bdecode().getString();</span>
+
+<span class="fc" id="L277">      BEValue value = this.bdecode();</span>
+<span class="fc" id="L278">      result.put(key, value);</span>
+
+<span class="fc" id="L280">      c = this.getNextIndicator();</span>
+<span class="fc" id="L281">    }</span>
+<span class="fc" id="L282">    this.indicator = 0;</span>
+
+<span class="fc" id="L284">    return new BEValue(result);</span>
+  }
+
+  /**
+   * Returns the next byte read from the InputStream (as int).
+   *
+   * @throws EOFException If InputStream.read() returned -1.
+   */
+  private int read() throws IOException {
+<span class="fc" id="L293">    int c = this.in.read();</span>
+<span class="pc bpc" id="L294" title="1 of 2 branches missed.">    if (c == -1)</span>
+<span class="nc" id="L295">      throw new EOFException();</span>
+<span class="fc" id="L296">    return c;</span>
+  }
+
+  /**
+   * Returns a byte[] containing length valid bytes starting at offset zero.
+   *
+   * @throws EOFException If InputStream.read() returned -1 before all
+   *                      requested bytes could be read.  Note that the byte[] returned might be
+   *                      bigger then requested but will only contain length valid bytes.  The
+   *                      returned byte[] will be reused when this method is called again.
+   */
+  private byte[] read(int length) throws IOException {
+<span class="fc" id="L308">    byte[] result = new byte[length];</span>
+
+<span class="fc" id="L310">    int read = 0;</span>
+<span class="fc bfc" id="L311" title="All 2 branches covered.">    while (read &lt; length) {</span>
+<span class="fc" id="L312">      int i = this.in.read(result, read, length - read);</span>
+<span class="pc bpc" id="L313" title="1 of 2 branches missed.">      if (i == -1)</span>
+<span class="nc" id="L314">        throw new EOFException();</span>
+<span class="fc" id="L315">      read += i;</span>
+<span class="fc" id="L316">    }</span>
+
+<span class="fc" id="L318">    return result;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

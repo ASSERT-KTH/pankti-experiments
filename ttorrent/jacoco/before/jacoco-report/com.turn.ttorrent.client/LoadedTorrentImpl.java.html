@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoadedTorrentImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client</a> &gt; <span class="el_source">LoadedTorrentImpl.java</span></div><h1>LoadedTorrentImpl.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.client;
+
+import com.turn.ttorrent.client.storage.PieceStorage;
+import com.turn.ttorrent.common.*;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+
+public class LoadedTorrentImpl implements LoadedTorrent {
+
+  private final TorrentStatistic torrentStatistic;
+  private final TorrentHash torrentHash;
+  private final List&lt;List&lt;String&gt;&gt; announceUrls;
+  private final String announce;
+  private final PieceStorage pieceStorage;
+  private final TorrentMetadataProvider metadataProvider;
+  private final EventDispatcher eventDispatcher;
+
+  LoadedTorrentImpl(TorrentStatistic torrentStatistic,
+                    TorrentMetadataProvider metadataProvider,
+                    TorrentMetadata torrentMetadata,
+                    PieceStorage pieceStorage,
+<span class="fc" id="L25">                    EventDispatcher eventDispatcher) {</span>
+<span class="fc" id="L26">    this.torrentStatistic = torrentStatistic;</span>
+<span class="fc" id="L27">    this.metadataProvider = metadataProvider;</span>
+<span class="fc" id="L28">    this.eventDispatcher = eventDispatcher;</span>
+<span class="fc" id="L29">    torrentHash = new ImmutableTorrentHash(torrentMetadata.getInfoHash());</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">    if (torrentMetadata.getAnnounceList() != null) {</span>
+<span class="nc" id="L31">      this.announceUrls = Collections.unmodifiableList(torrentMetadata.getAnnounceList());</span>
+    } else {
+<span class="fc" id="L33">      this.announceUrls = Collections.singletonList(Collections.singletonList(torrentMetadata.getAnnounce()));</span>
+    }
+<span class="fc" id="L35">    this.announce = torrentMetadata.getAnnounce();</span>
+<span class="fc" id="L36">    this.pieceStorage = pieceStorage;</span>
+<span class="fc" id="L37">  }</span>
+
+  @Override
+  public PieceStorage getPieceStorage() {
+<span class="fc" id="L41">    return pieceStorage;</span>
+  }
+
+  @Override
+  public TorrentMetadata getMetadata() {
+    try {
+<span class="fc" id="L47">      return metadataProvider.getTorrentMetadata();</span>
+<span class="nc" id="L48">    } catch (IOException e) {</span>
+<span class="nc" id="L49">      throw new IllegalStateException(&quot;Unable to fetch torrent metadata from metadata provider: &quot; + metadataProvider, e);</span>
+    }
+  }
+
+  @Override
+  public TorrentStatistic getTorrentStatistic() {
+<span class="fc" id="L55">    return torrentStatistic;</span>
+  }
+
+  @Override
+  @NotNull
+  public AnnounceableInformation createAnnounceableInformation() {
+<span class="fc" id="L61">    return new AnnounceableInformationImpl(</span>
+<span class="fc" id="L62">            torrentStatistic.getUploadedBytes(),</span>
+<span class="fc" id="L63">            torrentStatistic.getDownloadedBytes(),</span>
+<span class="fc" id="L64">            torrentStatistic.getLeftBytes(),</span>
+            torrentHash,
+            announceUrls,
+            announce
+    );
+  }
+
+  @Override
+  public TorrentHash getTorrentHash() {
+<span class="fc" id="L73">    return torrentHash;</span>
+  }
+
+  @Override
+  public EventDispatcher getEventDispatcher() {
+<span class="fc" id="L78">    return eventDispatcher;</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="fc" id="L83">    return &quot;LoadedTorrentImpl{&quot; +</span>
+            &quot;piece storage='&quot; + pieceStorage + '\'' +
+            &quot;, metadata provider='&quot; + metadataProvider + '\'' +
+            '}';
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

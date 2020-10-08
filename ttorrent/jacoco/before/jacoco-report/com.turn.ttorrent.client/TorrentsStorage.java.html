@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TorrentsStorage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client</a> &gt; <span class="el_source">TorrentsStorage.java</span></div><h1>TorrentsStorage.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.client;
+
+import com.turn.ttorrent.common.AnnounceableInformation;
+import com.turn.ttorrent.common.Pair;
+import com.turn.ttorrent.common.TorrentUtils;
+
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+public class TorrentsStorage {
+
+  private final ReadWriteLock readWriteLock;
+  private final Map&lt;String, SharedTorrent&gt; activeTorrents;
+  private final Map&lt;String, LoadedTorrent&gt; loadedTorrents;
+
+<span class="fc" id="L18">  public TorrentsStorage() {</span>
+<span class="fc" id="L19">    readWriteLock = new ReentrantReadWriteLock();</span>
+<span class="fc" id="L20">    activeTorrents = new HashMap&lt;String, SharedTorrent&gt;();</span>
+<span class="fc" id="L21">    loadedTorrents = new HashMap&lt;String, LoadedTorrent&gt;();</span>
+<span class="fc" id="L22">  }</span>
+
+  public boolean hasTorrent(String hash) {
+    try {
+<span class="fc" id="L26">      readWriteLock.readLock().lock();</span>
+<span class="fc" id="L27">      return loadedTorrents.containsKey(hash);</span>
+    } finally {
+<span class="fc" id="L29">      readWriteLock.readLock().unlock();</span>
+    }
+  }
+
+  public LoadedTorrent getLoadedTorrent(String hash) {
+    try {
+<span class="fc" id="L35">      readWriteLock.readLock().lock();</span>
+<span class="fc" id="L36">      return loadedTorrents.get(hash);</span>
+    } finally {
+<span class="fc" id="L38">      readWriteLock.readLock().unlock();</span>
+    }
+  }
+
+  public void peerDisconnected(String torrentHash) {
+    final SharedTorrent torrent;
+    try {
+<span class="fc" id="L45">      readWriteLock.writeLock().lock();</span>
+<span class="fc" id="L46">      torrent = activeTorrents.get(torrentHash);</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">      if (torrent == null) return;</span>
+
+<span class="fc" id="L49">      boolean isTorrentFinished = torrent.isFinished();</span>
+<span class="fc bfc" id="L50" title="All 4 branches covered.">      if (torrent.getDownloadersCount() == 0 &amp;&amp; isTorrentFinished) {</span>
+<span class="fc" id="L51">        activeTorrents.remove(torrentHash);</span>
+      } else {
+<span class="fc" id="L53">        return;</span>
+      }
+    } finally {
+<span class="fc" id="L56">      readWriteLock.writeLock().unlock();</span>
+    }
+<span class="fc" id="L58">    torrent.close();</span>
+<span class="fc" id="L59">  }</span>
+
+  public SharedTorrent getTorrent(String hash) {
+    try {
+<span class="fc" id="L63">      readWriteLock.readLock().lock();</span>
+<span class="fc" id="L64">      return activeTorrents.get(hash);</span>
+    } finally {
+<span class="fc" id="L66">      readWriteLock.readLock().unlock();</span>
+    }
+  }
+
+  public void addTorrent(String hash, LoadedTorrent torrent) {
+    try {
+<span class="fc" id="L72">      readWriteLock.writeLock().lock();</span>
+<span class="fc" id="L73">      loadedTorrents.put(hash, torrent);</span>
+    } finally {
+<span class="fc" id="L75">      readWriteLock.writeLock().unlock();</span>
+    }
+<span class="fc" id="L77">  }</span>
+
+  public SharedTorrent putIfAbsentActiveTorrent(String hash, SharedTorrent torrent) {
+    try {
+<span class="fc" id="L81">      readWriteLock.writeLock().lock();</span>
+<span class="fc" id="L82">      final SharedTorrent old = activeTorrents.get(hash);</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">      if (old != null) return old;</span>
+
+<span class="fc" id="L85">      return activeTorrents.put(hash, torrent);</span>
+    } finally {
+<span class="fc" id="L87">      readWriteLock.writeLock().unlock();</span>
+    }
+  }
+
+  public Pair&lt;SharedTorrent, LoadedTorrent&gt; remove(String hash) {
+    final Pair&lt;SharedTorrent, LoadedTorrent&gt; result;
+    try {
+<span class="nc" id="L94">      readWriteLock.writeLock().lock();</span>
+<span class="nc" id="L95">      final SharedTorrent sharedTorrent = activeTorrents.remove(hash);</span>
+<span class="nc" id="L96">      final LoadedTorrent loadedTorrent = loadedTorrents.remove(hash);</span>
+<span class="nc" id="L97">      result = new Pair&lt;SharedTorrent, LoadedTorrent&gt;(sharedTorrent, loadedTorrent);</span>
+    } finally {
+<span class="nc" id="L99">      readWriteLock.writeLock().unlock();</span>
+    }
+<span class="nc bnc" id="L101" title="All 2 branches missed.">    if (result.second() != null) {</span>
+      try {
+<span class="nc" id="L103">        result.second().getPieceStorage().close();</span>
+<span class="nc" id="L104">      } catch (IOException ignored) {</span>
+<span class="nc" id="L105">      }</span>
+    }
+<span class="nc bnc" id="L107" title="All 2 branches missed.">    if (result.first() != null) {</span>
+<span class="nc" id="L108">      result.first().close();</span>
+    }
+<span class="nc" id="L110">    return result;</span>
+  }
+
+  public List&lt;SharedTorrent&gt; activeTorrents() {
+    try {
+<span class="fc" id="L115">      readWriteLock.readLock().lock();</span>
+<span class="fc" id="L116">      return new ArrayList&lt;SharedTorrent&gt;(activeTorrents.values());</span>
+    } finally {
+<span class="fc" id="L118">      readWriteLock.readLock().unlock();</span>
+    }
+  }
+
+  public List&lt;AnnounceableInformation&gt; announceableTorrents() {
+<span class="fc" id="L123">    List&lt;AnnounceableInformation&gt; result = new ArrayList&lt;AnnounceableInformation&gt;();</span>
+    try {
+<span class="fc" id="L125">      readWriteLock.readLock().lock();</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">      for (LoadedTorrent loadedTorrent : loadedTorrents.values()) {</span>
+<span class="fc" id="L127">        AnnounceableInformation announceableInformation = loadedTorrent.createAnnounceableInformation();</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        if (TorrentUtils.isTrackerLessInfo(announceableInformation)) continue;</span>
+<span class="fc" id="L129">        result.add(announceableInformation);</span>
+<span class="fc" id="L130">      }</span>
+<span class="fc" id="L131">      return result;</span>
+    } finally {
+<span class="fc" id="L133">      readWriteLock.readLock().unlock();</span>
+    }
+  }
+
+  public List&lt;LoadedTorrent&gt; getLoadedTorrents() {
+    try {
+<span class="nc" id="L139">      readWriteLock.readLock().lock();</span>
+<span class="nc" id="L140">      return new ArrayList&lt;LoadedTorrent&gt;(loadedTorrents.values());</span>
+    } finally {
+<span class="nc" id="L142">      readWriteLock.readLock().unlock();</span>
+    }
+  }
+
+  public void clear() {
+    final Collection&lt;SharedTorrent&gt; sharedTorrents;
+    final Collection&lt;LoadedTorrent&gt; loadedTorrents;
+    try {
+<span class="fc" id="L150">      readWriteLock.writeLock().lock();</span>
+<span class="fc" id="L151">      sharedTorrents = new ArrayList&lt;SharedTorrent&gt;(activeTorrents.values());</span>
+<span class="fc" id="L152">      loadedTorrents = new ArrayList&lt;LoadedTorrent&gt;(this.loadedTorrents.values());</span>
+<span class="fc" id="L153">      this.loadedTorrents.clear();</span>
+<span class="fc" id="L154">      activeTorrents.clear();</span>
+    } finally {
+<span class="fc" id="L156">      readWriteLock.writeLock().unlock();</span>
+    }
+<span class="fc bfc" id="L158" title="All 2 branches covered.">    for (SharedTorrent sharedTorrent : sharedTorrents) {</span>
+<span class="fc" id="L159">      sharedTorrent.close();</span>
+<span class="fc" id="L160">    }</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">    for (LoadedTorrent loadedTorrent : loadedTorrents) {</span>
+      try {
+<span class="fc" id="L163">        loadedTorrent.getPieceStorage().close();</span>
+<span class="nc" id="L164">      } catch (IOException ignored) {</span>
+<span class="fc" id="L165">      }</span>
+<span class="fc" id="L166">    }</span>
+<span class="fc" id="L167">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

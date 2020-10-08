@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HTTPTrackerMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common.protocol.http</a> &gt; <span class="el_source">HTTPTrackerMessage.java</span></div><h1>HTTPTrackerMessage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.common.protocol.http;
+
+import com.turn.ttorrent.bcodec.BDecoder;
+import com.turn.ttorrent.bcodec.BEValue;
+import com.turn.ttorrent.common.protocol.TrackerMessage;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.util.Map;
+
+
+/**
+ * Base class for HTTP tracker messages.
+ *
+ * @author mpetazzoni
+ */
+public abstract class HTTPTrackerMessage extends TrackerMessage {
+
+  protected HTTPTrackerMessage(Type type, ByteBuffer data) {
+<span class="fc" id="L36">    super(type, data);</span>
+<span class="fc" id="L37">  }</span>
+
+  public static HTTPTrackerMessage parse(InputStream data)
+          throws IOException, MessageValidationException {
+<span class="fc" id="L41">    BEValue decoded = BDecoder.bdecode(data);</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">    if (decoded == null) {</span>
+<span class="nc" id="L43">      throw new MessageValidationException(&quot;Could not decode tracker message (not B-encoded?)!: &quot;);</span>
+    }
+<span class="fc" id="L45">    return parse(decoded);</span>
+  }
+
+  public static HTTPTrackerMessage parse(BEValue decoded) throws IOException, MessageValidationException {
+<span class="fc" id="L49">    Map&lt;String, BEValue&gt; params = decoded.getMap();</span>
+
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">    if (params.containsKey(&quot;info_hash&quot;)) {</span>
+<span class="nc" id="L52">      return HTTPAnnounceRequestMessage.parse(decoded);</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">    } else if (params.containsKey(&quot;peers&quot;)) {</span>
+<span class="fc" id="L54">      return HTTPAnnounceResponseMessage.parse(decoded);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">    } else if (params.containsKey(&quot;failure reason&quot;)) {</span>
+<span class="nc" id="L56">      return HTTPTrackerErrorMessage.parse(decoded);</span>
+    }
+
+<span class="nc" id="L59">    throw new MessageValidationException(&quot;Unknown HTTP tracker message!&quot;);</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

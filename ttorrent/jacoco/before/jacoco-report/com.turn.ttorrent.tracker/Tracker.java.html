@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Tracker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.tracker</a> &gt; <span class="el_source">Tracker.java</span></div><h1>Tracker.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ * &lt;p&gt;
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * &lt;p&gt;
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * &lt;p&gt;
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.tracker;
+
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import org.simpleframework.http.core.ContainerServer;
+import org.simpleframework.transport.connect.Connection;
+import org.simpleframework.transport.connect.SocketConnection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * BitTorrent tracker.
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * The tracker usually listens on port 6969 (the standard BitTorrent tracker
+ * port). Torrents must be registered directly to this tracker with the
+ * {@link #announce(TrackedTorrent torrent)}&lt;/code&gt; method.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ */
+public class Tracker {
+
+<span class="fc" id="L45">  private static final Logger logger = TorrentLoggerFactory.getLogger(Tracker.class);</span>
+
+  /**
+   * Request path handled by the tracker announce request handler.
+   */
+  public static final String ANNOUNCE_URL = &quot;/announce&quot;;
+
+  /**
+   * Default tracker listening port (BitTorrent's default is 6969).
+   */
+  public static final int DEFAULT_TRACKER_PORT = 6969;
+
+  /**
+   * Default server name and version announced by the tracker.
+   */
+  public static final String DEFAULT_VERSION_STRING = &quot;BitTorrent Tracker (ttorrent)&quot;;
+
+  private Connection connection;
+
+  /**
+   * The in-memory repository of torrents tracked.
+   */
+  private final TorrentsRepository myTorrentsRepository;
+
+  private PeerCollectorThread myPeerCollectorThread;
+  private boolean stop;
+  private String myAnnounceUrl;
+  private final int myPort;
+<span class="pc" id="L73">  private SocketAddress myBoundAddress = null;</span>
+
+  private final TrackerServiceContainer myTrackerServiceContainer;
+
+  /**
+   * Create a new BitTorrent tracker listening at the given address.
+   *
+   * @throws IOException Throws an &lt;em&gt;IOException&lt;/em&gt; if the tracker
+   *                     cannot be initialized.
+   */
+  public Tracker(int port) throws IOException {
+<span class="fc" id="L84">    this(port,</span>
+<span class="fc" id="L85">            getDefaultAnnounceUrl(new InetSocketAddress(InetAddress.getLocalHost(), port)).toString()</span>
+    );
+<span class="fc" id="L87">  }</span>
+
+<span class="fc" id="L89">  public Tracker(int port, String announceURL) throws IOException {</span>
+<span class="fc" id="L90">    myPort = port;</span>
+<span class="fc" id="L91">    myAnnounceUrl = announceURL;</span>
+<span class="fc" id="L92">    myTorrentsRepository = new TorrentsRepository(10);</span>
+<span class="fc" id="L93">    final TrackerRequestProcessor requestProcessor = new TrackerRequestProcessor(myTorrentsRepository);</span>
+<span class="fc" id="L94">    myTrackerServiceContainer = new TrackerServiceContainer(requestProcessor,</span>
+            new MultiAnnounceRequestProcessor(requestProcessor));
+<span class="fc" id="L96">    myPeerCollectorThread = new PeerCollectorThread(myTorrentsRepository);</span>
+<span class="fc" id="L97">  }</span>
+
+<span class="nc" id="L99">  public Tracker(int port, String announceURL, TrackerRequestProcessor requestProcessor, TorrentsRepository torrentsRepository) throws IOException {</span>
+<span class="nc" id="L100">    myPort = port;</span>
+<span class="nc" id="L101">    myAnnounceUrl = announceURL;</span>
+<span class="nc" id="L102">    myTorrentsRepository = torrentsRepository;</span>
+<span class="nc" id="L103">    myTrackerServiceContainer = new TrackerServiceContainer(requestProcessor, new MultiAnnounceRequestProcessor(requestProcessor));</span>
+<span class="nc" id="L104">    myPeerCollectorThread = new PeerCollectorThread(myTorrentsRepository);</span>
+<span class="nc" id="L105">  }</span>
+
+  /**
+   * Returns the full announce URL served by this tracker.
+   * &lt;p&gt;
+   * &lt;p&gt;
+   * This has the form http://host:port/announce.
+   * &lt;/p&gt;
+   */
+  private static URL getDefaultAnnounceUrl(InetSocketAddress address) {
+    try {
+<span class="fc" id="L116">      return new URL(&quot;http&quot;,</span>
+<span class="fc" id="L117">              address.getAddress().getCanonicalHostName(),</span>
+<span class="fc" id="L118">              address.getPort(),</span>
+              ANNOUNCE_URL);
+<span class="nc" id="L120">    } catch (MalformedURLException mue) {</span>
+<span class="nc" id="L121">      logger.error(&quot;Could not build tracker URL: {}!&quot;, mue, mue);</span>
+    }
+
+<span class="nc" id="L124">    return null;</span>
+  }
+
+  public String getAnnounceUrl() {
+<span class="fc" id="L128">    return myAnnounceUrl;</span>
+  }
+
+  public URI getAnnounceURI() {
+    try {
+<span class="fc" id="L133">      URL announceURL = new URL(getAnnounceUrl());</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">      if (announceURL != null) {</span>
+<span class="fc" id="L135">        return announceURL.toURI();</span>
+      }
+<span class="nc" id="L137">    } catch (URISyntaxException e) {</span>
+<span class="nc" id="L138">      logger.error(&quot;Cannot convert announce URL to URI&quot;, e);</span>
+<span class="nc" id="L139">    } catch (MalformedURLException e) {</span>
+<span class="nc" id="L140">      logger.error(&quot;Cannot create URL from announceURL&quot;, e);</span>
+<span class="nc" id="L141">    }</span>
+<span class="nc" id="L142">    return null;</span>
+  }
+
+  /**
+   * Start the tracker thread.
+   */
+  public void start(final boolean startPeerCleaningThread) throws IOException {
+<span class="fc" id="L149">    logger.info(&quot;Starting BitTorrent tracker on {}...&quot;,</span>
+<span class="fc" id="L150">            getAnnounceUrl());</span>
+<span class="fc" id="L151">    connection = new SocketConnection(new ContainerServer(myTrackerServiceContainer));</span>
+
+<span class="fc" id="L153">    List&lt;SocketAddress&gt; tries = new ArrayList&lt;SocketAddress&gt;() {{</span>
+      try {
+<span class="fc" id="L155">        add(new InetSocketAddress(InetAddress.getByAddress(new byte[4]), myPort));</span>
+<span class="nc" id="L156">      } catch (Exception ex) {</span>
+<span class="fc" id="L157">      }</span>
+      try {
+<span class="fc" id="L159">        add(new InetSocketAddress(InetAddress.getLocalHost(), myPort));</span>
+<span class="nc" id="L160">      } catch (Exception ex) {</span>
+<span class="fc" id="L161">      }</span>
+      try {
+<span class="fc" id="L163">        add(new InetSocketAddress(InetAddress.getByName(new URL(getAnnounceUrl()).getHost()), myPort));</span>
+<span class="nc" id="L164">      } catch (Exception ex) {</span>
+<span class="fc" id="L165">      }</span>
+<span class="fc" id="L166">    }};</span>
+
+<span class="fc" id="L168">    boolean started = false;</span>
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">    for (SocketAddress address : tries) {</span>
+      try {
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if ((myBoundAddress = connection.connect(address)) != null) {</span>
+<span class="fc" id="L172">          logger.info(&quot;Started torrent tracker on {}&quot;, address);</span>
+<span class="fc" id="L173">          started = true;</span>
+<span class="fc" id="L174">          break;</span>
+        }
+<span class="nc" id="L176">      } catch (IOException ioe) {</span>
+<span class="nc" id="L177">        logger.info(&quot;Can't start the tracker using address{} : &quot;, address.toString(), ioe.getMessage());</span>
+<span class="nc" id="L178">      }</span>
+<span class="nc" id="L179">    }</span>
+<span class="pc bpc" id="L180" title="1 of 2 branches missed.">    if (!started) {</span>
+<span class="nc" id="L181">      logger.error(&quot;Cannot start tracker on port {}. Stopping now...&quot;, myPort);</span>
+<span class="nc" id="L182">      stop();</span>
+<span class="nc" id="L183">      return;</span>
+    }
+<span class="fc bfc" id="L185" title="All 2 branches covered.">    if (startPeerCleaningThread) {</span>
+<span class="pc bpc" id="L186" title="4 of 6 branches missed.">      if (myPeerCollectorThread == null || !myPeerCollectorThread.isAlive() || myPeerCollectorThread.getState() != Thread.State.NEW) {</span>
+<span class="fc" id="L187">        myPeerCollectorThread = new PeerCollectorThread(myTorrentsRepository);</span>
+      }
+
+<span class="fc" id="L190">      myPeerCollectorThread.setName(&quot;peer-peerCollectorThread:&quot; + myPort);</span>
+<span class="fc" id="L191">      myPeerCollectorThread.start();</span>
+    }
+<span class="fc" id="L193">  }</span>
+
+  /**
+   * Stop the tracker.
+   * &lt;p&gt;
+   * &lt;p&gt;
+   * This effectively closes the listening HTTP connection to terminate
+   * the service, and interrupts the peer myPeerCollectorThread thread as well.
+   * &lt;/p&gt;
+   */
+  public void stop() {
+<span class="fc" id="L204">    this.stop = true;</span>
+
+    try {
+<span class="fc" id="L207">      this.connection.close();</span>
+<span class="fc" id="L208">      logger.info(&quot;BitTorrent tracker closed.&quot;);</span>
+<span class="nc" id="L209">    } catch (IOException ioe) {</span>
+<span class="nc" id="L210">      logger.error(&quot;Could not stop the tracker: {}!&quot;, ioe.getMessage());</span>
+<span class="fc" id="L211">    }</span>
+
+<span class="pc bpc" id="L213" title="1 of 4 branches missed.">    if (myPeerCollectorThread != null &amp;&amp; myPeerCollectorThread.isAlive()) {</span>
+<span class="fc" id="L214">      myPeerCollectorThread.interrupt();</span>
+      try {
+<span class="fc" id="L216">        myPeerCollectorThread.join();</span>
+<span class="nc" id="L217">      } catch (InterruptedException e) {</span>
+        //
+<span class="fc" id="L219">      }</span>
+<span class="fc" id="L220">      logger.info(&quot;Peer collection terminated.&quot;);</span>
+    }
+<span class="fc" id="L222">  }</span>
+
+  /**
+   * Announce a new torrent on this tracker.
+   * &lt;p&gt;
+   * &lt;p&gt;
+   * The fact that torrents must be announced here first makes this tracker a
+   * closed BitTorrent tracker: it will only accept clients for torrents it
+   * knows about, and this list of torrents is managed by the program
+   * instrumenting this Tracker class.
+   * &lt;/p&gt;
+   *
+   * @param torrent The Torrent object to start tracking.
+   * @return The torrent object for this torrent on this tracker. This may be
+   * different from the supplied Torrent object if the tracker already
+   * contained a torrent with the same hash.
+   */
+  public synchronized TrackedTorrent announce(TrackedTorrent torrent) {
+<span class="fc" id="L240">    TrackedTorrent existing = myTorrentsRepository.getTorrent(torrent.getHexInfoHash());</span>
+
+<span class="pc bpc" id="L242" title="1 of 2 branches missed.">    if (existing != null) {</span>
+<span class="nc" id="L243">      logger.warn(&quot;Tracker already announced torrent with hash {}.&quot;, existing.getHexInfoHash());</span>
+<span class="nc" id="L244">      return existing;</span>
+    }
+
+<span class="fc" id="L247">    myTorrentsRepository.putIfAbsent(torrent.getHexInfoHash(), torrent);</span>
+<span class="fc" id="L248">    logger.info(&quot;Registered new torrent with hash {}.&quot;, torrent.getHexInfoHash());</span>
+<span class="fc" id="L249">    return torrent;</span>
+  }
+
+  /**
+   * Set to true to allow this tracker to track external torrents (i.e. those that were not explicitly announced here).
+   *
+   * @param acceptForeignTorrents true to accept foreign torrents (false otherwise)
+   */
+  public void setAcceptForeignTorrents(boolean acceptForeignTorrents) {
+<span class="fc" id="L258">    myTrackerServiceContainer.setAcceptForeignTorrents(acceptForeignTorrents);</span>
+<span class="fc" id="L259">  }</span>
+
+  /**
+   * @return all tracked torrents.
+   */
+  public Collection&lt;TrackedTorrent&gt; getTrackedTorrents() {
+<span class="fc" id="L265">    return Collections.unmodifiableCollection(myTorrentsRepository.getTorrents().values());</span>
+  }
+
+  public TrackedTorrent getTrackedTorrent(String hash) {
+<span class="fc" id="L269">    return myTorrentsRepository.getTorrent(hash);</span>
+  }
+
+  public void setAnnounceInterval(int announceInterval) {
+<span class="fc" id="L273">    myTrackerServiceContainer.setAnnounceInterval(announceInterval);</span>
+<span class="fc" id="L274">  }</span>
+
+  public void setPeerCollectorExpireTimeout(int expireTimeout) {
+<span class="fc" id="L277">    myPeerCollectorThread.setTorrentExpireTimeoutSec(expireTimeout);</span>
+<span class="fc" id="L278">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

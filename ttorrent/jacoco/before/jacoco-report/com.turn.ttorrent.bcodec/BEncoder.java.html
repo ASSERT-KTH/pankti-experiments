@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BEncoder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.bcodec</a> &gt; <span class="el_source">BEncoder.java</span></div><h1>BEncoder.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.bcodec;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.util.*;
+
+/**
+ * B-encoding encoder.
+ *
+ * &lt;p&gt;
+ * This class provides utility methods to encode objects and
+ * {@link BEValue}s to B-encoding into a provided output stream.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;
+ * Inspired by Snark's implementation.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/Bencode&quot;&gt;B-encoding specification&lt;/a&gt;
+ */
+<span class="nc" id="L39">public class BEncoder {</span>
+
+  @SuppressWarnings(&quot;unchecked&quot;)
+  public static void bencode(Object o, OutputStream out)
+          throws IOException, IllegalArgumentException {
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">    if (o instanceof BEValue) {</span>
+<span class="fc" id="L45">      o = ((BEValue) o).getValue();</span>
+    }
+
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">    if (o instanceof String) {</span>
+<span class="nc" id="L49">      bencode((String) o, out);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">    } else if (o instanceof byte[]) {</span>
+<span class="fc" id="L51">      bencode((byte[]) o, out);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">    } else if (o instanceof Number) {</span>
+<span class="fc" id="L53">      bencode((Number) o, out);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">    } else if (o instanceof List) {</span>
+<span class="fc" id="L55">      bencode((List&lt;BEValue&gt;) o, out);</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">    } else if (o instanceof Map) {</span>
+<span class="fc" id="L57">      bencode((Map&lt;String, BEValue&gt;) o, out);</span>
+    } else {
+<span class="nc" id="L59">      throw new IllegalArgumentException(&quot;Cannot bencode: &quot; +</span>
+<span class="nc" id="L60">              o.getClass());</span>
+    }
+<span class="fc" id="L62">  }</span>
+
+  public static void bencode(String s, OutputStream out) throws IOException {
+<span class="fc" id="L65">    byte[] bs = s.getBytes(&quot;UTF-8&quot;);</span>
+<span class="fc" id="L66">    bencode(bs, out);</span>
+<span class="fc" id="L67">  }</span>
+
+  public static void bencode(Number n, OutputStream out) throws IOException {
+<span class="fc" id="L70">    out.write('i');</span>
+<span class="fc" id="L71">    String s = n.toString();</span>
+<span class="fc" id="L72">    out.write(s.getBytes(&quot;UTF-8&quot;));</span>
+<span class="fc" id="L73">    out.write('e');</span>
+<span class="fc" id="L74">  }</span>
+
+  public static void bencode(List&lt;BEValue&gt; l, OutputStream out)
+          throws IOException {
+<span class="fc" id="L78">    out.write('l');</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">    for (BEValue value : l) {</span>
+<span class="fc" id="L80">      bencode(value, out);</span>
+<span class="fc" id="L81">    }</span>
+<span class="fc" id="L82">    out.write('e');</span>
+<span class="fc" id="L83">  }</span>
+
+  public static void bencode(byte[] bs, OutputStream out) throws IOException {
+<span class="fc" id="L86">    String l = Integer.toString(bs.length);</span>
+<span class="fc" id="L87">    out.write(l.getBytes(&quot;UTF-8&quot;));</span>
+<span class="fc" id="L88">    out.write(':');</span>
+<span class="fc" id="L89">    out.write(bs);</span>
+<span class="fc" id="L90">  }</span>
+
+  public static void bencode(Map&lt;String, BEValue&gt; m, OutputStream out)
+          throws IOException {
+<span class="fc" id="L94">    out.write('d');</span>
+
+    // Keys must be sorted.
+<span class="fc" id="L97">    Set&lt;String&gt; s = m.keySet();</span>
+<span class="fc" id="L98">    List&lt;String&gt; l = new ArrayList&lt;String&gt;(s);</span>
+<span class="fc" id="L99">    Collections.sort(l);</span>
+
+<span class="fc bfc" id="L101" title="All 2 branches covered.">    for (String key : l) {</span>
+<span class="fc" id="L102">      Object value = m.get(key);</span>
+<span class="fc" id="L103">      bencode(key, out);</span>
+<span class="fc" id="L104">      bencode(value, out);</span>
+<span class="fc" id="L105">    }</span>
+
+<span class="fc" id="L107">    out.write('e');</span>
+<span class="fc" id="L108">  }</span>
+
+  public static ByteBuffer bencode(Map&lt;String, BEValue&gt; m)
+          throws IOException {
+<span class="fc" id="L112">    ByteArrayOutputStream baos = new ByteArrayOutputStream();</span>
+<span class="fc" id="L113">    BEncoder.bencode(m, baos);</span>
+<span class="fc" id="L114">    baos.close();</span>
+<span class="fc" id="L115">    return ByteBuffer.wrap(baos.toByteArray());</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

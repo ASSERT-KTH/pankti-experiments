@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HTTPAnnounceResponseMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common.protocol.http</a> &gt; <span class="el_source">HTTPAnnounceResponseMessage.java</span></div><h1>HTTPAnnounceResponseMessage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.common.protocol.http;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.bcodec.BEValue;
+import com.turn.ttorrent.bcodec.BEncoder;
+import com.turn.ttorrent.bcodec.InvalidBEncodingException;
+import com.turn.ttorrent.common.Peer;
+import com.turn.ttorrent.common.protocol.AnnounceResponseMessage;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
+import java.util.*;
+
+
+/**
+ * The announce response message from an HTTP tracker.
+ *
+ * @author mpetazzoni
+ */
+public class HTTPAnnounceResponseMessage extends HTTPTrackerMessage
+        implements AnnounceResponseMessage {
+
+  private final int interval;
+  private final int complete;
+  private final int incomplete;
+  private final List&lt;Peer&gt; peers;
+  private String hexInfoHash;
+
+  private HTTPAnnounceResponseMessage(ByteBuffer data,
+                                      int interval, int complete, int incomplete, List&lt;Peer&gt; peers) {
+<span class="fc" id="L50">    super(Type.ANNOUNCE_RESPONSE, data);</span>
+<span class="fc" id="L51">    this.interval = interval;</span>
+<span class="fc" id="L52">    this.complete = complete;</span>
+<span class="fc" id="L53">    this.incomplete = incomplete;</span>
+<span class="fc" id="L54">    this.peers = peers;</span>
+<span class="fc" id="L55">  }</span>
+
+  private HTTPAnnounceResponseMessage(ByteBuffer data,
+                                      int interval, int complete, int incomplete, List&lt;Peer&gt; peers, String hexInfoHash) {
+<span class="fc" id="L59">    this(data, interval, complete, incomplete, peers);</span>
+<span class="fc" id="L60">    this.hexInfoHash = hexInfoHash;</span>
+<span class="fc" id="L61">  }</span>
+
+  @Override
+  public int getInterval() {
+<span class="fc" id="L65">    return this.interval;</span>
+  }
+
+  @Override
+  public int getComplete() {
+<span class="fc" id="L70">    return this.complete;</span>
+  }
+
+  @Override
+  public int getIncomplete() {
+<span class="fc" id="L75">    return this.incomplete;</span>
+  }
+
+  @Override
+  public List&lt;Peer&gt; getPeers() {
+<span class="fc" id="L80">    return this.peers;</span>
+  }
+
+  public String getHexInfoHash() {
+<span class="fc" id="L84">    return this.hexInfoHash;</span>
+  }
+
+  public static HTTPAnnounceResponseMessage parse(BEValue decoded)
+          throws IOException, MessageValidationException {
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">    if (decoded == null) {</span>
+<span class="nc" id="L90">      throw new MessageValidationException(</span>
+              &quot;Could not decode tracker message (not B-encoded?)!&quot;);
+    }
+
+<span class="fc" id="L94">    Map&lt;String, BEValue&gt; params = decoded.getMap();</span>
+
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">    if (params.get(&quot;interval&quot;) == null) {</span>
+<span class="nc" id="L97">      throw new MessageValidationException(&quot;Tracker message missing mandatory field 'interval'!&quot;);</span>
+    }
+
+    try {
+      List&lt;Peer&gt; peers;
+
+      try {
+        // First attempt to decode a compact response, since we asked
+        // for it.
+<span class="fc" id="L106">        peers = toPeerList(params.get(&quot;peers&quot;).getBytes());</span>
+<span class="nc" id="L107">      } catch (InvalidBEncodingException ibee) {</span>
+        // Fall back to peer list, non-compact response, in case the
+        // tracker did not support compact responses.
+<span class="nc" id="L110">        peers = toPeerList(params.get(&quot;peers&quot;).getList());</span>
+<span class="fc" id="L111">      }</span>
+
+<span class="fc bfc" id="L113" title="All 2 branches covered.">      if (params.get(&quot;torrentIdentifier&quot;) != null) {</span>
+<span class="fc" id="L114">        return new HTTPAnnounceResponseMessage(Constants.EMPTY_BUFFER,</span>
+<span class="fc" id="L115">                params.get(&quot;interval&quot;).getInt(),</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">                params.get(&quot;complete&quot;) != null ? params.get(&quot;complete&quot;).getInt() : 0,</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">                params.get(&quot;incomplete&quot;) != null ? params.get(&quot;incomplete&quot;).getInt() : 0,</span>
+<span class="fc" id="L118">                peers, params.get(&quot;torrentIdentifier&quot;).getString());</span>
+      } else {
+<span class="fc" id="L120">        return new HTTPAnnounceResponseMessage(Constants.EMPTY_BUFFER,</span>
+<span class="fc" id="L121">                params.get(&quot;interval&quot;).getInt(),</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">                params.get(&quot;complete&quot;) != null ? params.get(&quot;complete&quot;).getInt() : 0,</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">                params.get(&quot;incomplete&quot;) != null ? params.get(&quot;incomplete&quot;).getInt() : 0,</span>
+                peers);
+      }
+<span class="nc" id="L126">    } catch (InvalidBEncodingException ibee) {</span>
+<span class="nc" id="L127">      throw new MessageValidationException(&quot;Invalid response &quot; +</span>
+              &quot;from tracker!&quot;, ibee);
+<span class="nc" id="L129">    } catch (UnknownHostException uhe) {</span>
+<span class="nc" id="L130">      throw new MessageValidationException(&quot;Invalid peer &quot; +</span>
+              &quot;in tracker response!&quot;, uhe);
+    }
+  }
+
+  /**
+   * Build a peer list as a list of {@link Peer}s from the
+   * announce response's peer list (in non-compact mode).
+   *
+   * @param peers The list of {@link BEValue}s dictionaries describing the
+   *              peers from the announce response.
+   * @return A {@link List} of {@link Peer}s representing the
+   * peers' addresses. Peer IDs are lost, but they are not crucial.
+   */
+  private static List&lt;Peer&gt; toPeerList(List&lt;BEValue&gt; peers)
+          throws InvalidBEncodingException {
+<span class="nc" id="L146">    List&lt;Peer&gt; result = new LinkedList&lt;Peer&gt;();</span>
+
+<span class="nc bnc" id="L148" title="All 2 branches missed.">    for (BEValue peer : peers) {</span>
+<span class="nc" id="L149">      Map&lt;String, BEValue&gt; peerInfo = peer.getMap();</span>
+<span class="nc" id="L150">      result.add(new Peer(</span>
+<span class="nc" id="L151">              peerInfo.get(&quot;ip&quot;).getString(Constants.BYTE_ENCODING),</span>
+<span class="nc" id="L152">              peerInfo.get(&quot;port&quot;).getInt()));</span>
+<span class="nc" id="L153">    }</span>
+
+<span class="nc" id="L155">    return result;</span>
+  }
+
+  /**
+   * Build a peer list as a list of {@link Peer}s from the
+   * announce response's binary compact peer list.
+   *
+   * @param data The bytes representing the compact peer list from the
+   *             announce response.
+   * @return A {@link List} of {@link Peer}s representing the
+   * peers' addresses. Peer IDs are lost, but they are not crucial.
+   */
+  private static List&lt;Peer&gt; toPeerList(byte[] data)
+          throws InvalidBEncodingException, UnknownHostException {
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">    if (data.length % 6 != 0) {</span>
+<span class="nc" id="L170">      throw new InvalidBEncodingException(&quot;Invalid peers &quot; +</span>
+              &quot;binary information string!&quot;);
+    }
+
+<span class="fc" id="L174">    List&lt;Peer&gt; result = new LinkedList&lt;Peer&gt;();</span>
+<span class="fc" id="L175">    ByteBuffer peers = ByteBuffer.wrap(data);</span>
+
+<span class="fc bfc" id="L177" title="All 2 branches covered.">    for (int i = 0; i &lt; data.length / 6; i++) {</span>
+<span class="fc" id="L178">      byte[] ipBytes = new byte[4];</span>
+<span class="fc" id="L179">      peers.get(ipBytes);</span>
+<span class="fc" id="L180">      InetAddress ip = InetAddress.getByAddress(ipBytes);</span>
+<span class="fc" id="L181">      int port =</span>
+<span class="fc" id="L182">              (0xFF &amp; (int) peers.get()) &lt;&lt; 8 |</span>
+<span class="fc" id="L183">                      (0xFF &amp; (int) peers.get());</span>
+<span class="fc" id="L184">      result.add(new Peer(new InetSocketAddress(ip, port)));</span>
+    }
+
+<span class="fc" id="L187">    return result;</span>
+  }
+
+  /**
+   * Craft a compact announce response message with a torrent identifier.
+   *
+   * @param interval
+   * @param complete
+   * @param incomplete
+   * @param peers
+   */
+  public static HTTPAnnounceResponseMessage craft(int interval,
+                                                  int complete, int incomplete,
+                                                  List&lt;Peer&gt; peers, String hexInfoHash) throws IOException, UnsupportedEncodingException {
+<span class="fc" id="L201">    Map&lt;String, BEValue&gt; response = new HashMap&lt;String, BEValue&gt;();</span>
+<span class="fc" id="L202">    response.put(&quot;interval&quot;, new BEValue(interval));</span>
+<span class="fc" id="L203">    response.put(&quot;complete&quot;, new BEValue(complete));</span>
+<span class="fc" id="L204">    response.put(&quot;incomplete&quot;, new BEValue(incomplete));</span>
+<span class="pc bpc" id="L205" title="1 of 2 branches missed.">    if (hexInfoHash != null) {</span>
+<span class="fc" id="L206">      response.put(&quot;torrentIdentifier&quot;, new BEValue(hexInfoHash));</span>
+    }
+
+<span class="fc" id="L209">    ByteBuffer data = ByteBuffer.allocate(peers.size() * 6);</span>
+<span class="fc bfc" id="L210" title="All 2 branches covered.">    for (Peer peer : peers) {</span>
+<span class="fc" id="L211">      byte[] ip = peer.getRawIp();</span>
+<span class="pc bpc" id="L212" title="1 of 4 branches missed.">      if (ip == null || ip.length != 4) {</span>
+<span class="nc" id="L213">        continue;</span>
+      }
+<span class="fc" id="L215">      data.put(ip);</span>
+<span class="fc" id="L216">      data.putShort((short) peer.getPort());</span>
+<span class="fc" id="L217">    }</span>
+<span class="fc" id="L218">    response.put(&quot;peers&quot;, new BEValue(Arrays.copyOf(data.array(), data.position())));</span>
+
+<span class="fc" id="L220">    return new HTTPAnnounceResponseMessage(</span>
+<span class="fc" id="L221">            BEncoder.bencode(response),</span>
+            interval, complete, incomplete, peers, hexInfoHash);
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

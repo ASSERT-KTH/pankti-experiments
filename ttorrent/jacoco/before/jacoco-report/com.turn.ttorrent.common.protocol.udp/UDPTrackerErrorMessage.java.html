@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UDPTrackerErrorMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common.protocol.udp</a> &gt; <span class="el_source">UDPTrackerErrorMessage.java</span></div><h1>UDPTrackerErrorMessage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.common.protocol.udp;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.common.protocol.TrackerMessage;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+
+
+/**
+ * The error message for the UDP tracker protocol.
+ *
+ * @author mpetazzoni
+ */
+public class UDPTrackerErrorMessage
+        extends UDPTrackerMessage.UDPTrackerResponseMessage
+        implements TrackerMessage.ErrorMessage {
+
+  private static final int UDP_TRACKER_ERROR_MIN_MESSAGE_SIZE = 8;
+
+<span class="nc" id="L36">  private final int actionId = Type.ERROR.getId();</span>
+  private final int transactionId;
+  private final String reason;
+
+  private UDPTrackerErrorMessage(ByteBuffer data, int transactionId,
+                                 String reason) {
+<span class="nc" id="L42">    super(Type.ERROR, data);</span>
+<span class="nc" id="L43">    this.transactionId = transactionId;</span>
+<span class="nc" id="L44">    this.reason = reason;</span>
+<span class="nc" id="L45">  }</span>
+
+  @Override
+  public int getActionId() {
+<span class="nc" id="L49">    return this.actionId;</span>
+  }
+
+  @Override
+  public int getTransactionId() {
+<span class="nc" id="L54">    return this.transactionId;</span>
+  }
+
+  @Override
+  public String getReason() {
+<span class="nc" id="L59">    return this.reason;</span>
+  }
+
+  public static UDPTrackerErrorMessage parse(ByteBuffer data)
+          throws MessageValidationException {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">    if (data.remaining() &lt; UDP_TRACKER_ERROR_MIN_MESSAGE_SIZE) {</span>
+<span class="nc" id="L65">      throw new MessageValidationException(</span>
+              &quot;Invalid tracker error message size!&quot;);
+    }
+
+<span class="nc bnc" id="L69" title="All 2 branches missed.">    if (data.getInt() != Type.ERROR.getId()) {</span>
+<span class="nc" id="L70">      throw new MessageValidationException(</span>
+              &quot;Invalid action code for tracker error!&quot;);
+    }
+
+<span class="nc" id="L74">    int transactionId = data.getInt();</span>
+<span class="nc" id="L75">    byte[] reasonBytes = new byte[data.remaining()];</span>
+<span class="nc" id="L76">    data.get(reasonBytes);</span>
+
+    try {
+<span class="nc" id="L79">      return new UDPTrackerErrorMessage(data,</span>
+              transactionId,
+              new String(reasonBytes, Constants.BYTE_ENCODING)
+      );
+<span class="nc" id="L83">    } catch (UnsupportedEncodingException uee) {</span>
+<span class="nc" id="L84">      throw new MessageValidationException(</span>
+              &quot;Could not decode error message!&quot;, uee);
+    }
+  }
+
+  public static UDPTrackerErrorMessage craft(int transactionId,
+                                             String reason) throws UnsupportedEncodingException {
+<span class="nc" id="L91">    byte[] reasonBytes = reason.getBytes(Constants.BYTE_ENCODING);</span>
+<span class="nc" id="L92">    ByteBuffer data = ByteBuffer</span>
+<span class="nc" id="L93">            .allocate(UDP_TRACKER_ERROR_MIN_MESSAGE_SIZE +</span>
+                    reasonBytes.length);
+<span class="nc" id="L95">    data.putInt(Type.ERROR.getId());</span>
+<span class="nc" id="L96">    data.putInt(transactionId);</span>
+<span class="nc" id="L97">    data.put(reasonBytes);</span>
+<span class="nc" id="L98">    return new UDPTrackerErrorMessage(data,</span>
+            transactionId,
+            reason);
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

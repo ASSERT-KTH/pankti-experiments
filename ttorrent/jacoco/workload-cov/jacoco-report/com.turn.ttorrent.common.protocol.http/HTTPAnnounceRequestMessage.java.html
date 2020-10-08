@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HTTPAnnounceRequestMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common.protocol.http</a> &gt; <span class="el_source">HTTPAnnounceRequestMessage.java</span></div><h1>HTTPAnnounceRequestMessage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.common.protocol.http;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.bcodec.BEValue;
+import com.turn.ttorrent.bcodec.BEncoder;
+import com.turn.ttorrent.bcodec.InvalidBEncodingException;
+import com.turn.ttorrent.common.Peer;
+import com.turn.ttorrent.common.TorrentUtils;
+import com.turn.ttorrent.common.protocol.AnnounceRequestMessage;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.ByteBuffer;
+import java.util.HashMap;
+import java.util.Map;
+
+
+/**
+ * The announce request message for the HTTP tracker protocol.
+ *
+ * &lt;p&gt;
+ * This class represents the announce request message in the HTTP tracker
+ * protocol. It doesn't add any specific fields compared to the generic
+ * announce request message, but it provides the means to parse such
+ * messages and craft them.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ */
+public class HTTPAnnounceRequestMessage extends HTTPTrackerMessage
+        implements AnnounceRequestMessage {
+
+  private final byte[] infoHash;
+  private final Peer peer;
+  private final long uploaded;
+  private final long downloaded;
+  private final long left;
+  private final boolean compact;
+  private final boolean noPeerId;
+  private final RequestEvent event;
+  private final int numWant;
+
+  private HTTPAnnounceRequestMessage(ByteBuffer data,
+                                     byte[] infoHash, Peer peer, long uploaded, long downloaded,
+                                     long left, boolean compact, boolean noPeerId, RequestEvent event,
+                                     int numWant) {
+<span class="fc" id="L65">    super(Type.ANNOUNCE_REQUEST, data);</span>
+<span class="fc" id="L66">    this.infoHash = infoHash;</span>
+<span class="fc" id="L67">    this.peer = peer;</span>
+<span class="fc" id="L68">    this.downloaded = downloaded;</span>
+<span class="fc" id="L69">    this.uploaded = uploaded;</span>
+<span class="fc" id="L70">    this.left = left;</span>
+<span class="fc" id="L71">    this.compact = compact;</span>
+<span class="fc" id="L72">    this.noPeerId = noPeerId;</span>
+<span class="fc" id="L73">    this.event = event;</span>
+<span class="fc" id="L74">    this.numWant = numWant;</span>
+<span class="fc" id="L75">  }</span>
+
+  @Override
+  public byte[] getInfoHash() {
+<span class="fc" id="L79">    return this.infoHash;</span>
+  }
+
+  @Override
+  public String getHexInfoHash() {
+<span class="nc" id="L84">    return TorrentUtils.byteArrayToHexString(this.infoHash);</span>
+  }
+
+  @Override
+  public byte[] getPeerId() {
+<span class="fc" id="L89">    return this.peer.getPeerIdArray();</span>
+  }
+
+  @Override
+  public String getHexPeerId() {
+<span class="nc" id="L94">    return this.peer.getHexPeerId();</span>
+  }
+
+  @Override
+  public int getPort() {
+<span class="fc" id="L99">    return this.peer.getPort();</span>
+  }
+
+  @Override
+  public long getUploaded() {
+<span class="fc" id="L104">    return this.uploaded;</span>
+  }
+
+  @Override
+  public long getDownloaded() {
+<span class="fc" id="L109">    return this.downloaded;</span>
+  }
+
+  @Override
+  public long getLeft() {
+<span class="fc" id="L114">    return this.left;</span>
+  }
+
+  @Override
+  public boolean isCompact() {
+<span class="fc" id="L119">    return this.compact;</span>
+  }
+
+  @Override
+  public boolean canOmitPeerId() {
+<span class="fc" id="L124">    return this.noPeerId;</span>
+  }
+
+  @Override
+  public RequestEvent getEvent() {
+<span class="fc" id="L129">    return this.event;</span>
+  }
+
+  @Override
+  public String getIp() {
+<span class="fc" id="L134">    return this.peer.getIp();</span>
+  }
+
+  @Override
+  public int getNumWant() {
+<span class="nc" id="L139">    return this.numWant;</span>
+  }
+
+  @Override
+  public String getKey() {
+<span class="nc" id="L144">    return &quot;&quot;;</span>
+  }
+
+  @Override
+  public String getTrackerId() {
+<span class="nc" id="L149">    return &quot;&quot;;</span>
+  }
+
+  /**
+   * Build the announce request URL for the given tracker announce URL.
+   *
+   * @param trackerAnnounceURL The tracker's announce URL.
+   * @return The URL object representing the announce request URL.
+   */
+  public URL buildAnnounceURL(URL trackerAnnounceURL)
+          throws UnsupportedEncodingException, MalformedURLException {
+<span class="fc" id="L160">    String base = trackerAnnounceURL.toString();</span>
+<span class="fc" id="L161">    StringBuilder url = new StringBuilder(base);</span>
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">    url.append(base.contains(&quot;?&quot;) ? &quot;&amp;&quot; : &quot;?&quot;)</span>
+<span class="fc" id="L163">            .append(&quot;info_hash=&quot;)</span>
+<span class="fc" id="L164">            .append(URLEncoder.encode(</span>
+<span class="fc" id="L165">                    new String(this.getInfoHash(), Constants.BYTE_ENCODING),</span>
+                    Constants.BYTE_ENCODING))
+<span class="fc" id="L167">            .append(&quot;&amp;peer_id=&quot;)</span>
+<span class="fc" id="L168">            .append(URLEncoder.encode(</span>
+<span class="fc" id="L169">                    new String(this.getPeerId(), Constants.BYTE_ENCODING),</span>
+                    Constants.BYTE_ENCODING))
+<span class="fc" id="L171">            .append(&quot;&amp;port=&quot;).append(this.getPort())</span>
+<span class="fc" id="L172">            .append(&quot;&amp;uploaded=&quot;).append(this.getUploaded())</span>
+<span class="fc" id="L173">            .append(&quot;&amp;downloaded=&quot;).append(this.getDownloaded())</span>
+<span class="fc" id="L174">            .append(&quot;&amp;left=&quot;).append(this.getLeft())</span>
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">            .append(&quot;&amp;compact=&quot;).append(this.isCompact() ? 1 : 0)</span>
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">            .append(&quot;&amp;no_peer_id=&quot;).append(this.canOmitPeerId() ? 1 : 0);</span>
+
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">    if (this.getEvent() != null &amp;&amp;</span>
+<span class="fc bfc" id="L179" title="All 2 branches covered.">            !RequestEvent.NONE.equals(this.getEvent())) {</span>
+<span class="fc" id="L180">      url.append(&quot;&amp;event=&quot;).append(this.getEvent().getEventName());</span>
+    }
+
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">    if (this.getIp() != null) {</span>
+<span class="fc" id="L184">      url.append(&quot;&amp;ip=&quot;).append(this.getIp());</span>
+    }
+
+<span class="fc" id="L187">    return new URL(url.toString());</span>
+  }
+
+  public static HTTPAnnounceRequestMessage parse(BEValue decoded)
+          throws IOException, MessageValidationException {
+<span class="nc bnc" id="L192" title="All 2 branches missed.">    if (decoded == null) {</span>
+<span class="nc" id="L193">      throw new MessageValidationException(</span>
+              &quot;Could not decode tracker message (not B-encoded?)!&quot;);
+    }
+
+<span class="nc" id="L197">    Map&lt;String, BEValue&gt; params = decoded.getMap();</span>
+
+<span class="nc bnc" id="L199" title="All 2 branches missed.">    if (!params.containsKey(&quot;info_hash&quot;)) {</span>
+<span class="nc" id="L200">      throw new MessageValidationException(</span>
+<span class="nc" id="L201">              ErrorMessage.FailureReason.MISSING_HASH.getMessage());</span>
+    }
+
+<span class="nc bnc" id="L204" title="All 2 branches missed.">    if (!params.containsKey(&quot;peer_id&quot;)) {</span>
+<span class="nc" id="L205">      throw new MessageValidationException(</span>
+<span class="nc" id="L206">              ErrorMessage.FailureReason.MISSING_PEER_ID.getMessage());</span>
+    }
+
+<span class="nc bnc" id="L209" title="All 2 branches missed.">    if (!params.containsKey(&quot;port&quot;)) {</span>
+<span class="nc" id="L210">      throw new MessageValidationException(</span>
+<span class="nc" id="L211">              ErrorMessage.FailureReason.MISSING_PORT.getMessage());</span>
+    }
+
+    try {
+<span class="nc" id="L215">      byte[] infoHash = params.get(&quot;info_hash&quot;).getBytes();</span>
+<span class="nc" id="L216">      byte[] peerId = params.get(&quot;peer_id&quot;).getBytes();</span>
+<span class="nc" id="L217">      int port = params.get(&quot;port&quot;).getInt();</span>
+
+      // Default 'uploaded' and 'downloaded' to 0 if the client does
+      // not provide it (although it should, according to the spec).
+<span class="nc" id="L221">      long uploaded = 0;</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">      if (params.containsKey(&quot;uploaded&quot;)) {</span>
+<span class="nc" id="L223">        uploaded = params.get(&quot;uploaded&quot;).getLong();</span>
+      }
+
+<span class="nc" id="L226">      long downloaded = 0;</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">      if (params.containsKey(&quot;downloaded&quot;)) {</span>
+<span class="nc" id="L228">        downloaded = params.get(&quot;downloaded&quot;).getLong();</span>
+      }
+
+      // Default 'left' to -1 to avoid peers entering the COMPLETED
+      // state when they don't provide the 'left' parameter.
+<span class="nc" id="L233">      long left = -1;</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">      if (params.containsKey(&quot;left&quot;)) {</span>
+<span class="nc" id="L235">        left = params.get(&quot;left&quot;).getLong();</span>
+      }
+
+<span class="nc" id="L238">      boolean compact = false;</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">      if (params.containsKey(&quot;compact&quot;)) {</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">        compact = params.get(&quot;compact&quot;).getInt() == 1;</span>
+      }
+
+<span class="nc" id="L243">      boolean noPeerId = false;</span>
+<span class="nc bnc" id="L244" title="All 2 branches missed.">      if (params.containsKey(&quot;no_peer_id&quot;)) {</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">        noPeerId = params.get(&quot;no_peer_id&quot;).getInt() == 1;</span>
+      }
+
+<span class="nc" id="L248">      int numWant = AnnounceRequestMessage.DEFAULT_NUM_WANT;</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">      if (params.containsKey(&quot;numwant&quot;)) {</span>
+<span class="nc" id="L250">        numWant = params.get(&quot;numwant&quot;).getInt();</span>
+      }
+
+<span class="nc" id="L253">      String ip = null;</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">      if (params.containsKey(&quot;ip&quot;)) {</span>
+<span class="nc" id="L255">        ip = params.get(&quot;ip&quot;).getString(Constants.BYTE_ENCODING);</span>
+      }
+
+<span class="nc" id="L258">      RequestEvent event = RequestEvent.NONE;</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">      if (params.containsKey(&quot;event&quot;)) {</span>
+<span class="nc" id="L260">        event = RequestEvent.getByName(params.get(&quot;event&quot;)</span>
+<span class="nc" id="L261">                .getString(Constants.BYTE_ENCODING));</span>
+      }
+
+<span class="nc" id="L264">      return new HTTPAnnounceRequestMessage(Constants.EMPTY_BUFFER, infoHash,</span>
+<span class="nc" id="L265">              new Peer(ip, port, ByteBuffer.wrap(peerId)),</span>
+              uploaded, downloaded, left, compact, noPeerId,
+              event, numWant);
+<span class="nc" id="L268">    } catch (InvalidBEncodingException ibee) {</span>
+<span class="nc" id="L269">      throw new MessageValidationException(</span>
+              &quot;Invalid HTTP tracker request!&quot;, ibee);
+    }
+  }
+
+  public static HTTPAnnounceRequestMessage craft(byte[] infoHash,
+                                                 byte[] peerId, int port, long uploaded, long downloaded, long left,
+                                                 boolean compact, boolean noPeerId, RequestEvent event,
+                                                 String ip, int numWant)
+          throws IOException {
+<span class="fc" id="L279">    Map&lt;String, BEValue&gt; params = new HashMap&lt;String, BEValue&gt;();</span>
+<span class="fc" id="L280">    params.put(&quot;info_hash&quot;, new BEValue(infoHash));</span>
+<span class="fc" id="L281">    params.put(&quot;peer_id&quot;, new BEValue(peerId));</span>
+<span class="fc" id="L282">    params.put(&quot;port&quot;, new BEValue(port));</span>
+<span class="fc" id="L283">    params.put(&quot;uploaded&quot;, new BEValue(uploaded));</span>
+<span class="fc" id="L284">    params.put(&quot;downloaded&quot;, new BEValue(downloaded));</span>
+<span class="fc" id="L285">    params.put(&quot;left&quot;, new BEValue(left));</span>
+<span class="pc bpc" id="L286" title="1 of 2 branches missed.">    params.put(&quot;compact&quot;, new BEValue(compact ? 1 : 0));</span>
+<span class="pc bpc" id="L287" title="1 of 2 branches missed.">    params.put(&quot;no_peer_id&quot;, new BEValue(noPeerId ? 1 : 0));</span>
+
+<span class="pc bpc" id="L289" title="1 of 2 branches missed.">    if (event != null) {</span>
+<span class="fc" id="L290">      params.put(&quot;event&quot;,</span>
+<span class="fc" id="L291">              new BEValue(event.getEventName(), Constants.BYTE_ENCODING));</span>
+    }
+
+<span class="pc bpc" id="L294" title="1 of 2 branches missed.">    if (ip != null) {</span>
+<span class="fc" id="L295">      params.put(&quot;ip&quot;,</span>
+              new BEValue(ip, Constants.BYTE_ENCODING));
+    }
+
+<span class="pc bpc" id="L299" title="1 of 2 branches missed.">    if (numWant != AnnounceRequestMessage.DEFAULT_NUM_WANT) {</span>
+<span class="nc" id="L300">      params.put(&quot;numwant&quot;, new BEValue(numWant));</span>
+    }
+
+<span class="fc" id="L303">    return new HTTPAnnounceRequestMessage(</span>
+<span class="fc" id="L304">            BEncoder.bencode(params),</span>
+<span class="fc" id="L305">            infoHash, new Peer(ip, port, ByteBuffer.wrap(peerId)),</span>
+            uploaded, downloaded, left, compact, noPeerId, event, numWant);
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

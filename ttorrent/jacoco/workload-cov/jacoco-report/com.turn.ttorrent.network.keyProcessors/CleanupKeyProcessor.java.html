@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CleanupKeyProcessor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.network.keyProcessors</a> &gt; <span class="el_source">CleanupKeyProcessor.java</span></div><h1>CleanupKeyProcessor.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.network.keyProcessors;
+
+import com.turn.ttorrent.common.LoggerUtils;
+import com.turn.ttorrent.common.TimeService;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.network.TimeoutAttachment;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.SocketChannel;
+
+public class CleanupKeyProcessor implements CleanupProcessor {
+
+<span class="fc" id="L15">  private final static Logger logger = TorrentLoggerFactory.getLogger(CleanupKeyProcessor.class);</span>
+
+  private final TimeService myTimeService;
+
+<span class="fc" id="L19">  public CleanupKeyProcessor(TimeService timeService) {</span>
+<span class="fc" id="L20">    this.myTimeService = timeService;</span>
+<span class="fc" id="L21">  }</span>
+
+  @Override
+  public void processCleanup(SelectionKey key) {
+<span class="nc" id="L25">    TimeoutAttachment attachment = KeyProcessorUtil.getAttachmentAsTimeoutOrNull(key);</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">    if (attachment == null) {</span>
+<span class="nc" id="L27">      key.cancel();</span>
+<span class="nc" id="L28">      return;</span>
+    }
+<span class="nc bnc" id="L30" title="All 2 branches missed.">    if (attachment.isTimeoutElapsed(myTimeService.now())) {</span>
+
+<span class="nc" id="L32">      SocketChannel channel = KeyProcessorUtil.getCastedChannelOrNull(key);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">      if (channel == null) {</span>
+<span class="nc" id="L34">        key.cancel();</span>
+<span class="nc" id="L35">        return;</span>
+      }
+
+<span class="nc" id="L38">      logger.debug(&quot;channel {} was inactive in specified timeout. Close channel...&quot;, channel);</span>
+      try {
+<span class="nc" id="L40">        channel.close();</span>
+<span class="nc" id="L41">        key.cancel();</span>
+<span class="nc" id="L42">        attachment.onTimeoutElapsed(channel);</span>
+<span class="nc" id="L43">      } catch (IOException e) {</span>
+<span class="nc" id="L44">        LoggerUtils.errorAndDebugDetails(logger, &quot;unable close channel {}&quot;, channel, e);</span>
+<span class="nc" id="L45">      }</span>
+    }
+<span class="nc" id="L47">  }</span>
+
+  @Override
+  public void processSelected(SelectionKey key) {
+<span class="fc" id="L51">    TimeoutAttachment attachment = KeyProcessorUtil.getAttachmentAsTimeoutOrNull(key);</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">    if (attachment == null) {</span>
+<span class="nc" id="L53">      key.cancel();</span>
+<span class="nc" id="L54">      return;</span>
+    }
+<span class="fc" id="L56">    attachment.communicatedNow(myTimeService.now());</span>
+<span class="fc" id="L57">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

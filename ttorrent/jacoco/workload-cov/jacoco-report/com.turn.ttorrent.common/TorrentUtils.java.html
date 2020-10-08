@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TorrentUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common</a> &gt; <span class="el_source">TorrentUtils.java</span></div><h1>TorrentUtils.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.common;
+
+import org.apache.commons.codec.digest.DigestUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc" id="L8">public final class TorrentUtils {</span>
+
+<span class="fc" id="L10">  private final static char[] HEX_SYMBOLS = &quot;0123456789ABCDEF&quot;.toCharArray();</span>
+
+  /**
+   * @param data for hashing
+   * @return sha 1 hash of specified data
+   */
+  public static byte[] calculateSha1Hash(byte[] data) {
+<span class="fc" id="L17">    return DigestUtils.sha(data);</span>
+  }
+
+  /**
+   * Convert a byte string to a string containing an hexadecimal
+   * representation of the original data.
+   *
+   * @param bytes The byte array to convert.
+   */
+  public static String byteArrayToHexString(byte[] bytes) {
+<span class="fc" id="L27">    char[] hexChars = new char[bytes.length * 2];</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">    for (int j = 0; j &lt; bytes.length; j++) {</span>
+<span class="fc" id="L29">      int v = bytes[j] &amp; 0xFF;</span>
+<span class="fc" id="L30">      hexChars[j * 2] = HEX_SYMBOLS[v &gt;&gt;&gt; 4];</span>
+<span class="fc" id="L31">      hexChars[j * 2 + 1] = HEX_SYMBOLS[v &amp; 0x0F];</span>
+    }
+<span class="fc" id="L33">    return new String(hexChars);</span>
+  }
+
+  public static boolean isTrackerLessInfo(AnnounceableInformation information) {
+<span class="pc bpc" id="L37" title="3 of 4 branches missed.">    return information.getAnnounce() == null &amp;&amp; information.getAnnounceList() == null;</span>
+  }
+
+  public static List&lt;String&gt; getTorrentFileNames(TorrentMetadata metadata) {
+<span class="fc" id="L41">    List&lt;String&gt; result = new ArrayList&lt;String&gt;();</span>
+
+<span class="fc bfc" id="L43" title="All 2 branches covered.">    for (TorrentFile torrentFile : metadata.getFiles()) {</span>
+<span class="fc" id="L44">      result.add(torrentFile.getRelativePathAsString());</span>
+<span class="fc" id="L45">    }</span>
+
+<span class="fc" id="L47">    return result;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

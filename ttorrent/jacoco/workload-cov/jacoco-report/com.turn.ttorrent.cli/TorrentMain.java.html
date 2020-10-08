@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TorrentMain.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.cli</a> &gt; <span class="el_source">TorrentMain.java</span></div><h1>TorrentMain.java</h1><pre class="source lang-java linenums">/*
+  Copyright (C) 2011-2013 Turn, Inc.
+  &lt;p&gt;
+  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  &lt;p&gt;
+  http://www.apache.org/licenses/LICENSE-2.0
+  &lt;p&gt;
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ */
+package com.turn.ttorrent.cli;
+
+
+import com.turn.ttorrent.common.TorrentCreator;
+import com.turn.ttorrent.common.TorrentMetadata;
+import com.turn.ttorrent.common.TorrentParser;
+import com.turn.ttorrent.common.TorrentSerializer;
+import jargs.gnu.CmdLineParser;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.PatternLayout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Vector;
+
+/**
+ * Command-line entry-point for reading and writing {@link TorrentMetadata}.
+ */
+<span class="nc" id="L46">public class TorrentMain {</span>
+
+<span class="nc" id="L48">  private static final Logger logger =</span>
+<span class="nc" id="L49">          LoggerFactory.getLogger(TorrentMain.class);</span>
+
+  /**
+   * Display program usage on the given {@link PrintStream}.
+   */
+  private static void usage(PrintStream s) {
+<span class="nc" id="L55">    usage(s, null);</span>
+<span class="nc" id="L56">  }</span>
+
+  /**
+   * Display a message and program usage on the given {@link PrintStream}.
+   */
+  private static void usage(PrintStream s, String msg) {
+<span class="nc bnc" id="L62" title="All 2 branches missed.">    if (msg != null) {</span>
+<span class="nc" id="L63">      s.println(msg);</span>
+<span class="nc" id="L64">      s.println();</span>
+    }
+
+<span class="nc" id="L67">    s.println(&quot;usage: Torrent [options] [file|directory]&quot;);</span>
+<span class="nc" id="L68">    s.println();</span>
+<span class="nc" id="L69">    s.println(&quot;Available options:&quot;);</span>
+<span class="nc" id="L70">    s.println(&quot;  -h,--help             Show this help and exit.&quot;);</span>
+<span class="nc" id="L71">    s.println(&quot;  -t,--torrent FILE     Use FILE to read/write torrent file.&quot;);</span>
+<span class="nc" id="L72">    s.println();</span>
+<span class="nc" id="L73">    s.println(&quot;  -c,--create           Create a new torrent file using &quot; +</span>
+            &quot;the given announce URL and data.&quot;);
+<span class="nc" id="L75">    s.println(&quot;  -l,--length           Define the piece length for hashing data&quot;);</span>
+<span class="nc" id="L76">    s.println(&quot;  -a,--announce         Tracker URL (can be repeated).&quot;);</span>
+<span class="nc" id="L77">    s.println();</span>
+<span class="nc" id="L78">  }</span>
+
+  /**
+   * Torrent reader and creator.
+   *
+   * &lt;p&gt;
+   * You can use the {@code main()} function of this class to read or create
+   * torrent files. See usage for details.
+   * &lt;/p&gt;
+   */
+  public static void main(String[] args) {
+<span class="nc" id="L89">    BasicConfigurator.configure(new ConsoleAppender(</span>
+            new PatternLayout(&quot;%-5p: %m%n&quot;)));
+
+<span class="nc" id="L92">    CmdLineParser parser = new CmdLineParser();</span>
+<span class="nc" id="L93">    CmdLineParser.Option help = parser.addBooleanOption('h', &quot;help&quot;);</span>
+<span class="nc" id="L94">    CmdLineParser.Option filename = parser.addStringOption('t', &quot;torrent&quot;);</span>
+<span class="nc" id="L95">    CmdLineParser.Option create = parser.addBooleanOption('c', &quot;create&quot;);</span>
+<span class="nc" id="L96">    CmdLineParser.Option pieceLength = parser.addIntegerOption('l', &quot;length&quot;);</span>
+<span class="nc" id="L97">    CmdLineParser.Option announce = parser.addStringOption('a', &quot;announce&quot;);</span>
+
+    try {
+<span class="nc" id="L100">      parser.parse(args);</span>
+<span class="nc" id="L101">    } catch (CmdLineParser.OptionException oe) {</span>
+<span class="nc" id="L102">      System.err.println(oe.getMessage());</span>
+<span class="nc" id="L103">      usage(System.err);</span>
+<span class="nc" id="L104">      System.exit(1);</span>
+<span class="nc" id="L105">    }</span>
+
+    // Display help and exit if requested
+<span class="nc bnc" id="L108" title="All 2 branches missed.">    if (Boolean.TRUE.equals(parser.getOptionValue(help))) {</span>
+<span class="nc" id="L109">      usage(System.out);</span>
+<span class="nc" id="L110">      System.exit(0);</span>
+    }
+
+<span class="nc" id="L113">    String filenameValue = (String) parser.getOptionValue(filename);</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">    if (filenameValue == null) {</span>
+<span class="nc" id="L115">      usage(System.err, &quot;Torrent file must be provided!&quot;);</span>
+<span class="nc" id="L116">      System.exit(1);</span>
+    }
+
+<span class="nc" id="L119">    Integer pieceLengthVal = (Integer) parser.getOptionValue(pieceLength);</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">    if (pieceLengthVal == null) {</span>
+<span class="nc" id="L121">      pieceLengthVal = TorrentCreator.DEFAULT_PIECE_LENGTH;</span>
+    } else {
+<span class="nc" id="L123">      pieceLengthVal = pieceLengthVal * 1024;</span>
+    }
+<span class="nc" id="L125">    logger.info(&quot;Using piece length of {} bytes.&quot;, pieceLengthVal);</span>
+
+<span class="nc" id="L127">    Boolean createFlag = (Boolean) parser.getOptionValue(create);</span>
+
+    //For repeated announce urls
+    @SuppressWarnings(&quot;unchecked&quot;)
+<span class="nc" id="L131">    Vector&lt;String&gt; announceURLs = (Vector&lt;String&gt;) parser.getOptionValues(announce);</span>
+
+<span class="nc" id="L133">    String[] otherArgs = parser.getRemainingArgs();</span>
+
+<span class="nc bnc" id="L135" title="All 4 branches missed.">    if (Boolean.TRUE.equals(createFlag) &amp;&amp;</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">            (otherArgs.length != 1 || announceURLs.isEmpty())) {</span>
+<span class="nc" id="L137">      usage(System.err, &quot;Announce URL and a file or directory must be &quot; +</span>
+              &quot;provided to create a torrent file!&quot;);
+<span class="nc" id="L139">      System.exit(1);</span>
+    }
+
+<span class="nc" id="L142">    OutputStream fos = null;</span>
+    try {
+<span class="nc bnc" id="L144" title="All 2 branches missed.">      if (Boolean.TRUE.equals(createFlag)) {</span>
+<span class="nc" id="L145">        fos = new FileOutputStream(filenameValue);</span>
+
+        //Process the announce URLs into URIs
+<span class="nc" id="L148">        List&lt;URI&gt; announceURIs = new ArrayList&lt;URI&gt;();</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        for (String url : announceURLs) {</span>
+<span class="nc" id="L150">          announceURIs.add(new URI(url));</span>
+<span class="nc" id="L151">        }</span>
+
+        //Create the announce-list as a list of lists of URIs
+        //Assume all the URI's are first tier trackers
+<span class="nc" id="L155">        List&lt;List&lt;URI&gt;&gt; announceList = new ArrayList&lt;List&lt;URI&gt;&gt;();</span>
+<span class="nc" id="L156">        announceList.add(announceURIs);</span>
+
+<span class="nc" id="L158">        File source = new File(otherArgs[0]);</span>
+<span class="nc bnc" id="L159" title="All 4 branches missed.">        if (!source.exists() || !source.canRead()) {</span>
+<span class="nc" id="L160">          throw new IllegalArgumentException(</span>
+                  &quot;Cannot access source file or directory &quot; +
+<span class="nc" id="L162">                          source.getName());</span>
+        }
+
+<span class="nc" id="L165">        String creator = String.format(&quot;%s (ttorrent)&quot;,</span>
+<span class="nc" id="L166">                System.getProperty(&quot;user.name&quot;));</span>
+
+        TorrentMetadata torrent;
+<span class="nc bnc" id="L169" title="All 2 branches missed.">        if (source.isDirectory()) {</span>
+<span class="nc" id="L170">          List&lt;File&gt; files = new ArrayList&lt;File&gt;(FileUtils.listFiles(source, TrueFileFilter.TRUE, TrueFileFilter.TRUE));</span>
+<span class="nc" id="L171">          Collections.sort(files);</span>
+<span class="nc" id="L172">          torrent = TorrentCreator.create(source, files, announceList.get(0).get(0), announceList, creator, pieceLengthVal);</span>
+<span class="nc" id="L173">        } else {</span>
+<span class="nc" id="L174">          torrent = TorrentCreator.create(source, null, announceList.get(0).get(0), announceList, creator, pieceLengthVal);</span>
+        }
+
+<span class="nc" id="L177">        fos.write(new TorrentSerializer().serialize(torrent));</span>
+<span class="nc" id="L178">      } else {</span>
+<span class="nc" id="L179">        new TorrentParser().parseFromFile(new File(filenameValue));</span>
+      }
+<span class="nc" id="L181">    } catch (Exception e) {</span>
+<span class="nc" id="L182">      logger.error(&quot;{}&quot;, e.getMessage(), e);</span>
+<span class="nc" id="L183">      System.exit(2);</span>
+    } finally {
+<span class="nc bnc" id="L185" title="All 2 branches missed.">      if (fos != System.out) {</span>
+<span class="nc" id="L186">        IOUtils.closeQuietly(fos);</span>
+      }
+    }
+<span class="nc" id="L189">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

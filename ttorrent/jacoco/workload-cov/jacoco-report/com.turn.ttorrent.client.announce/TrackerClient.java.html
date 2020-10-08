@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TrackerClient.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.announce</a> &gt; <span class="el_source">TrackerClient.java</span></div><h1>TrackerClient.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.client.announce;
+
+import com.turn.ttorrent.common.AnnounceableInformation;
+import com.turn.ttorrent.common.Peer;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.common.protocol.AnnounceRequestMessage;
+import com.turn.ttorrent.common.protocol.AnnounceResponseMessage;
+import com.turn.ttorrent.common.protocol.TrackerMessage;
+import com.turn.ttorrent.common.protocol.TrackerMessage.ErrorMessage;
+import org.slf4j.Logger;
+
+import java.net.ConnectException;
+import java.net.URI;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public abstract class TrackerClient {
+
+<span class="fc" id="L36">  private static final Logger logger =</span>
+<span class="fc" id="L37">          TorrentLoggerFactory.getLogger(TrackerClient.class);</span>
+
+
+  /**
+   * The set of listeners to announce request answers.
+   */
+  private final Set&lt;AnnounceResponseListener&gt; listeners;
+
+  protected final List&lt;Peer&gt; myAddress;
+  protected final URI tracker;
+
+<span class="fc" id="L48">  public TrackerClient(final List&lt;Peer&gt; peers, final URI tracker) {</span>
+<span class="fc" id="L49">    this.listeners = new HashSet&lt;AnnounceResponseListener&gt;();</span>
+<span class="fc" id="L50">    myAddress = peers;</span>
+<span class="fc" id="L51">    this.tracker = tracker;</span>
+<span class="fc" id="L52">  }</span>
+
+  /**
+   * Register a new announce response listener.
+   *
+   * @param listener The listener to register on this announcer events.
+   */
+  public void register(AnnounceResponseListener listener) {
+<span class="fc" id="L60">    this.listeners.add(listener);</span>
+<span class="fc" id="L61">  }</span>
+
+  /**
+   * Returns the URI this tracker clients connects to.
+   */
+  public URI getTrackerURI() {
+<span class="nc" id="L67">    return this.tracker;</span>
+  }
+
+  public void announceAllInterfaces(final AnnounceRequestMessage.RequestEvent event,
+                                    boolean inhibitEvent, final AnnounceableInformation torrent) throws AnnounceException {
+    try {
+<span class="fc" id="L73">      announce(event, inhibitEvent, torrent, myAddress);</span>
+<span class="nc" id="L74">    } catch (AnnounceException e) {</span>
+<span class="nc" id="L75">      throw new AnnounceException(String.format(&quot;Unable to announce tracker %s event %s for torrent %s and peers %s. Reason %s&quot;,</span>
+<span class="nc" id="L76">              getTrackerURI(), event.getEventName(), torrent.getHexInfoHash(), Arrays.toString(myAddress.toArray()), e.getMessage()), e);</span>
+<span class="fc" id="L77">    }</span>
+<span class="fc" id="L78">  }</span>
+
+  /**
+   * Build, send and process a tracker announce request.
+   *
+   * &lt;p&gt;
+   * This function first builds an announce request for the specified event
+   * with all the required parameters. Then, the request is made to the
+   * tracker and the response analyzed.
+   * &lt;/p&gt;
+   *
+   * &lt;p&gt;
+   * All registered {@link AnnounceResponseListener} objects are then fired
+   * with the decoded payload.
+   * &lt;/p&gt;
+   *
+   * @param event        The announce event type (can be AnnounceEvent.NONE for
+   *                     periodic updates).
+   * @param inhibitEvent Prevent event listeners from being notified.
+   * @param torrent
+   */
+  protected abstract void announce(final AnnounceRequestMessage.RequestEvent event,
+                                   boolean inhibitEvent, final AnnounceableInformation torrent, final List&lt;Peer&gt; peer) throws AnnounceException;
+
+  protected abstract void multiAnnounce(final AnnounceRequestMessage.RequestEvent event,
+                                        boolean inhibitEvent,
+                                        final List&lt;? extends AnnounceableInformation&gt; torrents,
+                                        final List&lt;Peer&gt; peer) throws AnnounceException, ConnectException;
+
+  protected void logAnnounceRequest(AnnounceRequestMessage.RequestEvent event, AnnounceableInformation torrent) {
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">    if (event != AnnounceRequestMessage.RequestEvent.NONE) {</span>
+<span class="fc" id="L109">      logger.debug(&quot;Announcing {} to tracker with {}U/{}D/{}L bytes...&quot;,</span>
+              new Object[]{
+<span class="fc" id="L111">                      this.formatAnnounceEvent(event),</span>
+<span class="fc" id="L112">                      torrent.getUploaded(),</span>
+<span class="fc" id="L113">                      torrent.getDownloaded(),</span>
+<span class="fc" id="L114">                      torrent.getLeft()</span>
+              });
+    } else {
+<span class="nc" id="L117">      logger.debug(&quot;Simply announcing to tracker with {}U/{}D/{}L bytes...&quot;,</span>
+              new Object[]{
+<span class="nc" id="L119">                      torrent.getUploaded(),</span>
+<span class="nc" id="L120">                      torrent.getDownloaded(),</span>
+<span class="nc" id="L121">                      torrent.getLeft()</span>
+              });
+    }
+<span class="fc" id="L124">  }</span>
+
+  /**
+   * Close any opened announce connection.
+   *
+   * &lt;p&gt;
+   * This method is called to make sure all connections
+   * are correctly closed when the announce thread is asked to stop.
+   * &lt;/p&gt;
+   */
+  protected void close() {
+    // Do nothing by default, but can be overloaded.
+<span class="fc" id="L136">  }</span>
+
+  /**
+   * Formats an announce event into a usable string.
+   */
+  protected String formatAnnounceEvent(
+          AnnounceRequestMessage.RequestEvent event) {
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">    return AnnounceRequestMessage.RequestEvent.NONE.equals(event)</span>
+            ? &quot;&quot;
+<span class="fc" id="L145">            : String.format(&quot; %s&quot;, event.name());</span>
+  }
+
+  /**
+   * Handle the announce response from the tracker.
+   *
+   * &lt;p&gt;
+   * Analyzes the response from the tracker and acts on it. If the response
+   * is an error, it is logged. Otherwise, the announce response is used
+   * to fire the corresponding announce and peer events to all announce
+   * listeners.
+   * &lt;/p&gt;
+   *
+   * @param message       The incoming {@link TrackerMessage}.
+   * @param inhibitEvents Whether or not to prevent events from being fired.
+   */
+  protected void handleTrackerAnnounceResponse(TrackerMessage message,
+                                               boolean inhibitEvents, String hexInfoHash) throws AnnounceException {
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">    if (message instanceof ErrorMessage) {</span>
+<span class="nc" id="L164">      ErrorMessage error = (ErrorMessage) message;</span>
+<span class="nc" id="L165">      throw new AnnounceException(error.getReason());</span>
+    }
+
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">    if (!(message instanceof AnnounceResponseMessage)) {</span>
+<span class="nc" id="L169">      throw new AnnounceException(&quot;Unexpected tracker message type &quot; +</span>
+<span class="nc" id="L170">              message.getType().name() + &quot;!&quot;);</span>
+    }
+
+
+<span class="fc" id="L174">    AnnounceResponseMessage response =</span>
+            (AnnounceResponseMessage) message;
+
+<span class="fc" id="L177">    this.fireAnnounceResponseEvent(</span>
+<span class="fc" id="L178">            response.getComplete(),</span>
+<span class="fc" id="L179">            response.getIncomplete(),</span>
+<span class="fc" id="L180">            response.getInterval(),</span>
+            hexInfoHash);
+
+<span class="fc bfc" id="L183" title="All 2 branches covered.">    if (inhibitEvents) {</span>
+<span class="fc" id="L184">      return;</span>
+    }
+
+<span class="fc" id="L187">    this.fireDiscoveredPeersEvent(</span>
+<span class="fc" id="L188">            response.getPeers(),</span>
+            hexInfoHash);
+<span class="fc" id="L190">  }</span>
+
+  /**
+   * Fire the announce response event to all listeners.
+   *
+   * @param complete   The number of seeders on this torrent.
+   * @param incomplete The number of leechers on this torrent.
+   * @param interval   The announce interval requested by the tracker.
+   */
+  protected void fireAnnounceResponseEvent(int complete, int incomplete, int interval, String hexInfoHash) {
+<span class="fc bfc" id="L200" title="All 2 branches covered.">    for (AnnounceResponseListener listener : this.listeners) {</span>
+<span class="fc" id="L201">      listener.handleAnnounceResponse(interval, complete, incomplete, hexInfoHash);</span>
+<span class="fc" id="L202">    }</span>
+<span class="fc" id="L203">  }</span>
+
+  /**
+   * Fire the new peer discovery event to all listeners.
+   *
+   * @param peers The list of peers discovered.
+   */
+  protected void fireDiscoveredPeersEvent(List&lt;Peer&gt; peers, String hexInfoHash) {
+<span class="fc bfc" id="L211" title="All 2 branches covered.">    for (AnnounceResponseListener listener : this.listeners) {</span>
+<span class="fc" id="L212">      listener.handleDiscoveredPeers(peers, hexInfoHash);</span>
+<span class="fc" id="L213">    }</span>
+<span class="fc" id="L214">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

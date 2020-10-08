@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UDPTrackerMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common.protocol.udp</a> &gt; <span class="el_source">UDPTrackerMessage.java</span></div><h1>UDPTrackerMessage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.common.protocol.udp;
+
+import com.turn.ttorrent.common.protocol.TrackerMessage;
+
+import java.nio.ByteBuffer;
+
+/**
+ * Base class for UDP tracker messages.
+ *
+ * @author mpetazzoni
+ */
+public abstract class UDPTrackerMessage extends TrackerMessage {
+
+  private UDPTrackerMessage(Type type, ByteBuffer data) {
+<span class="nc" id="L30">    super(type, data);</span>
+<span class="nc" id="L31">  }</span>
+
+  public abstract int getActionId();
+
+  public abstract int getTransactionId();
+
+  public static abstract class UDPTrackerRequestMessage
+          extends UDPTrackerMessage {
+
+    private static final int UDP_MIN_REQUEST_PACKET_SIZE = 16;
+
+    protected UDPTrackerRequestMessage(Type type, ByteBuffer data) {
+<span class="nc" id="L43">      super(type, data);</span>
+<span class="nc" id="L44">    }</span>
+
+    public static UDPTrackerRequestMessage parse(ByteBuffer data)
+            throws MessageValidationException {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">      if (data.remaining() &lt; UDP_MIN_REQUEST_PACKET_SIZE) {</span>
+<span class="nc" id="L49">        throw new MessageValidationException(&quot;Invalid packet size!&quot;);</span>
+      }
+
+      /**
+       * UDP request packets always start with the connection ID (8 bytes),
+       * followed by the action (4 bytes). Extract the action code
+       * accordingly.
+       */
+<span class="nc" id="L57">      data.mark();</span>
+<span class="nc" id="L58">      data.getLong();</span>
+<span class="nc" id="L59">      int action = data.getInt();</span>
+<span class="nc" id="L60">      data.reset();</span>
+
+<span class="nc bnc" id="L62" title="All 2 branches missed.">      if (action == Type.CONNECT_REQUEST.getId()) {</span>
+<span class="nc" id="L63">        return UDPConnectRequestMessage.parse(data);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">      } else if (action == Type.ANNOUNCE_REQUEST.getId()) {</span>
+<span class="nc" id="L65">        return UDPAnnounceRequestMessage.parse(data);</span>
+      }
+
+<span class="nc" id="L68">      throw new MessageValidationException(&quot;Unknown UDP tracker &quot; +</span>
+              &quot;request message!&quot;);
+    }
+  }
+
+  public static abstract class UDPTrackerResponseMessage
+          extends UDPTrackerMessage {
+
+    private static final int UDP_MIN_RESPONSE_PACKET_SIZE = 8;
+
+    protected UDPTrackerResponseMessage(Type type, ByteBuffer data) {
+<span class="nc" id="L79">      super(type, data);</span>
+<span class="nc" id="L80">    }</span>
+
+    public static UDPTrackerResponseMessage parse(ByteBuffer data)
+            throws MessageValidationException {
+<span class="nc bnc" id="L84" title="All 2 branches missed.">      if (data.remaining() &lt; UDP_MIN_RESPONSE_PACKET_SIZE) {</span>
+<span class="nc" id="L85">        throw new MessageValidationException(&quot;Invalid packet size!&quot;);</span>
+      }
+
+      /**
+       * UDP response packets always start with the action (4 bytes), so
+       * we can extract it immediately.
+       */
+<span class="nc" id="L92">      data.mark();</span>
+<span class="nc" id="L93">      int action = data.getInt();</span>
+<span class="nc" id="L94">      data.reset();</span>
+
+<span class="nc bnc" id="L96" title="All 2 branches missed.">      if (action == Type.CONNECT_RESPONSE.getId()) {</span>
+<span class="nc" id="L97">        return UDPConnectResponseMessage.parse(data);</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">      } else if (action == Type.ANNOUNCE_RESPONSE.getId()) {</span>
+<span class="nc" id="L99">        return UDPAnnounceResponseMessage.parse(data);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">      } else if (action == Type.ERROR.getId()) {</span>
+<span class="nc" id="L101">        return UDPTrackerErrorMessage.parse(data);</span>
+      }
+
+<span class="nc" id="L104">      throw new MessageValidationException(&quot;Unknown UDP tracker &quot; +</span>
+              &quot;response message!&quot;);
+    }
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

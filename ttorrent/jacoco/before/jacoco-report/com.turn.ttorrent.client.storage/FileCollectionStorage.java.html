@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FileCollectionStorage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.storage</a> &gt; <span class="el_source">FileCollectionStorage.java</span></div><h1>FileCollectionStorage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.client.storage;
+
+import com.turn.ttorrent.common.TorrentFile;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.common.TorrentMetadata;
+import org.slf4j.Logger;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.LinkedList;
+import java.util.List;
+
+
+/**
+ * Multi-file torrent byte storage.
+ *
+ * &lt;p&gt;
+ * This implementation of the torrent byte storage provides support for
+ * multi-file torrents and completely abstracts the read/write operations from
+ * the notion of different files. The byte storage is represented as one
+ * continuous byte storage, directly accessible by offset regardless of which
+ * file this offset lands.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ * @author dgiffin
+ */
+public class FileCollectionStorage implements TorrentByteStorage {
+
+<span class="fc" id="L46">  private static final Logger logger =</span>
+<span class="fc" id="L47">          TorrentLoggerFactory.getLogger(FileCollectionStorage.class);</span>
+
+  private final List&lt;FileStorage&gt; files;
+  private final long size;
+  private volatile boolean myIsOpen;
+
+  /**
+   * Initialize a new multi-file torrent byte storage.
+   *
+   * @param files The list of individual {@link FileStorage}
+   *              objects making up the torrent.
+   * @param size  The total size of the torrent data, in bytes.
+   */
+  public FileCollectionStorage(List&lt;FileStorage&gt; files,
+<span class="fc" id="L61">                               long size) {</span>
+<span class="fc" id="L62">    this.files = files;</span>
+<span class="fc" id="L63">    this.size = size;</span>
+
+<span class="fc" id="L65">    logger.debug(&quot;Initialized torrent byte storage on {} file(s) &quot; +</span>
+<span class="fc" id="L66">            &quot;({} total byte(s)).&quot;, files.size(), size);</span>
+<span class="fc" id="L67">  }</span>
+
+  public static FileCollectionStorage create(TorrentMetadata metadata, File parent) throws IOException {
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">    if (!parent.isDirectory()) {</span>
+<span class="nc" id="L71">      throw new IllegalArgumentException(&quot;Invalid parent directory!&quot;);</span>
+    }
+<span class="fc" id="L73">    List&lt;FileStorage&gt; files = new LinkedList&lt;FileStorage&gt;();</span>
+<span class="fc" id="L74">    long offset = 0L;</span>
+<span class="fc" id="L75">    long totalSize = 0;</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">    for (TorrentFile file : metadata.getFiles()) {</span>
+<span class="fc" id="L77">      File actual = new File(parent, file.getRelativePathAsString());</span>
+
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">      if (!actual.getCanonicalPath().startsWith(parent.getCanonicalPath())) {</span>
+<span class="nc" id="L80">        throw new SecurityException(&quot;Torrent file path attempted &quot; +</span>
+                &quot;to break directory jail!&quot;);
+      }
+
+<span class="pc bpc" id="L84" title="3 of 4 branches missed.">      if (!actual.getParentFile().exists() &amp;&amp; !actual.getParentFile().mkdirs()) {</span>
+<span class="nc" id="L85">        throw new IOException(&quot;Unable to create directories &quot; + actual.getParent() + &quot; for storing torrent file &quot; + actual.getName());</span>
+      }
+<span class="fc" id="L87">      files.add(new FileStorage(actual, offset, file.size));</span>
+<span class="fc" id="L88">      offset += file.size;</span>
+<span class="fc" id="L89">      totalSize += file.size;</span>
+<span class="fc" id="L90">    }</span>
+<span class="fc" id="L91">    return new FileCollectionStorage(files, totalSize);</span>
+  }
+
+  public synchronized void open(final boolean seeder) throws IOException {
+<span class="fc bfc" id="L95" title="All 2 branches covered.">    for (FileStorage file : files) {</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">      if (!file.isOpen())</span>
+<span class="fc" id="L97">        file.open(seeder);</span>
+<span class="fc" id="L98">    }</span>
+<span class="fc" id="L99">    myIsOpen = true;</span>
+<span class="fc" id="L100">  }</span>
+
+  @Override
+  public int read(ByteBuffer buffer, long position) throws IOException {
+<span class="fc" id="L104">    int requested = buffer.remaining();</span>
+<span class="fc" id="L105">    int bytes = 0;</span>
+
+<span class="fc bfc" id="L107" title="All 2 branches covered.">    for (FileOffset fo : this.select(position, requested)) {</span>
+      // TODO: remove cast to int when large ByteBuffer support is
+      // implemented in Java.
+<span class="fc" id="L110">      buffer.limit((int) (buffer.position() + fo.length));</span>
+<span class="fc" id="L111">      bytes += fo.file.read(buffer, fo.offset);</span>
+<span class="fc" id="L112">    }</span>
+
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">    if (bytes &lt; requested) {</span>
+<span class="nc" id="L115">      throw new IOException(&quot;Storage collection read underrun!&quot;);</span>
+    }
+
+<span class="fc" id="L118">    return bytes;</span>
+  }
+
+  @Override
+  public int write(ByteBuffer buffer, long position) throws IOException {
+<span class="fc" id="L123">    int requested = buffer.remaining();</span>
+
+<span class="fc" id="L125">    int bytes = 0;</span>
+
+<span class="fc bfc" id="L127" title="All 2 branches covered.">    for (FileOffset fo : this.select(position, requested)) {</span>
+<span class="fc" id="L128">      buffer.limit(bytes + (int) fo.length);</span>
+<span class="fc" id="L129">      bytes += fo.file.write(buffer, fo.offset);</span>
+<span class="fc" id="L130">    }</span>
+
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">    if (bytes &lt; requested) {</span>
+<span class="nc" id="L133">      throw new IOException(&quot;Storage collection write underrun!&quot;);</span>
+    }
+
+<span class="fc" id="L136">    return bytes;</span>
+  }
+
+  @Override
+  public synchronized void close() throws IOException {
+<span class="fc bfc" id="L141" title="All 2 branches covered.">    for (FileStorage file : this.files) {</span>
+<span class="fc" id="L142">      file.close();</span>
+<span class="fc" id="L143">    }</span>
+<span class="fc" id="L144">    myIsOpen = false;</span>
+<span class="fc" id="L145">  }</span>
+
+  @Override
+  public synchronized void finish() throws IOException {
+<span class="fc bfc" id="L149" title="All 2 branches covered.">    for (FileStorage file : this.files) {</span>
+<span class="fc" id="L150">      file.finish();</span>
+<span class="fc" id="L151">    }</span>
+<span class="fc" id="L152">  }</span>
+
+  @Override
+  public boolean isFinished() {
+<span class="fc bfc" id="L156" title="All 2 branches covered.">    for (FileStorage file : this.files) {</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">      if (!file.isFinished()) {</span>
+<span class="nc" id="L158">        return false;</span>
+      }
+<span class="fc" id="L160">    }</span>
+
+<span class="fc" id="L162">    return true;</span>
+  }
+
+  @Override
+  public void delete() throws IOException {
+<span class="nc bnc" id="L167" title="All 2 branches missed.">    for (FileStorage file : files) {</span>
+<span class="nc" id="L168">      file.delete();</span>
+<span class="nc" id="L169">    }</span>
+<span class="nc" id="L170">  }</span>
+
+  /**
+   * File operation details holder.
+   *
+   * &lt;p&gt;
+   * This simple inner class holds the details for a read or write operation
+   * on one of the underlying {@link FileStorage}s.
+   * &lt;/p&gt;
+   *
+   * @author dgiffin
+   * @author mpetazzoni
+   */
+  private static class FileOffset {
+
+    public final FileStorage file;
+    public final long offset;
+    public final long length;
+
+<span class="fc" id="L189">    FileOffset(FileStorage file, long offset, long length) {</span>
+<span class="fc" id="L190">      this.file = file;</span>
+<span class="fc" id="L191">      this.offset = offset;</span>
+<span class="fc" id="L192">      this.length = length;</span>
+<span class="fc" id="L193">    }</span>
+  }
+
+  /**
+   * Select the group of files impacted by an operation.
+   *
+   * &lt;p&gt;
+   * This function selects which files are impacted by a read or write
+   * operation, with their respective relative offset and chunk length.
+   * &lt;/p&gt;
+   *
+   * @param offset The offset of the operation, in bytes, relative to the
+   *               complete byte storage.
+   * @param length The number of bytes to read or write.
+   * @return A list of {@link FileOffset} objects representing the {@link
+   * FileStorage}s impacted by the operation, bundled with their
+   * respective relative offset and number of bytes to read or write.
+   * @throws IllegalArgumentException If the offset and length go over the
+   *                                  byte storage size.
+   * @throws IllegalStateException    If the files registered with this byte
+   *                                  storage can't accommodate the request (should not happen, really).
+   */
+  private List&lt;FileOffset&gt; select(long offset, long length) {
+<span class="pc bpc" id="L216" title="1 of 2 branches missed.">    if (offset + length &gt; this.size) {</span>
+<span class="nc" id="L217">      throw new IllegalArgumentException(&quot;Buffer overrun (&quot; +</span>
+              offset + &quot; + &quot; + length + &quot; &gt; &quot; + this.size + &quot;) !&quot;);
+    }
+
+<span class="fc" id="L221">    List&lt;FileOffset&gt; selected = new LinkedList&lt;FileOffset&gt;();</span>
+<span class="fc" id="L222">    long bytes = 0;</span>
+
+<span class="fc bfc" id="L224" title="All 2 branches covered.">    for (FileStorage file : this.files) {</span>
+<span class="fc bfc" id="L225" title="All 2 branches covered.">      if (file.offset() &gt;= offset + length) {</span>
+<span class="fc" id="L226">        break;</span>
+      }
+
+<span class="pc bpc" id="L229" title="1 of 2 branches missed.">      if (file.offset() + file.size() &lt; offset) {</span>
+<span class="nc" id="L230">        continue;</span>
+      }
+
+<span class="fc" id="L233">      long position = offset - file.offset();</span>
+<span class="fc bfc" id="L234" title="All 2 branches covered.">      position = position &gt; 0 ? position : 0;</span>
+<span class="fc" id="L235">      long size = Math.min(</span>
+<span class="fc" id="L236">              file.size() - position,</span>
+              length - bytes);
+<span class="fc" id="L238">      selected.add(new FileOffset(file, position, size));</span>
+<span class="fc" id="L239">      bytes += size;</span>
+<span class="fc" id="L240">    }</span>
+
+<span class="pc bpc" id="L242" title="2 of 4 branches missed.">    if (selected.size() == 0 || bytes &lt; length) {</span>
+<span class="nc" id="L243">      throw new IllegalStateException(&quot;Buffer underrun (only got &quot; +</span>
+              bytes + &quot; out of &quot; + length + &quot; byte(s) requested)!&quot;);
+    }
+
+<span class="fc" id="L247">    return selected;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

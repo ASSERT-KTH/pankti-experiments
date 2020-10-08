@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FairPieceStorageFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.storage</a> &gt; <span class="el_source">FairPieceStorageFactory.java</span></div><h1>FairPieceStorageFactory.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.client.storage;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.common.TorrentFile;
+import com.turn.ttorrent.common.TorrentMetadata;
+import com.turn.ttorrent.common.TorrentUtils;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.BitSet;
+
+/**
+ * This implementation will read all pieces from storage and compare hashes of pieces with really hashed
+ * from metadata
+ */
+public class FairPieceStorageFactory implements PieceStorageFactory {
+
+<span class="fc" id="L19">  public final static FairPieceStorageFactory INSTANCE = new FairPieceStorageFactory();</span>
+
+  private FairPieceStorageFactory() {
+  }
+
+  @Override
+  public PieceStorage createStorage(TorrentMetadata metadata, TorrentByteStorage byteStorage) throws IOException {
+<span class="fc" id="L26">    long totalSize = 0;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">    for (TorrentFile file : metadata.getFiles()) {</span>
+<span class="fc" id="L28">      totalSize += file.size;</span>
+<span class="fc" id="L29">    }</span>
+
+<span class="fc" id="L31">    byteStorage.open(false);</span>
+<span class="fc" id="L32">    BitSet availablePieces = new BitSet(metadata.getPiecesCount());</span>
+    try {
+<span class="fc" id="L34">      int pieceLength = metadata.getPieceLength();</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">      for (int i = 0; i &lt; metadata.getPiecesCount(); i++) {</span>
+<span class="fc" id="L36">        long position = (long) i * pieceLength;</span>
+        int len;
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (totalSize - position &gt; pieceLength) {</span>
+<span class="fc" id="L39">          len = pieceLength;</span>
+        } else {
+<span class="fc" id="L41">          len = (int) (totalSize - position);</span>
+        }
+<span class="fc" id="L43">        ByteBuffer buffer = ByteBuffer.allocate(len);</span>
+<span class="fc" id="L44">        byteStorage.read(buffer, position);</span>
+<span class="fc" id="L45">        byte[] expectedHash = Arrays.copyOfRange(metadata.getPiecesHashes(), i * Constants.PIECE_HASH_SIZE, (i + 1) * Constants.PIECE_HASH_SIZE);</span>
+<span class="fc" id="L46">        byte[] actualHash = TorrentUtils.calculateSha1Hash(buffer.array());</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (Arrays.equals(expectedHash, actualHash)) {</span>
+<span class="fc" id="L48">          availablePieces.set(i);</span>
+        }
+      }
+    } finally {
+<span class="fc" id="L52">      byteStorage.close();</span>
+    }
+
+<span class="fc" id="L55">    return new PieceStorageImpl(</span>
+            byteStorage,
+            availablePieces,
+<span class="fc" id="L58">            metadata.getPiecesCount(),</span>
+<span class="fc" id="L59">            metadata.getPieceLength()</span>
+    );
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

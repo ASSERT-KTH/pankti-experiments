@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TrackedPeer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.tracker</a> &gt; <span class="el_source">TrackedPeer.java</span></div><h1>TrackedPeer.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ * &lt;p&gt;
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * &lt;p&gt;
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * &lt;p&gt;
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.tracker;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.bcodec.BEValue;
+import com.turn.ttorrent.common.*;
+import org.slf4j.Logger;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.util.HashMap;
+import java.util.Map;
+
+
+/**
+ * A BitTorrent tracker peer.
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Represents a peer exchanging on a given torrent. In this implementation,
+ * we don't really care about the status of the peers and how much they
+ * have downloaded / exchanged because we are not a torrent exchange and
+ * don't need to keep track of what peers are doing while they're
+ * downloading. We only care about when they start, and when they are done.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * We also never expire peers automatically. Unless peers send a STOPPED
+ * announce request, they remain as long as the torrent object they are a
+ * part of.
+ * &lt;/p&gt;
+ */
+public class TrackedPeer extends Peer {
+
+<span class="nc" id="L48">  private static final Logger logger =</span>
+<span class="nc" id="L49">          TorrentLoggerFactory.getLogger(TrackedPeer.class);</span>
+
+  private final TimeService myTimeService;
+  private long uploaded;
+  private long downloaded;
+  private long left;
+  private TrackedTorrent torrent;
+
+  /**
+   * Represents the state of a peer exchanging on this torrent.
+   * &lt;p&gt;
+   * &lt;p&gt;
+   * Peers can be in the STARTED state, meaning they have announced
+   * themselves to us and are eventually exchanging data with other peers.
+   * Note that a peer starting with a completed file will also be in the
+   * started state and will never notify as being in the completed state.
+   * This information can be inferred from the fact that the peer reports 0
+   * bytes left to download.
+   * &lt;/p&gt;
+   * &lt;p&gt;
+   * &lt;p&gt;
+   * Peers enter the COMPLETED state when they announce they have entirely
+   * downloaded the file. As stated above, we may also elect them for this
+   * state if they report 0 bytes left to download.
+   * &lt;/p&gt;
+   * &lt;p&gt;
+   * &lt;p&gt;
+   * Peers enter the STOPPED state very briefly before being removed. We
+   * still pass them to the STOPPED state in case someone else kept a
+   * reference on them.
+   * &lt;/p&gt;
+   */
+<span class="nc" id="L81">  public enum PeerState {</span>
+<span class="nc" id="L82">    UNKNOWN,</span>
+<span class="nc" id="L83">    STARTED,</span>
+<span class="nc" id="L84">    COMPLETED,</span>
+<span class="nc" id="L85">    STOPPED</span>
+  }
+
+  private PeerState state;
+  private long lastAnnounce;
+
+  /**
+   * Instantiate a new tracked peer for the given torrent.
+   *
+   * @param torrent The torrent this peer exchanges on.
+   * @param ip      The peer's IP address.
+   * @param port    The peer's port.
+   * @param peerId  The byte-encoded peer ID.
+   */
+  public TrackedPeer(TrackedTorrent torrent, String ip, int port, ByteBuffer peerId) {
+<span class="nc" id="L100">    this(torrent, ip, port, peerId, new SystemTimeService());</span>
+<span class="nc" id="L101">  }</span>
+
+  TrackedPeer(TrackedTorrent torrent, String ip, int port,
+              ByteBuffer peerId, TimeService timeService) {
+<span class="nc" id="L105">    super(ip, port, peerId);</span>
+<span class="nc" id="L106">    myTimeService = timeService;</span>
+<span class="nc" id="L107">    this.torrent = torrent;</span>
+
+    // Instantiated peers start in the UNKNOWN state.
+<span class="nc" id="L110">    this.state = PeerState.UNKNOWN;</span>
+<span class="nc" id="L111">    this.lastAnnounce = myTimeService.now();</span>
+
+<span class="nc" id="L113">    this.uploaded = 0;</span>
+<span class="nc" id="L114">    this.downloaded = 0;</span>
+<span class="nc" id="L115">    this.left = 0;</span>
+<span class="nc" id="L116">  }</span>
+
+  /**
+   * Update this peer's state and information.
+   * &lt;p&gt;
+   * &lt;p&gt;
+   * &lt;b&gt;Note:&lt;/b&gt; if the peer reports 0 bytes left to download, its state will
+   * be automatically be set to COMPLETED.
+   * &lt;/p&gt;
+   *
+   * @param state      The peer's state.
+   * @param uploaded   Uploaded byte count, as reported by the peer.
+   * @param downloaded Downloaded byte count, as reported by the peer.
+   * @param left       Left-to-download byte count, as reported by the peer.
+   */
+  public void update(PeerState state, long uploaded, long downloaded,
+                     long left) {
+<span class="nc bnc" id="L133" title="All 4 branches missed.">    if (PeerState.STARTED.equals(state) &amp;&amp; left == 0) {</span>
+<span class="nc" id="L134">      state = PeerState.COMPLETED;</span>
+    }
+
+<span class="nc bnc" id="L137" title="All 2 branches missed.">    if (!state.equals(this.state)) {</span>
+<span class="nc" id="L138">      logger.trace(&quot;Peer {} {} download of {}.&quot;,</span>
+              new Object[]{
+                      this,
+<span class="nc" id="L141">                      state.name().toLowerCase(),</span>
+                      this.torrent,
+              });
+    }
+
+<span class="nc" id="L146">    this.state = state;</span>
+<span class="nc" id="L147">    this.lastAnnounce = myTimeService.now();</span>
+<span class="nc" id="L148">    this.uploaded = uploaded;</span>
+<span class="nc" id="L149">    this.downloaded = downloaded;</span>
+<span class="nc" id="L150">    this.left = left;</span>
+<span class="nc" id="L151">  }</span>
+
+  /**
+   * Tells whether this peer has completed its download and can thus be
+   * considered a seeder.
+   */
+  public boolean isCompleted() {
+<span class="nc" id="L158">    return PeerState.COMPLETED.equals(this.state);</span>
+  }
+
+  /**
+   * Returns how many bytes the peer reported it has uploaded so far.
+   */
+  public long getUploaded() {
+<span class="nc" id="L165">    return this.uploaded;</span>
+  }
+
+  /**
+   * Returns how many bytes the peer reported it has downloaded so far.
+   */
+  public long getDownloaded() {
+<span class="nc" id="L172">    return this.downloaded;</span>
+  }
+
+  /**
+   * Returns how many bytes the peer reported it needs to retrieve before
+   * its download is complete.
+   */
+  public long getLeft() {
+<span class="nc" id="L180">    return this.left;</span>
+  }
+
+  /**
+   * Tells whether this peer has checked in with the tracker recently.
+   * &lt;p&gt;
+   * &lt;p&gt;
+   * Non-fresh peers are automatically terminated and collected by the
+   * Tracker.
+   * &lt;/p&gt;
+   */
+  public boolean isFresh(int expireTimeoutSec) {
+<span class="nc bnc" id="L192" title="All 2 branches missed.">    return this.lastAnnounce + expireTimeoutSec * 1000 &gt; myTimeService.now();</span>
+  }
+
+  /**
+   * Returns a BEValue representing this peer for inclusion in an
+   * announce reply from the tracker.
+   * &lt;p&gt;
+   * The returned BEValue is a dictionary containing the peer ID (in its
+   * original byte-encoded form), the peer's IP and the peer's port.
+   */
+  public BEValue toBEValue() throws UnsupportedEncodingException {
+<span class="nc" id="L203">    Map&lt;String, BEValue&gt; peer = new HashMap&lt;String, BEValue&gt;();</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">    if (this.hasPeerId()) {</span>
+<span class="nc" id="L205">      peer.put(&quot;peer id&quot;, new BEValue(this.getPeerIdArray()));</span>
+    }
+<span class="nc" id="L207">    peer.put(&quot;ip&quot;, new BEValue(this.getIp(), Constants.BYTE_ENCODING));</span>
+<span class="nc" id="L208">    peer.put(&quot;port&quot;, new BEValue(this.getPort()));</span>
+<span class="nc" id="L209">    return new BEValue(peer);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

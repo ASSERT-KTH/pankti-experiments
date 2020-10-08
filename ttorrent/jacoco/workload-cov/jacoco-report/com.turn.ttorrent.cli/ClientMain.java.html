@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientMain.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.cli</a> &gt; <span class="el_source">ClientMain.java</span></div><h1>ClientMain.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2013 Turn, Inc.
+ * &lt;p&gt;
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * &lt;p&gt;
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * &lt;p&gt;
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.cli;
+
+import com.turn.ttorrent.client.CommunicationManager;
+import com.turn.ttorrent.client.SimpleClient;
+import jargs.gnu.CmdLineParser;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.PatternLayout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.PrintStream;
+import java.net.*;
+import java.nio.channels.UnsupportedAddressTypeException;
+import java.util.Enumeration;
+
+/**
+ * Command-line entry-point for starting a {@link CommunicationManager}
+ */
+<span class="nc" id="L36">public class ClientMain {</span>
+
+<span class="fc" id="L38">  private static final Logger logger =</span>
+<span class="fc" id="L39">          LoggerFactory.getLogger(ClientMain.class);</span>
+
+  /**
+   * Default data output directory.
+   */
+  private static final String DEFAULT_OUTPUT_DIRECTORY = &quot;/tmp&quot;;
+
+  /**
+   * Returns a usable {@link Inet4Address} for the given interface name.
+   *
+   * &lt;p&gt;
+   * If an interface name is given, return the first usable IPv4 address for
+   * that interface. If no interface name is given or if that interface
+   * doesn't have an IPv4 address, return's localhost address (if IPv4).
+   * &lt;/p&gt;
+   *
+   * &lt;p&gt;
+   * It is understood this makes the client IPv4 only, but it is important to
+   * remember that most BitTorrent extensions (like compact peer lists from
+   * trackers and UDP tracker support) are IPv4-only anyway.
+   * &lt;/p&gt;
+   *
+   * @param iface The network interface name.
+   * @return A usable IPv4 address as a {@link Inet4Address}.
+   * @throws UnsupportedAddressTypeException If no IPv4 address was available
+   * to bind on.
+   */
+  private static Inet4Address getIPv4Address(String iface)
+          throws SocketException, UnsupportedAddressTypeException,
+          UnknownHostException {
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">    if (iface != null) {</span>
+<span class="nc" id="L70">      Enumeration&lt;InetAddress&gt; addresses =</span>
+<span class="nc" id="L71">              NetworkInterface.getByName(iface).getInetAddresses();</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">      while (addresses.hasMoreElements()) {</span>
+<span class="nc" id="L73">        InetAddress addr = addresses.nextElement();</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (addr instanceof Inet4Address) {</span>
+<span class="nc" id="L75">          return (Inet4Address) addr;</span>
+        }
+<span class="nc" id="L77">      }</span>
+    }
+
+<span class="fc" id="L80">    InetAddress localhost = InetAddress.getLocalHost();</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">    if (localhost instanceof Inet4Address) {</span>
+<span class="fc" id="L82">      return (Inet4Address) localhost;</span>
+    }
+
+<span class="nc" id="L85">    throw new UnsupportedAddressTypeException();</span>
+  }
+
+  /**
+   * Display program usage on the given {@link PrintStream}.
+   */
+  private static void usage(PrintStream s) {
+<span class="nc" id="L92">    s.println(&quot;usage: Client [options] &lt;torrent&gt;&quot;);</span>
+<span class="nc" id="L93">    s.println();</span>
+<span class="nc" id="L94">    s.println(&quot;Available options:&quot;);</span>
+<span class="nc" id="L95">    s.println(&quot;  -h,--help                  Show this help and exit.&quot;);</span>
+<span class="nc" id="L96">    s.println(&quot;  -o,--output DIR            Read/write data to directory DIR.&quot;);</span>
+<span class="nc" id="L97">    s.println(&quot;  -i,--iface IFACE           Bind to interface IFACE.&quot;);</span>
+<span class="nc" id="L98">    s.println(&quot;  -s,--seed SECONDS          Time to seed after downloading (default: infinitely).&quot;);</span>
+<span class="nc" id="L99">    s.println(&quot;  -d,--max-download KB/SEC   Max download rate (default: unlimited).&quot;);</span>
+<span class="nc" id="L100">    s.println(&quot;  -u,--max-upload KB/SEC     Max upload rate (default: unlimited).&quot;);</span>
+<span class="nc" id="L101">    s.println();</span>
+<span class="nc" id="L102">  }</span>
+
+  /**
+   * Main client entry point for stand-alone operation.
+   */
+  public static void main(String[] args) {
+<span class="fc" id="L108">    BasicConfigurator.configure(new ConsoleAppender(</span>
+            new PatternLayout(&quot;%d [%-25t] %-5p: %m%n&quot;)));
+
+<span class="fc" id="L111">    CmdLineParser parser = new CmdLineParser();</span>
+<span class="fc" id="L112">    CmdLineParser.Option help = parser.addBooleanOption('h', &quot;help&quot;);</span>
+<span class="fc" id="L113">    CmdLineParser.Option output = parser.addStringOption('o', &quot;output&quot;);</span>
+<span class="fc" id="L114">    CmdLineParser.Option iface = parser.addStringOption('i', &quot;iface&quot;);</span>
+<span class="fc" id="L115">    CmdLineParser.Option seedTime = parser.addIntegerOption('s', &quot;seed&quot;);</span>
+<span class="fc" id="L116">    CmdLineParser.Option maxUpload = parser.addDoubleOption('u', &quot;max-upload&quot;);</span>
+<span class="fc" id="L117">    CmdLineParser.Option maxDownload = parser.addDoubleOption('d', &quot;max-download&quot;);</span>
+
+    try {
+<span class="fc" id="L120">      parser.parse(args);</span>
+<span class="nc" id="L121">    } catch (CmdLineParser.OptionException oe) {</span>
+<span class="nc" id="L122">      System.err.println(oe.getMessage());</span>
+<span class="nc" id="L123">      usage(System.err);</span>
+<span class="nc" id="L124">      System.exit(1);</span>
+<span class="fc" id="L125">    }</span>
+
+    // Display help and exit if requested
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">    if (Boolean.TRUE.equals((Boolean) parser.getOptionValue(help))) {</span>
+<span class="nc" id="L129">      usage(System.out);</span>
+<span class="nc" id="L130">      System.exit(0);</span>
+    }
+
+<span class="fc" id="L133">    String outputValue = (String) parser.getOptionValue(output,</span>
+            DEFAULT_OUTPUT_DIRECTORY);
+<span class="fc" id="L135">    String ifaceValue = (String) parser.getOptionValue(iface);</span>
+<span class="fc" id="L136">    int seedTimeValue = (Integer) parser.getOptionValue(seedTime, -1);</span>
+
+<span class="fc" id="L138">    String[] otherArgs = parser.getRemainingArgs();</span>
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">    if (otherArgs.length != 1) {</span>
+<span class="nc" id="L140">      usage(System.err);</span>
+<span class="nc" id="L141">      System.exit(1);</span>
+    }
+
+<span class="fc" id="L144">    SimpleClient client = new SimpleClient();</span>
+    try {
+<span class="fc" id="L146">      Inet4Address iPv4Address = getIPv4Address(ifaceValue);</span>
+<span class="fc" id="L147">      File torrentFile = new File(otherArgs[0]);</span>
+<span class="fc" id="L148">      File outputFile = new File(outputValue);</span>
+
+<span class="fc" id="L150">      client.downloadTorrent(</span>
+<span class="fc" id="L151">              torrentFile.getAbsolutePath(),</span>
+<span class="fc" id="L152">              outputFile.getAbsolutePath(),</span>
+              iPv4Address);
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">      if (seedTimeValue &gt; 0) {</span>
+<span class="nc" id="L155">        Thread.sleep(seedTimeValue * 1000);</span>
+      }
+
+<span class="nc" id="L158">    } catch (Exception e) {</span>
+<span class="nc" id="L159">      logger.error(&quot;Fatal error: {}&quot;, e.getMessage(), e);</span>
+<span class="nc" id="L160">      System.exit(2);</span>
+    } finally {
+<span class="fc" id="L162">      client.stop();</span>
+    }
+<span class="fc" id="L164">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

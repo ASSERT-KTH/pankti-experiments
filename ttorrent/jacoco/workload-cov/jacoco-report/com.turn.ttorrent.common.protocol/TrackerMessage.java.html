@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TrackerMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common.protocol</a> &gt; <span class="el_source">TrackerMessage.java</span></div><h1>TrackerMessage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.common.protocol;
+
+import com.turn.ttorrent.common.Peer;
+
+import java.nio.ByteBuffer;
+import java.util.List;
+
+
+/**
+ * BitTorrent tracker protocol messages representations.
+ *
+ * &lt;p&gt;
+ * This class and its &lt;em&gt;*TrackerMessage&lt;/em&gt; subclasses provide POJO
+ * representations of the tracker protocol messages, for at least HTTP and UDP
+ * trackers' protocols, along with easy parsing from an input ByteBuffer to
+ * quickly get a usable representation of an incoming message.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ */
+public abstract class TrackerMessage {
+
+  /**
+   * Message type.
+   */
+<span class="fc" id="L41">  public enum Type {</span>
+<span class="fc" id="L42">    UNKNOWN(-1),</span>
+<span class="fc" id="L43">    CONNECT_REQUEST(0),</span>
+<span class="fc" id="L44">    CONNECT_RESPONSE(0),</span>
+<span class="fc" id="L45">    ANNOUNCE_REQUEST(1),</span>
+<span class="fc" id="L46">    ANNOUNCE_RESPONSE(1),</span>
+<span class="fc" id="L47">    SCRAPE_REQUEST(2),</span>
+<span class="fc" id="L48">    SCRAPE_RESPONSE(2),</span>
+<span class="fc" id="L49">    ERROR(3);</span>
+
+    private final int id;
+
+<span class="fc" id="L53">    Type(int id) {</span>
+<span class="fc" id="L54">      this.id = id;</span>
+<span class="fc" id="L55">    }</span>
+
+    public int getId() {
+<span class="nc" id="L58">      return this.id;</span>
+    }
+  }
+
+  private final Type type;
+  private final ByteBuffer data;
+
+  /**
+   * Constructor for the base tracker message type.
+   *
+   * @param type The message type.
+   * @param data A byte buffer containing the binary data of the message (a
+   *             B-encoded map, a UDP packet data, etc.).
+   */
+<span class="fc" id="L72">  protected TrackerMessage(Type type, ByteBuffer data) {</span>
+<span class="fc" id="L73">    this.type = type;</span>
+<span class="fc" id="L74">    this.data = data;</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">    if (this.data != null) {</span>
+<span class="fc" id="L76">      this.data.rewind();</span>
+    }
+<span class="fc" id="L78">  }</span>
+
+  /**
+   * Returns the type of this tracker message.
+   */
+  public Type getType() {
+<span class="nc" id="L84">    return this.type;</span>
+  }
+
+  /**
+   * Returns the encoded binary data for this message.
+   */
+  public ByteBuffer getData() {
+<span class="nc" id="L91">    return this.data;</span>
+  }
+
+  /**
+   * Generic exception for message format and message validation exceptions.
+   */
+  public static class MessageValidationException extends Exception {
+
+    static final long serialVersionUID = -1;
+
+    public MessageValidationException(String s) {
+<span class="nc" id="L102">      super(s);</span>
+<span class="nc" id="L103">    }</span>
+
+    public MessageValidationException(String s, Throwable cause) {
+<span class="nc" id="L106">      super(s, cause);</span>
+<span class="nc" id="L107">    }</span>
+
+  }
+
+
+  /**
+   * Base interface for connection request messages.
+   *
+   * &lt;p&gt;
+   * This interface must be implemented by all subtypes of connection request
+   * messages for the various tracker protocols.
+   * &lt;/p&gt;
+   *
+   * @author mpetazzoni
+   */
+  public interface ConnectionRequestMessage {
+
+  }
+
+
+  /**
+   * Base interface for connection response messages.
+   *
+   * &lt;p&gt;
+   * This interface must be implemented by all subtypes of connection
+   * response messages for the various tracker protocols.
+   * &lt;/p&gt;
+   *
+   * @author mpetazzoni
+   */
+  public interface ConnectionResponseMessage {
+
+  }
+
+
+  /**
+   * Base interface for tracker error messages.
+   *
+   * &lt;p&gt;
+   * This interface must be implemented by all subtypes of tracker error
+   * messages for the various tracker protocols.
+   * &lt;/p&gt;
+   *
+   * @author mpetazzoni
+   */
+  public interface ErrorMessage {
+
+    /**
+     * The various tracker error states.
+     *
+     * &lt;p&gt;
+     * These errors are reported by the tracker to a client when expected
+     * parameters or conditions are not present while processing an
+     * announce request from a BitTorrent client.
+     * &lt;/p&gt;
+     */
+<span class="nc" id="L163">    enum FailureReason {</span>
+<span class="nc" id="L164">      UNKNOWN_TORRENT(&quot;The requested torrent does not exist on this tracker&quot;),</span>
+<span class="nc" id="L165">      MISSING_HASH(&quot;Missing info hash&quot;),</span>
+<span class="nc" id="L166">      MISSING_PEER_ID(&quot;Missing peer ID&quot;),</span>
+<span class="nc" id="L167">      MISSING_PORT(&quot;Missing port&quot;),</span>
+<span class="nc" id="L168">      INVALID_EVENT(&quot;Unexpected event for peer state&quot;),</span>
+<span class="nc" id="L169">      NOT_IMPLEMENTED(&quot;Feature not implemented&quot;);</span>
+
+      private String message;
+
+<span class="nc" id="L173">      FailureReason(String message) {</span>
+<span class="nc" id="L174">        this.message = message;</span>
+<span class="nc" id="L175">      }</span>
+
+      public String getMessage() {
+<span class="nc" id="L178">        return this.message;</span>
+      }
+    }
+
+    String getReason();
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

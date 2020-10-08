@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TorrentCreator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.common</a> &gt; <span class="el_source">TorrentCreator.java</span></div><h1>TorrentCreator.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.common;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.bcodec.BEValue;
+import com.turn.ttorrent.bcodec.BEncoder;
+import com.turn.ttorrent.common.creation.MetadataBuilder;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+
+import java.io.*;
+import java.net.URI;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static com.turn.ttorrent.common.TorrentMetadataKeys.*;
+
+/**
+ * Old API for creating .torrent files, use {@link MetadataBuilder}
+ * @deprecated
+ */
+@Deprecated
+<span class="nc" id="L25">public class TorrentCreator {</span>
+
+<span class="fc" id="L27">  private final static Logger logger = TorrentLoggerFactory.getLogger(TorrentCreator.class);</span>
+
+  /**
+   * Torrent file piece length (in bytes), we use 512 kB.
+   */
+  public static final int DEFAULT_PIECE_LENGTH = 512 * 1024;
+  private static final int HASHING_TIMEOUT_SEC = 15;
+<span class="fc" id="L34">  public static int HASHING_THREADS_COUNT = Runtime.getRuntime().availableProcessors();</span>
+
+  static {
+<span class="fc" id="L37">    String threads = System.getenv(&quot;TTORRENT_HASHING_THREADS&quot;);</span>
+
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">    if (threads != null) {</span>
+      try {
+<span class="nc" id="L41">        int count = Integer.parseInt(threads);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (count &gt; 0) {</span>
+<span class="nc" id="L43">          TorrentCreator.HASHING_THREADS_COUNT = count;</span>
+        }
+<span class="nc" id="L45">      } catch (NumberFormatException nfe) {</span>
+        // Pass
+<span class="nc" id="L47">      }</span>
+    }
+  }
+
+<span class="fc" id="L51">  private static final ExecutorService HASHING_EXECUTOR = Executors.newFixedThreadPool(HASHING_THREADS_COUNT, new ThreadFactory() {</span>
+    @Override
+    public Thread newThread(@NotNull final Runnable r) {
+<span class="fc" id="L54">      final Thread thread = new Thread(r);</span>
+<span class="fc" id="L55">      thread.setDaemon(true);</span>
+<span class="fc" id="L56">      return thread;</span>
+    }
+  });
+
+  /**
+   * Create a {@link TorrentMetadata} object for a file.
+   *
+   * &lt;p&gt;
+   * Hash the given file to create the {@link TorrentMetadata} object representing
+   * the Torrent meta info about this file, needed for announcing and/or
+   * sharing said file.
+   * &lt;/p&gt;
+   *
+   * @param source    The file to use in the torrent.
+   * @param announce  The announce URI that will be used for this torrent.
+   * @param createdBy The creator's name, or any string identifying the
+   *                  torrent's creator.
+   */
+  public static TorrentMetadata create(File source, URI announce, String createdBy)
+          throws InterruptedException, IOException {
+<span class="fc" id="L76">    return create(source, null, announce, createdBy);</span>
+  }
+
+  /**
+   * Create a {@link TorrentMetadata} object for a set of files.
+   *
+   * &lt;p&gt;
+   * Hash the given files to create the multi-file {@link TorrentMetadata} object
+   * representing the Torrent meta-info about them, needed for announcing
+   * and/or sharing these files. Since we created the torrent, we're
+   * considering we'll be a full initial seeder for it.
+   * &lt;/p&gt;
+   *
+   * @param parent    The parent directory or location of the torrent files,
+   *                  also used as the torrent's name.
+   * @param files     The files to add into this torrent.
+   * @param announce  The announce URI that will be used for this torrent.
+   * @param createdBy The creator's name, or any string identifying the
+   *                  torrent's creator.
+   */
+  public static TorrentMetadata create(File parent, List&lt;File&gt; files, URI announce,
+                                       String createdBy) throws InterruptedException, IOException {
+<span class="fc" id="L98">    return create(parent, files, announce, null, createdBy);</span>
+  }
+
+  /**
+   * Create a {@link TorrentMetadata} object for a file.
+   *
+   * &lt;p&gt;
+   * Hash the given file to create the {@link TorrentMetadata} object representing
+   * the Torrent metainfo about this file, needed for announcing and/or
+   * sharing said file.
+   * &lt;/p&gt;
+   *
+   * @param source       The file to use in the torrent.
+   * @param announceList The announce URIs organized as tiers that will
+   *                     be used for this torrent
+   * @param createdBy    The creator's name, or any string identifying the
+   *                     torrent's creator.
+   */
+  public static TorrentMetadata create(File source, List&lt;List&lt;URI&gt;&gt; announceList,
+                                       String createdBy) throws InterruptedException, IOException {
+<span class="nc" id="L118">    return create(source, null, null, announceList, createdBy);</span>
+  }
+
+  /**
+   * Create a {@link TorrentMetadata} object for a set of files.
+   *
+   * &lt;p&gt;
+   * Hash the given files to create the multi-file {@link TorrentMetadata} object
+   * representing the Torrent meta-info about them, needed for announcing
+   * and/or sharing these files. Since we created the torrent, we're
+   * considering we'll be a full initial seeder for it.
+   * &lt;/p&gt;
+   *
+   * @param source       The parent directory or location of the torrent files,
+   *                     also used as the torrent's name.
+   * @param files        The files to add into this torrent.
+   * @param announceList The announce URIs organized as tiers that will
+   *                     be used for this torrent
+   * @param createdBy    The creator's name, or any string identifying the
+   *                     torrent's creator.
+   */
+  public static TorrentMetadata create(File source, List&lt;File&gt; files,
+                                       List&lt;List&lt;URI&gt;&gt; announceList, String createdBy)
+          throws InterruptedException, IOException {
+<span class="nc" id="L142">    return create(source, files, null, announceList, createdBy);</span>
+  }
+
+  /**
+   * Helper method to create a {@link TorrentMetadata} object for a set of files.
+   *
+   * &lt;p&gt;
+   * Hash the given files to create the multi-file {@link TorrentMetadata} object
+   * representing the Torrent meta-info about them, needed for announcing
+   * and/or sharing these files. Since we created the torrent, we're
+   * considering we'll be a full initial seeder for it.
+   * &lt;/p&gt;
+   *
+   * @param parent       The parent directory or location of the torrent files,
+   *                     also used as the torrent's name.
+   * @param files        The files to add into this torrent.
+   * @param announce     The announce URI that will be used for this torrent.
+   * @param announceList The announce URIs organized as tiers that will
+   *                     be used for this torrent
+   * @param createdBy    The creator's name, or any string identifying the
+   *                     torrent's creator.
+   */
+  public static TorrentMetadata create(File parent, List&lt;File&gt; files, URI announce, List&lt;List&lt;URI&gt;&gt; announceList, String createdBy)
+          throws InterruptedException, IOException {
+<span class="fc" id="L166">    return create(parent, files, announce, announceList, createdBy, DEFAULT_PIECE_LENGTH);</span>
+  }
+
+  public static TorrentMetadata create(File parent, List&lt;File&gt; files, URI announce,
+                                       List&lt;List&lt;URI&gt;&gt; announceList, String createdBy, final int pieceSize)
+          throws InterruptedException, IOException {
+<span class="fc" id="L172">    return create(parent, files, announce, announceList, createdBy, System.currentTimeMillis() / 1000, pieceSize);</span>
+  }
+
+  //for tests
+  /*package local*/
+  static TorrentMetadata create(File parent, List&lt;File&gt; files, URI announce,
+                                List&lt;List&lt;URI&gt;&gt; announceList, String createdBy, long creationTimeSecs, final int pieceSize)
+          throws InterruptedException, IOException {
+<span class="fc" id="L180">    Map&lt;String, BEValue&gt; torrent = new HashMap&lt;String, BEValue&gt;();</span>
+
+<span class="pc bpc" id="L182" title="1 of 2 branches missed.">    if (announce != null) {</span>
+<span class="fc" id="L183">      torrent.put(ANNOUNCE, new BEValue(announce.toString()));</span>
+    }
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">    if (announceList != null) {</span>
+<span class="nc" id="L186">      List&lt;BEValue&gt; tiers = new LinkedList&lt;BEValue&gt;();</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">      for (List&lt;URI&gt; trackers : announceList) {</span>
+<span class="nc" id="L188">        List&lt;BEValue&gt; tierInfo = new LinkedList&lt;BEValue&gt;();</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">        for (URI trackerURI : trackers) {</span>
+<span class="nc" id="L190">          tierInfo.add(new BEValue(trackerURI.toString()));</span>
+<span class="nc" id="L191">        }</span>
+<span class="nc" id="L192">        tiers.add(new BEValue(tierInfo));</span>
+<span class="nc" id="L193">      }</span>
+<span class="nc" id="L194">      torrent.put(ANNOUNCE_LIST, new BEValue(tiers));</span>
+    }
+<span class="fc" id="L196">    torrent.put(CREATION_DATE_SEC, new BEValue(creationTimeSecs));</span>
+<span class="fc" id="L197">    torrent.put(CREATED_BY, new BEValue(createdBy));</span>
+
+<span class="fc" id="L199">    Map&lt;String, BEValue&gt; info = new TreeMap&lt;String, BEValue&gt;();</span>
+<span class="fc" id="L200">    info.put(NAME, new BEValue(parent.getName()));</span>
+<span class="fc" id="L201">    info.put(PIECE_LENGTH, new BEValue(pieceSize));</span>
+
+<span class="pc bpc" id="L203" title="1 of 4 branches missed.">    if (files == null || files.isEmpty()) {</span>
+<span class="fc" id="L204">      info.put(FILE_LENGTH, new BEValue(parent.length()));</span>
+<span class="fc" id="L205">      info.put(PIECES, new BEValue(hashFile(parent, pieceSize),</span>
+              Constants.BYTE_ENCODING));
+    } else {
+<span class="fc" id="L208">      List&lt;BEValue&gt; fileInfo = new LinkedList&lt;BEValue&gt;();</span>
+<span class="fc bfc" id="L209" title="All 2 branches covered.">      for (File file : files) {</span>
+<span class="fc" id="L210">        Map&lt;String, BEValue&gt; fileMap = new HashMap&lt;String, BEValue&gt;();</span>
+<span class="fc" id="L211">        fileMap.put(FILE_LENGTH, new BEValue(file.length()));</span>
+
+<span class="fc" id="L213">        LinkedList&lt;BEValue&gt; filePath = new LinkedList&lt;BEValue&gt;();</span>
+<span class="pc bpc" id="L214" title="1 of 2 branches missed.">        while (file != null) {</span>
+<span class="fc bfc" id="L215" title="All 2 branches covered.">          if (file.equals(parent)) {</span>
+<span class="fc" id="L216">            break;</span>
+          }
+
+<span class="fc" id="L219">          filePath.addFirst(new BEValue(file.getName()));</span>
+<span class="fc" id="L220">          file = file.getParentFile();</span>
+        }
+
+<span class="fc" id="L223">        fileMap.put(FILE_PATH, new BEValue(filePath));</span>
+<span class="fc" id="L224">        fileInfo.add(new BEValue(fileMap));</span>
+<span class="fc" id="L225">      }</span>
+<span class="fc" id="L226">      info.put(FILES, new BEValue(fileInfo));</span>
+<span class="fc" id="L227">      info.put(PIECES, new BEValue(hashFiles(files, pieceSize),</span>
+              Constants.BYTE_ENCODING));
+    }
+<span class="fc" id="L230">    torrent.put(INFO_TABLE, new BEValue(info));</span>
+
+<span class="fc" id="L232">    ByteArrayOutputStream baos = new ByteArrayOutputStream();</span>
+<span class="fc" id="L233">    BEncoder.bencode(new BEValue(torrent), baos);</span>
+<span class="fc" id="L234">    return new TorrentParser().parse(baos.toByteArray());</span>
+  }
+
+  /**
+   * Return the concatenation of the SHA-1 hashes of a file's pieces.
+   *
+   * &lt;p&gt;
+   * Hashes the given file piece by piece using the default Torrent piece
+   * length (see {@link #DEFAULT_PIECE_LENGTH}) and returns the concatenation of
+   * these hashes, as a string.
+   * &lt;/p&gt;
+   *
+   * &lt;p&gt;
+   * This is used for creating Torrent meta-info structures from a file.
+   * &lt;/p&gt;
+   *
+   * @param file The file to hash.
+   */
+  private static String hashFile(final File file, final int pieceSize)
+          throws InterruptedException, IOException {
+<span class="fc" id="L254">    return hashFiles(Collections.singletonList(file), pieceSize);</span>
+  }
+
+  private static String hashFiles(final List&lt;File&gt; files, final int pieceSize)
+          throws InterruptedException, IOException {
+<span class="pc bpc" id="L259" title="1 of 2 branches missed.">    if (files.size() == 0) {</span>
+<span class="nc" id="L260">      return &quot;&quot;;</span>
+    }
+<span class="fc" id="L262">    List&lt;Future&lt;String&gt;&gt; results = new LinkedList&lt;Future&lt;String&gt;&gt;();</span>
+<span class="fc" id="L263">    long length = 0L;</span>
+
+<span class="fc" id="L265">    final ByteBuffer buffer = ByteBuffer.allocate(pieceSize);</span>
+
+
+<span class="fc" id="L268">    final AtomicInteger threadIdx = new AtomicInteger(0);</span>
+<span class="fc" id="L269">    final String firstFileName = files.get(0).getName();</span>
+
+<span class="fc" id="L271">    StringBuilder hashes = new StringBuilder();</span>
+
+<span class="fc" id="L273">    long start = System.nanoTime();</span>
+<span class="fc bfc" id="L274" title="All 2 branches covered.">    for (File file : files) {</span>
+<span class="fc" id="L275">      logger.debug(&quot;Analyzing local data for {} with {} threads...&quot;,</span>
+<span class="fc" id="L276">              file.getName(), HASHING_THREADS_COUNT);</span>
+
+<span class="fc" id="L278">      length += file.length();</span>
+
+<span class="fc" id="L280">      FileInputStream fis = new FileInputStream(file);</span>
+<span class="fc" id="L281">      FileChannel channel = fis.getChannel();</span>
+
+      try {
+<span class="fc bfc" id="L284" title="All 2 branches covered.">        while (channel.read(buffer) &gt; 0) {</span>
+<span class="fc bfc" id="L285" title="All 2 branches covered.">          if (buffer.remaining() == 0) {</span>
+<span class="fc" id="L286">            buffer.clear();</span>
+<span class="fc" id="L287">            final ByteBuffer data = prepareDataFromBuffer(buffer);</span>
+
+<span class="fc" id="L289">            results.add(HASHING_EXECUTOR.submit(new Callable&lt;String&gt;() {</span>
+              @Override
+              public String call() throws Exception {
+<span class="fc" id="L292">                Thread.currentThread().setName(String.format(&quot;%s hasher #%d&quot;, firstFileName, threadIdx.incrementAndGet()));</span>
+<span class="fc" id="L293">                return new CallableChunkHasher(data).call();</span>
+              }
+            }));
+          }
+
+<span class="fc bfc" id="L298" title="All 2 branches covered.">          if (results.size() &gt;= HASHING_THREADS_COUNT) {</span>
+            // process hashers, otherwise they will spend too much memory
+<span class="fc" id="L300">            waitForHashesToCalculate(results, hashes);</span>
+<span class="fc" id="L301">            results.clear();</span>
+          }
+        }
+      } finally {
+<span class="fc" id="L305">        channel.close();</span>
+<span class="fc" id="L306">        fis.close();</span>
+      }
+<span class="fc" id="L308">    }</span>
+
+    // Hash the last bit, if any
+<span class="fc bfc" id="L311" title="All 2 branches covered.">    if (buffer.position() &gt; 0) {</span>
+<span class="fc" id="L312">      buffer.limit(buffer.position());</span>
+<span class="fc" id="L313">      buffer.position(0);</span>
+<span class="fc" id="L314">      final ByteBuffer data = prepareDataFromBuffer(buffer);</span>
+<span class="fc" id="L315">      results.add(HASHING_EXECUTOR.submit(new CallableChunkHasher(data)));</span>
+    }
+    // here we have only a few hashes to wait for calculation
+<span class="fc" id="L318">    waitForHashesToCalculate(results, hashes);</span>
+
+<span class="fc" id="L320">    long elapsed = System.nanoTime() - start;</span>
+
+<span class="fc" id="L322">    int expectedPieces = (int) (Math.ceil(</span>
+            (double) length / pieceSize));
+<span class="fc" id="L324">    logger.debug(&quot;Hashed {} file(s) ({} bytes) in {} pieces ({} expected) in {}ms.&quot;,</span>
+            new Object[]{
+<span class="fc" id="L326">                    files.size(),</span>
+<span class="fc" id="L327">                    length,</span>
+<span class="fc" id="L328">                    results.size(),</span>
+<span class="fc" id="L329">                    expectedPieces,</span>
+<span class="fc" id="L330">                    String.format(&quot;%.1f&quot;, elapsed / 1e6),</span>
+            });
+
+<span class="fc" id="L333">    return hashes.toString();</span>
+  }
+
+  private static ByteBuffer prepareDataFromBuffer(ByteBuffer buffer) {
+<span class="fc" id="L337">    final ByteBuffer data = ByteBuffer.allocate(buffer.remaining());</span>
+<span class="fc" id="L338">    buffer.mark();</span>
+<span class="fc" id="L339">    data.put(buffer);</span>
+<span class="fc" id="L340">    data.clear();</span>
+<span class="fc" id="L341">    buffer.reset();</span>
+<span class="fc" id="L342">    return data;</span>
+  }
+
+  private static void waitForHashesToCalculate(List&lt;Future&lt;String&gt;&gt; results, StringBuilder hashes) throws InterruptedException, IOException {
+    try {
+<span class="fc bfc" id="L347" title="All 2 branches covered.">      for (Future&lt;String&gt; chunk : results) {</span>
+<span class="fc" id="L348">        hashes.append(chunk.get(HASHING_TIMEOUT_SEC, TimeUnit.SECONDS));</span>
+<span class="fc" id="L349">      }</span>
+<span class="nc" id="L350">    } catch (ExecutionException ee) {</span>
+<span class="nc" id="L351">      throw new IOException(&quot;Error while hashing the torrent data!&quot;, ee);</span>
+<span class="nc" id="L352">    } catch (TimeoutException e) {</span>
+<span class="nc" id="L353">      throw new RuntimeException(String.format(&quot;very slow hashing: took more than %d seconds to calculate several pieces. Cancelling&quot;, HASHING_TIMEOUT_SEC));</span>
+<span class="fc" id="L354">    }</span>
+<span class="fc" id="L355">  }</span>
+
+  /**
+   * A {@link Callable} to hash a data chunk.
+   *
+   * @author mpetazzoni
+   */
+  private static class CallableChunkHasher implements Callable&lt;String&gt; {
+
+    private final ByteBuffer data;
+
+<span class="fc" id="L366">    CallableChunkHasher(final ByteBuffer data) {</span>
+<span class="fc" id="L367">      this.data = data;</span>
+<span class="fc" id="L368">    }</span>
+
+    @Override
+    public String call() throws UnsupportedEncodingException {
+<span class="fc" id="L372">      byte[] sha1Hash = TorrentUtils.calculateSha1Hash(this.data.array());</span>
+<span class="fc" id="L373">      return new String(sha1Hash, Constants.BYTE_ENCODING);</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

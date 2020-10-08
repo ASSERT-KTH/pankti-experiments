@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HandshakeSender.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.network</a> &gt; <span class="el_source">HandshakeSender.java</span></div><h1>HandshakeSender.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.client.network;
+
+import com.turn.ttorrent.client.Context;
+import com.turn.ttorrent.client.Handshake;
+import com.turn.ttorrent.common.Peer;
+import com.turn.ttorrent.common.TorrentHash;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.ByteChannel;
+import java.util.Arrays;
+
+public class HandshakeSender implements DataProcessor {
+
+<span class="fc" id="L17">  private static final Logger logger = TorrentLoggerFactory.getLogger(HandshakeSender.class);</span>
+
+  private final TorrentHash myTorrentHash;
+  private final String myRemotePeerIp;
+  private final int myRemotePeerPort;
+  private final Context myContext;
+
+  public HandshakeSender(TorrentHash torrentHash,
+                         String remotePeerIp,
+                         int remotePeerPort,
+<span class="fc" id="L27">                         Context context) {</span>
+<span class="fc" id="L28">    myTorrentHash = torrentHash;</span>
+<span class="fc" id="L29">    myRemotePeerIp = remotePeerIp;</span>
+<span class="fc" id="L30">    myRemotePeerPort = remotePeerPort;</span>
+<span class="fc" id="L31">    myContext = context;</span>
+<span class="fc" id="L32">  }</span>
+
+  @Override
+  public DataProcessor processAndGetNext(ByteChannel socketChannel) throws IOException {
+
+<span class="fc" id="L37">    Peer self = myContext.getPeersStorage().getSelf();</span>
+<span class="fc" id="L38">    Handshake handshake = Handshake.craft(myTorrentHash.getInfoHash(), self.getPeerIdArray());</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">    if (handshake == null) {</span>
+<span class="nc" id="L40">      logger.warn(&quot;can not craft handshake message. Self peer id is {}, torrent hash is {}&quot;,</span>
+<span class="nc" id="L41">              Arrays.toString(self.getPeerIdArray()),</span>
+<span class="nc" id="L42">              Arrays.toString(myTorrentHash.getInfoHash()));</span>
+<span class="nc" id="L43">      return new ShutdownProcessor();</span>
+    }
+<span class="fc" id="L45">    ByteBuffer messageToSend = ByteBuffer.wrap(handshake.getData().array());</span>
+<span class="fc" id="L46">    logger.trace(&quot;try send handshake {} to {}&quot;, handshake, socketChannel);</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">    while (messageToSend.hasRemaining()) {</span>
+<span class="fc" id="L48">      socketChannel.write(messageToSend);</span>
+    }
+<span class="fc" id="L50">    return new HandshakeReceiver(</span>
+            myContext,
+            myRemotePeerIp,
+            myRemotePeerPort,
+            true);
+  }
+
+  @Override
+  public DataProcessor handleError(ByteChannel socketChannel, Throwable e) throws IOException {
+<span class="nc" id="L59">    return new ShutdownProcessor().processAndGetNext(socketChannel);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

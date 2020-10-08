@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EndGameStrategyImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.strategy</a> &gt; <span class="el_source">EndGameStrategyImpl.java</span></div><h1>EndGameStrategyImpl.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2000-2018 JetBrains s.r.o.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.turn.ttorrent.client.strategy;
+
+import com.turn.ttorrent.client.Piece;
+import com.turn.ttorrent.client.peer.SharingPeer;
+
+import java.util.*;
+
+public class EndGameStrategyImpl implements EndGameStrategy {
+
+<span class="fc" id="L26">  private static final Random RANDOM = new Random();</span>
+
+  private final int peersPerPiece;
+
+<span class="fc" id="L30">  public EndGameStrategyImpl(int peersPerPiece) {</span>
+<span class="fc" id="L31">    this.peersPerPiece = peersPerPiece;</span>
+<span class="fc" id="L32">  }</span>
+
+  @Override
+  public RequestsCollection collectRequests(Piece[] allPieces, List&lt;SharingPeer&gt; connectedPeers) {
+<span class="fc" id="L36">    List&lt;SharingPeer&gt; sorted = new ArrayList&lt;SharingPeer&gt;(connectedPeers);</span>
+<span class="fc" id="L37">    Map&lt;Piece, List&lt;SharingPeer&gt;&gt; selectedPieces = new HashMap&lt;Piece, List&lt;SharingPeer&gt;&gt;();</span>
+<span class="fc" id="L38">    Collections.sort(sorted, new Comparator&lt;SharingPeer&gt;() {</span>
+      @Override
+      public int compare(SharingPeer o1, SharingPeer o2) {
+<span class="fc" id="L41">        return Integer.valueOf(o1.getDownloadedPiecesCount()).compareTo(o2.getDownloadedPiecesCount());</span>
+      }
+    });
+<span class="fc bfc" id="L44" title="All 2 branches covered.">    for (Piece piece : allPieces) {</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">      if (piece.isValid()) continue;</span>
+
+      //if we don't have piece, then request this piece from two random peers
+      //(peers are selected by peer rank, peer with better rank will be selected more often then peer with bad rank
+<span class="fc" id="L49">      List&lt;SharingPeer&gt; selectedPeers = selectGoodPeers(piece, peersPerPiece, sorted);</span>
+<span class="fc" id="L50">      selectedPieces.put(piece, selectedPeers);</span>
+    }
+<span class="fc" id="L52">    return new RequestsCollectionImpl(selectedPieces);</span>
+  }
+
+  private List&lt;SharingPeer&gt; selectGoodPeers(Piece piece, int count, List&lt;SharingPeer&gt; sortedPeers) {
+<span class="fc" id="L56">    List&lt;SharingPeer&gt; notSelected = new ArrayList&lt;SharingPeer&gt;(sortedPeers);</span>
+<span class="fc" id="L57">    Iterator&lt;SharingPeer&gt; iterator = notSelected.iterator();</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">    while (iterator.hasNext()) {</span>
+<span class="fc" id="L59">      SharingPeer peer = iterator.next();</span>
+<span class="fc" id="L60">      boolean peerHasCurrentPiece = peer.getAvailablePieces().get(piece.getIndex());</span>
+<span class="fc" id="L61">      boolean alreadyRequested = peer.getRequestedPieces().contains(piece);</span>
+
+<span class="fc bfc" id="L63" title="All 4 branches covered.">      if (!peerHasCurrentPiece || alreadyRequested) iterator.remove();</span>
+<span class="fc" id="L64">    }</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">    if (notSelected.size() &lt;= count) return notSelected;</span>
+
+<span class="fc" id="L67">    List&lt;SharingPeer&gt; selected = new ArrayList&lt;SharingPeer&gt;();</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">    for (int i = 0; i &lt; count; i++) {</span>
+<span class="fc" id="L69">      SharingPeer sharingPeer = selectPeer(notSelected);</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">      if (sharingPeer == null) continue;</span>
+<span class="fc" id="L71">      notSelected.remove(sharingPeer);</span>
+<span class="fc" id="L72">      selected.add(sharingPeer);</span>
+    }
+
+<span class="fc" id="L75">    return selected;</span>
+  }
+
+  private SharingPeer selectPeer(List&lt;SharingPeer&gt; notSelected) {
+<span class="fc bfc" id="L79" title="All 2 branches covered.">    for (SharingPeer sharingPeer : notSelected) {</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">      if (RANDOM.nextDouble() &lt; 0.8) {</span>
+<span class="fc" id="L81">        return sharingPeer;</span>
+      }
+<span class="fc" id="L83">    }</span>
+<span class="fc" id="L84">    return notSelected.get(RANDOM.nextInt(notSelected.size()));</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

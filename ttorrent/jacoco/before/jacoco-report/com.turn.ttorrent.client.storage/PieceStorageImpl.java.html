@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PieceStorageImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.storage</a> &gt; <span class="el_source">PieceStorageImpl.java</span></div><h1>PieceStorageImpl.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.client.storage;
+
+import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.BitSet;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+public class PieceStorageImpl implements PieceStorage {
+
+  private final TorrentByteStorage fileCollectionStorage;
+  private final ReadWriteLock readWriteLock;
+
+<span class="fc" id="L16">  private final Object openStorageLock = new Object();</span>
+
+  @Nullable
+  private volatile BitSet availablePieces;
+  private final int piecesCount;
+  private final int pieceSize;
+  private volatile boolean isOpen;
+
+  public PieceStorageImpl(TorrentByteStorage fileCollectionStorage,
+                          BitSet availablePieces,
+                          int piecesCount,
+<span class="fc" id="L27">                          int pieceSize) {</span>
+<span class="fc" id="L28">    this.fileCollectionStorage = fileCollectionStorage;</span>
+<span class="fc" id="L29">    this.readWriteLock = new ReentrantReadWriteLock();</span>
+<span class="fc" id="L30">    this.piecesCount = piecesCount;</span>
+<span class="fc" id="L31">    this.pieceSize = pieceSize;</span>
+<span class="fc" id="L32">    BitSet bitSet = new BitSet(piecesCount);</span>
+<span class="fc" id="L33">    bitSet.or(availablePieces);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">    if (bitSet.cardinality() != piecesCount) {</span>
+<span class="fc" id="L35">      this.availablePieces = bitSet;</span>
+    }
+<span class="fc" id="L37">    isOpen = false;</span>
+<span class="fc" id="L38">  }</span>
+
+  private void checkPieceIndex(int pieceIndex) {
+<span class="pc bpc" id="L41" title="1 of 4 branches missed.">    if (pieceIndex &lt; 0 || pieceIndex &gt;= piecesCount) {</span>
+<span class="fc" id="L42">      throw new IllegalArgumentException(&quot;Incorrect piece index &quot; + pieceIndex + &quot;. Piece index must be positive less than&quot; + piecesCount);</span>
+    }
+<span class="fc" id="L44">  }</span>
+
+  @Override
+  public void savePiece(int pieceIndex, byte[] pieceData) throws IOException {
+<span class="fc" id="L48">    checkPieceIndex(pieceIndex);</span>
+    try {
+<span class="fc" id="L50">      readWriteLock.writeLock().lock();</span>
+
+<span class="fc" id="L52">      BitSet availablePieces = this.availablePieces;</span>
+
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">      boolean isFullyDownloaded = availablePieces == null;</span>
+
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">      if (isFullyDownloaded) return;</span>
+
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">      if (availablePieces.get(pieceIndex)) return;</span>
+
+<span class="fc" id="L60">      openStorageIsNecessary(false);</span>
+
+<span class="fc" id="L62">      long pos = pieceIndex;</span>
+<span class="fc" id="L63">      pos = pos * pieceSize;</span>
+<span class="fc" id="L64">      ByteBuffer buffer = ByteBuffer.wrap(pieceData);</span>
+<span class="fc" id="L65">      fileCollectionStorage.write(buffer, pos);</span>
+
+<span class="fc" id="L67">      availablePieces.set(pieceIndex);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">      boolean isFullyNow = availablePieces.cardinality() == piecesCount;</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">      if (isFullyNow) {</span>
+<span class="fc" id="L70">        this.availablePieces = null;</span>
+<span class="fc" id="L71">        fileCollectionStorage.finish();</span>
+<span class="fc" id="L72">        fileCollectionStorage.close();</span>
+<span class="fc" id="L73">        fileCollectionStorage.open(true);</span>
+      }
+    } finally {
+<span class="fc" id="L76">      readWriteLock.writeLock().unlock();</span>
+    }
+<span class="fc" id="L78">  }</span>
+
+  private void openStorageIsNecessary(boolean onlyRead) throws IOException {
+<span class="fc bfc" id="L81" title="All 2 branches covered.">    if (!isOpen) {</span>
+<span class="fc" id="L82">      fileCollectionStorage.open(onlyRead);</span>
+<span class="fc" id="L83">      isOpen = true;</span>
+    }
+<span class="fc" id="L85">  }</span>
+
+  @Override
+  public byte[] readPiecePart(int pieceIndex, int offset, int length) throws IOException {
+<span class="fc" id="L89">    checkPieceIndex(pieceIndex);</span>
+    try {
+<span class="fc" id="L91">      readWriteLock.readLock().lock();</span>
+
+<span class="fc" id="L93">      BitSet availablePieces = this.availablePieces;</span>
+<span class="pc bpc" id="L94" title="1 of 4 branches missed.">      if (availablePieces != null &amp;&amp; !availablePieces.get(pieceIndex)) {</span>
+<span class="nc" id="L95">        throw new IllegalArgumentException(&quot;trying reading part of not available piece&quot;);</span>
+      }
+
+<span class="fc" id="L98">      synchronized (openStorageLock) {</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        openStorageIsNecessary(availablePieces == null);</span>
+<span class="fc" id="L100">      }</span>
+
+<span class="fc" id="L102">      ByteBuffer buffer = ByteBuffer.allocate(length);</span>
+<span class="fc" id="L103">      long pos = pieceIndex;</span>
+<span class="fc" id="L104">      pos = pos * pieceSize + offset;</span>
+<span class="fc" id="L105">      fileCollectionStorage.read(buffer, pos);</span>
+<span class="fc" id="L106">      return buffer.array();</span>
+    } finally {
+<span class="fc" id="L108">      readWriteLock.readLock().unlock();</span>
+    }
+  }
+
+  @Override
+  public boolean isFinished() {
+    try {
+<span class="fc" id="L115">      readWriteLock.readLock().lock();</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">      return availablePieces == null;</span>
+    } finally {
+<span class="fc" id="L118">      readWriteLock.readLock().unlock();</span>
+    }
+  }
+
+  @Override
+  public BitSet getAvailablePieces() {
+    try {
+<span class="fc" id="L125">      readWriteLock.readLock().lock();</span>
+<span class="fc" id="L126">      BitSet result = new BitSet(piecesCount);</span>
+
+<span class="fc" id="L128">      BitSet availablePieces = this.availablePieces;</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">      boolean isFullyDownloaded = availablePieces == null;</span>
+
+<span class="fc bfc" id="L131" title="All 2 branches covered.">      if (isFullyDownloaded) {</span>
+<span class="fc" id="L132">        result.set(0, piecesCount);</span>
+<span class="fc" id="L133">        return result;</span>
+      }
+<span class="fc" id="L135">      result.or(availablePieces);</span>
+<span class="fc" id="L136">      return result;</span>
+    } finally {
+<span class="fc" id="L138">      readWriteLock.readLock().unlock();</span>
+    }
+  }
+
+  @Override
+  public void close() throws IOException {
+    try {
+<span class="fc" id="L145">      readWriteLock.writeLock().lock();</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">      if (!isOpen) return;</span>
+<span class="fc" id="L147">      fileCollectionStorage.close();</span>
+<span class="fc" id="L148">      isOpen = false;</span>
+    } finally {
+<span class="fc" id="L150">      readWriteLock.writeLock().unlock();</span>
+    }
+<span class="fc" id="L152">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

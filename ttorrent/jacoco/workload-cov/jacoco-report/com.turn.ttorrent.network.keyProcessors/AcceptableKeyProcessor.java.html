@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AcceptableKeyProcessor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.network.keyProcessors</a> &gt; <span class="el_source">AcceptableKeyProcessor.java</span></div><h1>AcceptableKeyProcessor.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.network.keyProcessors;
+
+import com.turn.ttorrent.common.TimeService;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.network.*;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.nio.channels.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class AcceptableKeyProcessor implements KeyProcessor {
+
+<span class="fc" id="L14">  private static final Logger logger = TorrentLoggerFactory.getLogger(AcceptableKeyProcessor.class);</span>
+
+  private final Selector mySelector;
+  private final String myServerSocketLocalAddress;
+  private final TimeService myTimeService;
+  private final NewConnectionAllower myNewConnectionAllower;
+  private final TimeoutStorage myTimeoutStorage;
+  private final AtomicInteger mySendBufferSize;
+  private final AtomicInteger myReceiveBufferSize;
+
+  public AcceptableKeyProcessor(Selector selector,
+                                String serverSocketLocalAddress,
+                                TimeService timeService,
+                                NewConnectionAllower newConnectionAllower,
+                                TimeoutStorage timeoutStorage,
+                                AtomicInteger sendBufferSize,
+<span class="fc" id="L30">                                AtomicInteger receiveBufferSize) {</span>
+<span class="fc" id="L31">    this.mySelector = selector;</span>
+<span class="fc" id="L32">    this.myServerSocketLocalAddress = serverSocketLocalAddress;</span>
+<span class="fc" id="L33">    this.myTimeService = timeService;</span>
+<span class="fc" id="L34">    this.myNewConnectionAllower = newConnectionAllower;</span>
+<span class="fc" id="L35">    this.myTimeoutStorage = timeoutStorage;</span>
+<span class="fc" id="L36">    this.mySendBufferSize = sendBufferSize;</span>
+<span class="fc" id="L37">    this.myReceiveBufferSize = receiveBufferSize;</span>
+<span class="fc" id="L38">  }</span>
+
+  @Override
+  public void process(SelectionKey key) throws IOException {
+<span class="nc" id="L42">    SelectableChannel channel = key.channel();</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">    if (!(channel instanceof ServerSocketChannel)) {</span>
+<span class="nc" id="L44">      logger.error(&quot;incorrect instance of server channel. Can not accept connections&quot;);</span>
+<span class="nc" id="L45">      key.cancel();</span>
+<span class="nc" id="L46">      return;</span>
+    }
+<span class="nc" id="L48">    Object attachment = key.attachment();</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">    if (!(attachment instanceof AcceptAttachment)) {</span>
+<span class="nc" id="L50">      logger.error(&quot;incorrect instance of server channel key attachment&quot;);</span>
+<span class="nc" id="L51">      key.cancel();</span>
+<span class="nc" id="L52">      return;</span>
+    }
+<span class="nc" id="L54">    ChannelListenerFactory channelListenerFactory = ((AcceptAttachment) attachment).getChannelListenerFactory();</span>
+
+<span class="nc" id="L56">    SocketChannel socketChannel = ((ServerSocketChannel) key.channel()).accept();</span>
+<span class="nc" id="L57">    logger.trace(&quot;server {} get new connection from {}&quot;, new Object[]{myServerSocketLocalAddress, socketChannel.socket()});</span>
+
+<span class="nc bnc" id="L59" title="All 2 branches missed.">    if (!myNewConnectionAllower.isNewConnectionAllowed()) {</span>
+<span class="nc" id="L60">      logger.info(&quot;new connection is not allowed. New connection is closed&quot;);</span>
+<span class="nc" id="L61">      socketChannel.close();</span>
+<span class="nc" id="L62">      return;</span>
+    }
+
+<span class="nc" id="L65">    ConnectionListener stateConnectionListener = channelListenerFactory.newChannelListener();</span>
+<span class="nc" id="L66">    stateConnectionListener.onConnectionEstablished(socketChannel);</span>
+<span class="nc" id="L67">    socketChannel.configureBlocking(false);</span>
+<span class="nc" id="L68">    KeyProcessorUtil.setBuffersSizeIfNecessary(socketChannel, mySendBufferSize.get(), myReceiveBufferSize.get());</span>
+<span class="nc" id="L69">    ReadWriteAttachment keyAttachment = new ReadWriteAttachment(stateConnectionListener, myTimeService.now(), myTimeoutStorage.getTimeoutMillis());</span>
+<span class="nc" id="L70">    socketChannel.register(mySelector, SelectionKey.OP_READ, keyAttachment);</span>
+<span class="nc" id="L71">  }</span>
+
+  @Override
+  public boolean accept(SelectionKey key) {
+<span class="pc bpc" id="L75" title="2 of 4 branches missed.">    return key.isValid() &amp;&amp; key.isAcceptable();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

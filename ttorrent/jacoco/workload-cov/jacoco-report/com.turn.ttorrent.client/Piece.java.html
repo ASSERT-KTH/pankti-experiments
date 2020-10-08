@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Piece.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client</a> &gt; <span class="el_source">Piece.java</span></div><h1>Piece.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.client;
+
+import com.turn.ttorrent.client.peer.SharingPeer;
+import com.turn.ttorrent.client.storage.PieceStorage;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.common.TorrentUtils;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+
+
+/**
+ * A torrent piece.
+ *
+ * &lt;p&gt;
+ * This class represents a torrent piece. Torrents are made of pieces, which
+ * are in turn made of blocks that are exchanged using the peer protocol.
+ * The piece length is defined at the torrent level, but the last piece that
+ * makes the torrent might be smaller.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;
+ * If the torrent has multiple files, pieces can spread across file boundaries.
+ * The TorrentByteStorage abstracts this problem to give Piece objects the
+ * impression of a contiguous, linear byte storage.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ */
+public class Piece implements Comparable&lt;Piece&gt;, PieceInformation {
+
+<span class="fc" id="L49">  private static final Logger logger =</span>
+<span class="fc" id="L50">          TorrentLoggerFactory.getLogger(Piece.class);</span>
+
+  private final PieceStorage pieceStorage;
+  private final int index;
+  private final long length;
+  private final byte[] hash;
+
+  private volatile boolean valid;
+  private int seen;
+  private ByteBuffer data;
+
+  /**
+   * Initialize a new piece in the byte bucket.
+   *
+   * @param pieceStorage  The underlying piece storage bucket.
+   * @param index   This piece index in the torrent.
+   * @param length  This piece length, in bytes.
+   * @param hash    This piece 20-byte SHA1 hash sum.
+   */
+<span class="fc" id="L69">  public Piece(PieceStorage pieceStorage, int index, long length, byte[] hash) {</span>
+<span class="fc" id="L70">    this.pieceStorage = pieceStorage;</span>
+<span class="fc" id="L71">    this.index = index;</span>
+<span class="fc" id="L72">    this.length = length;</span>
+<span class="fc" id="L73">    this.hash = hash;</span>
+
+    // Piece is considered invalid until first check.
+<span class="fc" id="L76">    this.valid = false;</span>
+
+    // Piece start unseen
+<span class="fc" id="L79">    this.seen = 0;</span>
+
+<span class="fc" id="L81">    this.data = null;</span>
+<span class="fc" id="L82">  }</span>
+
+  @Override
+  public int getSize() {
+<span class="nc" id="L86">    return (int)length;</span>
+  }
+
+  /**
+   * Tells whether this piece's data is valid or not.
+   */
+  public boolean isValid() {
+<span class="fc" id="L93">    return this.valid;</span>
+  }
+
+  /**
+   * Returns the index of this piece in the torrent.
+   */
+  public int getIndex() {
+<span class="fc" id="L100">    return this.index;</span>
+  }
+
+  /**
+   * Returns the size, in bytes, of this piece.
+   *
+   * &lt;p&gt;
+   * All pieces, except the last one, are expected to have the same size.
+   * &lt;/p&gt;
+   */
+  public long size() {
+<span class="fc" id="L111">    return this.length;</span>
+  }
+
+  /**
+   * Tells whether this piece is available in the current connected peer swarm.
+   */
+  public boolean available() {
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">    return this.seen &gt; 0;</span>
+  }
+
+  /**
+   * Mark this piece as being seen at the given peer.
+   *
+   * @param peer The sharing peer this piece has been seen available at.
+   */
+  public void seenAt(SharingPeer peer) {
+<span class="fc" id="L127">    this.seen++;</span>
+<span class="fc" id="L128">  }</span>
+
+  /**
+   * Mark this piece as no longer being available at the given peer.
+   *
+   * @param peer The sharing peer from which the piece is no longer available.
+   */
+  public void noLongerAt(SharingPeer peer) {
+<span class="fc" id="L136">    this.seen--;</span>
+<span class="fc" id="L137">  }</span>
+
+  void setValid(boolean valid) {
+<span class="fc" id="L140">    this.valid = valid;</span>
+<span class="fc" id="L141">  }</span>
+
+  /**
+   * Validates this piece.
+   *
+   * @return Returns true if this piece, as stored in the underlying byte
+   * storage, is valid, i.e. its SHA1 sum matches the one from the torrent
+   * meta-info.
+   */
+  public boolean validate(SharedTorrent torrent, Piece piece) throws IOException {
+
+<span class="fc" id="L152">    logger.trace(&quot;Validating {}...&quot;, this);</span>
+
+    // TODO: remove cast to int when large ByteBuffer support is
+    // implemented in Java.
+<span class="fc" id="L156">    byte[] pieceBytes = data.array();</span>
+<span class="fc" id="L157">    final byte[] calculatedHash = TorrentUtils.calculateSha1Hash(pieceBytes);</span>
+<span class="fc" id="L158">    this.valid = Arrays.equals(calculatedHash, this.hash);</span>
+<span class="fc" id="L159">    logger.trace(&quot;validating result of piece {} is {}&quot;, this.index, this.valid);</span>
+
+<span class="fc" id="L161">    return this.isValid();</span>
+  }
+
+  /**
+   * Internal piece data read function.
+   *
+   * &lt;p&gt;
+   * This function will read the piece data without checking if the piece has
+   * been validated. It is simply meant at factoring-in the common read code
+   * from the validate and read functions.
+   * &lt;/p&gt;
+   *
+   * @param offset Offset inside this piece where to start reading.
+   * @param length Number of bytes to read from the piece.
+   * @return A byte buffer containing the piece data.
+   * @throws IllegalArgumentException If &lt;em&gt;offset + length&lt;/em&gt; goes over
+   *                                  the piece boundary.
+   * @throws IOException              If the read can't be completed (I/O error, or EOF
+   *                                  reached, which can happen if the piece is not complete).
+   */
+  private ByteBuffer _read(long offset, long length, ByteBuffer buffer) throws IOException {
+<span class="nc bnc" id="L182" title="All 2 branches missed.">    if (offset + length &gt; this.length) {</span>
+<span class="nc" id="L183">      throw new IllegalArgumentException(&quot;Piece#&quot; + this.index +</span>
+              &quot; overrun (&quot; + offset + &quot; + &quot; + length + &quot; &gt; &quot; +
+              this.length + &quot;) !&quot;);
+    }
+
+    // TODO: remove cast to int when large ByteBuffer support is
+    // implemented in Java.
+<span class="nc" id="L190">    int position = buffer.position();</span>
+<span class="nc" id="L191">    byte[] bytes = this.pieceStorage.readPiecePart(this.index, (int)offset, (int)length);</span>
+<span class="nc" id="L192">    buffer.put(bytes);</span>
+<span class="nc" id="L193">    buffer.rewind();</span>
+<span class="nc" id="L194">    buffer.limit(bytes.length + position);</span>
+<span class="nc" id="L195">    return buffer;</span>
+  }
+
+  /**
+   * Read a piece block from the underlying byte storage.
+   *
+   * &lt;p&gt;
+   * This is the public method for reading this piece's data, and it will
+   * only succeed if the piece is complete and valid on disk, thus ensuring
+   * any data that comes out of this function is valid piece data we can send
+   * to other peers.
+   * &lt;/p&gt;
+   *
+   * @param offset Offset inside this piece where to start reading.
+   * @param length Number of bytes to read from the piece.
+   * @return A byte buffer containing the piece data.
+   * @throws IllegalArgumentException If &lt;em&gt;offset + length&lt;/em&gt; goes over
+   *                                  the piece boundary.
+   * @throws IllegalStateException    If the piece is not valid when attempting
+   *                                  to read it.
+   * @throws IOException              If the read can't be completed (I/O error, or EOF
+   *                                  reached, which can happen if the piece is not complete).
+   */
+  public ByteBuffer read(long offset, int length, ByteBuffer block)
+          throws IllegalArgumentException, IllegalStateException, IOException {
+<span class="nc bnc" id="L220" title="All 2 branches missed.">    if (!this.valid) {</span>
+<span class="nc" id="L221">      throw new IllegalStateException(&quot;Attempting to read an &quot; +</span>
+              &quot;known-to-be invalid piece!&quot;);
+    }
+
+<span class="nc" id="L225">    return this._read(offset, length, block);</span>
+  }
+
+  /**
+   * Record the given block at the given offset in this piece.
+   *
+   * @param block  The ByteBuffer containing the block data.
+   * @param offset The block offset in this piece.
+   */
+  public void record(ByteBuffer block, int offset) {
+<span class="fc bfc" id="L235" title="All 2 branches covered.">    if (this.data == null) {</span>
+      // TODO: remove cast to int when large ByteBuffer support is
+      // implemented in Java.
+<span class="fc" id="L238">      this.data = ByteBuffer.allocate((int) this.length);</span>
+    }
+
+<span class="fc" id="L241">    int pos = block.position();</span>
+<span class="fc" id="L242">    this.data.position(offset);</span>
+<span class="fc" id="L243">    this.data.put(block);</span>
+<span class="fc" id="L244">    block.position(pos);</span>
+<span class="fc" id="L245">  }</span>
+
+  public void finish() throws IOException {
+<span class="fc" id="L248">    this.data.rewind();</span>
+<span class="fc" id="L249">    logger.trace(&quot;Recording {}...&quot;, this);</span>
+    try {
+<span class="fc" id="L251">      pieceStorage.savePiece(index, this.data.array());</span>
+    } finally {
+<span class="fc" id="L253">      this.data = null;</span>
+    }
+<span class="fc" id="L255">  }</span>
+
+  /**
+   * Return a human-readable representation of this piece.
+   */
+  public String toString() {
+<span class="fc" id="L261">    return String.format(&quot;piece#%4d%s&quot;,</span>
+<span class="fc" id="L262">            this.index,</span>
+<span class="pc bpc" id="L263" title="1 of 2 branches missed.">            this.isValid() ? &quot;+&quot; : &quot;-&quot;);</span>
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+<span class="nc bnc" id="L268" title="All 2 branches missed.">    if (obj instanceof Piece) {</span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">      return this.index == ((Piece) obj).index;</span>
+    } else {
+<span class="nc" id="L271">      return false;</span>
+    }
+  }
+
+  /**
+   * Piece comparison function for ordering pieces based on their
+   * availability.
+   *
+   * @param other The piece to compare with, should not be &lt;em&gt;null&lt;/em&gt;.
+   */
+  public int compareTo(Piece other) {
+    // return true for the same pieces, otherwise sort by time seen, then by index;
+<span class="nc bnc" id="L283" title="All 2 branches missed.">    if (this.equals(other)) {</span>
+<span class="nc" id="L284">      return 0;</span>
+<span class="nc bnc" id="L285" title="All 2 branches missed.">    } else if (this.seen == other.seen) {</span>
+<span class="nc" id="L286">      return new Integer(this.index).compareTo(other.index);</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">    } else if (this.seen &lt; other.seen) {</span>
+<span class="nc" id="L288">      return -1;</span>
+    } else {
+<span class="nc" id="L290">      return 1;</span>
+    }
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

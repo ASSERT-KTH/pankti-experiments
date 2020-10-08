@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConnectionManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.network</a> &gt; <span class="el_source">ConnectionManager.java</span></div><h1>ConnectionManager.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.network;
+
+import com.turn.ttorrent.common.LoggerUtils;
+import com.turn.ttorrent.common.TimeService;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.network.keyProcessors.*;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.nio.channels.Channel;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.util.Arrays;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static com.turn.ttorrent.Constants.DEFAULT_CLEANUP_RUN_TIMEOUT_MILLIS;
+import static com.turn.ttorrent.Constants.DEFAULT_SELECTOR_SELECT_TIMEOUT_MILLIS;
+
+public class ConnectionManager {
+
+<span class="fc" id="L25">  private static final Logger logger = TorrentLoggerFactory.getLogger(ConnectionManager.class);</span>
+
+  private final Selector selector;
+  private final TimeService myTimeService;
+  private volatile ConnectionWorker myConnectionWorker;
+  private int myBindPort;
+  private final ConnectionManagerContext myContext;
+  private volatile ServerSocketChannel myServerSocketChannel;
+  private volatile Future&lt;?&gt; myWorkerFuture;
+  private final NewConnectionAllower myIncomingConnectionAllower;
+  private final NewConnectionAllower myOutgoingConnectionAllower;
+<span class="fc" id="L36">  private final TimeoutStorage socketTimeoutStorage = new TimeoutStorageImpl();</span>
+<span class="fc" id="L37">  private final AtomicBoolean alreadyInit = new AtomicBoolean(false);</span>
+  private final AtomicInteger mySendBufferSize;
+  private final AtomicInteger myReceiveBufferSize;
+
+  public ConnectionManager(ConnectionManagerContext context,
+                           TimeService timeService,
+                           NewConnectionAllower newIncomingConnectionAllower,
+                           NewConnectionAllower newOutgoingConnectionAllower,
+                           SelectorFactory selectorFactory,
+                           AtomicInteger mySendBufferSize,
+<span class="fc" id="L47">                           AtomicInteger myReceiveBufferSize) throws IOException {</span>
+<span class="fc" id="L48">    this.mySendBufferSize = mySendBufferSize;</span>
+<span class="fc" id="L49">    this.myReceiveBufferSize = myReceiveBufferSize;</span>
+<span class="fc" id="L50">    this.selector = selectorFactory.newSelector();</span>
+<span class="fc" id="L51">    this.myTimeService = timeService;</span>
+<span class="fc" id="L52">    myContext = context;</span>
+<span class="fc" id="L53">    this.myIncomingConnectionAllower = newIncomingConnectionAllower;</span>
+<span class="fc" id="L54">    this.myOutgoingConnectionAllower = newOutgoingConnectionAllower;</span>
+<span class="fc" id="L55">  }</span>
+
+  public void initAndRunWorker(ServerChannelRegister serverChannelRegister) throws IOException {
+
+<span class="fc" id="L59">    boolean wasInit = alreadyInit.getAndSet(true);</span>
+
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">    if (wasInit) {</span>
+<span class="nc" id="L62">      throw new IllegalStateException(&quot;connection manager was already initialized&quot;);</span>
+    }
+
+<span class="fc" id="L65">    myServerSocketChannel = serverChannelRegister.channelFor(selector);</span>
+<span class="fc" id="L66">    myServerSocketChannel.register(selector, SelectionKey.OP_ACCEPT, new AcceptAttachmentImpl(myContext));</span>
+<span class="fc" id="L67">    myBindPort = myServerSocketChannel.socket().getLocalPort();</span>
+<span class="fc" id="L68">    String serverName = myServerSocketChannel.socket().toString();</span>
+<span class="fc" id="L69">    myConnectionWorker = new ConnectionWorker(selector, Arrays.asList(</span>
+            new InvalidKeyProcessor(),
+            new AcceptableKeyProcessor(selector, serverName, myTimeService, myIncomingConnectionAllower, socketTimeoutStorage,
+                    mySendBufferSize, myReceiveBufferSize),
+            new ConnectableKeyProcessor(selector, myTimeService, socketTimeoutStorage,
+                    mySendBufferSize, myReceiveBufferSize),
+            new ReadableKeyProcessor(serverName),
+            new WritableKeyProcessor()), DEFAULT_SELECTOR_SELECT_TIMEOUT_MILLIS, DEFAULT_CLEANUP_RUN_TIMEOUT_MILLIS,
+            myTimeService,
+            new CleanupKeyProcessor(myTimeService),
+            myOutgoingConnectionAllower);
+<span class="fc" id="L80">    myWorkerFuture = myContext.getExecutor().submit(myConnectionWorker);</span>
+<span class="fc" id="L81">  }</span>
+
+  public void setSelectorSelectTimeout(int timeout) {
+<span class="nc" id="L84">    ConnectionWorker workerLocal = myConnectionWorker;</span>
+<span class="nc" id="L85">    checkThatWorkerIsInit(workerLocal);</span>
+<span class="nc" id="L86">    workerLocal.setSelectorSelectTimeout(timeout);</span>
+<span class="nc" id="L87">  }</span>
+
+  private void checkThatWorkerIsInit(ConnectionWorker worker) {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">    if (worker == null) throw new IllegalStateException(&quot;Connection manager is not initialized!&quot;);</span>
+<span class="nc" id="L91">  }</span>
+
+  public boolean offerConnect(ConnectTask connectTask, int timeout, TimeUnit timeUnit) {
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">    if (myConnectionWorker == null) {</span>
+<span class="nc" id="L95">      return false;</span>
+    }
+<span class="fc" id="L97">    return myConnectionWorker.offerConnect(connectTask, timeout, timeUnit);</span>
+  }
+
+  public boolean offerWrite(WriteTask writeTask, int timeout, TimeUnit timeUnit) {
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">    if (myConnectionWorker == null) {</span>
+<span class="nc" id="L102">      return false;</span>
+    }
+<span class="fc" id="L104">    return myConnectionWorker.offerWrite(writeTask, timeout, timeUnit);</span>
+  }
+
+
+  public int getBindPort() {
+<span class="fc" id="L109">    return myBindPort;</span>
+  }
+
+  public void close(int timeout, TimeUnit timeUnit) {
+<span class="fc" id="L113">    logger.debug(&quot;try close connection manager...&quot;);</span>
+<span class="fc" id="L114">    boolean successfullyClosed = true;</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">    if (myConnectionWorker != null) {</span>
+<span class="fc" id="L116">      myWorkerFuture.cancel(true);</span>
+      try {
+<span class="fc" id="L118">        boolean shutdownCorrectly = myConnectionWorker.stop(timeout, timeUnit);</span>
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        if (!shutdownCorrectly) {</span>
+<span class="nc" id="L120">          successfullyClosed = false;</span>
+<span class="nc" id="L121">          logger.warn(&quot;unable to terminate worker in {} {}&quot;, timeout, timeUnit);</span>
+        }
+<span class="nc" id="L123">      } catch (InterruptedException e) {</span>
+<span class="nc" id="L124">        successfullyClosed = false;</span>
+<span class="nc" id="L125">        LoggerUtils.warnAndDebugDetails(logger, &quot;unable to await termination worker, thread was interrupted&quot;, e);</span>
+<span class="fc" id="L126">      }</span>
+    }
+    try {
+<span class="fc" id="L129">      this.myServerSocketChannel.close();</span>
+<span class="nc" id="L130">    } catch (Throwable e) {</span>
+<span class="nc" id="L131">      LoggerUtils.errorAndDebugDetails(logger, &quot;unable to close server socket channel&quot;, e);</span>
+<span class="nc" id="L132">      successfullyClosed = false;</span>
+<span class="fc" id="L133">    }</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">    for (SelectionKey key : this.selector.keys()) {</span>
+      try {
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        if (key.isValid()) {</span>
+<span class="fc" id="L137">          key.channel().close();</span>
+        }
+<span class="nc" id="L139">      } catch (Throwable e) {</span>
+<span class="nc" id="L140">        logger.error(&quot;unable to close socket channel {}&quot;, key.channel());</span>
+<span class="nc" id="L141">        successfullyClosed = false;</span>
+<span class="nc" id="L142">        logger.debug(&quot;&quot;, e);</span>
+<span class="fc" id="L143">      }</span>
+<span class="fc" id="L144">    }</span>
+    try {
+<span class="fc" id="L146">      this.selector.close();</span>
+<span class="nc" id="L147">    } catch (Throwable e) {</span>
+<span class="nc" id="L148">      LoggerUtils.errorAndDebugDetails(logger, &quot;unable to close selector channel&quot;, e);</span>
+<span class="nc" id="L149">      successfullyClosed = false;</span>
+<span class="fc" id="L150">    }</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">    if (successfullyClosed) {</span>
+<span class="fc" id="L152">      logger.debug(&quot;connection manager is successfully closed&quot;);</span>
+    } else {
+<span class="nc" id="L154">      logger.error(&quot;connection manager wasn't closed successfully&quot;);</span>
+    }
+<span class="fc" id="L156">  }</span>
+
+  public void close() {
+<span class="fc" id="L159">    close(1, TimeUnit.MINUTES);</span>
+<span class="fc" id="L160">  }</span>
+
+  public void setCleanupTimeout(long timeoutMillis) {
+<span class="nc" id="L163">    ConnectionWorker workerLocal = myConnectionWorker;</span>
+<span class="nc" id="L164">    checkThatWorkerIsInit(workerLocal);</span>
+<span class="nc" id="L165">    workerLocal.setCleanupTimeout(timeoutMillis);</span>
+<span class="nc" id="L166">  }</span>
+
+  public void setSocketConnectionTimeout(long timeoutMillis) {
+<span class="fc" id="L169">    socketTimeoutStorage.setTimeout(timeoutMillis);</span>
+<span class="fc" id="L170">  }</span>
+
+  public void closeChannel(Channel channel) throws IOException {
+<span class="fc" id="L173">    channel.close();</span>
+<span class="fc" id="L174">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

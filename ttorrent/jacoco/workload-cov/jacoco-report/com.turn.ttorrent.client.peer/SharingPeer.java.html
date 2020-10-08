@@ -1,0 +1,807 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SharingPeer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.peer</a> &gt; <span class="el_source">SharingPeer.java</span></div><h1>SharingPeer.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.client.peer;
+
+import com.turn.ttorrent.client.PeerInformation;
+import com.turn.ttorrent.client.Piece;
+import com.turn.ttorrent.client.SharedTorrent;
+import com.turn.ttorrent.common.LoggerUtils;
+import com.turn.ttorrent.common.Peer;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.common.TorrentUtils;
+import com.turn.ttorrent.common.protocol.PeerMessage;
+import com.turn.ttorrent.network.ConnectionClosedException;
+import com.turn.ttorrent.network.ConnectionManager;
+import com.turn.ttorrent.network.WriteListener;
+import com.turn.ttorrent.network.WriteTask;
+import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.nio.ByteBuffer;
+import java.nio.channels.ByteChannel;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
+
+/**
+ * A peer exchanging on a torrent with the BitTorrent client.
+ * &lt;p/&gt;
+ * &lt;p&gt;
+ * A SharingPeer extends the base Peer class with all the data and logic needed
+ * by the BitTorrent client to interact with a peer exchanging on the same
+ * torrent.
+ * &lt;/p&gt;
+ * &lt;p/&gt;
+ * &lt;p&gt;
+ * Peers are defined by their peer ID, IP address and port number, just like
+ * base peers. Peers we exchange with also contain four crucial attributes:
+ * &lt;/p&gt;
+ * &lt;p/&gt;
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;code&gt;choking&lt;/code&gt;, which means we are choking this peer and we're
+ * not willing to send him anything for now;&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;interesting&lt;/code&gt;, which means we are interested in a piece
+ * this peer has;&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;choked&lt;/code&gt;, if this peer is choking and won't send us
+ * anything right now;&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;interested&lt;/code&gt;, if this peer is interested in something we
+ * have.&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;p/&gt;
+ * &lt;p&gt;
+ * Peers start choked and uninterested.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ */
+public class SharingPeer extends Peer implements MessageListener, PeerInformation {
+
+<span class="fc" id="L76">  private static final Logger logger = TorrentLoggerFactory.getLogger(SharingPeer.class);</span>
+
+  private final Object availablePiecesLock;
+  private volatile boolean choking;
+  private volatile boolean interesting;
+  private volatile boolean choked;
+  private volatile boolean interested;
+  private final SharedTorrent torrent;
+  private final BitSet availablePieces;
+  private BitSet poorlyAvailablePieces;
+  private final Map&lt;Piece, Integer&gt; myRequestedPieces;
+
+  private volatile boolean downloading;
+
+  private final Rate download;
+  private final Rate upload;
+  private final AtomicInteger downloadedPiecesCount;
+  private final List&lt;PeerActivityListener&gt; listeners;
+
+  private final Object requestsLock;
+
+  private final AtomicBoolean isStopped;
+
+  private final ConnectionManager connectionManager;
+  private final ByteChannel socketChannel;
+
+  private final String clientIdentifier;
+  private final int clientVersion;
+
+  /**
+   * Create a new sharing peer on a given torrent.
+   *  @param ip      The peer's IP address.
+   * @param port    The peer's port.
+   * @param peerId  The byte-encoded peer ID.
+   * @param torrent The torrent this peer exchanges with us on.
+   * @param clientIdentifier
+   * @param clientVersion
+   */
+  public SharingPeer(String ip,
+                     int port,
+                     ByteBuffer peerId,
+                     SharedTorrent torrent,
+                     ConnectionManager connectionManager,
+                     PeerActivityListener client,
+                     ByteChannel channel,
+                     String clientIdentifier,
+                     int clientVersion) {
+<span class="fc" id="L123">    super(ip, port, peerId);</span>
+
+<span class="fc" id="L125">    this.torrent = torrent;</span>
+<span class="fc" id="L126">    this.clientIdentifier = clientIdentifier;</span>
+<span class="fc" id="L127">    this.clientVersion = clientVersion;</span>
+<span class="fc" id="L128">    this.listeners = Arrays.asList(client, torrent);</span>
+<span class="fc" id="L129">    this.availablePieces = new BitSet(torrent.getPieceCount());</span>
+<span class="fc" id="L130">    this.poorlyAvailablePieces = new BitSet(torrent.getPieceCount());</span>
+
+<span class="fc" id="L132">    this.requestsLock = new Object();</span>
+<span class="fc" id="L133">    this.socketChannel = channel;</span>
+<span class="fc" id="L134">    this.isStopped = new AtomicBoolean(false);</span>
+<span class="fc" id="L135">    this.availablePiecesLock = new Object();</span>
+<span class="fc" id="L136">    this.myRequestedPieces = new HashMap&lt;Piece, Integer&gt;();</span>
+<span class="fc" id="L137">    this.connectionManager = connectionManager;</span>
+<span class="fc" id="L138">    this.download = new Rate();</span>
+<span class="fc" id="L139">    this.upload = new Rate();</span>
+<span class="fc" id="L140">    this.setTorrentHash(torrent.getHexInfoHash());</span>
+<span class="fc" id="L141">    this.choking = true;</span>
+<span class="fc" id="L142">    this.interesting = false;</span>
+<span class="fc" id="L143">    this.choked = true;</span>
+<span class="fc" id="L144">    this.interested = false;</span>
+<span class="fc" id="L145">    this.downloading = false;</span>
+<span class="fc" id="L146">    this.downloadedPiecesCount = new AtomicInteger();</span>
+<span class="fc" id="L147">  }</span>
+
+  public Rate getDLRate() {
+<span class="nc" id="L150">    return this.download;</span>
+  }
+
+  public Rate getULRate() {
+<span class="nc" id="L154">    return this.upload;</span>
+  }
+
+  /**
+   * Choke this peer.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * We don't want to upload to this peer anymore, so mark that we're choking
+   * from this peer.
+   * &lt;/p&gt;
+   */
+  public void choke() {
+<span class="nc bnc" id="L166" title="All 2 branches missed.">    if (!this.choking) {</span>
+<span class="nc" id="L167">      logger.trace(&quot;Choking {}&quot;, this);</span>
+<span class="nc" id="L168">      this.send(PeerMessage.ChokeMessage.craft());</span>
+<span class="nc" id="L169">      this.choking = true;</span>
+    }
+<span class="nc" id="L171">  }</span>
+
+  @Override
+  public byte[] getId() {
+<span class="nc" id="L175">    return getPeerIdArray();</span>
+  }
+
+  @Override
+  public String getClientIdentifier() {
+<span class="nc" id="L180">    return clientIdentifier;</span>
+  }
+
+  @Override
+  public int getClientVersion() {
+<span class="nc" id="L185">    return clientVersion;</span>
+  }
+
+  public void onConnectionEstablished() {
+<span class="fc" id="L189">    firePeerConnected();</span>
+<span class="fc" id="L190">    BitSet pieces = this.torrent.getCompletedPieces();</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">    if (pieces.cardinality() &gt; 0) {</span>
+<span class="fc" id="L192">      this.send(PeerMessage.BitfieldMessage.craft(pieces));</span>
+    }
+<span class="fc" id="L194">    resetRates();</span>
+<span class="fc" id="L195">  }</span>
+
+  /**
+   * Unchoke this peer.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Mark that we are no longer choking from this peer and can resume
+   * uploading to it.
+   * &lt;/p&gt;
+   */
+  public void unchoke() {
+<span class="nc" id="L206">    logger.trace(&quot;Unchoking {}&quot;, this);</span>
+<span class="nc" id="L207">    this.send(PeerMessage.UnchokeMessage.craft());</span>
+<span class="nc" id="L208">    this.choking = false;</span>
+<span class="nc" id="L209">  }</span>
+
+  public boolean isChoking() {
+<span class="nc" id="L212">    return this.choking;</span>
+  }
+
+  public void interesting() {
+<span class="fc bfc" id="L216" title="All 2 branches covered.">    if (!this.interesting) {</span>
+<span class="fc" id="L217">      logger.trace(&quot;Telling {} we're interested.&quot;, this);</span>
+<span class="fc" id="L218">      this.send(PeerMessage.InterestedMessage.craft());</span>
+<span class="fc" id="L219">      this.interesting = true;</span>
+    }
+<span class="fc" id="L221">  }</span>
+
+  public void notInteresting() {
+<span class="pc bpc" id="L224" title="1 of 2 branches missed.">    if (this.interesting) {</span>
+<span class="fc" id="L225">      logger.trace(&quot;Telling {} we're no longer interested.&quot;, this);</span>
+<span class="fc" id="L226">      this.send(PeerMessage.NotInterestedMessage.craft());</span>
+<span class="fc" id="L227">      this.interesting = false;</span>
+    }
+<span class="fc" id="L229">  }</span>
+
+  public boolean isInteresting() {
+<span class="fc" id="L232">    return this.interesting;</span>
+  }
+
+  public boolean isChoked() {
+<span class="fc" id="L236">    return this.choked;</span>
+  }
+
+  public boolean isInterested() {
+<span class="nc" id="L240">    return this.interested;</span>
+  }
+
+  public BitSet getPoorlyAvailablePieces() {
+<span class="nc" id="L244">    return poorlyAvailablePieces;</span>
+  }
+
+  /**
+   * Returns the available pieces from this peer.
+   *
+   * @return A clone of the available pieces bit field from this peer.
+   */
+  public BitSet getAvailablePieces() {
+<span class="fc" id="L253">    synchronized (this.availablePiecesLock) {</span>
+<span class="fc" id="L254">      return (BitSet) this.availablePieces.clone();</span>
+    }
+  }
+
+  /**
+   * Returns the currently requested piece, if any.
+   */
+  public Set&lt;Piece&gt; getRequestedPieces() {
+<span class="fc" id="L262">    synchronized (requestsLock) {</span>
+<span class="fc" id="L263">      return myRequestedPieces.keySet();</span>
+    }
+  }
+
+  public void resetRates() {
+<span class="fc" id="L268">    this.download.reset();</span>
+<span class="fc" id="L269">    this.upload.reset();</span>
+<span class="fc" id="L270">  }</span>
+
+  public void pieceDownloaded() {
+<span class="fc" id="L273">    downloadedPiecesCount.incrementAndGet();</span>
+<span class="fc" id="L274">  }</span>
+
+  public int getDownloadedPiecesCount() {
+<span class="fc" id="L277">    return downloadedPiecesCount.get();</span>
+  }
+
+  /**
+   * Tells whether this peer as an active connection through a peer exchange.
+   */
+  public boolean isConnected() {
+<span class="fc" id="L284">    return this.socketChannel.isOpen();</span>
+  }
+
+  /**
+   * Unbind and disconnect this peer.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * This terminates the eventually present and/or connected peer exchange
+   * with the peer and fires the peer disconnected event to any peer activity
+   * listeners registered on this peer.
+   * &lt;/p&gt;
+   *
+   * @param force Force unbind without sending cancel requests.
+   */
+  public void unbind(boolean force) {
+<span class="pc bpc" id="L299" title="1 of 2 branches missed.">    if (isStopped.getAndSet(true))</span>
+<span class="nc" id="L300">      return;</span>
+
+    try {
+<span class="fc" id="L303">      connectionManager.closeChannel(socketChannel);</span>
+<span class="nc" id="L304">    } catch (IOException e) {</span>
+<span class="nc" id="L305">      LoggerUtils.errorAndDebugDetails(logger, &quot;cannot close socket channel. Peer {}&quot;, this, e);</span>
+<span class="fc" id="L306">    }</span>
+
+<span class="fc" id="L308">    this.firePeerDisconnected();</span>
+
+<span class="fc" id="L310">    synchronized (requestsLock) {</span>
+<span class="fc bfc" id="L311" title="All 2 branches covered.">      this.downloading = myRequestedPieces.size() &gt; 0;</span>
+<span class="fc" id="L312">      myRequestedPieces.clear();</span>
+<span class="fc" id="L313">    }</span>
+
+<span class="fc" id="L315">    this.afterPeerDisconnected();</span>
+<span class="fc" id="L316">  }</span>
+
+  /**
+   * Send a message to the peer.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Delivery of the message can only happen if the peer is connected.
+   * &lt;/p&gt;
+   *
+   * @param message The message to send to the remote peer through our peer
+   *                exchange.
+   */
+  public void send(PeerMessage message) throws IllegalStateException {
+<span class="fc" id="L329">    logger.trace(&quot;Sending msg {} to {}&quot;, message.getType(), this);</span>
+<span class="fc bfc" id="L330" title="All 2 branches covered.">    if (this.isConnected()) {</span>
+<span class="fc" id="L331">      ByteBuffer data = message.getData();</span>
+<span class="fc" id="L332">      data.rewind();</span>
+<span class="fc" id="L333">      connectionManager.offerWrite(new WriteTask(socketChannel, data, new WriteListener() {</span>
+        @Override
+        public void onWriteFailed(String message, Throwable e) {
+<span class="nc bnc" id="L336" title="All 2 branches missed.">          if (e == null) {</span>
+<span class="nc" id="L337">            logger.info(message);</span>
+<span class="nc bnc" id="L338" title="All 2 branches missed.">          } else if (e instanceof ConnectionClosedException){</span>
+<span class="nc" id="L339">            logger.debug(message, e);</span>
+<span class="nc" id="L340">            unbind(true);</span>
+          } else {
+<span class="nc" id="L342">            LoggerUtils.warnAndDebugDetails(logger, message, e);</span>
+          }
+
+<span class="nc" id="L345">        }</span>
+
+        @Override
+        public void onWriteDone() {
+<span class="fc" id="L349">        }</span>
+      }), 1, TimeUnit.SECONDS);
+<span class="fc" id="L351">    } else {</span>
+<span class="fc" id="L352">      logger.trace(&quot;Attempting to send a message to non-connected peer {}!&quot;, this);</span>
+<span class="fc" id="L353">      unbind(true);</span>
+    }
+<span class="fc" id="L355">  }</span>
+
+  /**
+   * Download the given piece from this peer.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Starts a block request queue and pre-fill it with MAX_PIPELINED_REQUESTS
+   * block requests.
+   * &lt;/p&gt;
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Further requests will be added, one by one, every time a block is
+   * returned.
+   * &lt;/p&gt;
+   *
+   * @param piece The piece chosen to be downloaded from this peer.
+   */
+  public void downloadPiece(final Piece piece)
+          throws IllegalStateException {
+<span class="fc" id="L374">    List&lt;PeerMessage.RequestMessage&gt; toSend = new ArrayList&lt;PeerMessage.RequestMessage&gt;();</span>
+<span class="fc" id="L375">    synchronized (this.requestsLock) {</span>
+<span class="pc bpc" id="L376" title="1 of 2 branches missed.">      if (myRequestedPieces.containsKey(piece)) {</span>
+        //already requested
+<span class="nc" id="L378">        return;</span>
+      }
+<span class="fc" id="L380">      int requestedBlocksCount = 0;</span>
+<span class="fc" id="L381">      int lastRequestedOffset = 0;</span>
+<span class="fc bfc" id="L382" title="All 2 branches covered.">      while (lastRequestedOffset &lt; piece.size()) {</span>
+<span class="fc" id="L383">        PeerMessage.RequestMessage request = PeerMessage.RequestMessage</span>
+<span class="fc" id="L384">                .craft(piece.getIndex(), lastRequestedOffset,</span>
+<span class="fc" id="L385">                        Math.min((int) (piece.size() - lastRequestedOffset),</span>
+                                PeerMessage.RequestMessage.DEFAULT_REQUEST_SIZE));
+<span class="fc" id="L387">        toSend.add(request);</span>
+<span class="fc" id="L388">        requestedBlocksCount++;</span>
+<span class="fc" id="L389">        lastRequestedOffset = request.getLength() + lastRequestedOffset;</span>
+<span class="fc" id="L390">      }</span>
+<span class="fc" id="L391">      myRequestedPieces.put(piece, requestedBlocksCount);</span>
+<span class="pc bpc" id="L392" title="1 of 2 branches missed.">      this.downloading = myRequestedPieces.size() &gt; 0;</span>
+<span class="fc" id="L393">    }</span>
+<span class="fc bfc" id="L394" title="All 2 branches covered.">    for (PeerMessage.RequestMessage requestMessage : toSend) {</span>
+<span class="fc" id="L395">      this.send(requestMessage);</span>
+<span class="fc" id="L396">    }</span>
+<span class="fc" id="L397">  }</span>
+
+  public boolean isDownloading() {
+<span class="fc" id="L400">    return this.downloading;</span>
+  }
+
+  /**
+   * Remove the REQUEST message from the request pipeline matching this
+   * PIECE message.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Upon reception of a piece block with a PIECE message, remove the
+   * corresponding request from the pipeline to make room for the next block
+   * requests.
+   * &lt;/p&gt;
+   *
+   * @param piece The piece of PIECE message received.
+   */
+  private void removeBlockRequest(final Piece piece) {
+<span class="fc" id="L416">    synchronized (this.requestsLock) {</span>
+<span class="fc" id="L417">      Integer requestedBlocksCount = myRequestedPieces.get(piece);</span>
+<span class="fc bfc" id="L418" title="All 2 branches covered.">      if (requestedBlocksCount == null) {</span>
+<span class="fc" id="L419">        return;</span>
+      }
+<span class="fc bfc" id="L421" title="All 2 branches covered.">      if (requestedBlocksCount &lt;= 1) {</span>
+        //it's last block
+<span class="fc" id="L423">        myRequestedPieces.remove(piece);</span>
+      } else {
+<span class="fc" id="L425">        myRequestedPieces.put(piece, requestedBlocksCount - 1);</span>
+      }
+<span class="fc bfc" id="L427" title="All 2 branches covered.">      this.downloading = myRequestedPieces.size() &gt; 0;</span>
+<span class="fc" id="L428">    }</span>
+<span class="fc" id="L429">  }</span>
+
+  /**
+   * Cancel all pending requests.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * This queues CANCEL messages for all the requests in the queue, and
+   * returns the list of requests that were in the queue.
+   * &lt;/p&gt;
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * If no request queue existed, or if it was empty, an empty set of request
+   * messages is returned.
+   * &lt;/p&gt;
+   */
+  public void cancelPendingRequests() {
+<span class="fc" id="L445">    cancelPendingRequests(null);</span>
+<span class="fc" id="L446">  }</span>
+
+  public void cancelPendingRequests(@Nullable final Piece piece) {
+<span class="fc" id="L449">    synchronized (this.requestsLock) {</span>
+<span class="fc bfc" id="L450" title="All 2 branches covered.">      if (piece != null) {</span>
+<span class="fc" id="L451">        myRequestedPieces.remove(piece);</span>
+      } else {
+<span class="fc" id="L453">        myRequestedPieces.clear();</span>
+      }
+<span class="fc bfc" id="L455" title="All 2 branches covered.">      this.downloading = myRequestedPieces.size() &gt; 0;</span>
+<span class="fc" id="L456">    }</span>
+<span class="fc" id="L457">  }</span>
+
+  public int getRemainingRequestedPieces(final Piece piece) {
+<span class="fc" id="L460">    synchronized (this.requestsLock) {</span>
+<span class="fc" id="L461">      Integer requestedBlocksCount = myRequestedPieces.get(piece);</span>
+<span class="fc bfc" id="L462" title="All 2 branches covered.">      if (requestedBlocksCount == null) return 0;</span>
+<span class="fc" id="L463">      return requestedBlocksCount;</span>
+    }
+  }
+
+  /**
+   * Handle an incoming message from this peer.
+   *
+   * @param msg The incoming, parsed message.
+   */
+  @Override
+  public void handleMessage(PeerMessage msg) {
+//    logger.trace(&quot;Received msg {} from {}&quot;, msg.getType(), this);
+<span class="pc bpc" id="L475" title="1 of 2 branches missed.">    if (isStopped.get())</span>
+<span class="nc" id="L476">      return;</span>
+<span class="fc bfc" id="L477" title="All 2 branches covered.">    if (!torrent.isInitialized()) {</span>
+<span class="fc" id="L478">      torrent.initIfNecessary(this);</span>
+    }
+<span class="pc bpc" id="L480" title="4 of 10 branches missed.">    switch (msg.getType()) {</span>
+      case KEEP_ALIVE:
+        // Nothing to do, we're keeping the connection open anyways.
+<span class="fc" id="L483">        break;</span>
+      case CHOKE:
+<span class="fc" id="L485">        this.choked = true;</span>
+<span class="fc" id="L486">        this.firePeerChoked();</span>
+<span class="fc" id="L487">        this.cancelPendingRequests();</span>
+<span class="fc" id="L488">        break;</span>
+      case UNCHOKE:
+<span class="fc" id="L490">        this.choked = false;</span>
+<span class="fc" id="L491">        logger.trace(&quot;Peer {} is now accepting requests.&quot;, this);</span>
+<span class="fc" id="L492">        this.firePeerReady();</span>
+<span class="fc" id="L493">        break;</span>
+      case INTERESTED:
+<span class="nc" id="L495">        this.interested = true;</span>
+<span class="nc bnc" id="L496" title="All 2 branches missed.">        if (this.choking) {</span>
+<span class="nc" id="L497">          unchoke();</span>
+        }
+        break;
+      case NOT_INTERESTED:
+<span class="nc" id="L501">        this.interested = false;</span>
+<span class="nc bnc" id="L502" title="All 2 branches missed.">        if (!interesting) {</span>
+<span class="nc" id="L503">          unbind(true);</span>
+        }
+        break;
+      case HAVE:
+        // Record this peer has the given piece
+<span class="fc" id="L508">        PeerMessage.HaveMessage have = (PeerMessage.HaveMessage) msg;</span>
+<span class="fc" id="L509">        Piece havePiece = this.torrent.getPiece(have.getPieceIndex());</span>
+
+<span class="fc" id="L511">        synchronized (this.availablePiecesLock) {</span>
+<span class="fc" id="L512">          this.availablePieces.set(havePiece.getIndex());</span>
+<span class="fc" id="L513">          logger.trace(&quot;Peer {} now has {} [{}/{}].&quot;,</span>
+                  new Object[]{
+                          this,
+                          havePiece,
+<span class="fc" id="L517">                          this.availablePieces.cardinality(),</span>
+<span class="fc" id="L518">                          this.torrent.getPieceCount()</span>
+                  });
+<span class="fc" id="L520">        }</span>
+
+<span class="fc" id="L522">        this.firePieceAvailabity(havePiece);</span>
+<span class="fc" id="L523">        break;</span>
+      case BITFIELD:
+        // Augment the hasPiece bit field from this BITFIELD message
+<span class="fc" id="L526">        PeerMessage.BitfieldMessage bitfield =</span>
+                (PeerMessage.BitfieldMessage) msg;
+
+<span class="fc" id="L529">        synchronized (this.availablePiecesLock) {</span>
+<span class="fc" id="L530">          this.availablePieces.or(bitfield.getBitfield());</span>
+<span class="fc" id="L531">          logger.trace(&quot;Recorded bitfield from {} with {} &quot; +</span>
+                          &quot;pieces(s) [{}/{}].&quot;,
+                  new Object[]{
+                          this,
+<span class="fc" id="L535">                          bitfield.getBitfield().cardinality(),</span>
+<span class="fc" id="L536">                          this.availablePieces.cardinality(),</span>
+<span class="fc" id="L537">                          this.torrent.getPieceCount()</span>
+                  });
+<span class="fc" id="L539">        }</span>
+
+<span class="fc" id="L541">        this.fireBitfieldAvailabity();</span>
+<span class="fc" id="L542">        break;</span>
+      case REQUEST:
+<span class="nc" id="L544">        PeerMessage.RequestMessage request =</span>
+                (PeerMessage.RequestMessage) msg;
+<span class="nc" id="L546">        logger.trace(&quot;Got request message for {} ({} {}@{}) from {}&quot;, new Object[]{</span>
+<span class="nc" id="L547">                Arrays.toString(TorrentUtils.getTorrentFileNames(torrent).toArray()),</span>
+<span class="nc" id="L548">                request.getPiece(),</span>
+<span class="nc" id="L549">                request.getLength(),</span>
+<span class="nc" id="L550">                request.getOffset(),</span>
+                this
+        });
+<span class="nc" id="L553">        Piece rp = this.torrent.getPiece(request.getPiece());</span>
+
+        // If we are choking from this peer and it still sends us
+        // requests, it is a violation of the BitTorrent protocol.
+        // Similarly, if the peer requests a piece we don't have, it
+        // is a violation of the BitTorrent protocol. In these
+        // situation, terminate the connection.
+<span class="nc bnc" id="L560" title="All 2 branches missed.">        if (!rp.isValid()) {</span>
+<span class="nc" id="L561">          logger.warn(&quot;Peer {} violated protocol, terminating exchange: &quot; + this.isChoking() + &quot; &quot; + rp.isValid(), this);</span>
+<span class="nc" id="L562">          this.unbind(true);</span>
+<span class="nc" id="L563">          break;</span>
+        }
+
+<span class="nc bnc" id="L566" title="All 2 branches missed.">        if (request.getLength() &gt;</span>
+                PeerMessage.RequestMessage.MAX_REQUEST_SIZE) {
+<span class="nc" id="L568">          logger.warn(&quot;Peer {} requested a block too big, terminating exchange.&quot;, this);</span>
+<span class="nc" id="L569">          this.unbind(true);</span>
+<span class="nc" id="L570">          break;</span>
+        }
+
+        // At this point we agree to send the requested piece block to
+        // the remote peer, so let's queue a message with that block
+        try {
+
+<span class="nc" id="L577">          ByteBuffer bufferForMessage = PeerMessage.PieceMessage.createBufferWithHeaderForMessage(</span>
+<span class="nc" id="L578">                  request.getPiece(), request.getOffset(), request.getLength());</span>
+
+<span class="nc" id="L580">          rp.read(request.getOffset(), request.getLength(), bufferForMessage);</span>
+
+<span class="nc" id="L582">          this.send(PeerMessage.PieceMessage.craft(request.getPiece(),</span>
+<span class="nc" id="L583">                  request.getOffset(), bufferForMessage));</span>
+<span class="nc" id="L584">          this.upload.add(request.getLength());</span>
+
+<span class="nc bnc" id="L586" title="All 2 branches missed.">          if (request.getOffset() + request.getLength() == rp.size()) {</span>
+<span class="nc" id="L587">            this.firePieceSent(rp);</span>
+          }
+<span class="nc" id="L589">        } catch (IOException ioe) {</span>
+<span class="nc" id="L590">          logger.debug(&quot;error&quot;, ioe);</span>
+<span class="nc" id="L591">          this.fireIOException(new IOException(</span>
+                  &quot;Error while sending piece block request!&quot;, ioe));
+<span class="nc" id="L593">        }</span>
+
+<span class="nc" id="L595">        break;</span>
+      case PIECE:
+        // Record the incoming piece block.
+
+        // Should we keep track of the requested pieces and act when we
+        // get a piece we didn't ask for, or should we just stay
+        // greedy?
+<span class="fc" id="L602">        PeerMessage.PieceMessage piece = (PeerMessage.PieceMessage) msg;</span>
+<span class="fc" id="L603">        Piece p = this.torrent.getPiece(piece.getPiece());</span>
+
+<span class="fc" id="L605">        logger.trace(&quot;Got piece ({} {}@{}) from {}&quot;, new Object[]{</span>
+<span class="fc" id="L606">                p.getIndex(),</span>
+<span class="fc" id="L607">                p.size(),</span>
+<span class="fc" id="L608">                piece.getOffset(),</span>
+                this
+        });
+
+<span class="fc" id="L612">        this.download.add(piece.getBlock().capacity());</span>
+
+        try {
+<span class="fc" id="L615">          boolean isPieceDownloaded = false;</span>
+<span class="fc" id="L616">          synchronized (p) {</span>
+            // Remove the corresponding request from the request queue to
+            //  make room for next block requests.
+<span class="fc" id="L619">            this.removeBlockRequest(p);</span>
+<span class="fc bfc" id="L620" title="All 2 branches covered.">            if (p.isValid()) {</span>
+<span class="fc" id="L621">              this.cancelPendingRequests(p);</span>
+<span class="fc" id="L622">              this.firePeerReady();</span>
+<span class="fc" id="L623">              logger.trace(&quot;Discarding block for already completed &quot; + p);</span>
+<span class="fc" id="L624">              break;</span>
+            }
+            //TODO add proper catch for IOException
+<span class="fc" id="L627">            p.record(piece.getBlock(), piece.getOffset());</span>
+
+            // If the block offset equals the piece size and the block
+            // length is 0, it means the piece has been entirely
+            // downloaded. In this case, we have nothing to save, but
+            // we should validate the piece.
+<span class="fc bfc" id="L633" title="All 2 branches covered.">            if (getRemainingRequestedPieces(p) == 0) {</span>
+<span class="fc" id="L634">              this.firePieceCompleted(p);</span>
+<span class="fc" id="L635">              isPieceDownloaded = true;</span>
+            }
+<span class="fc" id="L637">          }</span>
+<span class="fc bfc" id="L638" title="All 2 branches covered.">          if (isPieceDownloaded) {</span>
+<span class="fc" id="L639">            firePeerReady();</span>
+          }
+<span class="nc" id="L641">        } catch (IOException ioe) {</span>
+<span class="nc" id="L642">          logger.error(ioe.getMessage(), ioe);</span>
+<span class="nc" id="L643">          this.fireIOException(new IOException(</span>
+                  &quot;Error while storing received piece block!&quot;, ioe));
+<span class="nc" id="L645">          break;</span>
+<span class="fc" id="L646">        }</span>
+        break;
+      case CANCEL:
+        // No need to support
+        break;
+    }
+<span class="fc" id="L652">  }</span>
+
+  /**
+   * Fire the peer choked event to all registered listeners.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * The event contains the peer that chocked.
+   * &lt;/p&gt;
+   */
+  private void firePeerChoked() {
+<span class="fc bfc" id="L662" title="All 2 branches covered.">    for (PeerActivityListener listener : this.listeners) {</span>
+<span class="fc" id="L663">      listener.handlePeerChoked(this);</span>
+<span class="fc" id="L664">    }</span>
+<span class="fc" id="L665">  }</span>
+
+  /**
+   * Fire the peer ready event to all registered listeners.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * The event contains the peer that unchoked or became ready.
+   * &lt;/p&gt;
+   */
+  private void firePeerReady() {
+<span class="fc bfc" id="L675" title="All 2 branches covered.">    for (PeerActivityListener listener : this.listeners) {</span>
+<span class="fc" id="L676">      listener.handlePeerReady(this);</span>
+<span class="fc" id="L677">    }</span>
+<span class="fc" id="L678">  }</span>
+
+  /**
+   * Fire the piece availability event to all registered listeners.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * The event contains the peer (this), and the piece that became available.
+   * &lt;/p&gt;
+   */
+  private void firePieceAvailabity(Piece piece) {
+<span class="fc bfc" id="L688" title="All 2 branches covered.">    for (PeerActivityListener listener : this.listeners) {</span>
+<span class="fc" id="L689">      listener.handlePieceAvailability(this, piece);</span>
+<span class="fc" id="L690">    }</span>
+<span class="fc" id="L691">  }</span>
+
+  /**
+   * Fire the bit field availability event to all registered listeners.
+   * &lt;p/&gt;
+   * The event contains the peer (this), and the bit field of available pieces
+   * from this peer.
+   */
+  private void fireBitfieldAvailabity() {
+<span class="fc bfc" id="L700" title="All 2 branches covered.">    for (PeerActivityListener listener : this.listeners) {</span>
+<span class="fc" id="L701">      listener.handleBitfieldAvailability(this,</span>
+<span class="fc" id="L702">              this.getAvailablePieces());</span>
+<span class="fc" id="L703">    }</span>
+<span class="fc" id="L704">  }</span>
+
+  /**
+   * Fire the piece sent event to all registered listeners.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * The event contains the peer (this), and the piece number that was
+   * sent to the peer.
+   * &lt;/p&gt;
+   *
+   * @param piece The completed piece.
+   */
+  private void firePieceSent(Piece piece) {
+<span class="nc bnc" id="L717" title="All 2 branches missed.">    for (PeerActivityListener listener : this.listeners) {</span>
+<span class="nc" id="L718">      listener.handlePieceSent(this, piece);</span>
+<span class="nc" id="L719">    }</span>
+<span class="nc" id="L720">  }</span>
+
+  /**
+   * Fire the piece completion event to all registered listeners.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * The event contains the peer (this), and the piece number that was
+   * completed.
+   * &lt;/p&gt;
+   *
+   * @param piece The completed piece.
+   */
+  private void firePieceCompleted(Piece piece) throws IOException {
+<span class="fc bfc" id="L733" title="All 2 branches covered.">    for (PeerActivityListener listener : this.listeners) {</span>
+<span class="fc" id="L734">      listener.handlePieceCompleted(this, piece);</span>
+<span class="fc" id="L735">    }</span>
+<span class="fc" id="L736">  }</span>
+
+  /**
+   * Fire the peer disconnected event to all registered listeners.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * The event contains the peer that disconnected (this).
+   * &lt;/p&gt;
+   */
+  private void firePeerDisconnected() {
+<span class="fc bfc" id="L746" title="All 2 branches covered.">    for (PeerActivityListener listener : this.listeners) {</span>
+<span class="fc" id="L747">      listener.handlePeerDisconnected(this);</span>
+<span class="fc" id="L748">    }</span>
+<span class="fc" id="L749">  }</span>
+
+  private void afterPeerDisconnected() {
+<span class="fc bfc" id="L752" title="All 2 branches covered.">    for (PeerActivityListener listener : this.listeners) {</span>
+<span class="fc" id="L753">      listener.afterPeerRemoved(this);</span>
+<span class="fc" id="L754">    }</span>
+<span class="fc" id="L755">  }</span>
+
+  private void firePeerConnected() {
+<span class="fc bfc" id="L758" title="All 2 branches covered.">    for (PeerActivityListener listener : this.listeners) {</span>
+<span class="fc" id="L759">      listener.handleNewPeerConnected(this);</span>
+<span class="fc" id="L760">    }</span>
+<span class="fc" id="L761">  }</span>
+
+  /**
+   * Fire the IOException event to all registered listeners.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * The event contains the peer that triggered the problem, and the
+   * exception object.
+   * &lt;/p&gt;
+   */
+  private void fireIOException(IOException ioe) {
+<span class="nc bnc" id="L772" title="All 2 branches missed.">    for (PeerActivityListener listener : this.listeners) {</span>
+<span class="nc" id="L773">      listener.handleIOException(this, ioe);</span>
+<span class="nc" id="L774">    }</span>
+<span class="nc" id="L775">  }</span>
+
+  public SharedTorrent getTorrent() {
+<span class="fc" id="L778">    return this.torrent;</span>
+  }
+
+  public int getDownloadingPiecesCount() {
+<span class="fc" id="L782">    synchronized (requestsLock) {</span>
+<span class="fc" id="L783">      return myRequestedPieces.size();</span>
+    }
+  }
+
+  /**
+   * Download rate comparator.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Compares sharing peers based on their current download rate.
+   * &lt;/p&gt;
+   *
+   * @author mpetazzoni
+   * @see Rate.RateComparator
+   */
+<span class="nc" id="L797">  public static class DLRateComparator</span>
+          implements Comparator&lt;SharingPeer&gt;, Serializable {
+
+    private static final long serialVersionUID = 96307229964730L;
+
+    public int compare(SharingPeer a, SharingPeer b) {
+<span class="nc" id="L803">      return Rate.RATE_COMPARATOR.compare(a.getDLRate(), b.getDLRate());</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TrackedTorrent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.tracker</a> &gt; <span class="el_source">TrackedTorrent.java</span></div><h1>TrackedTorrent.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ * &lt;p&gt;
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * &lt;p&gt;
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * &lt;p&gt;
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.tracker;
+
+import com.turn.ttorrent.common.*;
+import com.turn.ttorrent.common.protocol.AnnounceRequestMessage.RequestEvent;
+import org.slf4j.Logger;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
+/**
+ * Tracked torrents are torrent for which we don't expect to have data files
+ * for.
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * {@link TrackedTorrent} objects are used by the BitTorrent tracker to
+ * represent a torrent that is announced by the tracker. As such, it is not
+ * expected to point to any valid local data like. It also contains some
+ * additional information used by the tracker to keep track of which peers
+ * exchange on it, etc.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ */
+public class TrackedTorrent implements TorrentHash {
+
+<span class="fc" id="L50">  private static final Logger logger =</span>
+<span class="fc" id="L51">          TorrentLoggerFactory.getLogger(TrackedTorrent.class);</span>
+
+  /**
+   * Minimum announce interval requested from peers, in seconds.
+   */
+  public static final int MIN_ANNOUNCE_INTERVAL_SECONDS = 5;
+
+  /**
+   * Default number of peers included in a tracker response.
+   */
+  private static final int DEFAULT_ANSWER_NUM_PEERS = 30;
+
+  /**
+   * Default announce interval requested from peers, in seconds.
+   */
+  private static final int DEFAULT_ANNOUNCE_INTERVAL_SECONDS = 10;
+
+  private int answerPeers;
+  private int announceInterval;
+
+  private final byte[] info_hash;
+
+  /**
+   * Peers currently exchanging on this torrent.
+   */
+  private ConcurrentMap&lt;PeerUID, TrackedPeer&gt; peers;
+
+  /**
+   * Create a new tracked torrent from meta-info binary data.
+   *
+   * @param info_hash The meta-info byte data.
+   *                  encoded and hashed back to create the torrent's SHA-1 hash.
+   *                  available.
+   */
+<span class="fc" id="L85">  public TrackedTorrent(byte[] info_hash) {</span>
+<span class="fc" id="L86">    this.info_hash = info_hash;</span>
+
+<span class="fc" id="L88">    this.peers = new ConcurrentHashMap&lt;PeerUID, TrackedPeer&gt;();</span>
+<span class="fc" id="L89">    this.answerPeers = TrackedTorrent.DEFAULT_ANSWER_NUM_PEERS;</span>
+<span class="fc" id="L90">    this.announceInterval = TrackedTorrent.DEFAULT_ANNOUNCE_INTERVAL_SECONDS;</span>
+<span class="fc" id="L91">  }</span>
+
+  /**
+   * Returns the map of all peers currently exchanging on this torrent.
+   */
+  public Map&lt;PeerUID, TrackedPeer&gt; getPeers() {
+<span class="fc" id="L97">    return this.peers;</span>
+  }
+
+  /**
+   * Add a peer exchanging on this torrent.
+   *
+   * @param peer The new Peer involved with this torrent.
+   */
+  public void addPeer(TrackedPeer peer) {
+<span class="fc" id="L106">    this.peers.put(new PeerUID(peer.getAddress(), this.getHexInfoHash()), peer);</span>
+<span class="fc" id="L107">  }</span>
+
+  public TrackedPeer getPeer(PeerUID peerUID) {
+<span class="fc" id="L110">    return this.peers.get(peerUID);</span>
+  }
+
+  public TrackedPeer removePeer(PeerUID peerUID) {
+<span class="fc" id="L114">    return this.peers.remove(peerUID);</span>
+  }
+
+  /**
+   * Count the number of seeders (peers in the COMPLETED state) on this
+   * torrent.
+   */
+  public int seeders() {
+<span class="fc" id="L122">    int count = 0;</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">    for (TrackedPeer peer : this.peers.values()) {</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">      if (peer.isCompleted()) {</span>
+<span class="fc" id="L125">        count++;</span>
+      }
+<span class="fc" id="L127">    }</span>
+<span class="fc" id="L128">    return count;</span>
+  }
+
+  /**
+   * Count the number of leechers (non-COMPLETED peers) on this torrent.
+   */
+  public int leechers() {
+<span class="fc" id="L135">    int count = 0;</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">    for (TrackedPeer peer : this.peers.values()) {</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">      if (!peer.isCompleted()) {</span>
+<span class="fc" id="L138">        count++;</span>
+      }
+<span class="fc" id="L140">    }</span>
+<span class="fc" id="L141">    return count;</span>
+  }
+
+  /**
+   * Remove unfresh peers from this torrent.
+   * &lt;p&gt;
+   * &lt;p&gt;
+   * Collect and remove all non-fresh peers from this torrent. This is
+   * usually called by the periodic peer collector of the BitTorrent tracker.
+   * &lt;/p&gt;
+   */
+  public void collectUnfreshPeers(int expireTimeoutSec) {
+<span class="fc bfc" id="L153" title="All 2 branches covered.">    for (TrackedPeer peer : this.peers.values()) {</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">      if (!peer.isFresh(expireTimeoutSec)) {</span>
+<span class="fc" id="L155">        this.peers.remove(new PeerUID(peer.getAddress(), this.getHexInfoHash()));</span>
+      }
+<span class="fc" id="L157">    }</span>
+<span class="fc" id="L158">  }</span>
+
+  /**
+   * Get the announce interval for this torrent.
+   */
+  public int getAnnounceInterval() {
+<span class="nc" id="L164">    return this.announceInterval;</span>
+  }
+
+  /**
+   * Set the announce interval for this torrent.
+   *
+   * @param interval New announce interval, in seconds.
+   */
+  public void setAnnounceInterval(int interval) {
+<span class="nc bnc" id="L173" title="All 2 branches missed.">    if (interval &lt;= 0) {</span>
+<span class="nc" id="L174">      throw new IllegalArgumentException(&quot;Invalid announce interval&quot;);</span>
+    }
+
+<span class="nc" id="L177">    this.announceInterval = interval;</span>
+<span class="nc" id="L178">  }</span>
+
+  /**
+   * Update this torrent's swarm from an announce event.
+   * &lt;p&gt;
+   * &lt;p&gt;
+   * This will automatically create a new peer on a 'started' announce event,
+   * and remove the peer on a 'stopped' announce event.
+   * &lt;/p&gt;
+   *
+   * @param event      The reported event. If &lt;em&gt;null&lt;/em&gt;, means a regular
+   *                   interval announce event, as defined in the BitTorrent specification.
+   * @param peerId     The byte-encoded peer ID.
+   * @param hexPeerId  The hexadecimal representation of the peer's ID.
+   * @param ip         The peer's IP address.
+   * @param port       The peer's inbound port.
+   * @param uploaded   The peer's reported uploaded byte count.
+   * @param downloaded The peer's reported downloaded byte count.
+   * @param left       The peer's reported left to download byte count.
+   * @return The peer that sent us the announce request.
+   */
+  public TrackedPeer update(RequestEvent event, ByteBuffer peerId,
+                            String hexPeerId, String ip, int port, long uploaded, long downloaded,
+                            long left) throws UnsupportedEncodingException {
+<span class="fc" id="L202">    logger.trace(&quot;event {}, Peer: {}:{}&quot;, new Object[]{event.getEventName(), ip, port});</span>
+<span class="fc" id="L203">    TrackedPeer peer = null;</span>
+<span class="fc" id="L204">    TrackedPeer.PeerState state = TrackedPeer.PeerState.UNKNOWN;</span>
+
+<span class="fc" id="L206">    PeerUID peerUID = new PeerUID(new InetSocketAddress(ip, port), getHexInfoHash());</span>
+<span class="fc bfc" id="L207" title="All 2 branches covered.">    if (RequestEvent.STARTED.equals(event)) {</span>
+<span class="fc" id="L208">      state = TrackedPeer.PeerState.STARTED;</span>
+<span class="fc bfc" id="L209" title="All 2 branches covered.">    } else if (RequestEvent.STOPPED.equals(event)) {</span>
+<span class="fc" id="L210">      peer = this.removePeer(peerUID);</span>
+<span class="fc" id="L211">      state = TrackedPeer.PeerState.STOPPED;</span>
+<span class="fc bfc" id="L212" title="All 2 branches covered.">    } else if (RequestEvent.COMPLETED.equals(event)) {</span>
+<span class="fc" id="L213">      peer = this.getPeer(peerUID);</span>
+<span class="fc" id="L214">      state = TrackedPeer.PeerState.COMPLETED;</span>
+<span class="pc bpc" id="L215" title="1 of 2 branches missed.">    } else if (RequestEvent.NONE.equals(event)) {</span>
+<span class="fc" id="L216">      peer = this.getPeer(peerUID);</span>
+<span class="fc" id="L217">      state = TrackedPeer.PeerState.STARTED;</span>
+    } else {
+<span class="nc" id="L219">      throw new IllegalArgumentException(&quot;Unexpected announce event type!&quot;);</span>
+    }
+
+<span class="fc bfc" id="L222" title="All 2 branches covered.">    if (peer == null) {</span>
+<span class="fc" id="L223">      peer = new TrackedPeer(this, ip, port, peerId);</span>
+<span class="fc" id="L224">      this.addPeer(peer);</span>
+    }
+<span class="fc" id="L226">    peer.update(state, uploaded, downloaded, left);</span>
+<span class="fc" id="L227">    return peer;</span>
+  }
+
+  /**
+   * Get a list of peers we can return in an announce response for this
+   * torrent.
+   *
+   * @param peer The peer making the request, so we can exclude it from the
+   *             list of returned peers.
+   * @return A list of peers we can include in an announce response.
+   */
+  public List&lt;Peer&gt; getSomePeers(Peer peer) {
+<span class="fc" id="L239">    List&lt;Peer&gt; peers = new LinkedList&lt;Peer&gt;();</span>
+
+    // Extract answerPeers random peers
+<span class="fc" id="L242">    List&lt;TrackedPeer&gt; candidates = new LinkedList&lt;TrackedPeer&gt;(this.peers.values());</span>
+<span class="fc" id="L243">    Collections.shuffle(candidates);</span>
+
+<span class="fc" id="L245">    int count = 0;</span>
+<span class="fc bfc" id="L246" title="All 2 branches covered.">    for (TrackedPeer candidate : candidates) {</span>
+      // Don't include the requesting peer in the answer.
+<span class="pc bpc" id="L248" title="1 of 4 branches missed.">      if (peer != null &amp;&amp; peer.looksLike(candidate)) {</span>
+<span class="fc" id="L249">        continue;</span>
+      }
+
+      // Only serve at most ANSWER_NUM_PEERS peers
+<span class="fc bfc" id="L253" title="All 2 branches covered.">      if (count++ &gt; this.answerPeers) {</span>
+<span class="fc" id="L254">        break;</span>
+      }
+
+<span class="fc" id="L257">      peers.add(candidate);</span>
+<span class="fc" id="L258">    }</span>
+
+<span class="fc" id="L260">    return peers;</span>
+  }
+
+  /**
+   * Load a tracked torrent from the given torrent file.
+   *
+   * @param torrent The abstract {@link File} object representing the
+   *                &lt;tt&gt;.torrent&lt;/tt&gt; file to load.
+   * @throws IOException              When the torrent file cannot be read.
+   */
+  public static TrackedTorrent load(File torrent) throws IOException {
+
+<span class="fc" id="L272">    TorrentMetadata torrentMetadata = new TorrentParser().parseFromFile(torrent);</span>
+<span class="fc" id="L273">    return new TrackedTorrent(torrentMetadata.getInfoHash());</span>
+  }
+
+  @Override
+  public byte[] getInfoHash() {
+<span class="nc" id="L278">    return this.info_hash;</span>
+  }
+
+  @Override
+  public String getHexInfoHash() {
+<span class="fc" id="L283">    return TorrentUtils.byteArrayToHexString(this.info_hash);</span>
+  }
+
+  @Override
+  public String toString() {
+<span class="nc" id="L288">    return &quot;TrackedTorrent{&quot; +</span>
+<span class="nc" id="L289">            &quot;info_hash=&quot; + getHexInfoHash() +</span>
+            '}';
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

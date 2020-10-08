@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SharedTorrent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client</a> &gt; <span class="el_source">SharedTorrent.java</span></div><h1>SharedTorrent.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.client;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.client.peer.PeerActivityListener;
+import com.turn.ttorrent.client.peer.SharingPeer;
+import com.turn.ttorrent.client.storage.PieceStorage;
+import com.turn.ttorrent.client.storage.TorrentByteStorage;
+import com.turn.ttorrent.client.strategy.*;
+import com.turn.ttorrent.common.Optional;
+import com.turn.ttorrent.common.*;
+import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Future;
+
+
+/**
+ * A torrent shared by the BitTorrent client.
+ * &lt;p/&gt;
+ * &lt;p&gt;
+ * The {@link SharedTorrent} class extends the Torrent class with all the data
+ * and logic required by the BitTorrent client implementation.
+ * &lt;/p&gt;
+ * &lt;p/&gt;
+ * &lt;p&gt;
+ * &lt;em&gt;Note:&lt;/em&gt; this implementation currently only supports single-file
+ * torrents.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ */
+public class SharedTorrent implements PeerActivityListener, TorrentMetadata, TorrentInfo {
+
+<span class="fc" id="L56">  private static final Logger logger =</span>
+<span class="fc" id="L57">          TorrentLoggerFactory.getLogger(SharedTorrent.class);</span>
+
+<span class="fc" id="L59">  private final static RequestStrategy DEFAULT_REQUEST_STRATEGY = new RequestStrategyImplAnyInteresting();</span>
+
+  /**
+   * End-game trigger ratio.
+   *
+   * &lt;p&gt;
+   * Eng-game behavior (requesting already requested pieces from available
+   * and ready peers to try to speed-up the end of the transfer) will only be
+   * enabled when the ratio of completed pieces over total pieces in the
+   * torrent is over this value.
+   * &lt;/p&gt;
+   */
+  private static final float ENG_GAME_COMPLETION_RATIO = 0.95f;
+  private static final int END_GAME_STATIC_PIECES_COUNT = 20;
+  private static final long END_GAME_INVOCATION_PERIOD_MS = 2000;
+
+  private final TorrentStatistic myTorrentStatistic;
+
+<span class="fc" id="L77">  private long myLastAnnounceTime = -1;</span>
+<span class="fc" id="L78">  private int mySeedersCount = 0;</span>
+
+  private final PieceStorage pieceStorage;
+<span class="fc" id="L81">  private boolean isFileChannelOpen = false;</span>
+  private final Map&lt;Integer, Future&lt;?&gt;&gt; myValidationFutures;
+  private final TorrentMetadata myTorrentMetadata;
+  private final long myTorrentTotalSize;
+
+  private final int pieceLength;
+  private final ByteBuffer piecesHashes;
+
+  private boolean initialized;
+  private Piece[] pieces;
+  private final BitSet completedPieces;
+  private final BitSet requestedPieces;
+  private final RequestStrategy myRequestStrategy;
+  private final EventDispatcher eventDispatcher;
+
+<span class="fc" id="L96">  private final List&lt;SharingPeer&gt; myDownloaders = new CopyOnWriteArrayList&lt;SharingPeer&gt;();</span>
+<span class="fc" id="L97">  private final EndGameStrategy endGameStrategy = new EndGameStrategyImpl(2);</span>
+<span class="fc" id="L98">  private volatile long endGameEnabledOn = -1;</span>
+
+<span class="fc" id="L100">  private volatile ClientState clientState = ClientState.WAITING;</span>
+  private static final int MAX_VALIDATION_TASK_COUNT = 200;
+  private static final int MAX_REQUESTED_PIECES_PER_TORRENT = 100;
+
+  /**
+   * Create a new shared torrent from meta-info
+   *
+   * @param torrentMetadata The meta-info
+   * @param eventDispatcher
+   */
+  public SharedTorrent(TorrentMetadata torrentMetadata, PieceStorage pieceStorage, RequestStrategy requestStrategy,
+<span class="fc" id="L111">                       TorrentStatistic torrentStatistic, EventDispatcher eventDispatcher) {</span>
+<span class="fc" id="L112">    myTorrentMetadata = torrentMetadata;</span>
+<span class="fc" id="L113">    this.pieceStorage = pieceStorage;</span>
+<span class="fc" id="L114">    this.eventDispatcher = eventDispatcher;</span>
+<span class="fc" id="L115">    myTorrentStatistic = torrentStatistic;</span>
+<span class="fc" id="L116">    myValidationFutures = new HashMap&lt;Integer, Future&lt;?&gt;&gt;();</span>
+<span class="fc" id="L117">    long totalSize = 0;</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">    for (TorrentFile torrentFile : myTorrentMetadata.getFiles()) {</span>
+<span class="fc" id="L119">      totalSize += torrentFile.size;</span>
+<span class="fc" id="L120">    }</span>
+<span class="fc" id="L121">    myTorrentTotalSize = totalSize;</span>
+<span class="fc" id="L122">    this.myRequestStrategy = requestStrategy;</span>
+
+<span class="fc" id="L124">    this.pieceLength = myTorrentMetadata.getPieceLength();</span>
+<span class="fc" id="L125">    this.piecesHashes = ByteBuffer.wrap(myTorrentMetadata.getPiecesHashes());</span>
+
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">    if (this.piecesHashes.capacity() / Constants.PIECE_HASH_SIZE *</span>
+            (long) this.pieceLength &lt; myTorrentTotalSize) {
+<span class="nc" id="L129">      throw new IllegalArgumentException(&quot;Torrent size does not &quot; +</span>
+              &quot;match the number of pieces and the piece size!&quot;);
+    }
+
+<span class="fc" id="L133">    this.initialized = false;</span>
+<span class="fc" id="L134">    this.pieces = new Piece[0];</span>
+<span class="fc" id="L135">    this.completedPieces = new BitSet(torrentMetadata.getPiecesCount());</span>
+<span class="fc" id="L136">    this.requestedPieces = new BitSet();</span>
+<span class="fc" id="L137">  }</span>
+
+  public static SharedTorrent fromFile(File source, PieceStorage pieceStorage, TorrentStatistic torrentStatistic)
+          throws IOException {
+<span class="fc" id="L141">    byte[] data = FileUtils.readFileToByteArray(source);</span>
+<span class="fc" id="L142">    TorrentMetadata torrentMetadata = new TorrentParser().parse(data);</span>
+<span class="fc" id="L143">    return new SharedTorrent(torrentMetadata, pieceStorage, DEFAULT_REQUEST_STRATEGY, torrentStatistic, new EventDispatcher());</span>
+  }
+
+  private synchronized void closeFileChannelIfNecessary() throws IOException {
+<span class="pc bpc" id="L147" title="3 of 4 branches missed.">    if (isFileChannelOpen &amp;&amp; myDownloaders.size() == 0) {</span>
+<span class="nc" id="L148">      logger.debug(&quot;Closing file  channel for {} if necessary. Downloaders: {}&quot;, getHexInfoHash(), myDownloaders.size());</span>
+<span class="nc" id="L149">      this.pieceStorage.close();</span>
+<span class="nc" id="L150">      isFileChannelOpen = false;</span>
+    }
+<span class="fc" id="L152">  }</span>
+
+  /**
+   * Get the number of bytes uploaded for this torrent.
+   */
+  public long getUploaded() {
+<span class="nc" id="L158">    return myTorrentStatistic.getUploadedBytes();</span>
+  }
+
+  /**
+   * Get the number of bytes downloaded for this torrent.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * &lt;b&gt;Note:&lt;/b&gt; this could be more than the torrent's length, and should
+   * not be used to determine a completion percentage.
+   * &lt;/p&gt;
+   */
+  public long getDownloaded() {
+<span class="nc" id="L170">    return myTorrentStatistic.getDownloadedBytes();</span>
+  }
+
+  /**
+   * Get the number of bytes left to download for this torrent.
+   */
+  public long getLeft() {
+<span class="nc" id="L177">    return myTorrentStatistic.getLeftBytes();</span>
+  }
+
+  public int getSeedersCount() {
+<span class="nc" id="L181">    return mySeedersCount;</span>
+  }
+
+  public void setSeedersCount(int seedersCount) {
+<span class="fc" id="L185">    mySeedersCount = seedersCount;</span>
+<span class="fc" id="L186">  }</span>
+
+  public long getLastAnnounceTime() {
+<span class="nc" id="L189">    return myLastAnnounceTime;</span>
+  }
+
+  public void setLastAnnounceTime(long lastAnnounceTime) {
+<span class="fc" id="L193">    myLastAnnounceTime = lastAnnounceTime;</span>
+<span class="fc" id="L194">  }</span>
+
+  /**
+   * Tells whether this torrent has been fully initialized yet.
+   */
+  public boolean isInitialized() {
+<span class="fc" id="L200">    return this.initialized;</span>
+  }
+
+  /**
+   * Stop the torrent initialization as soon as possible.
+   */
+  public void stop() {
+<span class="nc" id="L207">  }</span>
+
+  /**
+   * Build this torrent's pieces array.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Hash and verify any potentially present local data and create this
+   * torrent's pieces array from their respective hash provided in the
+   * torrent meta-info.
+   * &lt;/p&gt;
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * This function should be called soon after the constructor to initialize
+   * the pieces array.
+   * &lt;/p&gt;
+   */
+  public synchronized void init() throws InterruptedException, IOException {
+<span class="fc" id="L224">    setClientState(ClientState.VALIDATING);</span>
+
+<span class="pc bpc" id="L226" title="1 of 2 branches missed.">    if (this.isInitialized()) {</span>
+<span class="nc" id="L227">      throw new IllegalStateException(&quot;Torrent was already initialized!&quot;);</span>
+    }
+
+<span class="fc" id="L230">    hashSingleThread();</span>
+
+<span class="fc" id="L232">    this.initialized = true;</span>
+<span class="fc" id="L233">  }</span>
+
+  private void initPieces() {
+<span class="fc" id="L236">    int nPieces = (int) (Math.ceil(</span>
+            (double) myTorrentTotalSize / this.pieceLength));
+<span class="fc" id="L238">    this.pieces = new Piece[nPieces];</span>
+<span class="fc" id="L239">    this.piecesHashes.clear();</span>
+<span class="fc" id="L240">  }</span>
+
+  private void hashSingleThread() {
+<span class="fc" id="L243">    initPieces();</span>
+
+<span class="fc" id="L245">    logger.debug(&quot;Analyzing local data for {} with {} threads...&quot;,</span>
+<span class="fc" id="L246">            myTorrentMetadata.getDirectoryName(), TorrentCreator.HASHING_THREADS_COUNT);</span>
+<span class="fc bfc" id="L247" title="All 2 branches covered.">    for (int idx = 0; idx &lt; this.pieces.length; idx++) {</span>
+<span class="fc" id="L248">      byte[] hash = new byte[Constants.PIECE_HASH_SIZE];</span>
+<span class="fc" id="L249">      this.piecesHashes.get(hash);</span>
+
+      // The last piece may be shorter than the torrent's global piece
+      // length. Let's make sure we get the right piece length in any
+      // situation.
+<span class="fc" id="L254">      long off = ((long) idx) * this.pieceLength;</span>
+<span class="fc" id="L255">      long len = Math.min(</span>
+              myTorrentTotalSize - off,
+              this.pieceLength);
+
+<span class="fc" id="L259">      Piece piece = new Piece(this.pieceStorage, idx, len, hash</span>
+      );
+<span class="fc" id="L261">      this.pieces[idx] = piece;</span>
+<span class="fc" id="L262">      piece.setValid(pieceStorage.getAvailablePieces().get(idx));</span>
+
+<span class="fc bfc" id="L264" title="All 2 branches covered.">      if (piece.isValid()) {</span>
+<span class="fc" id="L265">        this.completedPieces.set(piece.getIndex());</span>
+      }
+    }
+<span class="fc" id="L268">  }</span>
+
+  public synchronized void close() {
+<span class="fc" id="L271">    logger.trace(&quot;Closing torrent&quot;, myTorrentMetadata.getDirectoryName());</span>
+    try {
+<span class="fc" id="L273">      this.pieceStorage.close();</span>
+<span class="fc" id="L274">      isFileChannelOpen = false;</span>
+<span class="nc" id="L275">    } catch (IOException ioe) {</span>
+<span class="nc" id="L276">      logger.error(&quot;Error closing torrent byte storage: {}&quot;,</span>
+<span class="nc" id="L277">              ioe.getMessage());</span>
+<span class="fc" id="L278">    }</span>
+<span class="fc" id="L279">  }</span>
+
+  /**
+   * Retrieve a piece object by index.
+   *
+   * @param index The index of the piece in this torrent.
+   */
+  public Piece getPiece(int index) {
+<span class="pc bpc" id="L287" title="1 of 2 branches missed.">    if (this.pieces == null) {</span>
+<span class="nc" id="L288">      throw new IllegalStateException(&quot;Torrent not initialized yet.&quot;);</span>
+    }
+
+<span class="pc bpc" id="L291" title="1 of 2 branches missed.">    if (index &gt;= this.pieces.length) {</span>
+<span class="nc" id="L292">      throw new IllegalArgumentException(&quot;Invalid piece index!&quot;);</span>
+    }
+
+<span class="fc" id="L295">    return this.pieces[index];</span>
+  }
+
+  /**
+   * Return a copy of the bit field of available pieces for this torrent.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Available pieces are pieces available in the swarm, and it does not
+   * include our own pieces.
+   * &lt;/p&gt;
+   */
+  public BitSet getAvailablePieces() {
+<span class="pc bpc" id="L307" title="1 of 2 branches missed.">    if (!this.isInitialized()) {</span>
+<span class="nc" id="L308">      throw new IllegalStateException(&quot;Torrent not yet initialized!&quot;);</span>
+    }
+
+<span class="fc" id="L311">    BitSet availablePieces = new BitSet(this.pieces.length);</span>
+
+<span class="fc" id="L313">    synchronized (this.pieces) {</span>
+<span class="fc bfc" id="L314" title="All 2 branches covered.">      for (Piece piece : this.pieces) {</span>
+<span class="fc bfc" id="L315" title="All 2 branches covered.">        if (piece.available()) {</span>
+<span class="fc" id="L316">          availablePieces.set(piece.getIndex());</span>
+        }
+      }
+<span class="fc" id="L319">    }</span>
+
+<span class="fc" id="L321">    return availablePieces;</span>
+  }
+
+  /**
+   * Return a copy of the completed pieces bitset.
+   */
+  public BitSet getCompletedPieces() {
+<span class="pc bpc" id="L328" title="1 of 2 branches missed.">    if (!this.isInitialized()) {</span>
+<span class="nc" id="L329">      throw new IllegalStateException(&quot;Torrent not yet initialized!&quot;);</span>
+    }
+
+<span class="fc" id="L332">    return pieceStorage.getAvailablePieces();</span>
+  }
+
+  /**
+   * Tells whether this torrent has been fully downloaded, or is fully
+   * available locally.
+   */
+  public synchronized boolean isComplete() {
+<span class="pc bpc" id="L340" title="1 of 2 branches missed.">    return this.pieces.length &gt; 0</span>
+<span class="fc bfc" id="L341" title="All 2 branches covered.">            &amp;&amp; pieceStorage.getAvailablePieces().cardinality() == myTorrentMetadata.getPiecesCount();</span>
+  }
+
+  /**
+   * Finalize the download of this torrent.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * This realizes the final, pre-seeding phase actions on this torrent,
+   * which usually consists in putting the torrent data in their final form
+   * and at their target location.
+   * &lt;/p&gt;
+   *
+   * @see TorrentByteStorage#finish
+   */
+  public synchronized void finish() {
+<span class="pc bpc" id="L356" title="1 of 2 branches missed.">    if (!this.isInitialized()) {</span>
+<span class="nc" id="L357">      throw new IllegalStateException(&quot;Torrent not yet initialized!&quot;);</span>
+    }
+
+<span class="pc bpc" id="L360" title="1 of 2 branches missed.">    if (!this.isComplete()) {</span>
+<span class="nc" id="L361">      throw new IllegalStateException(&quot;Torrent download is not complete!&quot;);</span>
+    }
+
+<span class="fc" id="L364">    eventDispatcher.multicaster().downloadComplete();</span>
+<span class="fc" id="L365">    setClientState(ClientState.SEEDING);</span>
+<span class="fc" id="L366">  }</span>
+
+  public boolean isFinished() {
+<span class="fc bfc" id="L369" title="All 2 branches covered.">    return pieceStorage.getAvailablePieces().cardinality() == myTorrentMetadata.getPiecesCount();</span>
+  }
+
+  public ClientState getClientState() {
+<span class="nc" id="L373">    return this.clientState;</span>
+  }
+
+  public void setClientState(ClientState clientState) {
+<span class="fc" id="L377">    this.clientState = clientState;</span>
+<span class="fc" id="L378">  }</span>
+
+  /**
+   * Mark a piece as completed, decrementing the piece size in bytes from our
+   * left bytes to download counter.
+   */
+  public synchronized void markCompleted(Piece piece) {
+<span class="fc bfc" id="L385" title="All 2 branches covered.">    if (this.completedPieces.get(piece.getIndex())) {</span>
+<span class="fc" id="L386">      return;</span>
+    }
+
+    // A completed piece means that's that much data left to download for
+    // this torrent.
+<span class="fc" id="L391">    myTorrentStatistic.addLeft(-piece.size());</span>
+<span class="fc" id="L392">    this.completedPieces.set(piece.getIndex());</span>
+<span class="fc bfc" id="L393" title="All 2 branches covered.">    if (completedPieces.cardinality() == getPiecesCount()) {</span>
+<span class="fc" id="L394">      logger.info(&quot;all pieces are received for torrent {}. Validating...&quot;, this);</span>
+    }
+<span class="fc" id="L396">  }</span>
+
+  public synchronized void markUncompleted(Piece piece) {
+<span class="fc bfc" id="L399" title="All 2 branches covered.">    if (!this.completedPieces.get(piece.getIndex())) {</span>
+<span class="fc" id="L400">      return;</span>
+    }
+
+<span class="fc" id="L403">    removeValidationFuture(piece);</span>
+<span class="fc" id="L404">    myTorrentStatistic.addLeft(piece.size());</span>
+<span class="fc" id="L405">    this.completedPieces.clear(piece.getIndex());</span>
+<span class="fc" id="L406">  }</span>
+
+  public synchronized void removeValidationFuture(Piece piece) {
+<span class="fc" id="L409">    myValidationFutures.remove(piece.getIndex());</span>
+<span class="fc" id="L410">  }</span>
+
+  public void notifyPieceDownloaded(Piece piece, SharingPeer peer) {
+<span class="fc" id="L413">    eventDispatcher.multicaster().pieceDownloaded(piece, peer);</span>
+<span class="fc" id="L414">  }</span>
+
+  /** PeerActivityListener handler(s). *************************************/
+
+  /**
+   * Peer choked handler.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * When a peer chokes, the requests made to it are canceled and we need to
+   * mark the eventually piece we requested from it as available again for
+   * download tentative from another peer.
+   * &lt;/p&gt;
+   *
+   * @param peer The peer that choked.
+   */
+  @Override
+  public synchronized void handlePeerChoked(SharingPeer peer) {
+<span class="nc" id="L431">    Set&lt;Piece&gt; pieces = peer.getRequestedPieces();</span>
+
+<span class="nc bnc" id="L433" title="All 2 branches missed.">    if (pieces.size() &gt; 0) {</span>
+<span class="nc bnc" id="L434" title="All 2 branches missed.">      for (Piece piece : pieces) {</span>
+<span class="nc" id="L435">        this.requestedPieces.set(piece.getIndex(), false);</span>
+<span class="nc" id="L436">      }</span>
+    }
+
+<span class="nc" id="L439">    logger.trace(&quot;Peer {} choked, we now have {} outstanding &quot; +</span>
+                    &quot;request(s): {}.&quot;,
+            new Object[]{
+                    peer,
+<span class="nc" id="L443">                    this.requestedPieces.cardinality(),</span>
+                    this.requestedPieces
+            });
+<span class="nc" id="L446">  }</span>
+
+  /**
+   * Peer ready handler.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * When a peer becomes ready to accept piece block requests, select a piece
+   * to download and go for it.
+   * &lt;/p&gt;
+   *
+   * @param peer The peer that became ready.
+   */
+  @Override
+  public void handlePeerReady(SharingPeer peer) {
+<span class="fc" id="L460">    initIfNecessary(peer);</span>
+
+<span class="fc" id="L462">    RequestsCollection requestsCollection = getRequestsCollection(peer);</span>
+<span class="fc" id="L463">    requestsCollection.sendAllRequests();</span>
+<span class="fc" id="L464">  }</span>
+
+  @NotNull
+  private synchronized RequestsCollection getRequestsCollection(final SharingPeer peer) {
+<span class="pc bpc" id="L468" title="1 of 2 branches missed.">    if (myValidationFutures.size() &gt; MAX_VALIDATION_TASK_COUNT) return RequestsCollection.Empty.INSTANCE;</span>
+
+<span class="fc bfc" id="L470" title="All 2 branches covered.">    if (this.requestedPieces.cardinality() &gt; MAX_REQUESTED_PIECES_PER_TORRENT) return RequestsCollection.Empty.INSTANCE;</span>
+
+<span class="fc" id="L472">    int completedAndValidated = pieceStorage.getAvailablePieces().cardinality();</span>
+
+<span class="fc bfc" id="L474" title="All 2 branches covered.">    boolean turnOnEndGame = completedAndValidated &gt; getPiecesCount() * ENG_GAME_COMPLETION_RATIO ||</span>
+<span class="fc bfc" id="L475" title="All 2 branches covered.">            completedAndValidated &gt; getPiecesCount() - END_GAME_STATIC_PIECES_COUNT;</span>
+<span class="fc bfc" id="L476" title="All 2 branches covered.">    if (turnOnEndGame) {</span>
+<span class="fc" id="L477">      long now = System.currentTimeMillis();</span>
+<span class="fc bfc" id="L478" title="All 2 branches covered.">      if (now - END_GAME_INVOCATION_PERIOD_MS &gt; endGameEnabledOn) {</span>
+<span class="fc" id="L479">        endGameEnabledOn = now;</span>
+<span class="fc" id="L480">        logger.info(&quot;Running end-game mode, currently available {}/{} pieces&quot;,</span>
+<span class="fc" id="L481">                pieceStorage.getAvailablePieces().cardinality(),</span>
+<span class="fc" id="L482">                getPieceCount());</span>
+<span class="fc" id="L483">        return endGameStrategy.collectRequests(pieces, myDownloaders);</span>
+      }
+<span class="fc" id="L485">      return RequestsCollection.Empty.INSTANCE;</span>
+    }
+
+<span class="fc" id="L488">    final BitSet interesting = peer.getAvailablePieces();</span>
+<span class="fc" id="L489">    interesting.andNot(this.completedPieces);</span>
+<span class="fc" id="L490">    interesting.andNot(this.requestedPieces);</span>
+
+<span class="fc" id="L492">    int maxRequestingPieces = Math.min(10, interesting.cardinality());</span>
+<span class="fc" id="L493">    int currentlyDownloading = peer.getDownloadingPiecesCount();</span>
+<span class="fc" id="L494">    Map&lt;Piece, List&lt;SharingPeer&gt;&gt; toRequest = new HashMap&lt;Piece, List&lt;SharingPeer&gt;&gt;();</span>
+<span class="fc bfc" id="L495" title="All 2 branches covered.">    while (currentlyDownloading &lt; maxRequestingPieces) {</span>
+<span class="fc bfc" id="L496" title="All 2 branches covered.">      if (!peer.isConnected()) {</span>
+<span class="fc" id="L497">        break;</span>
+      }
+
+<span class="pc bpc" id="L500" title="1 of 2 branches missed.">      if (interesting.cardinality() == 0) {</span>
+<span class="nc" id="L501">        return RequestsCollection.Empty.INSTANCE;</span>
+      }
+
+<span class="fc" id="L504">      Piece chosen = myRequestStrategy.choosePiece(interesting, pieces);</span>
+<span class="pc bpc" id="L505" title="1 of 2 branches missed.">      if (chosen == null) {</span>
+<span class="nc" id="L506">        logger.info(&quot;chosen piece is null&quot;);</span>
+<span class="nc" id="L507">        break;</span>
+      }
+<span class="fc" id="L509">      this.requestedPieces.set(chosen.getIndex());</span>
+<span class="fc" id="L510">      currentlyDownloading++;</span>
+<span class="fc" id="L511">      toRequest.put(chosen, Collections.singletonList(peer));</span>
+<span class="fc" id="L512">      interesting.clear(chosen.getIndex());</span>
+<span class="fc" id="L513">    }</span>
+
+<span class="fc" id="L515">    return new RequestsCollectionImpl(toRequest);</span>
+  }
+
+  public synchronized void initIfNecessary(SharingPeer peer) {
+<span class="fc bfc" id="L519" title="All 2 branches covered.">    if (!isInitialized()) {</span>
+      try {
+<span class="fc" id="L521">        init();</span>
+<span class="nc" id="L522">      } catch (InterruptedException e) {</span>
+<span class="nc" id="L523">        logger.info(&quot;Interrupted init&quot;, e);</span>
+<span class="nc" id="L524">        peer.unbind(true);</span>
+<span class="nc" id="L525">        return;</span>
+<span class="nc" id="L526">      } catch (IOException e) {</span>
+<span class="nc" id="L527">        logger.info(&quot;IOE during init&quot;, e);</span>
+<span class="nc" id="L528">        peer.unbind(true);</span>
+<span class="nc" id="L529">        return;</span>
+<span class="fc" id="L530">      }</span>
+    }
+<span class="fc" id="L532">  }</span>
+
+  /**
+   * Piece availability handler.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Handle updates in piece availability from a peer's HAVE message. When
+   * this happens, we need to mark that piece as available from the peer.
+   * &lt;/p&gt;
+   *
+   * @param peer  The peer we got the update from.
+   * @param piece The piece that became available.
+   */
+  @Override
+  public void handlePieceAvailability(SharingPeer peer, Piece piece) {
+<span class="fc bfc" id="L547" title="All 2 branches covered.">    boolean isPeerInteresting = !this.completedPieces.get(piece.getIndex()) &amp;&amp;</span>
+<span class="fc bfc" id="L548" title="All 2 branches covered.">            !this.requestedPieces.get(piece.getIndex());</span>
+<span class="fc bfc" id="L549" title="All 2 branches covered.">    if (isPeerInteresting) {</span>
+<span class="fc" id="L550">      peer.interesting();</span>
+    }
+
+<span class="fc" id="L553">    piece.seenAt(peer);</span>
+
+<span class="fc" id="L555">    logger.trace(&quot;Peer {} contributes {} piece(s) [{}/{}/{}].&quot;,</span>
+            new Object[]{
+                    peer,
+<span class="fc" id="L558">                    peer.getAvailablePieces().cardinality(),</span>
+<span class="fc" id="L559">                    this.completedPieces.cardinality(),</span>
+<span class="fc" id="L560">                    this.getAvailablePieces().cardinality(),</span>
+<span class="fc" id="L561">                    this.pieces.length</span>
+            });
+
+<span class="fc bfc" id="L564" title="All 2 branches covered.">    if (!peer.isChoked() &amp;&amp;</span>
+<span class="fc bfc" id="L565" title="All 2 branches covered.">            peer.isInteresting() &amp;&amp;</span>
+<span class="fc bfc" id="L566" title="All 2 branches covered.">            !peer.isDownloading()) {</span>
+<span class="fc" id="L567">      this.handlePeerReady(peer);</span>
+    }
+<span class="fc" id="L569">  }</span>
+
+  /**
+   * Bit field availability handler.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Handle updates in piece availability from a peer's BITFIELD message.
+   * When this happens, we need to mark in all the pieces the peer has that
+   * they can be reached through this peer, thus augmenting the global
+   * availability of pieces.
+   * &lt;/p&gt;
+   *
+   * @param peer            The peer we got the update from.
+   * @param availablePieces The pieces availability bit field of the peer.
+   */
+  @Override
+  public void handleBitfieldAvailability(SharingPeer peer,
+                                         BitSet availablePieces) {
+    // Determine if the peer is interesting for us or not, and notify it.
+<span class="fc" id="L588">    BitSet interesting = (BitSet) availablePieces.clone();</span>
+<span class="fc" id="L589">    synchronized (this) {</span>
+<span class="fc" id="L590">      interesting.andNot(this.completedPieces);</span>
+<span class="fc" id="L591">      interesting.andNot(this.requestedPieces);</span>
+<span class="fc" id="L592">    }</span>
+    // Record the peer has all the pieces it told us it had.
+<span class="fc bfc" id="L594" title="All 2 branches covered.">    for (int i = availablePieces.nextSetBit(0); i &gt;= 0;</span>
+<span class="fc" id="L595">         i = availablePieces.nextSetBit(i + 1)) {</span>
+<span class="fc" id="L596">      this.pieces[i].seenAt(peer);</span>
+    }
+
+<span class="fc bfc" id="L599" title="All 2 branches covered.">    if (interesting.cardinality() == 0) {</span>
+<span class="fc" id="L600">      peer.notInteresting();</span>
+    } else {
+<span class="fc" id="L602">      peer.interesting();</span>
+    }
+
+<span class="fc" id="L605">    logger.debug(&quot;Peer {} contributes {} piece(s), total pieces count: {}.&quot;,</span>
+            new Object[]{
+                    peer,
+<span class="fc" id="L608">                    availablePieces.cardinality(),</span>
+<span class="fc" id="L609">                    myTorrentMetadata.getPiecesCount()</span>
+            });
+<span class="fc" id="L611">  }</span>
+
+  public int getDownloadersCount() {
+<span class="fc" id="L614">    return myDownloaders.size();</span>
+  }
+
+  @Override
+  public void afterPeerRemoved(SharingPeer peer) {
+
+<span class="fc" id="L620">  }</span>
+
+  /**
+   * Piece upload completion handler.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * When a piece has been sent to a peer, we just record that we sent that
+   * many bytes. If the piece is valid on the peer's side, it will send us a
+   * HAVE message and we'll record that the piece is available on the peer at
+   * that moment (see &lt;code&gt;handlePieceAvailability()&lt;/code&gt;).
+   * &lt;/p&gt;
+   *
+   * @param peer  The peer we got this piece from.
+   * @param piece The piece in question.
+   */
+  @Override
+  public void handlePieceSent(SharingPeer peer, Piece piece) {
+<span class="fc" id="L637">    logger.trace(&quot;Completed upload of {} to {}.&quot;, piece, peer);</span>
+<span class="fc" id="L638">    myTorrentStatistic.addUploaded(piece.size());</span>
+<span class="fc" id="L639">  }</span>
+
+  /**
+   * Piece download completion handler.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * If the complete piece downloaded is valid, we can record in the torrent
+   * completedPieces bit field that we know have this piece.
+   * &lt;/p&gt;
+   *
+   * @param peer  The peer we got this piece from.
+   * @param piece The piece in question.
+   */
+  @Override
+  public void handlePieceCompleted(SharingPeer peer,
+                                   Piece piece) throws IOException {
+    // Regardless of validity, record the number of bytes downloaded and
+    // mark the piece as not requested anymore
+<span class="fc" id="L657">    myTorrentStatistic.addDownloaded(piece.size());</span>
+<span class="fc" id="L658">    this.requestedPieces.set(piece.getIndex(), false);</span>
+
+<span class="fc" id="L660">    logger.trace(&quot;We now have {} piece(s) and {} outstanding request(s): {}&quot;,</span>
+            new Object[]{
+<span class="fc" id="L662">                    this.completedPieces.cardinality(),</span>
+<span class="fc" id="L663">                    this.requestedPieces.cardinality(),</span>
+                    this.requestedPieces
+            });
+<span class="fc" id="L666">  }</span>
+
+  /**
+   * Peer disconnection handler.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * When a peer disconnects, we need to mark in all of the pieces it had
+   * available that they can't be reached through this peer anymore.
+   * &lt;/p&gt;
+   *
+   * @param peer The peer we got this piece from.
+   */
+  @Override
+  public synchronized void handlePeerDisconnected(SharingPeer peer) {
+<span class="fc" id="L680">    BitSet availablePieces = peer.getAvailablePieces();</span>
+
+<span class="fc bfc" id="L682" title="All 2 branches covered.">    for (int i = availablePieces.nextSetBit(0); i &gt;= 0;</span>
+<span class="fc" id="L683">         i = availablePieces.nextSetBit(i + 1)) {</span>
+<span class="fc" id="L684">      this.pieces[i].noLongerAt(peer);</span>
+    }
+
+<span class="fc" id="L687">    Set&lt;Piece&gt; requested = peer.getRequestedPieces();</span>
+<span class="pc bpc" id="L688" title="1 of 2 branches missed.">    if (requested != null) {</span>
+<span class="fc bfc" id="L689" title="All 2 branches covered.">      for (Piece piece : requested) {</span>
+<span class="fc" id="L690">        this.requestedPieces.set(piece.getIndex(), false);</span>
+<span class="fc" id="L691">      }</span>
+    }
+
+<span class="fc" id="L694">    myDownloaders.remove(peer);</span>
+
+    try {
+<span class="fc" id="L697">      closeFileChannelIfNecessary();</span>
+<span class="nc" id="L698">    } catch (IOException e) {</span>
+<span class="nc" id="L699">      logger.info(&quot;I/O error on attempt to close file storage: &quot; + e.toString());</span>
+<span class="fc" id="L700">    }</span>
+
+<span class="fc" id="L702">    logger.debug(&quot;Peer {} went away with {} piece(s) [{}/{}].&quot;,</span>
+            new Object[]{
+                    peer,
+<span class="fc" id="L705">                    availablePieces.cardinality(),</span>
+<span class="fc" id="L706">                    this.completedPieces.cardinality(),</span>
+<span class="fc" id="L707">                    this.pieces.length</span>
+            });
+<span class="fc" id="L709">    logger.trace(&quot;We now have {} piece(s) and {} outstanding request(s): {}&quot;,</span>
+            new Object[]{
+<span class="fc" id="L711">                    this.completedPieces.cardinality(),</span>
+<span class="fc" id="L712">                    this.requestedPieces.cardinality(),</span>
+                    this.requestedPieces
+            });
+<span class="fc" id="L715">    eventDispatcher.multicaster().peerDisconnected(peer);</span>
+<span class="fc" id="L716">  }</span>
+
+  @Override
+  public synchronized void handleIOException(SharingPeer peer,
+                                             IOException ioe) {
+<span class="nc" id="L721">    eventDispatcher.multicaster().downloadFailed(ioe);</span>
+<span class="nc" id="L722">  }</span>
+
+  @Override
+  public synchronized void handleNewPeerConnected(SharingPeer peer) {
+<span class="fc" id="L726">    initIfNecessary(peer);</span>
+<span class="fc" id="L727">    eventDispatcher.multicaster().peerConnected(peer);</span>
+<span class="fc" id="L728">  }</span>
+
+  @Override
+  public String toString() {
+<span class="fc" id="L732">    return &quot;SharedTorrent{&quot; +</span>
+<span class="fc" id="L733">            Arrays.toString(TorrentUtils.getTorrentFileNames(myTorrentMetadata).toArray()) +</span>
+            &quot;}&quot;;
+  }
+
+  @Override
+  public String getDirectoryName() {
+<span class="fc" id="L739">    return myTorrentMetadata.getDirectoryName();</span>
+  }
+
+  @Override
+  public List&lt;TorrentFile&gt; getFiles() {
+<span class="fc" id="L744">    return myTorrentMetadata.getFiles();</span>
+  }
+
+  @Nullable
+  @Override
+  public List&lt;List&lt;String&gt;&gt; getAnnounceList() {
+<span class="nc" id="L750">    return myTorrentMetadata.getAnnounceList();</span>
+  }
+
+  @Nullable
+  @Override
+  public String getAnnounce() {
+<span class="nc" id="L756">    return myTorrentMetadata.getAnnounce();</span>
+  }
+
+  @Override
+  public Optional&lt;Long&gt; getCreationDate() {
+<span class="nc" id="L761">    return myTorrentMetadata.getCreationDate();</span>
+  }
+
+  @Override
+  public Optional&lt;String&gt; getComment() {
+<span class="nc" id="L766">    return myTorrentMetadata.getComment();</span>
+  }
+
+  @Override
+  public Optional&lt;String&gt; getCreatedBy() {
+<span class="nc" id="L771">    return myTorrentMetadata.getCreatedBy();</span>
+  }
+
+  @Override
+  public int getPieceLength() {
+<span class="fc" id="L776">    return myTorrentMetadata.getPieceLength();</span>
+  }
+
+  @Override
+  public byte[] getPiecesHashes() {
+<span class="nc" id="L781">    return myTorrentMetadata.getPiecesHashes();</span>
+  }
+
+  @Override
+  public boolean isPrivate() {
+<span class="nc" id="L786">    return myTorrentMetadata.isPrivate();</span>
+  }
+
+  @Override
+  public int getPiecesCount() {
+<span class="fc" id="L791">    return myTorrentMetadata.getPiecesCount();</span>
+  }
+
+  @Override
+  public byte[] getInfoHash() {
+<span class="nc" id="L796">    return myTorrentMetadata.getInfoHash();</span>
+  }
+
+  @Override
+  public String getHexInfoHash() {
+<span class="fc" id="L801">    return myTorrentMetadata.getHexInfoHash();</span>
+  }
+
+  @Override
+  public int getPieceCount() {
+<span class="fc" id="L806">    return getPiecesCount();</span>
+  }
+
+  @Override
+  public long getPieceSize(int pieceIdx) {
+<span class="fc" id="L811">    return getPieceLength();</span>
+  }
+
+  public synchronized void savePieceAndValidate(Piece p) throws IOException {
+//    p.finish();
+<span class="nc" id="L816">  }</span>
+
+  public synchronized void markCompletedAndAddValidationFuture(Piece piece, Future&lt;?&gt; validationFuture) {
+<span class="fc" id="L819">    this.markCompleted(piece);</span>
+<span class="fc" id="L820">    myValidationFutures.put(piece.getIndex(), validationFuture);</span>
+<span class="fc" id="L821">  }</span>
+
+  public synchronized boolean isAllPiecesOfPeerCompletedAndValidated(SharingPeer peer) {
+<span class="fc" id="L824">    final BitSet availablePieces = peer.getAvailablePieces();</span>
+<span class="fc bfc" id="L825" title="All 2 branches covered.">    for (Piece piece : pieces) {</span>
+<span class="fc" id="L826">      final boolean peerHaveCurrentPiece = availablePieces.get(piece.getIndex());</span>
+<span class="fc bfc" id="L827" title="All 2 branches covered.">      if (!peerHaveCurrentPiece) continue;</span>
+<span class="fc bfc" id="L828" title="All 2 branches covered.">      if (!completedPieces.get(piece.getIndex())) return false;</span>
+<span class="fc bfc" id="L829" title="All 2 branches covered.">      if (myValidationFutures.get(piece.getIndex()) != null) return false;</span>
+    }
+<span class="fc" id="L831">    return true;</span>
+  }
+
+  public void addConnectedPeer(SharingPeer sharingPeer) {
+<span class="fc" id="L835">    myDownloaders.add(sharingPeer);</span>
+<span class="fc" id="L836">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConnectionWorker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.network</a> &gt; <span class="el_source">ConnectionWorker.java</span></div><h1>ConnectionWorker.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.network;
+
+import com.turn.ttorrent.common.LoggerUtils;
+import com.turn.ttorrent.common.TimeService;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.network.keyProcessors.CleanupProcessor;
+import com.turn.ttorrent.network.keyProcessors.KeyProcessor;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.channels.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
+
+public class ConnectionWorker implements Runnable {
+
+<span class="fc" id="L23">  private static final Logger logger = TorrentLoggerFactory.getLogger(ConnectionWorker.class);</span>
+  private static final String SELECTOR_THREAD_NAME = &quot;Torrent channels manager thread&quot;;
+<span class="fc" id="L25">  private volatile boolean stop = false;</span>
+  private final Selector selector;
+  private final BlockingQueue&lt;ConnectTask&gt; myConnectQueue;
+  private final BlockingQueue&lt;WriteTask&gt; myWriteQueue;
+  private final Semaphore mySemaphore;
+  private final List&lt;KeyProcessor&gt; myKeyProcessors;
+  private final TimeService myTimeService;
+  private long lastCleanupTime;
+  private volatile int mySelectorTimeoutMillis;
+  private volatile long myCleanupTimeoutMillis;
+  private final CleanupProcessor myCleanupProcessor;
+  private final NewConnectionAllower myNewConnectionAllower;
+
+  ConnectionWorker(Selector selector,
+                   List&lt;KeyProcessor&gt; keyProcessors,
+                   int selectorTimeoutMillis,
+                   int cleanupTimeoutMillis,
+                   TimeService timeService,
+                   CleanupProcessor cleanupProcessor,
+<span class="fc" id="L44">                   NewConnectionAllower myNewConnectionAllower) {</span>
+<span class="fc" id="L45">    this.selector = selector;</span>
+<span class="fc" id="L46">    this.myTimeService = timeService;</span>
+<span class="fc" id="L47">    this.lastCleanupTime = timeService.now();</span>
+<span class="fc" id="L48">    this.mySelectorTimeoutMillis = selectorTimeoutMillis;</span>
+<span class="fc" id="L49">    this.myCleanupTimeoutMillis = cleanupTimeoutMillis;</span>
+<span class="fc" id="L50">    this.myCleanupProcessor = cleanupProcessor;</span>
+<span class="fc" id="L51">    this.myNewConnectionAllower = myNewConnectionAllower;</span>
+<span class="fc" id="L52">    this.mySemaphore = new Semaphore(1);</span>
+<span class="fc" id="L53">    this.myConnectQueue = new LinkedBlockingQueue&lt;ConnectTask&gt;(100);</span>
+<span class="fc" id="L54">    this.myKeyProcessors = keyProcessors;</span>
+<span class="fc" id="L55">    this.myWriteQueue = new LinkedBlockingQueue&lt;WriteTask&gt;(5000);</span>
+<span class="fc" id="L56">  }</span>
+
+  @Override
+  public void run() {
+
+    try {
+<span class="fc" id="L62">      mySemaphore.acquire();</span>
+<span class="nc" id="L63">    } catch (InterruptedException e) {</span>
+<span class="nc" id="L64">      return;</span>
+<span class="fc" id="L65">    }</span>
+
+<span class="fc" id="L67">    final String oldName = Thread.currentThread().getName();</span>
+
+    try {
+
+<span class="fc" id="L71">      Thread.currentThread().setName(SELECTOR_THREAD_NAME);</span>
+
+<span class="pc bpc" id="L73" title="1 of 4 branches missed.">      while (!stop &amp;&amp; (!Thread.currentThread().isInterrupted())) {</span>
+        try {
+<span class="fc" id="L75">          logger.trace(&quot;try select keys from selector&quot;);</span>
+          int selected;
+          try {
+<span class="fc" id="L78">            selected = selector.select(mySelectorTimeoutMillis);</span>
+<span class="fc" id="L79">          } catch (ClosedSelectorException e) {</span>
+<span class="fc" id="L80">            break;</span>
+<span class="fc" id="L81">          }</span>
+<span class="fc" id="L82">          connectToPeersFromQueue();</span>
+<span class="fc" id="L83">          processWriteTasks();</span>
+<span class="fc" id="L84">          logger.trace(&quot;select keys from selector. Keys count is &quot; + selected);</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">          if (selected != 0) {</span>
+<span class="fc" id="L86">            processSelectedKeys();</span>
+          }
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">          if (needRunCleanup()) {</span>
+<span class="nc" id="L89">            cleanup();</span>
+          }
+<span class="nc" id="L91">        } catch (Throwable e) {</span>
+<span class="nc" id="L92">          LoggerUtils.warnAndDebugDetails(logger, &quot;unable to select channel keys. Error message {}&quot;, e.getMessage(), e);</span>
+<span class="pc" id="L93">        }</span>
+      }
+<span class="nc" id="L95">    } catch (Throwable e) {</span>
+<span class="nc" id="L96">      LoggerUtils.errorAndDebugDetails(logger, &quot;exception on cycle iteration&quot;, e);</span>
+    } finally {
+<span class="fc" id="L98">      Thread.currentThread().setName(oldName);</span>
+<span class="fc" id="L99">      mySemaphore.release();</span>
+    }
+<span class="fc" id="L101">  }</span>
+
+  private void cleanup() {
+<span class="nc" id="L104">    lastCleanupTime = myTimeService.now();</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">    for (SelectionKey key : selector.keys()) {</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">      if (!key.isValid()) continue;</span>
+<span class="nc" id="L107">      myCleanupProcessor.processCleanup(key);</span>
+<span class="nc" id="L108">    }</span>
+<span class="nc" id="L109">  }</span>
+
+  private boolean needRunCleanup() {
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">    return (myTimeService.now() - lastCleanupTime) &gt; myCleanupTimeoutMillis;</span>
+  }
+
+  private void processWriteTasks() {
+
+<span class="fc" id="L117">    final Iterator&lt;WriteTask&gt; iterator = myWriteQueue.iterator();</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">    while (iterator.hasNext()) {</span>
+<span class="fc" id="L119">      WriteTask writeTask = iterator.next();</span>
+<span class="pc bpc" id="L120" title="2 of 4 branches missed.">      if (stop || Thread.currentThread().isInterrupted()) {</span>
+<span class="nc" id="L121">        return;</span>
+      }
+<span class="fc" id="L123">      logger.trace(&quot;try register channel for write. Write task is {}&quot;, writeTask);</span>
+<span class="fc" id="L124">      SocketChannel socketChannel = (SocketChannel) writeTask.getSocketChannel();</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">      if (!socketChannel.isOpen()) {</span>
+<span class="fc" id="L126">        iterator.remove();</span>
+<span class="fc" id="L127">        writeTask.getListener().onWriteFailed(getDefaultWriteErrorMessageWithSuffix(socketChannel, &quot;Channel is not open&quot;), new ConnectionClosedException());</span>
+<span class="fc" id="L128">        continue;</span>
+      }
+<span class="fc" id="L130">      SelectionKey key = socketChannel.keyFor(selector);</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">      if (key == null) {</span>
+<span class="nc" id="L132">        logger.warn(&quot;unable to find key for channel {}&quot;, socketChannel);</span>
+<span class="nc" id="L133">        iterator.remove();</span>
+<span class="nc" id="L134">        writeTask.getListener().onWriteFailed(getDefaultWriteErrorMessageWithSuffix(socketChannel, &quot;Can not find key for the channel&quot;), new ConnectionClosedException());</span>
+<span class="nc" id="L135">        continue;</span>
+      }
+<span class="fc" id="L137">      Object attachment = key.attachment();</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">      if (!(attachment instanceof WriteAttachment)) {</span>
+<span class="nc" id="L139">        logger.error(&quot;incorrect attachment {} for channel {}&quot;, attachment, socketChannel);</span>
+<span class="nc" id="L140">        iterator.remove();</span>
+<span class="nc" id="L141">        writeTask.getListener().onWriteFailed(getDefaultWriteErrorMessageWithSuffix(socketChannel, &quot;Incorrect attachment instance for the key&quot;), new ConnectionClosedException());</span>
+<span class="nc" id="L142">        continue;</span>
+      }
+<span class="fc" id="L144">      WriteAttachment keyAttachment = (WriteAttachment) attachment;</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">      if (keyAttachment.getWriteTasks().offer(writeTask)) {</span>
+<span class="fc" id="L146">        iterator.remove();</span>
+        try {
+<span class="fc" id="L148">          key.interestOps(key.interestOps() | SelectionKey.OP_WRITE);</span>
+<span class="nc" id="L149">        } catch (CancelledKeyException e) {</span>
+<span class="nc" id="L150">          writeTask.getListener().onWriteFailed(getDefaultWriteErrorMessageWithSuffix(socketChannel, &quot;Key is cancelled&quot;), new ConnectionClosedException(e));</span>
+<span class="fc" id="L151">        }</span>
+      }
+<span class="fc" id="L153">    }</span>
+<span class="fc" id="L154">  }</span>
+
+  private String getDefaultWriteErrorMessageWithSuffix(SocketChannel socketChannel, String suffix) {
+<span class="fc" id="L157">    return &quot;unable write data to channel &quot; + socketChannel + &quot;. &quot; + suffix;</span>
+  }
+
+  private void connectToPeersFromQueue() {
+    ConnectTask connectTask;
+<span class="fc bfc" id="L162" title="All 2 branches covered.">    while ((connectTask = myConnectQueue.poll()) != null) {</span>
+<span class="pc bpc" id="L163" title="2 of 4 branches missed.">      if (stop || Thread.currentThread().isInterrupted()) {</span>
+<span class="nc" id="L164">        return;</span>
+      }
+<span class="fc" id="L166">      logger.debug(&quot;try connect to peer. Connect task is {}&quot;, connectTask);</span>
+      try {
+<span class="fc" id="L168">        SocketChannel socketChannel = SocketChannel.open();</span>
+<span class="fc" id="L169">        socketChannel.configureBlocking(false);</span>
+<span class="fc" id="L170">        socketChannel.register(selector, SelectionKey.OP_CONNECT, connectTask);</span>
+<span class="fc" id="L171">        socketChannel.connect(new InetSocketAddress(connectTask.getHost(), connectTask.getPort()));</span>
+<span class="nc" id="L172">      } catch (IOException e) {</span>
+<span class="nc" id="L173">        LoggerUtils.warnAndDebugDetails(logger, &quot;unable connect. Connect task is {}&quot;, connectTask, e);</span>
+<span class="pc" id="L174">      }</span>
+    }
+<span class="fc" id="L176">  }</span>
+
+  public boolean stop(int timeout, TimeUnit timeUnit) throws InterruptedException {
+<span class="fc" id="L179">    stop = true;</span>
+<span class="pc bpc" id="L180" title="1 of 2 branches missed.">    if (timeout &lt;= 0) {</span>
+<span class="nc" id="L181">      return true;</span>
+    }
+<span class="fc" id="L183">    return mySemaphore.tryAcquire(timeout, timeUnit);</span>
+  }
+
+  private void processSelectedKeys() {
+<span class="fc" id="L187">    Set&lt;SelectionKey&gt; selectionKeys = selector.selectedKeys();</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">    for (SelectionKey key : selectionKeys) {</span>
+<span class="pc bpc" id="L189" title="1 of 4 branches missed.">      if (stop || Thread.currentThread().isInterrupted()) {</span>
+<span class="fc" id="L190">        return;</span>
+      }
+      try {
+<span class="fc" id="L193">        processSelectedKey(key);</span>
+<span class="nc" id="L194">      } catch (Exception e) {</span>
+<span class="nc" id="L195">        logger.warn(&quot;error {} in processing key. Close channel {}&quot;, e.getMessage(), key.channel());</span>
+<span class="nc" id="L196">        logger.debug(&quot;&quot;, e);</span>
+        try {
+<span class="nc" id="L198">          key.channel().close();</span>
+<span class="nc" id="L199">        } catch (IOException ioe) {</span>
+<span class="nc" id="L200">          LoggerUtils.errorAndDebugDetails(logger, &quot;unable close bad channel&quot;, ioe);</span>
+<span class="nc" id="L201">        }</span>
+<span class="fc" id="L202">      }</span>
+<span class="fc" id="L203">    }</span>
+<span class="fc" id="L204">    selectionKeys.clear();</span>
+<span class="fc" id="L205">  }</span>
+
+  private void processSelectedKey(SelectionKey key) throws IOException {
+<span class="fc" id="L208">    logger.trace(&quot;try process key for channel {}&quot;, key.channel());</span>
+<span class="fc" id="L209">    myCleanupProcessor.processSelected(key);</span>
+<span class="fc bfc" id="L210" title="All 2 branches covered.">    if (!key.channel().isOpen()) {</span>
+<span class="fc" id="L211">      key.cancel();</span>
+<span class="fc" id="L212">      return;</span>
+    }
+<span class="fc bfc" id="L214" title="All 2 branches covered.">    for (KeyProcessor keyProcessor : myKeyProcessors) {</span>
+<span class="fc bfc" id="L215" title="All 2 branches covered.">      if (keyProcessor.accept(key)) {</span>
+<span class="fc" id="L216">        keyProcessor.process(key);</span>
+      }
+<span class="fc" id="L218">    }</span>
+<span class="fc" id="L219">  }</span>
+
+  public boolean offerConnect(ConnectTask connectTask, int timeout, TimeUnit timeUnit) {
+<span class="pc bpc" id="L222" title="1 of 2 branches missed.">    if (!myNewConnectionAllower.isNewConnectionAllowed()) {</span>
+<span class="nc" id="L223">      logger.info(&quot;can not add connect task {} to queue. New connection is not allowed&quot;, connectTask);</span>
+<span class="nc" id="L224">      return false;</span>
+    }
+<span class="fc" id="L226">    return addTaskToQueue(connectTask, timeout, timeUnit, myConnectQueue);</span>
+  }
+
+  public boolean offerWrite(WriteTask writeTask, int timeout, TimeUnit timeUnit) {
+<span class="fc" id="L230">    boolean done = addTaskToQueue(writeTask, timeout, timeUnit, myWriteQueue);</span>
+<span class="pc bpc" id="L231" title="1 of 2 branches missed.">    if (!done) {</span>
+<span class="nc" id="L232">      writeTask.getListener().onWriteFailed(&quot;unable add task &quot; + writeTask + &quot; to the queue. Maybe queue is overload&quot;, null);</span>
+    }
+<span class="fc" id="L234">    return done;</span>
+  }
+
+  private &lt;T&gt; boolean addTaskToQueue(T task, int timeout, TimeUnit timeUnit, BlockingQueue&lt;T&gt; queue) {
+    try {
+<span class="pc bpc" id="L239" title="1 of 2 branches missed.">      if (queue.offer(task, timeout, timeUnit)) {</span>
+<span class="fc" id="L240">        logger.trace(&quot;added task {}. Wake up selector&quot;, task);</span>
+<span class="fc" id="L241">        selector.wakeup();</span>
+<span class="fc" id="L242">        return true;</span>
+      }
+<span class="nc" id="L244">    } catch (InterruptedException e) {</span>
+<span class="nc" id="L245">      logger.debug(&quot;Task {} interrupted before was added to queue&quot;, task);</span>
+<span class="nc" id="L246">    }</span>
+<span class="nc" id="L247">    logger.debug(&quot;Task {} was not added&quot;, task);</span>
+<span class="nc" id="L248">    return false;</span>
+  }
+
+  void setCleanupTimeout(long timeoutMillis) {
+<span class="nc" id="L252">    this.myCleanupTimeoutMillis = timeoutMillis;</span>
+<span class="nc" id="L253">  }</span>
+
+  void setSelectorSelectTimeout(int timeout) {
+<span class="nc" id="L256">    mySelectorTimeoutMillis = timeout;</span>
+<span class="nc" id="L257">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

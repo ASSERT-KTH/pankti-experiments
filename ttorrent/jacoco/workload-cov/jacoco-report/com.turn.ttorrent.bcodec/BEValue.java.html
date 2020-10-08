@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BEValue.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.bcodec</a> &gt; <span class="el_source">BEValue.java</span></div><h1>BEValue.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.bcodec;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+/**
+ * A type-agnostic container for B-encoded values.
+ *
+ * @author mpetazzoni
+ */
+public class BEValue {
+
+  /**
+   * The B-encoded value can be a byte array, a Number, a List or a Map.
+   * Lists and Maps contains BEValues too.
+   */
+  private final Object value;
+
+<span class="fc" id="L38">  public BEValue(byte[] value) {</span>
+<span class="fc" id="L39">    this.value = value;</span>
+<span class="fc" id="L40">  }</span>
+
+<span class="nc" id="L42">  public BEValue(String value) throws UnsupportedEncodingException {</span>
+<span class="nc" id="L43">    this.value = value.getBytes(&quot;UTF-8&quot;);</span>
+<span class="nc" id="L44">  }</span>
+
+  public BEValue(String value, String enc)
+<span class="fc" id="L47">          throws UnsupportedEncodingException {</span>
+<span class="fc" id="L48">    this.value = value.getBytes(enc);</span>
+<span class="fc" id="L49">  }</span>
+
+<span class="fc" id="L51">  public BEValue(int value) {</span>
+<span class="fc" id="L52">    this.value = new Integer(value);</span>
+<span class="fc" id="L53">  }</span>
+
+<span class="fc" id="L55">  public BEValue(long value) {</span>
+<span class="fc" id="L56">    this.value = new Long(value);</span>
+<span class="fc" id="L57">  }</span>
+
+<span class="fc" id="L59">  public BEValue(Number value) {</span>
+<span class="fc" id="L60">    this.value = value;</span>
+<span class="fc" id="L61">  }</span>
+
+<span class="fc" id="L63">  public BEValue(List&lt;BEValue&gt; value) {</span>
+<span class="fc" id="L64">    this.value = value;</span>
+<span class="fc" id="L65">  }</span>
+
+<span class="fc" id="L67">  public BEValue(Map&lt;String, BEValue&gt; value) {</span>
+<span class="fc" id="L68">    this.value = value;</span>
+<span class="fc" id="L69">  }</span>
+
+  public Object getValue() {
+<span class="fc" id="L72">    return this.value;</span>
+  }
+
+  /**
+   * Returns this BEValue as a String, interpreted as UTF-8.
+   *
+   * @throws InvalidBEncodingException If the value is not a byte[].
+   */
+  public String getString() throws InvalidBEncodingException {
+<span class="fc" id="L81">    return this.getString(&quot;UTF-8&quot;);</span>
+  }
+
+  /**
+   * Returns this BEValue as a String, interpreted with the specified
+   * encoding.
+   *
+   * @param encoding The encoding to interpret the bytes as when converting
+   *                 them into a {@link String}.
+   * @throws InvalidBEncodingException If the value is not a byte[].
+   */
+  public String getString(String encoding) throws InvalidBEncodingException {
+    try {
+<span class="fc" id="L94">      return new String(this.getBytes(), encoding);</span>
+<span class="nc" id="L95">    } catch (ClassCastException cce) {</span>
+<span class="nc" id="L96">      throw new InvalidBEncodingException(cce.toString());</span>
+<span class="nc" id="L97">    } catch (UnsupportedEncodingException uee) {</span>
+<span class="nc" id="L98">      throw new InternalError(uee.toString());</span>
+    }
+  }
+
+  /**
+   * Returns this BEValue as a byte[].
+   *
+   * @throws InvalidBEncodingException If the value is not a byte[].
+   */
+  public byte[] getBytes() throws InvalidBEncodingException {
+    try {
+<span class="fc" id="L109">      return (byte[]) this.value;</span>
+<span class="nc" id="L110">    } catch (ClassCastException cce) {</span>
+<span class="nc" id="L111">      throw new InvalidBEncodingException(cce.toString());</span>
+    }
+  }
+
+  /**
+   * Returns this BEValue as a Number.
+   *
+   * @throws InvalidBEncodingException If the value is not a {@link Number}.
+   */
+  public Number getNumber() throws InvalidBEncodingException {
+    try {
+<span class="fc" id="L122">      return (Number) this.value;</span>
+<span class="nc" id="L123">    } catch (ClassCastException cce) {</span>
+<span class="nc" id="L124">      throw new InvalidBEncodingException(cce.toString());</span>
+    }
+  }
+
+  /**
+   * Returns this BEValue as short.
+   *
+   * @throws InvalidBEncodingException If the value is not a {@link Number}.
+   */
+  public short getShort() throws InvalidBEncodingException {
+<span class="nc" id="L134">    return this.getNumber().shortValue();</span>
+  }
+
+  /**
+   * Returns this BEValue as int.
+   *
+   * @throws InvalidBEncodingException If the value is not a {@link Number}.
+   */
+  public int getInt() throws InvalidBEncodingException {
+<span class="fc" id="L143">    return this.getNumber().intValue();</span>
+  }
+
+  /**
+   * Returns this BEValue as long.
+   *
+   * @throws InvalidBEncodingException If the value is not a {@link Number}.
+   */
+  public long getLong() throws InvalidBEncodingException {
+<span class="fc" id="L152">    return this.getNumber().longValue();</span>
+  }
+
+  /**
+   * Returns this BEValue as a List of BEValues.
+   *
+   * @throws InvalidBEncodingException If the value is not an
+   *                                   {@link ArrayList}.
+   */
+  @SuppressWarnings(&quot;unchecked&quot;)
+  public List&lt;BEValue&gt; getList() throws InvalidBEncodingException {
+<span class="nc bnc" id="L163" title="All 2 branches missed.">    if (this.value instanceof ArrayList) {</span>
+<span class="nc" id="L164">      return (ArrayList&lt;BEValue&gt;) this.value;</span>
+    } else {
+<span class="nc" id="L166">      throw new InvalidBEncodingException(&quot;Excepted List&lt;BEvalue&gt; !&quot;);</span>
+    }
+  }
+
+  /**
+   * Returns this BEValue as a Map of String keys and BEValue values.
+   *
+   * @throws InvalidBEncodingException If the value is not a {@link HashMap}.
+   */
+  @SuppressWarnings(&quot;unchecked&quot;)
+  public Map&lt;String, BEValue&gt; getMap() throws InvalidBEncodingException {
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">    if (this.value instanceof HashMap) {</span>
+<span class="fc" id="L178">      return (Map&lt;String, BEValue&gt;) this.value;</span>
+    } else {
+<span class="nc" id="L180">      throw new InvalidBEncodingException(&quot;Expected Map&lt;String, BEValue&gt; !&quot;);</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

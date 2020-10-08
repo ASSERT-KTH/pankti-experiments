@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HandshakeReceiver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.network</a> &gt; <span class="el_source">HandshakeReceiver.java</span></div><h1>HandshakeReceiver.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.client.network;
+
+import com.turn.ttorrent.client.Context;
+import com.turn.ttorrent.client.Handshake;
+import com.turn.ttorrent.client.LoadedTorrent;
+import com.turn.ttorrent.client.SharedTorrent;
+import com.turn.ttorrent.client.peer.SharingPeer;
+import com.turn.ttorrent.common.LoggerUtils;
+import com.turn.ttorrent.common.PeerUID;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.ByteChannel;
+import java.text.ParseException;
+import java.util.Arrays;
+import java.util.concurrent.RejectedExecutionException;
+
+public class HandshakeReceiver implements DataProcessor {
+
+<span class="fc" id="L22">  private static final Logger logger = TorrentLoggerFactory.getLogger(HandshakeReceiver.class);</span>
+
+  private final Context myContext;
+  private final String myHostAddress;
+  private final int myPort;
+  private final boolean myIsOutgoingConnection;
+  private ByteBuffer messageBytes;
+  private int pstrLength;
+
+  HandshakeReceiver(Context context,
+                    String hostAddress,
+                    int port,
+<span class="fc" id="L34">                    boolean isOutgoingListener) {</span>
+<span class="fc" id="L35">    myContext = context;</span>
+<span class="fc" id="L36">    myHostAddress = hostAddress;</span>
+<span class="fc" id="L37">    myPort = port;</span>
+<span class="fc" id="L38">    this.pstrLength = -1;</span>
+<span class="fc" id="L39">    this.myIsOutgoingConnection = isOutgoingListener;</span>
+<span class="fc" id="L40">  }</span>
+
+  @Override
+  public DataProcessor processAndGetNext(ByteChannel socketChannel) throws IOException {
+
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">    if (pstrLength == -1) {</span>
+<span class="fc" id="L46">      ByteBuffer len = ByteBuffer.allocate(1);</span>
+<span class="fc" id="L47">      int readBytes = -1;</span>
+      try {
+<span class="fc" id="L49">        readBytes = socketChannel.read(len);</span>
+<span class="fc" id="L50">      } catch (IOException ignored) {</span>
+<span class="fc" id="L51">      }</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">      if (readBytes == -1) {</span>
+<span class="fc" id="L53">        return new ShutdownProcessor().processAndGetNext(socketChannel);</span>
+      }
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">      if (readBytes == 0) {</span>
+<span class="nc" id="L56">        return this;</span>
+      }
+<span class="fc" id="L58">      len.rewind();</span>
+<span class="fc" id="L59">      byte pstrLen = len.get();</span>
+<span class="fc" id="L60">      this.pstrLength = pstrLen;</span>
+<span class="fc" id="L61">      messageBytes = ByteBuffer.allocate(this.pstrLength + Handshake.BASE_HANDSHAKE_LENGTH);</span>
+<span class="fc" id="L62">      messageBytes.put(pstrLen);</span>
+    }
+<span class="fc" id="L64">    int readBytes = -1;</span>
+    try {
+<span class="fc" id="L66">      readBytes = socketChannel.read(messageBytes);</span>
+<span class="nc" id="L67">    } catch (IOException e) {</span>
+<span class="nc" id="L68">      LoggerUtils.warnAndDebugDetails(logger, &quot;unable to read data from {}&quot;, socketChannel, e);</span>
+<span class="fc" id="L69">    }</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">    if (readBytes == -1) {</span>
+<span class="nc" id="L71">      return new ShutdownProcessor().processAndGetNext(socketChannel);</span>
+    }
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">    if (messageBytes.remaining() != 0) {</span>
+<span class="nc" id="L74">      return this;</span>
+    }
+<span class="fc" id="L76">    Handshake hs = parseHandshake(socketChannel.toString());</span>
+
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">    if (hs == null) {</span>
+<span class="nc" id="L79">      return new ShutdownProcessor().processAndGetNext(socketChannel);</span>
+    }
+
+<span class="fc" id="L82">    final LoadedTorrent announceableTorrent = myContext.getTorrentsStorage().getLoadedTorrent(hs.getHexInfoHash());</span>
+
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">    if (announceableTorrent == null) {</span>
+<span class="nc" id="L85">      logger.debug(&quot;Announceable torrent {} is not found in storage&quot;, hs.getHexInfoHash());</span>
+<span class="nc" id="L86">      return new ShutdownProcessor().processAndGetNext(socketChannel);</span>
+    }
+
+    SharedTorrent torrent;
+    try {
+<span class="fc" id="L91">      torrent = myContext.getTorrentLoader().loadTorrent(announceableTorrent);</span>
+<span class="nc" id="L92">    } catch (IllegalStateException e) {</span>
+<span class="nc" id="L93">      return new ShutdownProcessor().processAndGetNext(socketChannel);</span>
+<span class="nc" id="L94">    } catch(Exception e) {</span>
+<span class="nc" id="L95">      LoggerUtils.warnWithMessageAndDebugDetails(logger, &quot;cannot load torrent {}&quot;, hs.getHexInfoHash(), e);</span>
+<span class="nc" id="L96">      return new ShutdownProcessor().processAndGetNext(socketChannel);</span>
+<span class="fc" id="L97">    }</span>
+
+<span class="fc" id="L99">    logger.trace(&quot;got handshake {} from {}&quot;, Arrays.toString(messageBytes.array()), socketChannel);</span>
+
+<span class="fc" id="L101">    String clientTypeVersion = new String(Arrays.copyOf(hs.getPeerId(), 8));</span>
+<span class="fc" id="L102">    String clientType = clientTypeVersion.substring(1, 3);</span>
+<span class="fc" id="L103">    int clientVersion = 0;</span>
+    try {
+<span class="fc" id="L105">      clientVersion = Integer.parseInt(clientTypeVersion.substring(3, 7));</span>
+<span class="fc" id="L106">    } catch (NumberFormatException ignored) {}</span>
+<span class="fc" id="L107">    final SharingPeer sharingPeer =</span>
+<span class="fc" id="L108">            myContext.createSharingPeer(myHostAddress,</span>
+                    myPort,
+<span class="fc" id="L110">                    ByteBuffer.wrap(hs.getPeerId()),</span>
+                    torrent,
+                    socketChannel,
+                    clientType,
+                    clientVersion);
+<span class="fc" id="L115">    PeerUID peerUID = new PeerUID(sharingPeer.getAddress(), hs.getHexInfoHash());</span>
+
+<span class="fc" id="L117">    SharingPeer old = myContext.getPeersStorage().putIfAbsent(peerUID, sharingPeer);</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">    if (old != null) {</span>
+<span class="nc" id="L119">      logger.debug(&quot;Already connected to old peer {}, close current connection with {}&quot;, old, sharingPeer);</span>
+<span class="nc" id="L120">      return new ShutdownProcessor().processAndGetNext(socketChannel);</span>
+    }
+
+    // If I am not a leecher
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">    if (!myIsOutgoingConnection) {</span>
+<span class="nc" id="L125">      logger.trace(&quot;send handshake to {}&quot;, socketChannel);</span>
+      try {
+<span class="nc" id="L127">        final Handshake craft = Handshake.craft(hs.getInfoHash(), myContext.getPeersStorage().getSelf().getPeerIdArray());</span>
+<span class="nc" id="L128">        socketChannel.write(craft.getData());</span>
+<span class="nc" id="L129">      } catch (IOException e) {</span>
+<span class="nc" id="L130">        LoggerUtils.warnAndDebugDetails(logger, &quot;error in sending handshake to {}&quot;, socketChannel, e);</span>
+<span class="nc" id="L131">        return new ShutdownAndRemovePeerProcessor(peerUID, myContext);</span>
+<span class="nc" id="L132">      }</span>
+    }
+
+<span class="fc" id="L135">    logger.debug(&quot;setup new connection with {}&quot;, sharingPeer);</span>
+
+    try {
+<span class="fc" id="L138">      myContext.getExecutor().submit(new Runnable() {</span>
+        @Override
+        public void run() {
+          try {
+<span class="fc" id="L142">            sharingPeer.onConnectionEstablished();</span>
+<span class="nc" id="L143">          } catch (Throwable e) {</span>
+<span class="nc" id="L144">            LoggerUtils.warnAndDebugDetails(logger, &quot;unhandled exception {} in executor task (onConnectionEstablished)&quot;, e.toString(), e);</span>
+<span class="fc" id="L145">          }</span>
+<span class="fc" id="L146">        }</span>
+      });
+<span class="fc" id="L148">      torrent.addConnectedPeer(sharingPeer);</span>
+<span class="nc" id="L149">    } catch (RejectedExecutionException e) {</span>
+<span class="nc" id="L150">      LoggerUtils.warnAndDebugDetails(logger, &quot;task 'onConnectionEstablished' submit is failed. Reason: {}&quot;, e.getMessage(), e);</span>
+<span class="nc" id="L151">      return new ShutdownAndRemovePeerProcessor(peerUID, myContext).processAndGetNext(socketChannel);</span>
+<span class="fc" id="L152">    }</span>
+
+<span class="fc" id="L154">    return new WorkingReceiver(peerUID, myContext);</span>
+  }
+
+  private Handshake parseHandshake(String socketChannelForLog) throws IOException {
+    try {
+<span class="fc" id="L159">      messageBytes.rewind();</span>
+<span class="fc" id="L160">      return Handshake.parse(messageBytes, pstrLength);</span>
+<span class="nc" id="L161">    } catch (ParseException e) {</span>
+<span class="nc" id="L162">      logger.info(&quot;incorrect handshake message from &quot; + socketChannelForLog, e);</span>
+    }
+<span class="nc" id="L164">    return null;</span>
+  }
+
+  @Override
+  public DataProcessor handleError(ByteChannel socketChannel, Throwable e) throws IOException {
+<span class="nc" id="L169">    return new ShutdownProcessor().processAndGetNext(socketChannel);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

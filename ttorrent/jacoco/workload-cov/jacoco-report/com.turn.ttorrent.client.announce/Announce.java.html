@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Announce.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.announce</a> &gt; <span class="el_source">Announce.java</span></div><h1>Announce.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.client.announce;
+
+import com.turn.ttorrent.client.Context;
+import com.turn.ttorrent.common.AnnounceableInformation;
+import com.turn.ttorrent.common.LoggerUtils;
+import com.turn.ttorrent.common.Peer;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.common.protocol.AnnounceRequestMessage;
+import org.slf4j.Logger;
+
+import java.net.ConnectException;
+import java.net.URI;
+import java.net.UnknownHostException;
+import java.net.UnknownServiceException;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+/**
+ * BitTorrent announce sub-system.
+ * &lt;p/&gt;
+ * &lt;p&gt;
+ * A BitTorrent client must check-in to the torrent's tracker(s) to get peers
+ * and to report certain events.
+ * &lt;/p&gt;
+ * &lt;p/&gt;
+ * &lt;p&gt;
+ * This Announce class implements a periodic announce request thread that will
+ * notify announce request event listeners for each tracker response.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ * @see com.turn.ttorrent.common.protocol.TrackerMessage
+ */
+public class Announce implements Runnable {
+
+<span class="fc" id="L53">  protected static final Logger logger =</span>
+<span class="fc" id="L54">          TorrentLoggerFactory.getLogger(Announce.class);</span>
+
+  private List&lt;Peer&gt; myPeers;
+  private final TrackerClientFactory myTrackerClientFactory;
+
+  /**
+   * The tiers of tracker clients matching the tracker URIs defined in the
+   * torrent.
+   */
+  private final ConcurrentMap&lt;String, TrackerClient&gt; clients;
+  private final Context myContext;
+
+  /**
+   * Announce thread and control.
+   */
+  private Thread thread;
+  private volatile boolean stop;
+  private boolean forceStop;
+
+  /**
+   * Announce interval.
+   */
+  private int myAnnounceInterval;
+  private TrackerClient myDefaultTracker;
+
+  /**
+   * Initialize the base announce class members for the announcer.
+   */
+<span class="fc" id="L82">  public Announce(Context context, TrackerClientFactory trackerClientFactory) {</span>
+<span class="fc" id="L83">    this.clients = new ConcurrentHashMap&lt;String, TrackerClient&gt;();</span>
+<span class="fc" id="L84">    this.thread = null;</span>
+<span class="fc" id="L85">    myTrackerClientFactory = trackerClientFactory;</span>
+<span class="fc" id="L86">    myContext = context;</span>
+<span class="fc" id="L87">    myPeers = new CopyOnWriteArrayList&lt;Peer&gt;();</span>
+<span class="fc" id="L88">  }</span>
+
+  public void forceAnnounce(AnnounceableInformation torrent, AnnounceResponseListener listener, AnnounceRequestMessage.RequestEvent event) throws UnknownServiceException, UnknownHostException {
+<span class="fc" id="L91">    URI trackerUrl = URI.create(torrent.getAnnounce());</span>
+<span class="fc" id="L92">    TrackerClient client = this.clients.get(trackerUrl.toString());</span>
+    try {
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">      if (client == null) {</span>
+<span class="fc" id="L95">        client = myTrackerClientFactory.createTrackerClient(myPeers, trackerUrl);</span>
+<span class="fc" id="L96">        client.register(listener);</span>
+<span class="fc" id="L97">        this.clients.put(trackerUrl.toString(), client);</span>
+      }
+<span class="fc" id="L99">      client.announceAllInterfaces(event, false, torrent);</span>
+<span class="nc" id="L100">    } catch (AnnounceException e) {</span>
+<span class="nc" id="L101">      logger.info(String.format(&quot;Unable to force announce torrent %s on tracker %s.&quot;, torrent.getHexInfoHash(), String.valueOf(trackerUrl)));</span>
+<span class="nc" id="L102">      logger.debug(String.format(&quot;Unable to force announce torrent %s on tracker %s.&quot;, torrent.getHexInfoHash(), String.valueOf(trackerUrl)), e);</span>
+<span class="fc" id="L103">    }</span>
+<span class="fc" id="L104">  }</span>
+
+  /**
+   * Start the announce request thread.
+   */
+  public void start(final URI defaultTrackerURI, final AnnounceResponseListener listener, final Peer[] peers, final int announceInterval) {
+<span class="fc" id="L110">    myAnnounceInterval = announceInterval;</span>
+<span class="fc" id="L111">    myPeers.addAll(Arrays.asList(peers));</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">    if (defaultTrackerURI != null) {</span>
+      try {
+<span class="nc" id="L114">        myDefaultTracker = myTrackerClientFactory.createTrackerClient(myPeers, defaultTrackerURI);</span>
+<span class="nc" id="L115">        myDefaultTracker.register(listener);</span>
+<span class="nc" id="L116">        this.clients.put(defaultTrackerURI.toString(), myDefaultTracker);</span>
+<span class="nc" id="L117">      } catch (Exception e) {</span>
+<span class="nc" id="L118">      }</span>
+    } else {
+<span class="fc" id="L120">      myDefaultTracker = null;</span>
+    }
+
+<span class="fc" id="L123">    this.stop = false;</span>
+<span class="fc" id="L124">    this.forceStop = false;</span>
+
+<span class="pc bpc" id="L126" title="3 of 4 branches missed.">    if (this.thread == null || !this.thread.isAlive()) {</span>
+<span class="fc" id="L127">      this.thread = new Thread(this);</span>
+<span class="fc" id="L128">      this.thread.setName(&quot;torrent tracker announce thread&quot;);</span>
+<span class="fc" id="L129">      this.thread.start();</span>
+    }
+<span class="fc" id="L131">  }</span>
+
+  /**
+   * Set the announce interval.
+   */
+  public void setAnnounceInterval(int announceInterval) {
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">    if (announceInterval &lt;= 0) {</span>
+<span class="nc" id="L138">      this.stop(true);</span>
+<span class="nc" id="L139">      return;</span>
+    }
+
+<span class="fc bfc" id="L142" title="All 2 branches covered.">    if (this.myAnnounceInterval == announceInterval) {</span>
+<span class="fc" id="L143">      return;</span>
+    }
+
+<span class="fc" id="L146">    logger.trace(&quot;Setting announce interval to {}s per tracker request.&quot;,</span>
+<span class="fc" id="L147">            announceInterval);</span>
+<span class="fc" id="L148">    this.myAnnounceInterval = announceInterval;</span>
+<span class="fc" id="L149">  }</span>
+
+  /**
+   * Stop the announce thread.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * One last 'stopped' announce event might be sent to the tracker to
+   * announce we're going away, depending on the implementation.
+   * &lt;/p&gt;
+   */
+  public void stop() {
+
+<span class="fc" id="L161">    this.stop = true;</span>
+
+<span class="pc bpc" id="L163" title="2 of 4 branches missed.">    if (this.thread != null &amp;&amp; this.thread.isAlive()) {</span>
+<span class="fc" id="L164">      this.thread.interrupt();</span>
+
+<span class="fc bfc" id="L166" title="All 2 branches covered.">      for (TrackerClient client : this.clients.values()) {</span>
+<span class="fc" id="L167">        client.close();</span>
+<span class="fc" id="L168">      }</span>
+
+      try {
+<span class="fc" id="L171">        this.thread.join();</span>
+<span class="nc" id="L172">      } catch (InterruptedException ie) {</span>
+        // Ignore
+<span class="fc" id="L174">      }</span>
+    }
+<span class="fc" id="L176">    this.myPeers.clear();</span>
+
+<span class="fc" id="L178">    this.thread = null;</span>
+<span class="fc" id="L179">  }</span>
+
+  /**
+   * Main announce loop.
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * The announce thread starts by making the initial 'started' announce
+   * request to register on the tracker and get the announce interval value.
+   * Subsequent announce requests are ordinary, event-less, periodic requests
+   * for peers.
+   * &lt;/p&gt;
+   * &lt;p/&gt;
+   * &lt;p&gt;
+   * Unless forcefully stopped, the announce thread will terminate by sending
+   * a 'stopped' announce request before stopping.
+   * &lt;/p&gt;
+   */
+  @Override
+  public void run() {
+<span class="fc" id="L198">    logger.info(&quot;Starting announce loop...&quot;);</span>
+
+
+<span class="pc bpc" id="L201" title="2 of 4 branches missed.">    while (!this.stop &amp;&amp; !Thread.currentThread().isInterrupted()) {</span>
+
+<span class="fc" id="L203">      final List&lt;AnnounceableInformation&gt; announceableInformationList = myContext.getTorrentsStorage().announceableTorrents();</span>
+<span class="fc" id="L204">      logger.debug(&quot;Starting announce for {} torrents&quot;, announceableInformationList.size());</span>
+<span class="fc" id="L205">      announceAllTorrents(announceableInformationList, AnnounceRequestMessage.RequestEvent.NONE);</span>
+      try {
+<span class="fc" id="L207">        Thread.sleep(this.myAnnounceInterval * 1000);</span>
+<span class="fc" id="L208">      } catch (InterruptedException ie) {</span>
+<span class="fc" id="L209">        break;</span>
+<span class="fc" id="L210">      }</span>
+<span class="fc" id="L211">    }</span>
+
+<span class="fc" id="L213">    announceAllTorrents(myContext.getTorrentsStorage().announceableTorrents(), AnnounceRequestMessage.RequestEvent.STOPPED);</span>
+
+<span class="fc" id="L215">    logger.info(&quot;Exited announce loop.&quot;);</span>
+<span class="fc" id="L216">  }</span>
+
+  private void defaultAnnounce(List&lt;AnnounceableInformation&gt; torrentsForAnnounce) {
+<span class="nc bnc" id="L219" title="All 2 branches missed.">    for (AnnounceableInformation torrent : torrentsForAnnounce) {</span>
+<span class="nc bnc" id="L220" title="All 4 branches missed.">      if (this.stop || Thread.currentThread().isInterrupted()) {</span>
+<span class="nc" id="L221">        break;</span>
+      }
+      try {
+<span class="nc" id="L224">        TrackerClient trackerClient = this.getCurrentTrackerClient(torrent);</span>
+<span class="nc bnc" id="L225" title="All 2 branches missed.">        if (trackerClient != null) {</span>
+<span class="nc" id="L226">          trackerClient.announceAllInterfaces(AnnounceRequestMessage.RequestEvent.NONE, false, torrent);</span>
+        } else {
+<span class="nc" id="L228">          logger.warn(&quot;Tracker client for {} is null. Torrent is not announced on tracker&quot;, torrent.getHexInfoHash());</span>
+        }
+<span class="nc" id="L230">      } catch (Exception e) {</span>
+<span class="nc" id="L231">        logger.info(e.getMessage());</span>
+<span class="nc" id="L232">        logger.debug(e.getMessage(), e);</span>
+<span class="nc" id="L233">      }</span>
+<span class="nc" id="L234">    }</span>
+<span class="nc" id="L235">  }</span>
+
+  private void announceAllTorrents(List&lt;AnnounceableInformation&gt; announceableInformationList, AnnounceRequestMessage.RequestEvent event) {
+
+<span class="fc" id="L239">    logger.debug(&quot;Started multi announce. Event {}, torrents {}&quot;, event, announceableInformationList);</span>
+<span class="fc" id="L240">    final Map&lt;String, List&lt;AnnounceableInformation&gt;&gt; torrentsGroupingByAnnounceUrl = new HashMap&lt;String, List&lt;AnnounceableInformation&gt;&gt;();</span>
+
+<span class="fc bfc" id="L242" title="All 2 branches covered.">    for (AnnounceableInformation torrent : announceableInformationList) {</span>
+<span class="fc" id="L243">      final URI uriForTorrent = getURIForTorrent(torrent);</span>
+<span class="pc bpc" id="L244" title="1 of 2 branches missed.">      if (uriForTorrent == null) continue;</span>
+<span class="fc" id="L245">      String torrentURI = uriForTorrent.toString();</span>
+<span class="fc" id="L246">      List&lt;AnnounceableInformation&gt; sharedTorrents = torrentsGroupingByAnnounceUrl.get(torrentURI);</span>
+<span class="pc bpc" id="L247" title="1 of 2 branches missed.">      if (sharedTorrents == null) {</span>
+<span class="fc" id="L248">        sharedTorrents = new ArrayList&lt;AnnounceableInformation&gt;();</span>
+<span class="fc" id="L249">        torrentsGroupingByAnnounceUrl.put(torrentURI, sharedTorrents);</span>
+      }
+<span class="fc" id="L251">      sharedTorrents.add(torrent);</span>
+<span class="fc" id="L252">    }</span>
+
+<span class="fc" id="L254">    List&lt;AnnounceableInformation&gt; unannouncedTorrents = new ArrayList&lt;AnnounceableInformation&gt;();</span>
+<span class="fc bfc" id="L255" title="All 2 branches covered.">    for (Map.Entry&lt;String, List&lt;AnnounceableInformation&gt;&gt; e : torrentsGroupingByAnnounceUrl.entrySet()) {</span>
+<span class="fc" id="L256">      TrackerClient trackerClient = this.clients.get(e.getKey());</span>
+<span class="pc bpc" id="L257" title="1 of 2 branches missed.">      if (trackerClient != null) {</span>
+        try {
+<span class="nc" id="L259">          trackerClient.multiAnnounce(event, false, e.getValue(), myPeers);</span>
+<span class="nc" id="L260">        } catch (AnnounceException t) {</span>
+<span class="nc" id="L261">          LoggerUtils.warnAndDebugDetails(logger, &quot;problem in multi announce {}&quot;, t.getMessage(), t);</span>
+<span class="nc" id="L262">          unannouncedTorrents.addAll(e.getValue());</span>
+<span class="fc" id="L263">        } catch (ConnectException t) {</span>
+<span class="fc" id="L264">          LoggerUtils.warnWithMessageAndDebugDetails(logger, &quot;Cannot connect to the tracker {}&quot;, e.getKey(), t);</span>
+<span class="fc" id="L265">          logger.debug(&quot;next torrents contain {} in tracker list. {}&quot;, e.getKey(), e.getValue());</span>
+<span class="pc" id="L266">        }</span>
+      } else {
+<span class="nc" id="L268">        logger.warn(&quot;Tracker client for {} is null. Torrents are not announced on tracker&quot;, e.getKey());</span>
+<span class="nc bnc" id="L269" title="All 4 branches missed.">        if (e.getKey() == null || e.getKey().isEmpty()) {</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">          for (AnnounceableInformation announceableInformation : e.getValue()) {</span>
+<span class="nc" id="L271">            myContext.getTorrentsStorage().remove(announceableInformation.getHexInfoHash());</span>
+<span class="nc" id="L272">          }</span>
+        }
+      }
+<span class="fc" id="L275">    }</span>
+<span class="pc bpc" id="L276" title="1 of 2 branches missed.">    if (unannouncedTorrents.size() &gt; 0) {</span>
+<span class="nc" id="L277">      defaultAnnounce(unannouncedTorrents);</span>
+    }
+<span class="fc" id="L279">  }</span>
+
+  /**
+   * Returns the current tracker client used for announces.
+   */
+  public TrackerClient getCurrentTrackerClient(AnnounceableInformation torrent) {
+<span class="fc" id="L285">    final URI uri = getURIForTorrent(torrent);</span>
+<span class="pc bpc" id="L286" title="1 of 2 branches missed.">    if (uri == null) return null;</span>
+<span class="fc" id="L287">    return this.clients.get(uri.toString());</span>
+  }
+
+  private URI getURIForTorrent(AnnounceableInformation torrent) {
+<span class="fc" id="L291">    List&lt;List&lt;String&gt;&gt; announceList = torrent.getAnnounceList();</span>
+<span class="pc bpc" id="L292" title="1 of 2 branches missed.">    if (announceList.size() == 0) return null;</span>
+<span class="fc" id="L293">    List&lt;String&gt; uris = announceList.get(0);</span>
+<span class="pc bpc" id="L294" title="1 of 2 branches missed.">    if (uris.size() == 0) return null;</span>
+<span class="fc" id="L295">    return URI.create(uris.get(0));</span>
+  }
+
+  public URI getDefaultTrackerURI() {
+<span class="nc bnc" id="L299" title="All 2 branches missed.">    if (myDefaultTracker == null) {</span>
+<span class="nc" id="L300">      return null;</span>
+    }
+<span class="nc" id="L302">    return myDefaultTracker.getTrackerURI();</span>
+  }
+
+  /**
+   * Stop the announce thread.
+   *
+   * @param hard Whether to force stop the announce thread or not, i.e. not
+   *             send the final 'stopped' announce request or not.
+   */
+  private void stop(boolean hard) {
+<span class="nc" id="L312">    this.forceStop = hard;</span>
+<span class="nc" id="L313">    this.stop();</span>
+<span class="nc" id="L314">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

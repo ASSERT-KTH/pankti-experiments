@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WritableKeyProcessor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.network.keyProcessors</a> &gt; <span class="el_source">WritableKeyProcessor.java</span></div><h1>WritableKeyProcessor.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.network.keyProcessors;
+
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.network.ConnectionClosedException;
+import com.turn.ttorrent.network.WriteAttachment;
+import com.turn.ttorrent.network.WriteTask;
+import org.slf4j.Logger;
+
+import java.io.EOFException;
+import java.io.IOException;
+import java.nio.channels.SelectableChannel;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.SocketChannel;
+
+<span class="fc" id="L15">public class WritableKeyProcessor implements KeyProcessor {</span>
+
+<span class="fc" id="L17">  private static final Logger logger = TorrentLoggerFactory.getLogger(WritableKeyProcessor.class);</span>
+
+  @Override
+  public void process(SelectionKey key) throws IOException {
+<span class="fc" id="L21">    SelectableChannel channel = key.channel();</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">    if (!(channel instanceof SocketChannel)) {</span>
+<span class="nc" id="L23">      logger.warn(&quot;incorrect instance of channel. The key is cancelled&quot;);</span>
+<span class="nc" id="L24">      key.cancel();</span>
+<span class="nc" id="L25">      return;</span>
+    }
+
+<span class="fc" id="L28">    SocketChannel socketChannel = (SocketChannel) channel;</span>
+
+<span class="fc" id="L30">    Object attachment = key.attachment();</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">    if (!(attachment instanceof WriteAttachment)) {</span>
+<span class="nc" id="L32">      logger.error(&quot;incorrect instance of attachment for channel {}&quot;, channel);</span>
+<span class="nc" id="L33">      key.cancel();</span>
+<span class="nc" id="L34">      return;</span>
+    }
+
+<span class="fc" id="L37">    WriteAttachment keyAttachment = (WriteAttachment) attachment;</span>
+
+<span class="fc bfc" id="L39" title="All 2 branches covered.">    if (keyAttachment.getWriteTasks().isEmpty()) {</span>
+<span class="fc" id="L40">      key.interestOps(SelectionKey.OP_READ);</span>
+<span class="fc" id="L41">      return;</span>
+    }
+
+<span class="fc" id="L44">    WriteTask processedTask = keyAttachment.getWriteTasks().peek();</span>
+
+    try {
+<span class="fc" id="L47">      int writeCount = socketChannel.write(processedTask.getByteBuffer());</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">      if (writeCount &lt; 0) {</span>
+<span class="nc" id="L49">        processedTask.getListener().onWriteFailed(&quot;Reached end of stream while writing&quot;, null);</span>
+<span class="nc" id="L50">        throw new EOFException(&quot;Reached end of stream while writing&quot;);</span>
+      }
+
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">      if (!processedTask.getByteBuffer().hasRemaining()) {</span>
+<span class="fc" id="L54">        processedTask.getListener().onWriteDone();</span>
+<span class="fc" id="L55">        keyAttachment.getWriteTasks().remove();</span>
+      }
+
+<span class="nc" id="L58">    } catch (IOException e) {</span>
+<span class="nc" id="L59">      processedTask.getListener().onWriteFailed(&quot;I/O error occurs on write to channel &quot; + socketChannel, new ConnectionClosedException(e));</span>
+<span class="nc" id="L60">      keyAttachment.getWriteTasks().clear();</span>
+<span class="nc" id="L61">      key.cancel();</span>
+<span class="fc" id="L62">    }</span>
+<span class="fc" id="L63">  }</span>
+
+  @Override
+  public boolean accept(SelectionKey key) {
+<span class="fc bfc" id="L67" title="All 4 branches covered.">    return key.isValid() &amp;&amp; key.isWritable();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

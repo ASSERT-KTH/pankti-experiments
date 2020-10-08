@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Handshake.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client</a> &gt; <span class="el_source">Handshake.java</span></div><h1>Handshake.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.client;
+
+import com.turn.ttorrent.Constants;
+import com.turn.ttorrent.common.TorrentHash;
+import com.turn.ttorrent.common.TorrentUtils;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.text.ParseException;
+
+
+/**
+ * Peer handshake handler.
+ *
+ * @author mpetazzoni
+ */
+public class Handshake implements TorrentHash {
+
+  public static final String BITTORRENT_PROTOCOL_IDENTIFIER = &quot;BitTorrent protocol&quot;;
+  public static final int BASE_HANDSHAKE_LENGTH = 49;
+
+  private ByteBuffer data;
+  private ByteBuffer infoHash;
+  private ByteBuffer peerId;
+
+  private String torrentIdentifier;
+
+  private int myPstrlen;
+
+  private Handshake(ByteBuffer data, ByteBuffer infoHash,
+<span class="fc" id="L46">                    ByteBuffer peerId) {</span>
+<span class="fc" id="L47">    this.data = data;</span>
+<span class="fc" id="L48">    this.data.rewind();</span>
+
+<span class="fc" id="L50">    this.infoHash = infoHash;</span>
+<span class="fc" id="L51">    this.peerId = peerId;</span>
+<span class="fc" id="L52">  }</span>
+
+  public ByteBuffer getData() {
+<span class="fc" id="L55">    return this.data;</span>
+  }
+
+  public byte[] getInfoHash() {
+<span class="fc" id="L59">    return this.infoHash.array();</span>
+  }
+
+  public String getHexInfoHash() {
+<span class="fc" id="L63">    return TorrentUtils.byteArrayToHexString(getInfoHash());</span>
+  }
+
+  public byte[] getPeerId() {
+<span class="fc" id="L67">    return this.peerId.array();</span>
+  }
+
+  public static Handshake parse(ByteBuffer buffer)
+          throws ParseException, UnsupportedEncodingException {
+<span class="fc" id="L72">    int pstrlen = Byte.valueOf(buffer.get()).intValue();</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">    if (pstrlen &lt; 0 ||</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">            buffer.remaining() != BASE_HANDSHAKE_LENGTH + pstrlen - 1) {</span>
+<span class="nc" id="L75">      throw new ParseException(&quot;Incorrect handshake message length &quot; +</span>
+              &quot;(pstrlen=&quot; + pstrlen + &quot;) !&quot;, 0);
+    }
+
+    // Check the protocol identification string
+<span class="fc" id="L80">    byte[] pstr = new byte[pstrlen];</span>
+<span class="fc" id="L81">    buffer.get(pstr);</span>
+
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">    if (!Handshake.BITTORRENT_PROTOCOL_IDENTIFIER.equals(</span>
+            new String(pstr, Constants.BYTE_ENCODING))) {
+<span class="nc" id="L85">      throw new ParseException(&quot;Invalid protocol identifier!&quot;, 1);</span>
+    }
+
+    // Ignore reserved bytes
+<span class="fc" id="L89">    byte[] reserved = new byte[8];</span>
+<span class="fc" id="L90">    buffer.get(reserved);</span>
+
+<span class="fc" id="L92">    byte[] infoHash = new byte[20];</span>
+<span class="fc" id="L93">    buffer.get(infoHash);</span>
+<span class="fc" id="L94">    byte[] peerId = new byte[20];</span>
+<span class="fc" id="L95">    buffer.get(peerId);</span>
+<span class="fc" id="L96">    return new Handshake(buffer, ByteBuffer.wrap(infoHash),</span>
+<span class="fc" id="L97">            ByteBuffer.wrap(peerId));</span>
+  }
+
+  public static Handshake parse(ByteBuffer buffer, String torrentIdentifier) throws UnsupportedEncodingException, ParseException {
+<span class="nc" id="L101">    Handshake hs = Handshake.parse(buffer);</span>
+<span class="nc" id="L102">    hs.setTorrentIdentifier(torrentIdentifier);</span>
+<span class="nc" id="L103">    return hs;</span>
+  }
+
+  public static Handshake parse(ByteBuffer buffer, int pstrlen) throws UnsupportedEncodingException, ParseException {
+<span class="fc" id="L107">    Handshake hs = Handshake.parse(buffer);</span>
+<span class="fc" id="L108">    hs.myPstrlen = pstrlen;</span>
+<span class="fc" id="L109">    return hs;</span>
+  }
+
+  public static Handshake craft(byte[] torrentInfoHash, byte[] clientPeerId) {
+    try {
+<span class="fc" id="L114">      ByteBuffer buffer = ByteBuffer.allocate(</span>
+              Handshake.BASE_HANDSHAKE_LENGTH +
+<span class="fc" id="L116">                      Handshake.BITTORRENT_PROTOCOL_IDENTIFIER.length());</span>
+
+<span class="fc" id="L118">      byte[] reserved = new byte[8];</span>
+<span class="fc" id="L119">      ByteBuffer infoHash = ByteBuffer.wrap(torrentInfoHash);</span>
+<span class="fc" id="L120">      ByteBuffer peerId = ByteBuffer.wrap(clientPeerId);</span>
+
+<span class="fc" id="L122">      buffer.put((byte) Handshake</span>
+<span class="fc" id="L123">              .BITTORRENT_PROTOCOL_IDENTIFIER.length());</span>
+<span class="fc" id="L124">      buffer.put(Handshake</span>
+<span class="fc" id="L125">              .BITTORRENT_PROTOCOL_IDENTIFIER.getBytes(Constants.BYTE_ENCODING));</span>
+<span class="fc" id="L126">      buffer.put(reserved);</span>
+<span class="fc" id="L127">      buffer.put(infoHash);</span>
+<span class="fc" id="L128">      buffer.put(peerId);</span>
+
+<span class="fc" id="L130">      return new Handshake(buffer, infoHash, peerId);</span>
+<span class="nc" id="L131">    } catch (UnsupportedEncodingException uee) {</span>
+<span class="nc" id="L132">      return null;</span>
+    }
+  }
+
+  public static Handshake parse(byte[] torrentInfoHash, byte[] clientPeerId, String torrentIdentifier) throws UnsupportedEncodingException, ParseException {
+<span class="nc" id="L137">    Handshake hs = Handshake.craft(torrentInfoHash, clientPeerId);</span>
+<span class="nc" id="L138">    hs.setTorrentIdentifier(torrentIdentifier);</span>
+<span class="nc" id="L139">    return hs;</span>
+  }
+
+  public void setTorrentIdentifier(String torrentIdentifier) {
+<span class="nc" id="L143">    this.torrentIdentifier = torrentIdentifier;</span>
+<span class="nc" id="L144">  }</span>
+
+  public int getPstrlen() {
+<span class="nc" id="L147">    return myPstrlen;</span>
+  }
+
+  public String getTorrentIdentifier() {
+<span class="nc" id="L151">    return torrentIdentifier;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

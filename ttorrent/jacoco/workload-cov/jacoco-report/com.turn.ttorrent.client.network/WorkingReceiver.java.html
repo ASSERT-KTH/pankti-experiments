@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorkingReceiver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.network</a> &gt; <span class="el_source">WorkingReceiver.java</span></div><h1>WorkingReceiver.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent.client.network;
+
+import com.turn.ttorrent.client.Context;
+import com.turn.ttorrent.client.SharedTorrent;
+import com.turn.ttorrent.client.peer.SharingPeer;
+import com.turn.ttorrent.common.LoggerUtils;
+import com.turn.ttorrent.common.PeerUID;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.common.protocol.PeerMessage;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.ByteChannel;
+import java.text.ParseException;
+import java.util.Arrays;
+import java.util.concurrent.RejectedExecutionException;
+
+public class WorkingReceiver implements DataProcessor {
+
+<span class="fc" id="L22">  private static final Logger logger = TorrentLoggerFactory.getLogger(WorkingReceiver.class);</span>
+  //16 bytes is sufficient for all torrents messages except bitfield and piece.
+  //So piece and bitfield have dynamic size because bytebuffer for this messages will be allocated after get message length
+  private static final int DEF_BUFFER_SIZE = 16;
+  private static final int MAX_MESSAGE_SIZE = 2 * 1024 * 1024;
+
+  private final PeerUID myPeerUID;
+  private final Context myContext;
+  @NotNull
+  private ByteBuffer messageBytes;
+  private int pstrLength;
+
+  WorkingReceiver(PeerUID peerId,
+<span class="fc" id="L35">                         Context context) {</span>
+<span class="fc" id="L36">    myPeerUID = peerId;</span>
+<span class="fc" id="L37">    myContext = context;</span>
+
+<span class="fc" id="L39">    this.messageBytes = ByteBuffer.allocate(DEF_BUFFER_SIZE);</span>
+<span class="fc" id="L40">    this.pstrLength = -1;</span>
+<span class="fc" id="L41">  }</span>
+
+  @Override
+  public DataProcessor processAndGetNext(ByteChannel socketChannel) throws IOException {
+<span class="fc" id="L45">    logger.trace(&quot;received data from channel&quot;, socketChannel);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">    if (pstrLength == -1) {</span>
+<span class="fc" id="L47">      messageBytes.limit(PeerMessage.MESSAGE_LENGTH_FIELD_SIZE);</span>
+      final int read;
+      try {
+<span class="fc" id="L50">        read = socketChannel.read(messageBytes);</span>
+<span class="nc" id="L51">      } catch (IOException e) {</span>
+        //Some clients close connection so that java throws IOException &quot;An existing connection was forcibly closed by the remote host&quot;
+<span class="nc" id="L53">        logger.debug(&quot;unable to read data from channel &quot; + socketChannel, e);</span>
+<span class="nc" id="L54">        return new ShutdownAndRemovePeerProcessor(myPeerUID, myContext).processAndGetNext(socketChannel);</span>
+<span class="fc" id="L55">      }</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">      if (read &lt; 0) {</span>
+<span class="fc" id="L57">        logger.debug(&quot;channel {} is closed by other peer&quot;, socketChannel);</span>
+<span class="fc" id="L58">        return new ShutdownAndRemovePeerProcessor(myPeerUID, myContext).processAndGetNext(socketChannel);</span>
+      }
+<span class="fc bfc" id="L60" title="All 2 branches covered.">      if (messageBytes.hasRemaining()) {</span>
+<span class="fc" id="L61">        return this;</span>
+      }
+<span class="fc" id="L63">      this.pstrLength = messageBytes.getInt(0);</span>
+<span class="fc" id="L64">      logger.trace(&quot;read of message length finished, Message length is {}&quot;, this.pstrLength);</span>
+
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">      if (this.pstrLength &gt; MAX_MESSAGE_SIZE) {</span>
+<span class="nc" id="L67">        logger.warn(&quot;Proposed limit of {} is larger than max message size {}&quot;,</span>
+<span class="nc" id="L68">                PeerMessage.MESSAGE_LENGTH_FIELD_SIZE + this.pstrLength, MAX_MESSAGE_SIZE);</span>
+<span class="nc" id="L69">        logger.warn(&quot;current bytes in buffer is {}&quot;, Arrays.toString(messageBytes.array()));</span>
+<span class="nc" id="L70">        logger.warn(&quot;Close connection with peer {}&quot;, myPeerUID);</span>
+<span class="nc" id="L71">        return new ShutdownAndRemovePeerProcessor(myPeerUID, myContext).processAndGetNext(socketChannel);</span>
+      }
+    }
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">    if (PeerMessage.MESSAGE_LENGTH_FIELD_SIZE + this.pstrLength &gt; messageBytes.capacity()) {</span>
+<span class="fc" id="L76">      ByteBuffer old = messageBytes;</span>
+<span class="fc" id="L77">      old.rewind();</span>
+<span class="fc" id="L78">      messageBytes = ByteBuffer.allocate(PeerMessage.MESSAGE_LENGTH_FIELD_SIZE + this.pstrLength);</span>
+<span class="fc" id="L79">      messageBytes.put(old);</span>
+    }
+
+<span class="fc" id="L82">    messageBytes.limit(PeerMessage.MESSAGE_LENGTH_FIELD_SIZE + this.pstrLength);</span>
+
+<span class="fc" id="L84">    logger.trace(&quot;try read data from {}&quot;, socketChannel);</span>
+    int readBytes;
+    try {
+<span class="fc" id="L87">      readBytes = socketChannel.read(messageBytes);</span>
+<span class="nc" id="L88">    } catch (IOException e) {</span>
+<span class="nc" id="L89">      return new ShutdownAndRemovePeerProcessor(myPeerUID, myContext).processAndGetNext(socketChannel);</span>
+<span class="fc" id="L90">    }</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">    if (readBytes &lt; 0) {</span>
+<span class="nc" id="L92">      logger.debug(&quot;channel {} is closed by other peer&quot;, socketChannel);</span>
+<span class="nc" id="L93">      return new ShutdownAndRemovePeerProcessor(myPeerUID, myContext).processAndGetNext(socketChannel);</span>
+    }
+<span class="fc bfc" id="L95" title="All 2 branches covered.">    if (messageBytes.hasRemaining()) {</span>
+<span class="fc" id="L96">      logger.trace(&quot;buffer is not full, continue reading...&quot;);</span>
+<span class="fc" id="L97">      return this;</span>
+    }
+<span class="fc" id="L99">    logger.trace(&quot;finished read data from {}&quot;, socketChannel);</span>
+
+<span class="fc" id="L101">    messageBytes.rewind();</span>
+<span class="fc" id="L102">    this.pstrLength = -1;</span>
+
+<span class="fc" id="L104">    final SharingPeer peer = myContext.getPeersStorage().getSharingPeer(myPeerUID);</span>
+
+<span class="fc" id="L106">    final String hexInfoHash = peer.getHexInfoHash();</span>
+<span class="fc" id="L107">    SharedTorrent torrent = myContext.getTorrentsStorage().getTorrent(hexInfoHash);</span>
+<span class="pc bpc" id="L108" title="2 of 4 branches missed.">    if (torrent == null || !myContext.getTorrentsStorage().hasTorrent(hexInfoHash)) {</span>
+<span class="nc" id="L109">      logger.debug(&quot;torrent with hash {} for peer {} doesn't found in storage. Maybe somebody deletes it manually&quot;, hexInfoHash, peer);</span>
+<span class="nc" id="L110">      return new ShutdownAndRemovePeerProcessor(myPeerUID, myContext).processAndGetNext(socketChannel);</span>
+    }
+
+<span class="fc" id="L113">    logger.trace(&quot;try parse message from {}. Torrent {}&quot;, peer, torrent);</span>
+<span class="fc" id="L114">    ByteBuffer bufferCopy = ByteBuffer.wrap(Arrays.copyOf(messageBytes.array(), messageBytes.limit()));</span>
+
+<span class="fc" id="L116">    this.messageBytes = ByteBuffer.allocate(DEF_BUFFER_SIZE);</span>
+    final PeerMessage message;
+
+    try {
+<span class="fc" id="L120">      message = PeerMessage.parse(bufferCopy, torrent);</span>
+<span class="nc" id="L121">    } catch (ParseException e) {</span>
+<span class="nc" id="L122">      LoggerUtils.warnAndDebugDetails(logger, &quot;incorrect message was received from peer {}&quot;, peer, e);</span>
+<span class="nc" id="L123">      return new ShutdownAndRemovePeerProcessor(myPeerUID, myContext).processAndGetNext(socketChannel);</span>
+<span class="fc" id="L124">    }</span>
+
+<span class="fc" id="L126">    logger.trace(&quot;get message {} from {}&quot;, message, socketChannel);</span>
+
+    try {
+<span class="fc" id="L129">      myContext.getExecutor().submit(new Runnable() {</span>
+        @Override
+        public void run() {
+<span class="fc" id="L132">          final Thread currentThread = Thread.currentThread();</span>
+<span class="fc" id="L133">          final String oldName = currentThread.getName();</span>
+          try {
+<span class="fc" id="L135">            currentThread.setName(oldName + &quot; handle message for torrent &quot; + myPeerUID.getTorrentHash() + &quot; peer: &quot; + peer.getHostIdentifier());</span>
+<span class="fc" id="L136">            peer.handleMessage(message);</span>
+<span class="nc" id="L137">          } catch (Throwable e) {</span>
+<span class="nc" id="L138">            LoggerUtils.warnAndDebugDetails(logger, &quot;unhandled exception {} in executor task (handleMessage)&quot;, e.toString(), e);</span>
+          } finally {
+<span class="fc" id="L140">            currentThread.setName(oldName);</span>
+          }
+
+<span class="fc" id="L143">        }</span>
+      });
+<span class="nc" id="L145">    } catch (RejectedExecutionException e) {</span>
+<span class="nc" id="L146">      LoggerUtils.warnAndDebugDetails(logger, &quot;task submit is failed. Reason: {}&quot;, e.getMessage(), e);</span>
+<span class="nc" id="L147">      return new ShutdownAndRemovePeerProcessor(myPeerUID, myContext).processAndGetNext(socketChannel);</span>
+<span class="fc" id="L148">    }</span>
+<span class="fc" id="L149">    return this;</span>
+  }
+
+  @Override
+  public DataProcessor handleError(ByteChannel socketChannel, Throwable e) throws IOException {
+<span class="nc" id="L154">    return new ShutdownAndRemovePeerProcessor(myPeerUID, myContext).processAndGetNext(socketChannel);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

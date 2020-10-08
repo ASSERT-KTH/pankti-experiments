@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TempFiles.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent</a> &gt; <span class="el_source">TempFiles.java</span></div><h1>TempFiles.java</h1><pre class="source lang-java linenums">package com.turn.ttorrent;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * @author Pavel.Sher
+ * Date: 05.03.2008
+ */
+public class TempFiles {
+<span class="nc" id="L15">  private static final File ourCurrentTempDir = FileUtils.getTempDirectory();</span>
+  private final File myCurrentTempDir;
+
+  private static Random ourRandom;
+
+  static {
+<span class="nc" id="L21">    ourRandom = new Random();</span>
+<span class="nc" id="L22">    ourRandom.setSeed(System.currentTimeMillis());</span>
+<span class="nc" id="L23">  }</span>
+
+<span class="nc" id="L25">  private final List&lt;File&gt; myFilesToDelete = new ArrayList&lt;File&gt;();</span>
+  private final Thread myShutdownHook;
+  private volatile boolean myInsideShutdownHook;
+
+<span class="nc" id="L29">  public TempFiles() {</span>
+<span class="nc" id="L30">    myCurrentTempDir = ourCurrentTempDir;</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">    if (!myCurrentTempDir.isDirectory()) {</span>
+
+<span class="nc" id="L33">      throw new IllegalStateException(&quot;Temp directory is not a directory, was deleted by some process: &quot; + myCurrentTempDir.getAbsolutePath() +</span>
+<span class="nc" id="L34">              &quot;\njava.io.tmpdir: &quot; + FileUtils.getTempDirectory());</span>
+    }
+
+<span class="nc" id="L37">    myShutdownHook = new Thread(new Runnable() {</span>
+      public void run() {
+<span class="nc" id="L39">        myInsideShutdownHook = true;</span>
+<span class="nc" id="L40">        cleanup();</span>
+<span class="nc" id="L41">      }</span>
+    });
+<span class="nc" id="L43">    Runtime.getRuntime().addShutdownHook(myShutdownHook);</span>
+<span class="nc" id="L44">  }</span>
+
+  private File doCreateTempDir(String prefix, String suffix) throws IOException {
+<span class="nc bnc" id="L47" title="All 2 branches missed.">    prefix = prefix == null ? &quot;&quot; : prefix;</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">    suffix = suffix == null ? &quot;.tmp&quot; : suffix;</span>
+
+    do {
+<span class="nc" id="L51">      int count = ourRandom.nextInt();</span>
+<span class="nc" id="L52">      final File f = new File(myCurrentTempDir, prefix + count + suffix);</span>
+<span class="nc bnc" id="L53" title="All 4 branches missed.">      if (!f.exists() &amp;&amp; f.mkdirs()) {</span>
+<span class="nc" id="L54">        return f.getCanonicalFile();</span>
+      }
+<span class="nc" id="L56">    } while (true);</span>
+
+  }
+
+  private File doCreateTempFile(String prefix, String suffix) throws IOException {
+<span class="nc" id="L61">    final File file = doCreateTempDir(prefix, suffix);</span>
+<span class="nc" id="L62">    file.delete();</span>
+<span class="nc" id="L63">    file.createNewFile();</span>
+<span class="nc" id="L64">    return file;</span>
+  }
+
+  public final File createTempFile() throws IOException {
+<span class="nc" id="L68">    File tempFile = doCreateTempFile(&quot;test&quot;, null);</span>
+<span class="nc" id="L69">    registerAsTempFile(tempFile);</span>
+<span class="nc" id="L70">    return tempFile;</span>
+  }
+
+  public void registerAsTempFile(final File tempFile) {
+<span class="nc" id="L74">    myFilesToDelete.add(tempFile);</span>
+<span class="nc" id="L75">  }</span>
+
+  public final File createTempFile(int size) throws IOException {
+<span class="nc" id="L78">    File tempFile = createTempFile();</span>
+<span class="nc" id="L79">    int bufLen = Math.min(8 * 1024, size);</span>
+<span class="nc" id="L80">    final Random random = new Random();</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">    if (bufLen == 0) return tempFile;</span>
+<span class="nc" id="L82">    final OutputStream fos = new BufferedOutputStream(new FileOutputStream(tempFile));</span>
+    try {
+<span class="nc" id="L84">      byte[] buf = new byte[bufLen];</span>
+
+<span class="nc" id="L86">      int numWritten = 0;</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">      for (int i = 0; i &lt; size / buf.length; i++) {</span>
+<span class="nc" id="L88">        random.nextBytes(buf);</span>
+<span class="nc" id="L89">        fos.write(buf);</span>
+<span class="nc" id="L90">        numWritten += buf.length;</span>
+      }
+
+<span class="nc bnc" id="L93" title="All 2 branches missed.">      if (size &gt; numWritten) {</span>
+<span class="nc" id="L94">        random.nextBytes(buf);</span>
+<span class="nc" id="L95">        fos.write(buf, 0, size - numWritten);</span>
+      }
+    } finally {
+<span class="nc" id="L98">      fos.close();</span>
+    }
+
+<span class="nc" id="L101">    return tempFile;</span>
+  }
+
+  /**
+   * Returns a File object for created temp directory.
+   * Also stores the value into this object accessed with {@link #getCurrentTempDir()}
+   *
+   * @return a File object for created temp directory
+   * @throws IOException if directory creation fails.
+   */
+  public final File createTempDir() throws IOException {
+<span class="nc" id="L112">    File f = doCreateTempDir(&quot;test&quot;, &quot;&quot;);</span>
+<span class="nc" id="L113">    registerAsTempFile(f);</span>
+<span class="nc" id="L114">    return f;</span>
+  }
+
+  /**
+   * Returns the current directory used by the test or null if no test is running or no directory is created yet.
+   *
+   * @return see above
+   */
+  public File getCurrentTempDir() {
+<span class="nc" id="L123">    return myCurrentTempDir;</span>
+  }
+
+  public void cleanup() {
+    try {
+<span class="nc bnc" id="L128" title="All 2 branches missed.">      for (File file : myFilesToDelete) {</span>
+        try {
+<span class="nc" id="L130">          FileUtils.forceDelete(file);</span>
+<span class="nc" id="L131">        } catch (IOException e) {</span>
+<span class="nc" id="L132">        }</span>
+<span class="nc" id="L133">      }</span>
+
+<span class="nc" id="L135">      myFilesToDelete.clear();</span>
+    } finally {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">      if (!myInsideShutdownHook) {</span>
+<span class="nc" id="L138">        Runtime.getRuntime().removeShutdownHook(myShutdownHook);</span>
+      }
+    }
+<span class="nc" id="L141">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

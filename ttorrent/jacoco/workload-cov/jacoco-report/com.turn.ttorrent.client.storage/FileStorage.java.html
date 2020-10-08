@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FileStorage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.storage</a> &gt; <span class="el_source">FileStorage.java</span></div><h1>FileStorage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2011-2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.client.storage;
+
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.ClosedByInterruptException;
+import java.nio.channels.FileChannel;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+
+/**
+ * Single-file torrent byte data storage.
+ *
+ * &lt;p&gt;
+ * This implementation of TorrentByteStorageFile provides a torrent byte data
+ * storage relying on a single underlying file and uses a RandomAccessFile
+ * FileChannel to expose thread-safe read/write methods.
+ * &lt;/p&gt;
+ *
+ * @author mpetazzoni
+ */
+public class FileStorage implements TorrentByteStorage {
+
+  private static final String PARTIAL_FILE_NAME_SUFFIX = &quot;.part&quot;;
+
+<span class="fc" id="L47">  private static final Logger logger =</span>
+<span class="fc" id="L48">          TorrentLoggerFactory.getLogger(FileStorage.class);</span>
+
+  private final File target;
+  private File partial;
+  private final long offset;
+  private final long size;
+
+  private RandomAccessFile raf;
+  private FileChannel channel;
+  private File current;
+<span class="fc" id="L58">  private boolean myIsOpen = false;</span>
+
+<span class="fc" id="L60">  private final ReadWriteLock myLock = new ReentrantReadWriteLock();</span>
+
+  public FileStorage(File file, long offset, long size)
+<span class="fc" id="L63">          throws IOException {</span>
+<span class="fc" id="L64">    this.target = file;</span>
+<span class="fc" id="L65">    this.offset = offset;</span>
+<span class="fc" id="L66">    this.size = size;</span>
+
+<span class="fc" id="L68">  }</span>
+
+  public void open(final boolean seeder) throws IOException {
+    try {
+<span class="fc" id="L72">      myLock.writeLock().lock();</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">      if (seeder) {</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (!target.exists()) {</span>
+<span class="nc" id="L75">          throw new IOException(&quot;Target file &quot; + target.getAbsolutePath() + &quot; doesn't exist.&quot;);</span>
+        }
+<span class="fc" id="L77">        this.current = this.target;</span>
+<span class="fc" id="L78">        this.raf = new RandomAccessFile(this.current, &quot;r&quot;);</span>
+      } else {
+<span class="fc" id="L80">        this.partial = new File(this.target.getAbsolutePath() + PARTIAL_FILE_NAME_SUFFIX);</span>
+
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (this.partial.exists()) {</span>
+<span class="fc" id="L83">          logger.debug(&quot;Partial download found at {}. Continuing...&quot;,</span>
+<span class="fc" id="L84">                  this.partial.getAbsolutePath());</span>
+<span class="fc" id="L85">          this.current = this.partial;</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        } else if (!this.target.exists()) {</span>
+<span class="fc" id="L87">          logger.debug(&quot;Downloading new file to {}...&quot;,</span>
+<span class="fc" id="L88">                  this.partial.getAbsolutePath());</span>
+<span class="fc" id="L89">          this.current = this.partial;</span>
+        } else {
+<span class="nc" id="L91">          logger.debug(&quot;Using existing file {}.&quot;,</span>
+<span class="nc" id="L92">                  this.target.getAbsolutePath());</span>
+<span class="nc" id="L93">          this.current = this.target;</span>
+        }
+<span class="fc" id="L95">        this.raf = new RandomAccessFile(this.current, &quot;rw&quot;);</span>
+<span class="fc" id="L96">        this.raf.setLength(this.size);</span>
+      }
+
+      // Set the file length to the appropriate size, eventually truncating
+      // or extending the file if it already exists with a different size.
+<span class="fc" id="L101">      myIsOpen = true;</span>
+<span class="fc" id="L102">      this.channel = raf.getChannel();</span>
+
+<span class="fc" id="L104">      logger.debug(&quot;Opened byte storage file at {} ({}+{} byte(s)).&quot;,</span>
+              new Object[]{
+<span class="fc" id="L106">                      this.current.getAbsolutePath(),</span>
+<span class="fc" id="L107">                      this.offset,</span>
+<span class="fc" id="L108">                      this.size,</span>
+              });
+    } finally {
+<span class="fc" id="L111">      myLock.writeLock().unlock();</span>
+    }
+<span class="fc" id="L113">  }</span>
+
+  protected long offset() {
+<span class="fc" id="L116">    return this.offset;</span>
+  }
+
+  public long size() {
+<span class="fc" id="L120">    return this.size;</span>
+  }
+
+  @Override
+  public int read(ByteBuffer buffer, long position) throws IOException {
+    try {
+<span class="fc" id="L126">      myLock.readLock().lock();</span>
+<span class="fc" id="L127">      int requested = buffer.remaining();</span>
+
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">      if (position + requested &gt; this.size) {</span>
+<span class="nc" id="L130">        throw new IllegalArgumentException(&quot;Invalid storage read request!&quot;);</span>
+      }
+
+<span class="fc" id="L133">      int bytes = this.channel.read(buffer, position);</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">      if (bytes &lt; requested) {</span>
+<span class="nc" id="L135">        throw new IOException(&quot;Storage underrun!&quot;);</span>
+      }
+
+<span class="fc" id="L138">      return bytes;</span>
+    } finally {
+<span class="fc" id="L140">      myLock.readLock().unlock();</span>
+    }
+  }
+
+  @Override
+  public int write(ByteBuffer buffer, long position) throws IOException {
+    try {
+<span class="fc" id="L147">      myLock.writeLock().lock();</span>
+<span class="fc" id="L148">      int requested = buffer.remaining();</span>
+
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">      if (position + requested &gt; this.size) {</span>
+<span class="nc" id="L151">        throw new IllegalArgumentException(&quot;Invalid storage write request!&quot;);</span>
+      }
+
+<span class="fc" id="L154">      return this.channel.write(buffer, position);</span>
+    } finally {
+<span class="fc" id="L156">      myLock.writeLock().unlock();</span>
+    }
+  }
+
+  @Override
+  public void close() throws IOException {
+    try {
+<span class="fc" id="L163">      myLock.writeLock().lock();</span>
+<span class="fc bfc" id="L164" title="All 2 branches covered.">      if (!myIsOpen) return;</span>
+<span class="fc" id="L165">      logger.debug(&quot;Closing file channel to {}. Channel open: {}&quot;, current.getName(), channel.isOpen());</span>
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">      if (this.channel.isOpen()) {</span>
+        try {
+<span class="fc" id="L168">          this.channel.force(true);</span>
+<span class="nc" id="L169">        } catch (ClosedByInterruptException ignored) {</span>
+<span class="fc" id="L170">        }</span>
+      }
+<span class="fc" id="L172">      this.raf.close();</span>
+<span class="fc" id="L173">      myIsOpen = false;</span>
+    } finally {
+<span class="fc" id="L175">      myLock.writeLock().unlock();</span>
+    }
+<span class="fc" id="L177">  }</span>
+
+  /**
+   * Move the partial file to its final location.
+   */
+  @Override
+  public void finish() throws IOException {
+    try {
+<span class="fc" id="L185">      myLock.writeLock().lock();</span>
+<span class="fc" id="L186">      logger.debug(&quot;Closing file channel to &quot; + this.current.getName() +</span>
+              &quot; (download complete).&quot;);
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">      if (this.channel.isOpen()) {</span>
+<span class="fc" id="L189">        this.channel.force(true);</span>
+      }
+
+      // Nothing more to do if we're already on the target file.
+<span class="pc bpc" id="L193" title="1 of 2 branches missed.">      if (this.isFinished()) {</span>
+<span class="nc" id="L194">        return;</span>
+      }
+
+      try {
+<span class="fc" id="L198">        FileUtils.deleteQuietly(this.target);</span>
+<span class="fc" id="L199">        this.raf.close();</span>
+<span class="fc" id="L200">        FileUtils.moveFile(this.current, this.target);</span>
+<span class="nc" id="L201">      } catch (Exception ex) {</span>
+<span class="nc" id="L202">        logger.error(&quot;An error occurred while moving file to its final location&quot;, ex);</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">        if (this.target.exists()) {</span>
+<span class="nc" id="L204">          throw new IOException(&quot;Was unable to delete existing file &quot; + target.getAbsolutePath(), ex);</span>
+        }
+<span class="nc" id="L206">        FileUtils.copyFile(this.current, this.target);</span>
+<span class="fc" id="L207">      }</span>
+
+<span class="fc" id="L209">      this.current = this.target;</span>
+
+<span class="fc" id="L211">      FileUtils.deleteQuietly(this.partial);</span>
+<span class="fc" id="L212">      myIsOpen = false;</span>
+<span class="fc" id="L213">      logger.debug(&quot;Moved torrent data from {} to {}.&quot;,</span>
+<span class="fc" id="L214">              this.partial.getName(),</span>
+<span class="fc" id="L215">              this.target.getName());</span>
+    } finally {
+<span class="fc" id="L217">      myLock.writeLock().unlock();</span>
+    }
+<span class="fc" id="L219">  }</span>
+
+  public boolean isOpen() {
+    try {
+<span class="fc" id="L223">      myLock.readLock().lock();</span>
+<span class="fc" id="L224">      return myIsOpen;</span>
+    } finally {
+<span class="fc" id="L226">      myLock.readLock().unlock();</span>
+    }
+  }
+
+  @Override
+  public boolean isFinished() {
+<span class="fc" id="L232">    return this.current.equals(this.target);</span>
+  }
+
+  @Override
+  public void delete() throws IOException {
+<span class="nc" id="L237">    close();</span>
+<span class="nc" id="L238">    final File local = this.current;</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">    if (local != null) local.delete();</span>
+<span class="nc" id="L240">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

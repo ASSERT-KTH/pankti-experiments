@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HTTPTrackerClient.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">com.turn.ttorrent.client.announce</a> &gt; <span class="el_source">HTTPTrackerClient.java</span></div><h1>HTTPTrackerClient.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2012 Turn, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.turn.ttorrent.client.announce;
+
+import com.turn.ttorrent.bcodec.BDecoder;
+import com.turn.ttorrent.bcodec.BEValue;
+import com.turn.ttorrent.common.AnnounceableInformation;
+import com.turn.ttorrent.common.LoggerUtils;
+import com.turn.ttorrent.common.Peer;
+import com.turn.ttorrent.common.TorrentLoggerFactory;
+import com.turn.ttorrent.common.protocol.AnnounceRequestMessage;
+import com.turn.ttorrent.common.protocol.TrackerMessage.MessageValidationException;
+import com.turn.ttorrent.common.protocol.http.HTTPAnnounceRequestMessage;
+import com.turn.ttorrent.common.protocol.http.HTTPAnnounceResponseMessage;
+import com.turn.ttorrent.common.protocol.http.HTTPTrackerMessage;
+import org.slf4j.Logger;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Announcer for HTTP trackers.
+ *
+ * @author mpetazzoni
+ * @see &lt;a href=&quot;http://wiki.theory.org/BitTorrentSpecification#Tracker_Request_Parameters&quot;&gt;BitTorrent tracker request specification&lt;/a&gt;
+ */
+public class HTTPTrackerClient extends TrackerClient {
+
+<span class="fc" id="L46">  protected static final Logger logger =</span>
+<span class="fc" id="L47">          TorrentLoggerFactory.getLogger(HTTPTrackerClient.class);</span>
+
+  /**
+   * Create a new HTTP announcer for the given torrent.
+   *
+   * @param peers Our own peer specification.
+   */
+  public HTTPTrackerClient(List&lt;Peer&gt; peers, URI tracker) {
+<span class="fc" id="L55">    super(peers, tracker);</span>
+<span class="fc" id="L56">  }</span>
+
+  /**
+   * Build, send and process a tracker announce request.
+   *
+   * &lt;p&gt;
+   * This function first builds an announce request for the specified event
+   * with all the required parameters. Then, the request is made to the
+   * tracker and the response analyzed.
+   * &lt;/p&gt;
+   *
+   * &lt;p&gt;
+   * All registered {@link AnnounceResponseListener} objects are then fired
+   * with the decoded payload.
+   * &lt;/p&gt;
+   *
+   * @param event         The announce event type (can be AnnounceEvent.NONE for
+   *                      periodic updates).
+   * @param inhibitEvents Prevent event listeners from being notified.
+   * @param torrentInfo
+   */
+  public void announce(final AnnounceRequestMessage.RequestEvent event,
+                       boolean inhibitEvents, final AnnounceableInformation torrentInfo, final List&lt;Peer&gt; adresses) throws AnnounceException {
+<span class="fc" id="L79">    logAnnounceRequest(event, torrentInfo);</span>
+
+<span class="fc" id="L81">    final List&lt;HTTPTrackerMessage&gt; trackerResponses = new ArrayList&lt;HTTPTrackerMessage&gt;();</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">    for (final Peer address : adresses) {</span>
+<span class="fc" id="L83">      final URL target = encodeAnnounceToURL(event, torrentInfo, address);</span>
+      try {
+<span class="fc" id="L85">        sendAnnounce(target, &quot;GET&quot;, new ResponseParser() {</span>
+          @Override
+          public void parse(InputStream inputStream, int responseCode) throws IOException, MessageValidationException {
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">            if (responseCode != 200) {</span>
+<span class="nc" id="L89">              logger.info(&quot;received not http 200 code from tracker for request &quot; + target);</span>
+<span class="nc" id="L90">              return;</span>
+            }
+<span class="fc" id="L92">            trackerResponses.add(HTTPTrackerMessage.parse(inputStream));</span>
+<span class="fc" id="L93">          }</span>
+        });
+<span class="nc" id="L95">      } catch (ConnectException e) {</span>
+<span class="nc" id="L96">        throw new AnnounceException(e.getMessage(), e);</span>
+<span class="fc" id="L97">      }</span>
+<span class="fc" id="L98">    }</span>
+    // we process only first request:
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">    if (trackerResponses.size() &gt; 0) {</span>
+<span class="fc" id="L101">      final HTTPTrackerMessage message = trackerResponses.get(0);</span>
+<span class="fc" id="L102">      this.handleTrackerAnnounceResponse(message, inhibitEvents, torrentInfo.getHexInfoHash());</span>
+    }
+<span class="fc" id="L104">  }</span>
+
+  @Override
+  protected void multiAnnounce(AnnounceRequestMessage.RequestEvent event,
+                               boolean inhibitEvent,
+                               final List&lt;? extends AnnounceableInformation&gt; torrents,
+                               List&lt;Peer&gt; addresses) throws AnnounceException, ConnectException {
+<span class="fc" id="L111">    List&lt;List&lt;HTTPTrackerMessage&gt;&gt; trackerResponses = new ArrayList&lt;List&lt;HTTPTrackerMessage&gt;&gt;();</span>
+
+    URL trackerUrl;
+    try {
+<span class="fc" id="L115">      trackerUrl = this.tracker.toURL();</span>
+<span class="nc" id="L116">    } catch (MalformedURLException e) {</span>
+<span class="nc" id="L117">      throw new AnnounceException(&quot;Invalid tracker URL &quot; + this.tracker, e);</span>
+<span class="fc" id="L118">    }</span>
+
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">    for (final Peer address : addresses) {</span>
+<span class="fc" id="L121">      StringBuilder body = new StringBuilder();</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">      for (final AnnounceableInformation torrentInfo : torrents) {</span>
+<span class="fc" id="L123">        body.append(encodeAnnounceToURL(event, torrentInfo, address)).append(&quot;\n&quot;);</span>
+<span class="fc" id="L124">      }</span>
+<span class="fc" id="L125">      final List&lt;HTTPTrackerMessage&gt; responsesForCurrentIp = new ArrayList&lt;HTTPTrackerMessage&gt;();</span>
+<span class="fc" id="L126">      final String bodyStr = body.substring(0, body.length() - 1);</span>
+<span class="pc" id="L127">      sendAnnounce(trackerUrl, bodyStr, &quot;POST&quot;, new ResponseParser() {</span>
+        @Override
+        public void parse(InputStream inputStream, int responseCode) throws IOException, MessageValidationException {
+
+<span class="nc bnc" id="L131" title="All 2 branches missed.">          if (responseCode != 200) {</span>
+<span class="nc" id="L132">            logger.info(&quot;received {} code from tracker for multi announce request.&quot;, responseCode);</span>
+<span class="nc" id="L133">            logger.debug(bodyStr);</span>
+<span class="nc" id="L134">            return;</span>
+          }
+
+<span class="nc" id="L137">          final BEValue bdecode = BDecoder.bdecode(inputStream);</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">          if (bdecode == null) {</span>
+<span class="nc" id="L139">            logger.info(&quot;tracker sent bad response for multi announce message.&quot;);</span>
+<span class="nc" id="L140">            logger.debug(bodyStr);</span>
+<span class="nc" id="L141">            return;</span>
+          }
+<span class="nc" id="L143">          final List&lt;BEValue&gt; list = bdecode.getList();</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">          for (BEValue value : list) {</span>
+<span class="nc" id="L145">            responsesForCurrentIp.add(HTTPTrackerMessage.parse(value));</span>
+<span class="nc" id="L146">          }</span>
+<span class="nc" id="L147">        }</span>
+      });
+<span class="nc bnc" id="L149" title="All 2 branches missed.">      if (!responsesForCurrentIp.isEmpty()) {</span>
+<span class="nc" id="L150">        trackerResponses.add(responsesForCurrentIp);</span>
+      }
+<span class="nc" id="L152">    }</span>
+    // we process only first request:
+<span class="nc bnc" id="L154" title="All 2 branches missed.">    if (trackerResponses.size() &gt; 0) {</span>
+<span class="nc" id="L155">      final List&lt;HTTPTrackerMessage&gt; messages = trackerResponses.get(0);</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">      for (HTTPTrackerMessage message : messages) {</span>
+
+<span class="nc bnc" id="L158" title="All 2 branches missed.">        if (!(message instanceof HTTPAnnounceResponseMessage)) {</span>
+<span class="nc" id="L159">          logger.info(&quot;Incorrect instance of message {}. Skipping...&quot;, message);</span>
+<span class="nc" id="L160">          continue;</span>
+        }
+
+<span class="nc" id="L163">        final String hexInfoHash = ((HTTPAnnounceResponseMessage) message).getHexInfoHash();</span>
+        try {
+<span class="nc" id="L165">          this.handleTrackerAnnounceResponse(message, inhibitEvent, hexInfoHash);</span>
+<span class="nc" id="L166">        } catch (AnnounceException e) {</span>
+<span class="nc" id="L167">          LoggerUtils.errorAndDebugDetails(logger, &quot;Unable to process tracker response {}&quot;, message, e);</span>
+<span class="nc" id="L168">        }</span>
+<span class="nc" id="L169">      }</span>
+    }
+<span class="nc" id="L171">  }</span>
+
+  private URL encodeAnnounceToURL(AnnounceRequestMessage.RequestEvent event, AnnounceableInformation torrentInfo, Peer peer) throws AnnounceException {
+    URL result;
+    try {
+<span class="fc" id="L176">      HTTPAnnounceRequestMessage request = this.buildAnnounceRequest(event, torrentInfo, peer);</span>
+<span class="fc" id="L177">      result = request.buildAnnounceURL(this.tracker.toURL());</span>
+<span class="nc" id="L178">    } catch (MalformedURLException mue) {</span>
+<span class="nc" id="L179">      throw new AnnounceException(&quot;Invalid announce URL (&quot; +</span>
+<span class="nc" id="L180">              mue.getMessage() + &quot;)&quot;, mue);</span>
+<span class="nc" id="L181">    } catch (MessageValidationException mve) {</span>
+<span class="nc" id="L182">      throw new AnnounceException(&quot;Announce request creation violated &quot; +</span>
+<span class="nc" id="L183">              &quot;expected protocol (&quot; + mve.getMessage() + &quot;)&quot;, mve);</span>
+<span class="nc" id="L184">    } catch (IOException ioe) {</span>
+<span class="nc" id="L185">      throw new AnnounceException(&quot;Error building announce request (&quot; +</span>
+<span class="nc" id="L186">              ioe.getMessage() + &quot;)&quot;, ioe);</span>
+<span class="fc" id="L187">    }</span>
+<span class="fc" id="L188">    return result;</span>
+  }
+
+  private void sendAnnounce(final URL url, final String method, ResponseParser parser)
+          throws AnnounceException, ConnectException {
+<span class="fc" id="L193">    sendAnnounce(url, &quot;&quot;, method, parser);</span>
+<span class="fc" id="L194">  }</span>
+
+  private void sendAnnounce(final URL url, final String body, final String method, ResponseParser parser)
+          throws AnnounceException, ConnectException {
+<span class="fc" id="L198">    HttpURLConnection conn = null;</span>
+<span class="fc" id="L199">    InputStream in = null;</span>
+    try {
+<span class="fc" id="L201">      conn = (HttpURLConnection) openConnectionCheckRedirects(url, body, method);</span>
+<span class="fc" id="L202">      in = conn.getInputStream();</span>
+<span class="fc" id="L203">    } catch (IOException ioe) {</span>
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">      if (conn != null) {</span>
+<span class="nc" id="L205">        in = conn.getErrorStream();</span>
+      }
+<span class="fc" id="L207">    }</span>
+
+    // At this point if the input stream is null it means we have neither a
+    // response body nor an error stream from the server. No point in going
+    // any further.
+<span class="fc bfc" id="L212" title="All 2 branches covered.">    if (in == null) {</span>
+<span class="fc" id="L213">      throw new ConnectException(&quot;No response or unreachable tracker!&quot;);</span>
+    }
+
+    try {
+<span class="fc" id="L217">      parser.parse(in, conn.getResponseCode());</span>
+<span class="nc" id="L218">    } catch (IOException ioe) {</span>
+<span class="nc" id="L219">      throw new AnnounceException(&quot;Error reading tracker response!&quot;, ioe);</span>
+<span class="nc" id="L220">    } catch (MessageValidationException mve) {</span>
+<span class="nc" id="L221">      throw new AnnounceException(&quot;Tracker message violates expected &quot; +</span>
+<span class="nc" id="L222">              &quot;protocol (&quot; + mve.getMessage() + &quot;)&quot;, mve);</span>
+    } finally {
+      // Make sure we close everything down at the end to avoid resource
+      // leaks.
+      try {
+<span class="fc" id="L227">        in.close();</span>
+<span class="nc" id="L228">      } catch (IOException ioe) {</span>
+<span class="nc" id="L229">        logger.info(&quot;Problem ensuring error stream closed!&quot;);</span>
+<span class="nc" id="L230">        logger.debug(&quot;Problem ensuring error stream closed!&quot;, ioe);</span>
+<span class="fc" id="L231">      }</span>
+
+      // This means trying to close the error stream as well.
+<span class="fc" id="L234">      InputStream err = conn.getErrorStream();</span>
+<span class="pc bpc" id="L235" title="1 of 2 branches missed.">      if (err != null) {</span>
+        try {
+<span class="nc" id="L237">          err.close();</span>
+<span class="nc" id="L238">        } catch (IOException ioe) {</span>
+<span class="nc" id="L239">          logger.info(&quot;Problem ensuring error stream closed!&quot;);</span>
+<span class="nc" id="L240">          logger.debug(&quot;Problem ensuring error stream closed!&quot;, ioe);</span>
+<span class="nc" id="L241">        }</span>
+      }
+    }
+<span class="fc" id="L244">  }</span>
+
+  private URLConnection openConnectionCheckRedirects(URL url, String body, String method) throws IOException {
+    boolean needRedirect;
+<span class="fc" id="L248">    int redirects = 0;</span>
+<span class="fc" id="L249">    URLConnection connection = url.openConnection();</span>
+<span class="fc" id="L250">    boolean firstIteration = true;</span>
+    do {
+<span class="fc" id="L252">      needRedirect = false;</span>
+<span class="fc" id="L253">      connection.setConnectTimeout(10000);</span>
+<span class="fc" id="L254">      connection.setReadTimeout(10000);</span>
+<span class="fc" id="L255">      HttpURLConnection http = null;</span>
+<span class="pc bpc" id="L256" title="1 of 2 branches missed.">      if (connection instanceof HttpURLConnection) {</span>
+<span class="fc" id="L257">        http = (HttpURLConnection) connection;</span>
+<span class="fc" id="L258">        http.setInstanceFollowRedirects(false);</span>
+      }
+<span class="pc bpc" id="L260" title="1 of 2 branches missed.">      if (http != null) {</span>
+
+<span class="pc bpc" id="L262" title="1 of 2 branches missed.">        if (firstIteration) {</span>
+<span class="fc" id="L263">          firstIteration = false;</span>
+<span class="fc" id="L264">          http.setRequestProperty(&quot;Content-Type&quot;, &quot;text/plain; charset=UTF-8&quot;);</span>
+<span class="fc" id="L265">          http.setRequestMethod(method);</span>
+<span class="fc bfc" id="L266" title="All 2 branches covered.">          if (!body.isEmpty()) {</span>
+<span class="fc" id="L267">            connection.setDoOutput(true);</span>
+<span class="fc" id="L268">            connection.getOutputStream().write(body.getBytes(&quot;UTF-8&quot;));</span>
+          }
+        }
+
+<span class="fc" id="L272">        int stat = http.getResponseCode();</span>
+<span class="pc bpc" id="L273" title="7 of 8 branches missed.">        if (stat &gt;= 300 &amp;&amp; stat &lt;= 307 &amp;&amp; stat != 306 &amp;&amp;</span>
+                stat != HttpURLConnection.HTTP_NOT_MODIFIED) {
+<span class="nc" id="L275">          URL base = http.getURL();</span>
+<span class="nc" id="L276">          String newLocation = http.getHeaderField(&quot;Location&quot;);</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">          URL target = newLocation == null ? null : new URL(base, newLocation);</span>
+<span class="nc" id="L278">          http.disconnect();</span>
+          // Redirection should be allowed only for HTTP and HTTPS
+          // and should be limited to 5 redirections at most.
+<span class="nc bnc" id="L281" title="All 2 branches missed.">          if (redirects &gt;= 5) {</span>
+<span class="nc" id="L282">            throw new IOException(&quot;too many redirects&quot;);</span>
+          }
+<span class="nc bnc" id="L284" title="All 4 branches missed.">          if (target == null || !(target.getProtocol().equals(&quot;http&quot;)</span>
+<span class="nc bnc" id="L285" title="All 2 branches missed.">                  || target.getProtocol().equals(&quot;https&quot;))) {</span>
+<span class="nc" id="L286">            throw new IOException(&quot;illegal URL redirect or protocol&quot;);</span>
+          }
+<span class="nc" id="L288">          needRedirect = true;</span>
+<span class="nc" id="L289">          connection = target.openConnection();</span>
+<span class="nc" id="L290">          redirects++;</span>
+        }
+      }
+    }
+<span class="pc bpc" id="L294" title="1 of 2 branches missed.">    while (needRedirect);</span>
+<span class="fc" id="L295">    return connection;</span>
+  }
+
+  /**
+   * Build the announce request tracker message.
+   *
+   * @param event The announce event (can be &lt;tt&gt;NONE&lt;/tt&gt; or &lt;em&gt;null&lt;/em&gt;)
+   * @return Returns an instance of a {@link HTTPAnnounceRequestMessage}
+   * that can be used to generate the fully qualified announce URL, with
+   * parameters, to make the announce request.
+   * @throws UnsupportedEncodingException
+   * @throws IOException
+   * @throws MessageValidationException
+   */
+  private HTTPAnnounceRequestMessage buildAnnounceRequest(
+          AnnounceRequestMessage.RequestEvent event, AnnounceableInformation torrentInfo, Peer peer)
+          throws IOException,
+          MessageValidationException {
+    // Build announce request message
+<span class="fc" id="L314">    final long uploaded = torrentInfo.getUploaded();</span>
+<span class="fc" id="L315">    final long downloaded = torrentInfo.getDownloaded();</span>
+<span class="fc" id="L316">    final long left = torrentInfo.getLeft();</span>
+<span class="fc" id="L317">    return HTTPAnnounceRequestMessage.craft(</span>
+<span class="fc" id="L318">            torrentInfo.getInfoHash(),</span>
+<span class="fc" id="L319">            peer.getPeerIdArray(),</span>
+<span class="fc" id="L320">            peer.getPort(),</span>
+            uploaded,
+            downloaded,
+            left,
+            true, false, event,
+<span class="fc" id="L325">            peer.getIp(),</span>
+            AnnounceRequestMessage.DEFAULT_NUM_WANT);
+  }
+
+  private interface ResponseParser {
+
+    void parse(InputStream inputStream, int responseCode) throws IOException, MessageValidationException;
+
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
