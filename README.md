@@ -64,7 +64,7 @@ Then run `mvn test` and `mvn jacoco:report`. The JaCoCo report will be generated
 
 ##### JaCoCo for Maven Multi-Module Builds
 
-If a project contains multiple sub-modules, some extra work might be needed in order to generate an aggrated JaCoCo report. (https://github.com/jacoco/jacoco/wiki/MavenMultiModule)
+If a project contains multiple sub-modules, some extra work might be needed in order to generate an aggregated JaCoCo report. (https://github.com/jacoco/jacoco/wiki/MavenMultiModule)
 
 - Create a dedicated module in your project for generation of the report. This module should depend on all or some other modules in the project. [Here](https://github.com/gluckzhang/pdfbox/tree/2.0.21-jacoco/aggregate-report) is an example for PDFBox.
 - Run `mvn jacoco:report-aggregate` after `mvn test` to get an aggregated report.
@@ -79,6 +79,26 @@ If a project contains multiple sub-modules, some extra work might be needed in o
   </configuration>
 </plugin>
 ```
+
+##### Another Workaround for Aggregated Report Generation
+
+- Simply run `mvn test` first, after which a set of `jacoco.exec` files should be generated in each sub-module's folder
+- Use `jacococli.jar` to merge all the execution data files, e.g.,
+
+```bash
+java -jar jacococli.jar merge sub-module-a/jacoco.exec sub-module-b/jacoco.exec --destfile jacoco-merged.exec
+```
+- Use `jacococli.jar` to generate an aggregated report manually
+
+```bash
+java -jar jacococli.jar report ./jacoco-merged.exec \
+--classfiles ./sub-module-a/target/classes \
+--classfiles ./sub-module-b/target/classes \
+--sourcefiles ./sub-module-a/src/main/java \
+--sourcefiles ./sub-module-b/src/main/java \
+--html ./jacoco-report
+```
+This is very straightforward, though a bit tedious.
 
 #### WL (workload) Method Cov. and WL Line Cov.
 
