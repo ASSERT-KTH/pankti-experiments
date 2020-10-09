@@ -67,3 +67,7 @@ version             : 1.4.12
 - pseudo-tested -> pseudo-tested: 6
 
 Main reason of the unobvious improvement: too many failed test cases are removed before running descartes.
+
+## Notes
+
+To run descartes on TTorrent, we need [pitmp-maven-plugin](https://github.com/STAMP-project/pitmp-maven-plugin) instead of [pitest-descartes](https://github.com/STAMP-project/pitest-descartes).
