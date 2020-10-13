@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.isRtxEnabled: 2
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.isRtxEnabled: 13

@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.useRoomAsSharedDocName: 1
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.useRoomAsSharedDocName: 4

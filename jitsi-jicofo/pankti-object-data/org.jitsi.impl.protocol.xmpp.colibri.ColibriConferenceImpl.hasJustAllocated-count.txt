@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.impl.protocol.xmpp.colibri.ColibriConferenceImpl.hasJustAllocated: 2
+Invocation count for org.jitsi.impl.protocol.xmpp.colibri.ColibriConferenceImpl.hasJustAllocated: 13

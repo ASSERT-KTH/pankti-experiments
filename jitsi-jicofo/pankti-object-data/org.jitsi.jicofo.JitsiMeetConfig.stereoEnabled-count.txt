@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.stereoEnabled: 2
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.stereoEnabled: 13

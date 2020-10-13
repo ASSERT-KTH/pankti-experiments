@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.ProtocolProviderHandler.getXmppConnection: 2
+Invocation count for org.jitsi.jicofo.ProtocolProviderHandler.getXmppConnection: 5

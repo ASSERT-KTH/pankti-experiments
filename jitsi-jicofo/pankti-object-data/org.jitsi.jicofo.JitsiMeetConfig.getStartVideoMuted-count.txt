@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getStartVideoMuted: 2
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getStartVideoMuted: 13

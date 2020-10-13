@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getMinBitrate: 6
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getMinBitrate: 39
