@@ -1,48 +1,50 @@
 | \# | method                                                                                          | invocations | collected | unique |
 |----|-------------------------------------------------------------------------------------------------|-------------|-----------|--------|
-| 1  | org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags                                              | 23471       | 23471     |        |
-| 2  | org.apache.fontbox.ttf.HorizontalMetricsTable.getAdvanceWidth                                   | 275         | 275       |        |
-| 3  | org.apache.fontbox.ttf.HorizontalMetricsTable.getLeftSideBearing                                | 431         | 360       |        |
-| 4  | org.apache.fontbox.ttf.NamingTable.getName                                                      | 650         | 563       |        |
-| 5  | org.apache.fontbox.ttf.TrueTypeFont.getAdvanceWidth                                             | 275         | 275       |        |
-| 6  | org.apache.fontbox.ttf.TTFDataStream.readUnsignedByteArray                                      | 431         | 431       |        |
-| 7  | org.apache.pdfbox.pdfparser.COSParser.getEncryption                                             | 46          | 38        |        |
-| 8  | org.apache.pdfbox.pdfparser.XrefTrailerResolver.getXrefType                                     | 46          | 46        |        |
-| 9  | org.apache.pdfbox.pdmodel.DefaultResourceCache.getColorSpace                                    | 72          | 29        |        |
-| 10 | org.apache.pdfbox.pdmodel.DefaultResourceCache.getExtGState                                     | 49          | 24        |        |
-| 11 | org.apache.pdfbox.pdmodel.DefaultResourceCache.getFont                                          | 546         | 29        |        |
-| 12 | org.apache.pdfbox.pdmodel.DefaultResourceCache.getXObject                                       | 66          | 15        |        |
-| 13 | org.apache.pdfbox.pdmodel.font.FontCache.getFont                                                | 115         | 115       |        |
-| 14 | org.apache.pdfbox.pdmodel.font.PDCIDFont.getCIDSystemInfo                                       | 3           | 3         |        |
-| 15 | org.apache.pdfbox.pdmodel.font.PDCIDFontType2.codeToGID                                         | 58          | 38        |        |
-| 16 | org.apache.pdfbox.pdmodel.font.PDCIDFontType2.getPath                                           | 6           | 6         |        |
-| 17 | org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo.getOrdering                                      | 12          | 12        |        |
-| 18 | org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo.getRegistry                                      | 3           | 3         |        |
-| 19 | org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags                                        | 227         | 227       |        |
-| 20 | org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isFixedPitch                                    | 21          | 21        |        |
-| 21 | org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isItalic                                        | 21          | 21        |        |
-| 22 | org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSerif                                         | 21          | 21        |        |
-| 23 | org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic                                      | 24          | 24        |        |
-| 24 | org.apache.pdfbox.pdmodel.font.PDSimpleFont.hasExplicitWidth                                    | 274         | 144       |        |
-| 25 | org.apache.pdfbox.pdmodel.font.PDSimpleFont.toUnicode                                           | 30840       | 37        |        |
-| 26 | org.apache.pdfbox.pdmodel.font.PDTrueTypeFont.getPath                                           | 782         | 36        |        |
-| 27 | org.apache.pdfbox.pdmodel.graphics.color.PDICCBased.getDefaultDecode                            | 16          | 16        |        |
-| 28 | org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject.getColorKeyMask                         | 39          | 7         |        |
-| 29 | org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject.getDecode                               | 39          | 7         |        |
-| 30 | org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject.getInterpolate                          | 66          | 8         |        |
-| 31 | org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject.getMask                                 | 66          | 13        |        |
-| 32 | org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject.getOptionalContent                      | 33          | 7         |        |
-| 33 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getAlphaSourceFlag             | 12          | 12        |        |
-| 34 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getAutomaticStrokeAdjustment   | 33          | 33        |        |
-| 35 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getNonStrokingAlphaConstant    | 12          | 12        |        |
-| 36 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getNonStrokingOverprintControl | 24          | 24        |        |
-| 37 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getOverprintMode               | 24          | 24        |        |
-| 38 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getSmoothnessTolerance         | 21          | 21        |        |
-| 39 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getSoftMask                    | 20          | 20        |        |
-| 40 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getStrokingAlphaConstant       | 12          | 12        |        |
-| 41 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getStrokingOverprintControl    | 48          | 48        |        |
-| 42 | org.apache.pdfbox.pdmodel.graphics.state.RenderingMode.isFill                                   | 30944       | 30944     |        |
-| 43 | org.apache.pdfbox.pdmodel.PDDocumentCatalog.getViewerPreferences                                | 8           | 8         |        |
-| 44 | org.apache.pdfbox.pdmodel.PDResources.getExtGState                                              | 49          | 19        |        |
-| 45 | org.apache.pdfbox.rendering.TTFGlyph2D.getPathForCharacterCode                                  | 15472       | 34        |        |
-| 46 | org.apache.pdfbox.rendering.TTFGlyph2D.getPathForGID                                            | 15472       | 34        |        |
+| 1  | org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags                                              | 23471       | 23471     | 11730  |
+| 2  | org.apache.fontbox.ttf.HorizontalMetricsTable.getAdvanceWidth                                   | 275         | 275       | 174    |
+| 3  | org.apache.fontbox.ttf.HorizontalMetricsTable.getLeftSideBearing                                | 431         | 360       | 360    |
+| 4  | org.apache.fontbox.ttf.NamingTable.getName                                                      | 650         | 563       | 273    |
+| 5  | org.apache.fontbox.ttf.TrueTypeFont.getAdvanceWidth                                             | 275         | 275       | 174    |
+| 6  | org.apache.fontbox.ttf.TTFDataStream.readUnsignedByteArray                                      | 431         | 431       | 431    |
+| 7  | org.apache.pdfbox.pdfparser.COSParser.getEncryption                                             | 46          | 38        | 35     |
+| 8  | org.apache.pdfbox.pdfparser.XrefTrailerResolver.getXrefType                                     | 46          | 46        | 17     |
+| 9  | org.apache.pdfbox.pdmodel.DefaultResourceCache.getColorSpace                                    | 72          | 29        | 27     |
+| 10 | org.apache.pdfbox.pdmodel.DefaultResourceCache.getExtGState                                     | 49          | 24        | 22     |
+| 11 | org.apache.pdfbox.pdmodel.DefaultResourceCache.getFont                                          | 546         | 29        | 29     |
+| 12 | org.apache.pdfbox.pdmodel.DefaultResourceCache.getXObject                                       | 66          | 15        | 15     |
+| 13 | org.apache.pdfbox.pdmodel.font.FontCache.getFont                                                | 115         | 115       | 105    |
+| 14 | org.apache.pdfbox.pdmodel.font.PDCIDFont.getCIDSystemInfo                                       | 3           | 3         | 1      |
+| 15 | org.apache.pdfbox.pdmodel.font.PDCIDFontType2.codeToGID                                         | 58          | 38        | 7      |
+| 16 | org.apache.pdfbox.pdmodel.font.PDCIDFontType2.getPath                                           | 6           | 6         | 6      |
+| 17 | org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo.getOrdering                                      | 12          | 12        | 1      |
+| 18 | org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo.getRegistry                                      | 3           | 3         | 1      |
+| 19 | org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags                                        | 227         | 227       | 54     |
+| 20 | org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isFixedPitch                                    | 21          | 21        | 6      |
+| 21 | org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isItalic                                        | 21          | 21        | 6      |
+| 22 | org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSerif                                         | 21          | 21        | 6      |
+| 23 | org.apache.pdfbox.pdmodel.font.PDFontDescriptor.isSymbolic                                      | 24          | 24        | 20     |
+| 24 | org.apache.pdfbox.pdmodel.font.PDSimpleFont.hasExplicitWidth                                    | 274         | 144       | 117    |
+| 25 | org.apache.pdfbox.pdmodel.font.PDSimpleFont.toUnicode                                           | 30840       | 37        | 35     |
+| 26 | org.apache.pdfbox.pdmodel.font.PDTrueTypeFont.getPath                                           | 782         | 36        | 36     |
+| 27 | org.apache.pdfbox.pdmodel.graphics.color.PDICCBased.getDefaultDecode                            | 16          | 16        | 8      |
+| 28 | org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject.getColorKeyMask                         | 39          | 7         | 7      |
+| 29 | org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject.getDecode                               | 39          | 7         | 7      |
+| 30 | org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject.getInterpolate                          | 66          | 8         | 8      |
+| 31 | org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject.getMask                                 | 66          | 13        | 13     |
+| 32 | org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject.getOptionalContent                      | 33          | 7         | 7      |
+| 33 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getAlphaSourceFlag             | 12          | 12        | 1      |
+| 34 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getAutomaticStrokeAdjustment   | 33          | 33        | 4      |
+| 35 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getNonStrokingAlphaConstant    | 12          | 12        | 1      |
+| 36 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getNonStrokingOverprintControl | 24          | 24        | 3      |
+| 37 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getOverprintMode               | 24          | 24        | 3      |
+| 38 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getSmoothnessTolerance         | 21          | 21        | 3      |
+| 39 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getSoftMask                    | 20          | 20        | 4      |
+| 40 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getStrokingAlphaConstant       | 12          | 12        | 1      |
+| 41 | org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState.getStrokingOverprintControl    | 48          | 48        | 3      |
+| 42 | org.apache.pdfbox.pdmodel.graphics.state.RenderingMode.isFill                                   | 30944       | 30944     | 1      |
+| 43 | org.apache.pdfbox.pdmodel.PDDocumentCatalog.getViewerPreferences                                | 8           | 8         | 8      |
+| 44 | org.apache.pdfbox.pdmodel.PDResources.getExtGState                                              | 49          | 19        | 18     |
+| 45 | org.apache.pdfbox.rendering.TTFGlyph2D.getPathForCharacterCode                                  | 15472       | 34        | 34     |
+| 46 | org.apache.pdfbox.rendering.TTFGlyph2D.getPathForGID                                            | 15472       | 34        | 34     |
+| *  | **TOTAL**                                                                                       | 121175      | 57567     | 13856  |
+
