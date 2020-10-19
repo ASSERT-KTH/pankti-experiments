@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetServices.getJigasiDetector: 16
+Invocation count for org.jitsi.jicofo.JitsiMeetServices.getJigasiDetector: 8

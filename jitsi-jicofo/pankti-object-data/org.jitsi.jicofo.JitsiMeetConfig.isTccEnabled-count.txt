@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.isTccEnabled: 65
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.isTccEnabled: 20

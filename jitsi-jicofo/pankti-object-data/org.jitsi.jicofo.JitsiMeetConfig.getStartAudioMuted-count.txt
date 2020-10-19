@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getStartAudioMuted: 13
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getStartAudioMuted: 4

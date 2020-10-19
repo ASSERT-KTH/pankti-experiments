@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.isRembEnabled: 39
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.isRembEnabled: 12

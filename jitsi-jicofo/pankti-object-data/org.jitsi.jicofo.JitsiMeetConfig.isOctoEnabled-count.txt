@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.isOctoEnabled: 43
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.isOctoEnabled: 15

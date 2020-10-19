@@ -1,9 +1,9 @@
-visibility,parent-FQN,method-name,param-list,return-type,local-variables,conditionals,multiple-statements,loops,parameters,returns,switches,ifs,static,returns-primitives,param-signature,classification
+visibility,parent-FQN,method-name,param-list,return-type,param-signature,local-variables,conditionals,multiple-statements,loops,parameters,returns,switches,ifs,static,returns-primitives,classification
 public,org.jitsi.jicofo.util.MaxPacketRateCalculator,computeSenderIngressPacketRatePps,,int,,False,False,False,False,False,True,False,False,False,True,pseudo-tested
 public,org.jitsi.jicofo.util.MaxPacketRateCalculator,computeIngressPacketRatePps,,int,,False,False,False,False,False,True,False,False,False,True,pseudo-tested
-public,org.jitsi.jicofo.ProtocolProviderHandler,getXmppConnection,,org.jitsi.protocol.xmpp.XmppConnection,,False,False,False,False,False,True,False,False,False,False,pseudo-tested
 public,org.jitsi.jicofo.util.MaxPacketRateCalculator,computeParticipantEgressPacketRatePps,,int,,False,False,False,False,False,True,False,False,False,True,pseudo-tested
 public,org.jitsi.jicofo.util.MaxPacketRateCalculator,computeEgressPacketRatePps,,int,,False,False,False,False,False,True,False,False,False,True,pseudo-tested
+public,org.jitsi.jicofo.ProtocolProviderHandler,getXmppConnection,,org.jitsi.protocol.xmpp.XmppConnection,,False,False,False,False,False,True,False,False,False,False,pseudo-tested
 public,org.jitsi.jicofo.JitsiMeetConfig,useRoomAsSharedDocName,,boolean,,True,False,True,False,False,True,False,False,False,True,pseudo-tested
 public,org.jitsi.jicofo.JitsiMeetConfig,isLipSyncEnabled,,java.lang.Boolean,,False,False,False,False,False,True,False,False,False,False,pseudo-tested
 public,org.jitsi.jicofo.JitsiMeetServices,getJigasiDetector,,org.jitsi.jicofo.jigasi.JigasiDetector,,False,False,False,False,False,True,False,False,False,False,pseudo-tested

@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getStartBitrate: 39
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getStartBitrate: 12

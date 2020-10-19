@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getChannelLastN: 5
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getChannelLastN: 2

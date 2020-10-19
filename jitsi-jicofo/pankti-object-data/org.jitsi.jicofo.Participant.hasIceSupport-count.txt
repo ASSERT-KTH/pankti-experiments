@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.Participant.hasIceSupport: 13
+Invocation count for org.jitsi.jicofo.Participant.hasIceSupport: 4

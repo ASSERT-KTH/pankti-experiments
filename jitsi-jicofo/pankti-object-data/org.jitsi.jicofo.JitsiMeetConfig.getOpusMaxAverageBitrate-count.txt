@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getOpusMaxAverageBitrate: 13
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getOpusMaxAverageBitrate: 4

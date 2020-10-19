@@ -1,1 +1,1 @@
-Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getMinParticipants: 12
+Invocation count for org.jitsi.jicofo.JitsiMeetConfig.getMinParticipants: 5
