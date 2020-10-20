@@ -6,11 +6,11 @@
 
 ## Instrumentation candidates:
 
-8
+6
 
 ## Covered by the workload:
 
-7
+5
 
 ## Number of generated test cases:
 
