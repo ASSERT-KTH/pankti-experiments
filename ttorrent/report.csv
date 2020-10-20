@@ -1,0 +1,9 @@
+#,method,invocations,collected-profiles,unique-profiles,generated-tests,passing-tests,failing-tests,Descartes-classification,comments for failing test cases
+1,com.turn.ttorrent.bcodec.BEValue.getLong,6,6,2,2,2,0,tested,
+2,com.turn.ttorrent.client.storage.FileCollectionStorage.read,1168,600,600,600,0,600,pseudo-tested,Objects depend on external states (files)
+3,com.turn.ttorrent.common.protocol.AnnounceRequestMessage$RequestEvent.getEventName,1,,,,,,pseudo-tested,
+4,com.turn.ttorrent.client.network.ShutdownProcessor.processAndGetNext,8,8,8,8,8,0,pseudo-tested,
+5,com.turn.ttorrent.common.protocol.PeerMessage$HaveMessage.validate,1,36,36,36,0,36,pseudo-tested,AssertionError due to object comparisons
+6,com.turn.ttorrent.client.strategy.EndGameStrategyImpl$1.compare,1,21,,,,,pseudo-tested,
+7,com.turn.ttorrent.network.ConnectionWorker.stop,1,0,0,0,0,0,pseudo-tested,
+*,TOTAL,1186,671,646,646,10,636,tested/partially-tested:1 + pseudo-tested:6,
