@@ -15,10 +15,10 @@ for index, row in df.iterrows():
     for i in range(len(found)):
         size += os.path.getsize(files[found[i]])
     # in KB
-    average_size = (size/row['collected-profiles'])/1000
+    average_size = (size/row['collected-profiles'])/1000.0 if row['collected-profiles'] != 0 else 0
     total_average_size += average_size
-    average_sizes.append(average_size)
-average_sizes[-1] = total_average_size
+    average_sizes.append("%.2f KB"%average_size)
+average_sizes[-1] = "%.2f KB"%total_average_size
 df['avg-size-on-disk-kb'] = average_sizes
 
 df.to_csv(r'./report-file-sizes.csv', index=False)
