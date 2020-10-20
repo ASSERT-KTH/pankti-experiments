@@ -1,4 +1,4 @@
-#,method,invocations,collected-profiles,unique-profiles,generated-tests,passing-tests,failing-tests,descartes-classification,file-size
+#,method,invocations,collected-profiles,unique-profiles,generated-tests,passing-tests,failing-tests,descartes-classification,avg-size-on-disk-kb
 1,org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags,23471,23471,11730,117,117,0,tested,7.2042578501129055
 2,org.apache.fontbox.ttf.HorizontalMetricsTable.getAdvanceWidth,275,275,174,174,174,0,tested,689.2017163636364
 3,org.apache.fontbox.ttf.HorizontalMetricsTable.getLeftSideBearing,431,360,360,360,360,0,tested,583.503375
