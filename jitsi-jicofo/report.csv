@@ -1,31 +1,31 @@
 #,method,invocations,collected-profiles,reason for 0 collected-profiles,unique-profiles,generated-tests,passing-tests,failing-tests,Descartes-classification,comments for failing test cases,avg-size-on-disk-kb
-1,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeSenderIngressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
-2,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeIngressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
-3,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeParticipantEgressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
-4,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeEgressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
-5,org.jitsi.jicofo.ProtocolProviderHandler.getXmppConnection,4,0,ConcurrentModificationException,0,0,0,0,pseudo-tested,,0.00 KB
-6,org.jitsi.jicofo.JitsiMeetConfig.useRoomAsSharedDocName,3,3,,1,1,1,0,partially-tested,,0.49 KB
-7,org.jitsi.jicofo.JitsiMeetConfig.isLipSyncEnabled,3,3,,1,1,1,0,partially-tested,,0.49 KB
-8,org.jitsi.jicofo.JitsiMeetServices.getJigasiDetector,8,0,No converter specified,0,0,0,0,pseudo-tested,,0.00 KB
-9,org.jitsi.jicofo.JitsiMeetConfig.isOctoEnabled,15,15,,1,1,1,0,partially-tested,,0.49 KB
-10,org.jitsi.jicofo.JitsiMeetServices.getJibriDetector,6,0,No converter specified,0,0,0,0,pseudo-tested,,0.00 KB
-11,org.jitsi.jicofo.JitsiMeetServices.getSipJibriDetector,3,0,No converter specified,0,0,0,0,pseudo-tested,,0.00 KB
-12,org.jitsi.jicofo.JitsiMeetConfig.getMinParticipants,5,5,,1,1,1,0,tested,,0.48 KB
-13,org.jitsi.jicofo.JitsiMeetConfig.getStartAudioMuted,4,4,,1,1,1,0,partially-tested,,0.48 KB
-14,org.jitsi.jicofo.JitsiMeetConfig.getStartVideoMuted,4,4,,1,1,1,0,partially-tested,,0.48 KB
-15,org.jitsi.jicofo.JitsiMeetConfig.getEnforcedVideobridge,4,4,,1,1,1,0,pseudo-tested,,0.48 KB
-16,org.jitsi.jicofo.JitsiMeetConfig.getChannelLastN,2,2,,1,1,1,0,tested,,0.48 KB
-17,org.jitsi.jicofo.JitsiMeetConfig.getAudioPacketDelay,2,2,,1,1,1,0,partially-tested,,0.48 KB
-18,org.jitsi.jicofo.Participant.hasIceSupport,4,0,ConcurrentModificationException,0,0,0,0,pseudo-tested,,0.00 KB
-19,org.jitsi.jicofo.Participant.hasDtlsSupport,4,0,ConcurrentModificationException,0,0,0,0,pseudo-tested,,0.00 KB
-20,org.jitsi.jicofo.JitsiMeetConfig.isRtxEnabled,4,4,,1,1,1,0,partially-tested,,0.49 KB
-21,org.jitsi.jicofo.Participant.hasRtxSupport,4,0,ConcurrentModificationException,0,0,0,0,pseudo-tested,,0.00 KB
-22,org.jitsi.jicofo.JitsiMeetConfig.stereoEnabled,4,4,,1,1,1,0,partially-tested,,0.49 KB
-23,org.jitsi.jicofo.JitsiMeetConfig.getOpusMaxAverageBitrate,4,4,,1,1,1,0,tested,,0.48 KB
-24,org.jitsi.jicofo.JitsiMeetConfig.isTccEnabled,20,18,,1,1,1,0,partially-tested,,0.50 KB
-25,org.jitsi.jicofo.JitsiMeetConfig.getMinBitrate,12,11,,1,1,1,0,tested,,0.48 KB
-26,org.jitsi.jicofo.JitsiMeetConfig.getStartBitrate,12,11,,1,1,1,0,tested,,0.49 KB
-27,org.jitsi.jicofo.JitsiMeetConfig.isRembEnabled,12,12,,1,1,1,0,partially-tested,,0.49 KB
-28,org.jitsi.impl.protocol.xmpp.colibri.ColibriConferenceImpl.hasJustAllocated,4,0,Security alert. Marshalling rejected.,0,0,0,0,pseudo-tested,,0.00 KB
-29,org.jitsi.jicofo.JitsiMeetConferenceImpl$BridgeSession.terminate,1,0,Security alert. Marshalling rejected.,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_01,org.jitsi.jicofo.JitsiMeetConfig.isTccEnabled,20,18,,1,1,1,0,partially-tested,,0.50 KB
+JICOFO_02,org.jitsi.jicofo.JitsiMeetConfig.isOctoEnabled,15,15,,1,1,1,0,partially-tested,,0.49 KB
+JICOFO_03,org.jitsi.jicofo.JitsiMeetConfig.getMinBitrate,12,11,,1,1,1,0,tested,,0.48 KB
+JICOFO_04,org.jitsi.jicofo.JitsiMeetConfig.getStartBitrate,12,11,,1,1,1,0,tested,,0.49 KB
+JICOFO_05,org.jitsi.jicofo.JitsiMeetConfig.isRembEnabled,12,12,,1,1,1,0,partially-tested,,0.49 KB
+JICOFO_06,org.jitsi.jicofo.JitsiMeetServices.getJigasiDetector,8,0,No converter specified,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_07,org.jitsi.jicofo.JitsiMeetServices.getJibriDetector,6,0,No converter specified,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_08,org.jitsi.jicofo.JitsiMeetConfig.getMinParticipants,5,5,,1,1,1,0,tested,,0.48 KB
+JICOFO_09,org.jitsi.jicofo.ProtocolProviderHandler.getXmppConnection,4,0,ConcurrentModificationException,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_10,org.jitsi.jicofo.JitsiMeetConfig.getStartAudioMuted,4,4,,1,1,1,0,partially-tested,,0.48 KB
+JICOFO_11,org.jitsi.jicofo.JitsiMeetConfig.getStartVideoMuted,4,4,,1,1,1,0,partially-tested,,0.48 KB
+JICOFO_12,org.jitsi.jicofo.JitsiMeetConfig.getEnforcedVideobridge,4,4,,1,1,1,0,pseudo-tested,,0.48 KB
+JICOFO_13,org.jitsi.jicofo.Participant.hasIceSupport,4,0,ConcurrentModificationException,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_14,org.jitsi.jicofo.Participant.hasDtlsSupport,4,0,ConcurrentModificationException,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_15,org.jitsi.jicofo.JitsiMeetConfig.isRtxEnabled,4,4,,1,1,1,0,partially-tested,,0.49 KB
+JICOFO_16,org.jitsi.jicofo.Participant.hasRtxSupport,4,0,ConcurrentModificationException,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_17,org.jitsi.jicofo.JitsiMeetConfig.stereoEnabled,4,4,,1,1,1,0,partially-tested,,0.49 KB
+JICOFO_18,org.jitsi.jicofo.JitsiMeetConfig.getOpusMaxAverageBitrate,4,4,,1,1,1,0,tested,,0.48 KB
+JICOFO_19,org.jitsi.impl.protocol.xmpp.colibri.ColibriConferenceImpl.hasJustAllocated,4,0,Security alert. Marshalling rejected.,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_20,org.jitsi.jicofo.JitsiMeetConfig.useRoomAsSharedDocName,3,3,,1,1,1,0,partially-tested,,0.49 KB
+JICOFO_21,org.jitsi.jicofo.JitsiMeetConfig.isLipSyncEnabled,3,3,,1,1,1,0,partially-tested,,0.49 KB
+JICOFO_22,org.jitsi.jicofo.JitsiMeetServices.getSipJibriDetector,3,0,No converter specified,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_23,org.jitsi.jicofo.JitsiMeetConfig.getChannelLastN,2,2,,1,1,1,0,tested,,0.48 KB
+JICOFO_24,org.jitsi.jicofo.JitsiMeetConfig.getAudioPacketDelay,2,2,,1,1,1,0,partially-tested,,0.48 KB
+JICOFO_25,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeSenderIngressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
+JICOFO_26,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeIngressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
+JICOFO_27,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeParticipantEgressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
+JICOFO_28,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeEgressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
+JICOFO_29,org.jitsi.jicofo.JitsiMeetConferenceImpl$BridgeSession.terminate,1,0,Security alert. Marshalling rejected.,0,0,0,0,pseudo-tested,,0.00 KB
 *,TOTAL,152,110,,20,20,20,0,tested/partially-tested:19 + pseudo-tested:10,,9.79 KB
