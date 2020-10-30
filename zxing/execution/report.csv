@@ -1,0 +1,25 @@
+#,method,invocations,collected-profiles,unique-profiles,generated-tests,passing-tests,failing-tests,descartes-classification
+1,com.google.zxing.common.BitSource.available,1798,1798,869,869,869,0,strongly-tested
+2,com.google.zxing.common.BitArray.isRange,1356,1356,571,571,571,0,strongly-tested
+3,com.google.zxing.common.DecoderResult.hasStructuredAppend,20,20,10,10,10,0,strongly-tested
+4,com.google.zxing.client.result.AddressBookDoCoMoResultParser.parse,13,13,13,13,12,1,strongly-tested
+5,com.google.zxing.client.result.BookmarkDoCoMoResultParser.parse,13,13,13,13,13,0,strongly-tested
+6,com.google.zxing.client.result.AddressBookAUResultParser.parse,12,12,12,12,12,0,strongly-tested
+7,com.google.zxing.client.result.EmailDoCoMoResultParser.parse,12,12,12,12,12,0,strongly-tested
+8,com.google.zxing.client.result.VCardResultParser.parse,12,12,12,12,11,1,strongly-tested
+9,com.google.zxing.client.result.BizcardResultParser.parse,11,11,11,11,10,1,strongly-tested
+10,com.google.zxing.client.result.VEventResultParser.parse,10,10,10,10,9,1,strongly-tested
+11,com.google.zxing.client.result.EmailAddressResultParser.parse,9,9,9,9,8,1,strongly-tested
+12,com.google.zxing.client.result.SMTPResultParser.parse,8,8,8,8,8,0,strongly-tested
+13,com.google.zxing.client.result.TelResultParser.parse,8,8,8,8,7,1,strongly-tested
+14,com.google.zxing.client.result.SMSMMSResultParser.parse,7,7,7,7,6,1,strongly-tested
+15,com.google.zxing.client.result.GeoResultParser.parse,6,6,6,6,5,1,strongly-tested
+16,com.google.zxing.client.result.SMSTOMMSTOResultParser.parse,6,6,6,6,6,0,strongly-tested
+19,com.google.zxing.client.result.WifiResultParser.parse,5,5,5,5,4,1,strongly-tested
+17,com.google.zxing.client.result.URIResultParser.parse,4,4,4,4,3,1,strongly-tested
+18,com.google.zxing.client.result.URLTOResultParser.parse,4,4,4,4,4,0,strongly-tested
+21,com.google.zxing.client.result.ISBNResultParser.parse,3,3,3,3,3,0,strongly-tested
+22,com.google.zxing.client.result.ProductResultParser.parse,3,3,3,3,2,1,strongly-tested
+20,com.google.zxing.client.result.ExpandedProductResultParser.parse,2,2,2,2,2,0,strongly-tested
+23,com.google.zxing.client.result.VINResultParser.parse,2,2,2,2,2,0,strongly-tested
+*,TOTAL,3324,3324,1600,1600,1589,11,strongly-tested : 23 pseudo-tested : 0
