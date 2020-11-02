@@ -1,0 +1,8 @@
+<org.broadleafcommerce.core.order.fulfillment.domain.FixedPriceFulfillmentOptionImpl>
+  <id>3</id>
+  <name>Express</name>
+  <longDescription>1 - 2 Days</longDescription>
+  <useFlatRates>false</useFlatRates>
+  <fulfillmentType>PHYSICAL_SHIP</fulfillmentType>
+  <price>20.00000</price>
+</org.broadleafcommerce.core.order.fulfillment.domain.FixedPriceFulfillmentOptionImpl>

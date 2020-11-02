@@ -1,0 +1,13 @@
+#,method,invocations,collected-profiles,unique-profiles,generated-tests,passing-tests,failing-tests,descartes-classification
+1,org.broadleafcommerce.core.catalog.domain.SkuImpl.getCurrency,183,183,60,60,60,0,pseudo-tested
+2,org.broadleafcommerce.core.catalog.domain.SkuImpl.getName,175,175,86,86,37,49,strongly-tested
+3,org.broadleafcommerce.core.catalog.domain.SkuImpl.isTaxable,5,5,3,3,3,0,strongly-tested
+4,org.broadleafcommerce.core.order.domain.OrderImpl.finalizeItemPrices,2,2,2,2,2,0,strongly-tested
+5,org.broadleafcommerce.core.order.domain.OrderImpl.getHasOrderAdjustments,2,2,2,2,2,0,strongly-tested
+6,org.broadleafcommerce.core.catalog.domain.SkuImpl.getBaseRetailPrice,1,1,1,1,0,1,pseudo-tested
+7,org.broadleafcommerce.core.catalog.domain.SkuImpl.getBaseSalePrice,1,1,1,1,1,0,pseudo-tested
+8,org.broadleafcommerce.core.catalog.domain.SkuImpl.getPriceData,1,1,1,1,0,1,pseudo-tested
+9,org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices.getPrice,1,1,1,1,1,0,strongly-tested
+10,org.broadleafcommerce.core.order.fulfillment.domain.FixedPriceFulfillmentOptionImpl.getPrice,1,1,1,1,0,1,pseudo-tested
+11,org.broadleafcommerce.core.pricing.service.fulfillment.provider.FixedPriceFulfillmentPricingProvider.canCalculateCostForFulfillmentGroup,0,0,0,0,0,0,pseudo-tested
+*,TOTAL,372,372,158,158,106,52,strongly-tested : 5 pseudo-tested : 6

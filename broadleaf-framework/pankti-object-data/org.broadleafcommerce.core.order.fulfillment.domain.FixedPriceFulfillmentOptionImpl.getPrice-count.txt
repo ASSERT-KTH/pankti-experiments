@@ -1,0 +1,1 @@
+Invocation count for org.broadleafcommerce.core.order.fulfillment.domain.FixedPriceFulfillmentOptionImpl.getPrice: 1

@@ -1,0 +1,12 @@
+visibility,parent-FQN,method-name,param-list,return-type,param-signature,local-variables,conditionals,multiple-statements,loops,parameters,returns,switches,ifs,static,returns-primitives,classification
+public,org.broadleafcommerce.core.catalog.domain.SkuImpl,getCurrency,,org.broadleafcommerce.common.currency.domain.BroadleafCurrency,,False,False,False,False,False,True,False,True,False,False,pseudo-tested
+public,org.broadleafcommerce.core.catalog.domain.SkuImpl,getName,,java.lang.String,,False,False,True,False,False,True,False,True,False,False,pseudo-tested
+public,org.broadleafcommerce.core.catalog.domain.SkuImpl,getBaseRetailPrice,,org.broadleafcommerce.common.money.Money,,True,False,True,False,False,True,False,True,False,False,pseudo-tested
+public,org.broadleafcommerce.core.catalog.domain.SkuImpl,getBaseSalePrice,,org.broadleafcommerce.common.money.Money,,True,False,True,False,False,True,False,True,False,False,pseudo-tested
+public,org.broadleafcommerce.core.catalog.domain.SkuImpl,isTaxable,,java.lang.Boolean,,False,True,True,False,False,True,False,True,False,False,pseudo-tested
+public,org.broadleafcommerce.core.catalog.domain.SkuImpl,getPriceData,,org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices,,True,False,False,False,False,True,False,True,False,False,pseudo-tested
+public,org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices,getPrice,,org.broadleafcommerce.common.money.Money,,False,False,True,False,False,True,False,True,False,False,pseudo-tested
+public,org.broadleafcommerce.core.order.domain.OrderImpl,finalizeItemPrices,,boolean,,True,False,True,True,False,True,False,False,False,True,pseudo-tested
+public,org.broadleafcommerce.core.order.domain.OrderImpl,getHasOrderAdjustments,,boolean,,True,False,True,False,False,True,False,True,False,True,pseudo-tested
+public,org.broadleafcommerce.core.pricing.service.fulfillment.provider.FixedPriceFulfillmentPricingProvider,canCalculateCostForFulfillmentGroup,"org.broadleafcommerce.core.order.domain.FulfillmentGroup,org.broadleafcommerce.core.order.domain.FulfillmentOption",boolean,Lorg/broadleafcommerce/core/order/domain/FulfillmentGroup;Lorg/broadleafcommerce/core/order/domain/FulfillmentOption;,False,False,False,False,True,True,False,False,False,True,pseudo-tested
+public,org.broadleafcommerce.core.order.fulfillment.domain.FixedPriceFulfillmentOptionImpl,getPrice,,org.broadleafcommerce.common.money.Money,,False,True,False,False,False,True,False,False,False,False,pseudo-tested

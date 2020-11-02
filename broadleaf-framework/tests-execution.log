@@ -1,0 +1,80 @@
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running org.broadleafcommerce.core.order.domain.TestOrderImplPanktiGen
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields (file:/home/x/.m2/repository/com/thoughtworks/xstream/xstream/1.4.12/xstream-1.4.12.jar) to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Security framework of XStream not initialized, XStream is probably vulnerable.
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.524 sec
+Running org.broadleafcommerce.core.order.fulfillment.domain.TestFixedPriceFulfillmentOptionImplPanktiGen
+Security framework of XStream not initialized, XStream is probably vulnerable.
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec <<< FAILURE!
+Running org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen
+Security framework of XStream not initialized, XStream is probably vulnerable.
+Tests run: 152, Failures: 51, Errors: 0, Skipped: 0, Time elapsed: 0.295 sec <<< FAILURE!
+Running org.broadleafcommerce.core.catalog.service.dynamic.TestDynamicSkuPricesPanktiGen
+Security framework of XStream not initialized, XStream is probably vulnerable.
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+
+Results :
+
+Failed tests:   testGetPrice1(org.broadleafcommerce.core.order.fulfillment.domain.TestFixedPriceFulfillmentOptionImplPanktiGen): expected:<20> but was:<20.00>
+  testGetName1(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa del D&iacute;a de los Muertos de Bonnet Escoc&eacute;s]> but was:<[Day of the Dead Scotch Bonnet Hot Sauce]>
+  testGetName2(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<S[alsa de la Muerte S&uacute;bita]> but was:<S[udden Death Sauce]>
+  testGetName4(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa de Locura]> but was:<[Insanity Sauce]>
+  testGetName7(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Caf[&eacute; Cajun Louisiane Douce Sauce Blackening]> but was:<Caf[e Louisiane Sweet Cajun Blackening Sauce]>
+  testGetName8(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Hawt [comme une chemise Habanero (Homme]s)> but was:<Hawt [Like a Habanero Shirt (Men']s)>
+  testGetBaseRetailPrice1(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<6.9899997711181640625> but was:<6.99>
+  testGetPriceData1(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices@6e35bc3d> but was:<org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices@1cdc4c27>
+  testGetName10(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Fantasma Verde]> but was:<[Green Ghost]>
+  testGetName12(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Frais Poivre de Cayenne] Hot Sauce> but was:<[Cool Cayenne Pepper] Hot Sauce>
+  testGetName14(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Armageddon [L]e Hot Sauce To End A...> but was:<Armageddon [Th]e Hot Sauce To End A...>
+  testGetName15(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Bull Snort Cowboy [poivre de Cayenne] Hot Sauce> but was:<Bull Snort Cowboy [Cayenne Pepper] Hot Sauce>
+  testGetName18(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Fin del Mundo Salsa]> but was:<[Armageddon The Hot Sauce To End All]>
+  testGetName21(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<S[alsa de Locura]> but was:<S[cotch Bonnet Hot Sauce]>
+  testGetName23(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Heat Clinic [dibujado a mano (Mujere]s)> but was:<Heat Clinic [Hand-Drawn (Women']s)>
+  testGetName28(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Sauce chaudes Chipotl]e> but was:<[Roasted Red Pepper & Chipotle Hot Sauc]e>
+  testGetName32(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa de Pimienta Roja y Chipotl]e> but was:<[Roasted Red Pepper & Chipotle Hot Sauc]e>
+  testGetName34(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa de Cayene Fresco]> but was:<[Cool Cayenne Pepper Hot Sauce]>
+  testGetName35(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Bull Snort Smokin[ 'Hot Sauce Toncils]> but was:<Bull Snort Smokin[' Toncils Hot Sauce]>
+  testGetName37(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Ho[t Sauce Hoppin]> but was:<Ho[ppin' Hot Sauce]>
+  testGetName39(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Mascota de Heat Clinic (Hombre]s)> but was:<[Heat Clinic Mascot (Men']s)>
+  testGetName40(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa Mata-Gargantas de Bull Snort]> but was:<[Bull Snort Smokin' Toncils Hot Sauce]>
+  testGetName41(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<S[auce Scotch Bonnet chaud]> but was:<S[cotch Bonnet Hot Sauce]>
+  testGetName42(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Mascota de Heat Clinic (Mujere]s)> but was:<[Heat Clinic Mascot (Women']s)>
+  testGetName43(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Sauce Scotch Bonnet chaud]> but was:<[Insanity Sauce]>
+  testGetName45(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Camisa de Habanero Hawt (Mujere]s)> but was:<[Hawt Like a Habanero Shirt (Women']s)>
+  testGetName47(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa de la Muerte Saltant]e> but was:<[Hoppin' Hot Sauc]e>
+  testGetName48(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Jour de la sauce Scotch Bonnet Hot Mort]e> but was:<[Day of the Dead Scotch Bonnet Hot Sauc]e>
+  testGetName50(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Jour de la sauce chaude Morte Chipotl]e> but was:<[Day of the Dead Chipotle Hot Sauc]e>
+  testGetName53(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa de Jalape&ntilde;o Ardient]e> but was:<[Hurtin' Jalapeno Hot Sauc]e>
+  testGetName54(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa de Habanero de la Silla Ardient]e> but was:<[Blazin' Saddle XXX Hot Habanero Pepper Sauc]e>
+  testGetName55(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa de Ajo Tostado]> but was:<[Roasted Garlic Hot Sauce]>
+  testGetName56(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Heat Clinic [dibujado a mano (Hombre]s)> but was:<Heat Clinic [Hand-Drawn (Men']s)>
+  testGetName57(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<S[auce Sweet Death]> but was:<S[weet Death Sauce]>
+  testGetName59(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa Loca del Dr. Chilemeister]> but was:<[Dr. Chilemeister's Insane Hot Sauce]>
+  testGetName60(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Jour de la sauce Habanero Hot Mort]e> but was:<[Day of the Dead Habanero Hot Sauc]e>
+  testGetName61(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Camisa de Habanero Hawt (Hombre]s)> but was:<[Hawt Like a Habanero Shirt (Men']s)>
+  testGetName62(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Hawt [comme une chemise Habanero (Femme]s)> but was:<Hawt [Like a Habanero Shirt (Women']s)>
+  testGetName64(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Clinique de chaleur tir&eacute; par la main (Homme]s)> but was:<[Heat Clinic Hand-Drawn (Men']s)>
+  testGetName65(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Mascot Clinique chaleur (Homme]s)> but was:<[Heat Clinic Mascot (Men']s)>
+  testGetName66(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa Dulce de Cajun de Lousian]e> but was:<[Cafe Louisiane Sweet Cajun Blackening Sauc]e>
+  testGetName67(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa Picante del Vaquero]> but was:<[Bull Snort Cowboy Cayenne Pepper Hot Sauce]>
+  testGetName68(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa del D&iacute;a de los Muertos de Habanero]> but was:<[Day of the Dead Habanero Hot Sauce]>
+  testGetName70(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Sauces chaudes Jalapeno]> but was:<[Hurtin' Jalapeno Hot Sauce]>
+  testGetName71(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Blazin[ 'Selle XXX Hot Habanero sauce au poivr]e> but was:<Blazin[' Saddle XXX Hot Habanero Pepper Sauc]e>
+  testGetName72(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Mascot Clinique chaleur (Femme]s)> but was:<[Heat Clinic Mascot (Women']s)>
+  testGetName74(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Sauce &agrave; l'ail rôti chaud]> but was:<[Roasted Garlic Hot Sauce]>
+  testGetName76(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<S[alsa de la Muerte Dul]ce> but was:<S[weet Death Sau]ce>
+  testGetName77(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<Dr[ Chilemeister Sauce Hot Insan]e> but was:<Dr[. Chilemeister's Insane Hot Sauc]e>
+  testGetName79(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<S[auce mort subit]e> but was:<S[udden Death Sauc]e>
+  testGetName80(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Salsa del D&iacute;a de los Muertos de Chipotl]e> but was:<[Day of the Dead Chipotle Hot Sauc]e>
+  testGetName83(org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen): expected:<[Clinique de chaleur tir&eacute; par la main (Femme]s)> but was:<[Heat Clinic Hand-Drawn (Women']s)>
+
+Tests run: 158, Failures: 52, Errors: 0, Skipped: 0

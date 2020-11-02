@@ -1,0 +1,1 @@
+Invocation count for org.broadleafcommerce.core.order.domain.OrderImpl.getHasOrderAdjustments: 2
