@@ -1,0 +1,636 @@
+user@deepika:~/dev/pankti-experiments/pdfbox/execution$ bash run.sh 
+Encrypt  ./workload/000752.pdf
+2020-11-03 13:49:45.198 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:49:45.200 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:49:45.200 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:49:48.056 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Decrypt  ./workload/000752.pdf
+2020-11-03 13:49:50.450 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:49:50.452 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:49:50.453 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:49:52.990 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+ExtractText  ./workload/000752.pdf
+2020-11-03 13:49:55.056 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:49:55.058 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:49:55.059 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:49:57.909 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+2020-11-03 13:50:10.211 WARN  o.glowroot.agent.impl.TraceCollector - not storing a trace because of an excessive backlog of 150 traces already waiting to be stored (this warning will be logged at most once a minute)
+ExtractImages  ./workload/000752.pdf
+2020-11-03 13:50:26.278 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:50:26.280 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:50:26.281 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:50:29.433 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+2020-11-03 13:50:32.067 WARN  o.glowroot.agent.impl.TraceCollector - not storing a trace because of an excessive backlog of 150 traces already waiting to be stored (this warning will be logged at most once a minute)
+Writing image: ./workload/000752-locked-1
+Writing image: ./workload/000752-locked-2
+Writing image: ./workload/000752-locked-3
+Writing image: ./workload/000752-locked-4
+Writing image: ./workload/000752-locked-5
+Writing image: ./workload/000752-locked-6
+Writing image: ./workload/000752-locked-7
+PDFToImage  ./workload/000752.pdf
+2020-11-03 13:50:48.904 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:50:48.908 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:50:48.909 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:50:51.925 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Rendered 2 pages in 178185ms
+TextToPDF  ./workload/000752.pdf
+2020-11-03 13:53:52.254 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:53:52.257 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:53:52.257 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:53:54.945 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+PDFSplit  ./workload/000752.pdf
+2020-11-03 13:53:59.687 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:53:59.689 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:53:59.689 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:54:02.918 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+PDFMerger  ./workload/000752.pdf
+2020-11-03 13:54:05.796 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:54:05.797 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:54:05.798 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:54:08.757 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+WriteDecodedDoc  ./workload/000752.pdf
+2020-11-03 13:54:10.719 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:54:10.722 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:54:10.723 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:54:13.723 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+OverlayPDF  ./workload/000752.pdf
+2020-11-03 13:54:16.027 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:54:16.030 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:54:16.031 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:54:18.649 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Encrypt  ./workload/000753.pdf
+2020-11-03 13:54:20.999 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:54:21.001 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:54:21.002 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:54:24.845 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Decrypt  ./workload/000753.pdf
+2020-11-03 13:54:27.226 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:54:27.229 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:54:27.229 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:54:30.765 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+ExtractText  ./workload/000753.pdf
+2020-11-03 13:54:32.976 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:54:32.978 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:54:32.979 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:54:35.997 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+2020-11-03 13:54:40.997 WARN  o.glowroot.agent.impl.TraceCollector - not storing a trace because of an excessive backlog of 150 traces already waiting to be stored (this warning will be logged at most once a minute)
+ExtractImages  ./workload/000753.pdf
+2020-11-03 13:54:43.158 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:54:43.161 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:54:43.162 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:54:46.086 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Writing image: ./workload/000753-locked-1
+Writing image: ./workload/000753-locked-2
+Writing image: ./workload/000753-locked-3
+Writing image: ./workload/000753-locked-4
+Writing image: ./workload/000753-locked-5
+Writing image: ./workload/000753-locked-6
+Writing image: ./workload/000753-locked-7
+Writing image: ./workload/000753-locked-8
+Writing image: ./workload/000753-locked-9
+Writing image: ./workload/000753-locked-10
+Writing image: ./workload/000753-locked-11
+Writing image: ./workload/000753-locked-12
+Writing image: ./workload/000753-locked-13
+Writing image: ./workload/000753-locked-14
+Writing image: ./workload/000753-locked-15
+Writing image: ./workload/000753-locked-16
+Writing image: ./workload/000753-locked-17
+Writing image: ./workload/000753-locked-18
+Writing image: ./workload/000753-locked-19
+PDFToImage  ./workload/000753.pdf
+2020-11-03 13:55:17.507 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:55:17.511 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:55:17.512 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:55:21.069 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Rendered 3 pages in 185099ms
+TextToPDF  ./workload/000753.pdf
+2020-11-03 13:58:28.263 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:58:28.266 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:58:28.267 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:58:30.786 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+PDFSplit  ./workload/000753.pdf
+2020-11-03 13:58:36.493 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:58:36.495 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:58:36.495 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:58:39.226 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+PDFMerger  ./workload/000753.pdf
+2020-11-03 13:58:42.318 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:58:42.320 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:58:42.321 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:58:45.093 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+WriteDecodedDoc  ./workload/000753.pdf
+2020-11-03 13:58:47.493 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:58:47.495 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:58:47.496 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:58:50.168 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+OverlayPDF  ./workload/000753.pdf
+2020-11-03 13:58:52.371 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:58:52.373 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:58:52.374 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:58:55.300 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Encrypt  ./workload/000809.pdf
+2020-11-03 13:58:57.475 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:58:57.479 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:58:57.480 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:58:59.851 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Error: Document is already encrypted.
+Decrypt  ./workload/000809.pdf
+2020-11-03 13:59:01.386 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:01.390 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:01.391 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+Exception in thread "main" java.io.FileNotFoundException: ./workload/000809-locked.pdf (No such file or directory)
+	at java.base/java.io.RandomAccessFile.open0(Native Method)
+	at java.base/java.io.RandomAccessFile.open(RandomAccessFile.java:345)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:259)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:214)
+	at org.apache.pdfbox.io.RandomAccessBufferedFileInputStream.<init>(RandomAccessBufferedFileInputStream.java:99)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1079)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1059)
+	at org.apache.pdfbox.tools.Decrypt.decrypt(Decrypt.java:143)
+	at org.apache.pdfbox.tools.Decrypt.main(Decrypt.java:65)
+	at org.apache.pdfbox.tools.PDFBox.main(PDFBox.java:52)
+2020-11-03 13:59:04.105 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+ExtractText  ./workload/000809.pdf
+2020-11-03 13:59:05.156 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:05.158 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:05.158 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+Exception in thread "main" java.io.FileNotFoundException: ./workload/000809-locked.pdf (No such file or directory)
+	at java.base/java.io.RandomAccessFile.open0(Native Method)
+	at java.base/java.io.RandomAccessFile.open(RandomAccessFile.java:345)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:259)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:214)
+	at org.apache.pdfbox.io.RandomAccessBufferedFileInputStream.<init>(RandomAccessBufferedFileInputStream.java:99)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1079)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1023)
+	at org.apache.pdfbox.tools.ExtractText.startExtraction(ExtractText.java:218)
+	at org.apache.pdfbox.tools.ExtractText.main(ExtractText.java:97)
+	at org.apache.pdfbox.tools.PDFBox.main(PDFBox.java:60)
+2020-11-03 13:59:07.576 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+ExtractImages  ./workload/000809.pdf
+2020-11-03 13:59:08.597 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:08.600 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:08.602 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+Exception in thread "main" java.io.FileNotFoundException: ./workload/000809-locked.pdf (No such file or directory)
+	at java.base/java.io.RandomAccessFile.open0(Native Method)
+	at java.base/java.io.RandomAccessFile.open(RandomAccessFile.java:345)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:259)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:214)
+	at org.apache.pdfbox.io.RandomAccessBufferedFileInputStream.<init>(RandomAccessBufferedFileInputStream.java:99)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1079)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1023)
+	at org.apache.pdfbox.tools.ExtractImages.extract(ExtractImages.java:177)
+	at org.apache.pdfbox.tools.ExtractImages.run(ExtractImages.java:150)
+	at org.apache.pdfbox.tools.ExtractImages.main(ExtractImages.java:93)
+	at org.apache.pdfbox.tools.PDFBox.main(PDFBox.java:64)
+2020-11-03 13:59:11.191 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+PDFToImage  ./workload/000809.pdf
+2020-11-03 13:59:12.194 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:12.196 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:12.197 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:59:14.736 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+Exception in thread "main" java.io.FileNotFoundException: ./workload/000809-locked.pdf (No such file or directory)
+	at java.base/java.io.RandomAccessFile.open0(Native Method)
+	at java.base/java.io.RandomAccessFile.open(RandomAccessFile.java:345)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:259)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:214)
+	at org.apache.pdfbox.io.RandomAccessBufferedFileInputStream.<init>(RandomAccessBufferedFileInputStream.java:99)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1079)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1023)
+	at org.apache.pdfbox.tools.PDFToImage.main(PDFToImage.java:212)
+	at org.apache.pdfbox.tools.PDFBox.main(PDFBox.java:89)
+TextToPDF  ./workload/000809.pdf
+2020-11-03 13:59:15.801 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:15.803 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:15.804 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:59:18.488 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Exception in thread "main" java.io.FileNotFoundException: ./workload/000809-from-pdf.txt (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:219)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:112)
+	at java.base/java.io.FileReader.<init>(FileReader.java:60)
+	at org.apache.pdfbox.tools.TextToPDF.main(TextToPDF.java:332)
+	at org.apache.pdfbox.tools.PDFBox.main(PDFBox.java:97)
+PDFSplit  ./workload/000809.pdf
+2020-11-03 13:59:23.960 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:23.964 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:23.965 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+Exception in thread "main" java.io.FileNotFoundException: ./workload/000809-locked.pdf (No such file or directory)
+	at java.base/java.io.RandomAccessFile.open0(Native Method)
+	at java.base/java.io.RandomAccessFile.open(RandomAccessFile.java:345)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:259)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:214)
+	at org.apache.pdfbox.io.RandomAccessBufferedFileInputStream.<init>(RandomAccessBufferedFileInputStream.java:99)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1079)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1023)
+	at org.apache.pdfbox.tools.PDFSplit.split(PDFSplit.java:139)
+	at org.apache.pdfbox.tools.PDFSplit.main(PDFSplit.java:60)
+	at org.apache.pdfbox.tools.PDFBox.main(PDFBox.java:85)
+2020-11-03 13:59:27.711 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+PDFMerger  ./workload/000809.pdf
+2020-11-03 13:59:28.766 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:28.768 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:28.769 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+Usage: java -jar pdfbox-app-x.y.z.jar PDFMerger <inputfiles 2..n> <outputfile>
+
+Options:
+  <inputfiles 2..n> : 2 or more source PDF documents to merge
+  <outputfile>      : The PDF document to save the merged documents to
+
+2020-11-03 13:59:32.527 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WriteDecodedDoc  ./workload/000809.pdf
+2020-11-03 13:59:33.398 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:33.401 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:33.403 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+Exception in thread "main" java.io.FileNotFoundException: ./workload/000809-locked.pdf (No such file or directory)
+	at java.base/java.io.RandomAccessFile.open0(Native Method)
+	at java.base/java.io.RandomAccessFile.open(RandomAccessFile.java:345)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:259)
+	at java.base/java.io.RandomAccessFile.<init>(RandomAccessFile.java:214)
+	at org.apache.pdfbox.io.RandomAccessBufferedFileInputStream.<init>(RandomAccessBufferedFileInputStream.java:99)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1079)
+	at org.apache.pdfbox.pdmodel.PDDocument.load(PDDocument.java:1023)
+	at org.apache.pdfbox.tools.WriteDecodedDoc.doIt(WriteDecodedDoc.java:65)
+	at org.apache.pdfbox.tools.WriteDecodedDoc.main(WriteDecodedDoc.java:167)
+	at org.apache.pdfbox.tools.PDFBox.main(PDFBox.java:101)
+2020-11-03 13:59:37.660 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+OverlayPDF  ./workload/000809.pdf
+2020-11-03 13:59:38.529 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:38.531 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:38.532 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:59:40.618 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Exception in thread "main" java.lang.IllegalStateException: PDF contains an encryption dictionary, please remove it with setAllSecurityToBeRemoved() or set a protection policy with protect()
+	at org.apache.pdfbox.pdfwriter.COSWriter.write(COSWriter.java:1321)
+	at org.apache.pdfbox.pdfwriter.COSWriter.write(COSWriter.java:1273)
+	at org.apache.pdfbox.pdmodel.PDDocument.save(PDDocument.java:1357)
+	at org.apache.pdfbox.pdmodel.PDDocument.save(PDDocument.java:1328)
+	at org.apache.pdfbox.pdmodel.PDDocument.save(PDDocument.java:1316)
+	at org.apache.pdfbox.tools.OverlayPDF.main(OverlayPDF.java:143)
+	at org.apache.pdfbox.tools.PDFBox.main(PDFBox.java:68)
+Encrypt  ./workload/000810.pdf
+2020-11-03 13:59:42.820 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:42.825 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:42.827 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:59:46.845 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Decrypt  ./workload/000810.pdf
+2020-11-03 13:59:48.683 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:48.685 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:48.686 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:59:51.388 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+ExtractText  ./workload/000810.pdf
+2020-11-03 13:59:53.184 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 13:59:53.186 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 13:59:53.187 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 13:59:56.820 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Nov 03, 2020 2:00:00 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSerif' for 'TimesNewRomanPSMT'
+Nov 03, 2020 2:00:00 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans' for 'TrebuchetMS'
+Nov 03, 2020 2:00:01 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'TrebuchetMS-Bold'
+2020-11-03 14:00:02.354 WARN  o.glowroot.agent.impl.TraceCollector - not storing a trace because of an excessive backlog of 150 traces already waiting to be stored (this warning will be logged at most once a minute)
+Nov 03, 2020 2:00:03 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'ArialNarrow-Bold'
+Nov 03, 2020 2:00:04 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSerif-Italic' for 'TimesNewRomanPS-ItalicMT'
+ExtractImages  ./workload/000810.pdf
+2020-11-03 14:00:06.318 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:00:06.321 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:00:06.322 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:00:08.568 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Nov 03, 2020 2:00:11 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSerif' for 'TimesNewRomanPSMT'
+Nov 03, 2020 2:00:11 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans' for 'TrebuchetMS'
+Nov 03, 2020 2:00:11 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'TrebuchetMS-Bold'
+Nov 03, 2020 2:00:19 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'ArialNarrow-Bold'
+Writing image: ./workload/000810-locked-1
+Nov 03, 2020 2:00:21 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSerif-Italic' for 'TimesNewRomanPS-ItalicMT'
+PDFToImage  ./workload/000810.pdf
+2020-11-03 14:00:22.636 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:00:22.640 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:00:22.641 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:00:25.726 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Nov 03, 2020 2:00:28 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSerif' for 'TimesNewRomanPSMT'
+Nov 03, 2020 2:00:28 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans' for 'TrebuchetMS'
+Nov 03, 2020 2:00:29 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'TrebuchetMS-Bold'
+Nov 03, 2020 2:01:12 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'ArialNarrow-Bold'
+Nov 03, 2020 2:02:00 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSerif-Italic' for 'TimesNewRomanPS-ItalicMT'
+Rendered 1 page in 112334ms
+TextToPDF  ./workload/000810.pdf
+2020-11-03 14:02:20.151 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:02:20.152 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:02:20.153 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:02:22.970 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+PDFSplit  ./workload/000810.pdf
+2020-11-03 14:02:27.291 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:02:27.293 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:02:27.294 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:02:29.818 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+PDFMerger  ./workload/000810.pdf
+2020-11-03 14:02:32.172 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:02:32.174 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:02:32.175 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+Usage: java -jar pdfbox-app-x.y.z.jar PDFMerger <inputfiles 2..n> <outputfile>
+
+Options:
+  <inputfiles 2..n> : 2 or more source PDF documents to merge
+  <outputfile>      : The PDF document to save the merged documents to
+
+2020-11-03 14:02:34.572 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WriteDecodedDoc  ./workload/000810.pdf
+2020-11-03 14:02:35.364 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:02:35.366 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:02:35.367 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:02:37.672 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+OverlayPDF  ./workload/000810.pdf
+2020-11-03 14:02:39.529 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:02:39.531 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:02:39.531 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:02:42.179 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Encrypt  ./workload/000817.pdf
+2020-11-03 14:02:44.237 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:02:44.239 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:02:44.239 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:02:46.883 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Decrypt  ./workload/000817.pdf
+2020-11-03 14:02:49.153 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:02:49.155 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:02:49.157 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:02:52.297 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+ExtractText  ./workload/000817.pdf
+2020-11-03 14:02:54.741 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:02:54.743 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:02:54.744 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:02:57.732 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Nov 03, 2020 2:03:00 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'Arial-Black'
+2020-11-03 14:03:01.677 WARN  o.glowroot.agent.impl.TraceCollector - not storing a trace because of an excessive backlog of 150 traces already waiting to be stored (this warning will be logged at most once a minute)
+Nov 03, 2020 2:03:02 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'Arial-Black'
+ExtractImages  ./workload/000817.pdf
+2020-11-03 14:03:04.767 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:03:04.771 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:03:04.772 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:03:08.425 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Nov 03, 2020 2:03:10 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'Arial-Black'
+Nov 03, 2020 2:03:17 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'Arial-Black'
+PDFToImage  ./workload/000817.pdf
+2020-11-03 14:03:24.762 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:03:24.764 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:03:24.764 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:03:28.905 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Nov 03, 2020 2:03:36 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'Arial-Black'
+Nov 03, 2020 2:05:17 PM org.apache.pdfbox.pdmodel.font.PDTrueTypeFont <init>
+WARNING: Using fallback font 'LiberationSans-Bold' for 'Arial-Black'
+Rendered 2 pages in 235755ms
+TextToPDF  ./workload/000817.pdf
+2020-11-03 14:07:26.905 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:07:26.907 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:07:26.908 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:07:29.955 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+PDFSplit  ./workload/000817.pdf
+2020-11-03 14:07:33.860 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:07:33.862 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:07:33.862 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:07:36.906 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+PDFMerger  ./workload/000817.pdf
+2020-11-03 14:07:40.495 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:07:40.498 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:07:40.500 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:07:44.365 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+WriteDecodedDoc  ./workload/000817.pdf
+2020-11-03 14:07:46.436 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:07:46.442 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:07:46.443 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:07:49.569 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+OverlayPDF  ./workload/000817.pdf
+2020-11-03 14:07:50.959 INFO  org.glowroot - Glowroot version: 0.13.6, built 2020-03-01 01:25:31 +0000
+2020-11-03 14:07:50.960 INFO  org.glowroot - Java version: 11.0.8 (AdoptOpenJDK / Linux)
+2020-11-03 14:07:50.961 INFO  org.glowroot - Java args: -javaagent:/home/user/glowroot/glowroot.jar
+2020-11-03 14:07:53.769 INFO  org.glowroot - UI listening on 127.0.0.1:4000 (to access the UI from remote machines, change the bind address to 0.0.0.0, either in the Glowroot UI under Configuration > Web or directly in the admin.json file, and then restart JVM to take effect)
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.thoughtworks.xstream.core.util.Fields to field java.util.TreeMap.comparator
+WARNING: Please consider reporting this to the maintainers of com.thoughtworks.xstream.core.util.Fields
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+user@deepika:~/dev/pankti-experiments/pdfbox/execution$ 
+

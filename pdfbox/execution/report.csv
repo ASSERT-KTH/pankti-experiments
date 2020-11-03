@@ -1,20 +1,20 @@
-#,method,invocations,collected-profiles,unique-profiles,generated-tests,passing-tests,failing-tests,descartes-classification
+#,method,invocations,collected-profiles,unique-profiles,executed-tests,passing-tests,failing-tests,descartes-classification
 1,org.apache.fontbox.ttf.GlyfSimpleDescript.getFlags,23471,23471,11730,117,117,0,tested
 2,org.apache.fontbox.ttf.HorizontalMetricsTable.getAdvanceWidth,275,275,174,174,174,0,tested
 3,org.apache.fontbox.ttf.HorizontalMetricsTable.getLeftSideBearing,431,360,360,360,360,0,tested
 4,org.apache.fontbox.ttf.NamingTable.getName,650,563,273,273,273,0,tested
 5,org.apache.fontbox.ttf.TrueTypeFont.getAdvanceWidth,275,275,174,174,174,0,tested
-6,org.apache.fontbox.ttf.TTFDataStream.readUnsignedByteArray,431,431,431,43,43,0,tested
-7,org.apache.pdfbox.pdfparser.COSParser.getEncryption,46,38,35,35,13,22,pseudo-tested
+6,org.apache.fontbox.ttf.TTFDataStream.readUnsignedByteArray,431,431,431,431,431,0,tested
+7,org.apache.pdfbox.pdfparser.COSParser.getEncryption,46,38,33,33,13,20,pseudo-tested
 8,org.apache.pdfbox.pdfparser.XrefTrailerResolver.getXrefType,46,46,17,17,17,0,tested
-9,org.apache.pdfbox.pdmodel.DefaultResourceCache.getColorSpace,72,29,27,27,4,23,tested
+9,org.apache.pdfbox.pdmodel.DefaultResourceCache.getColorSpace,72,25,23,23,4,19,tested
 10,org.apache.pdfbox.pdmodel.DefaultResourceCache.getExtGState,49,24,22,22,4,18,pseudo-tested
 11,org.apache.pdfbox.pdmodel.DefaultResourceCache.getFont,546,29,29,29,5,24,pseudo-tested
 12,org.apache.pdfbox.pdmodel.DefaultResourceCache.getXObject,66,15,15,15,13,2,pseudo-tested
-13,org.apache.pdfbox.pdmodel.font.FontCache.getFont,115,115,105,105,83,22,pseudo-tested
+13,org.apache.pdfbox.pdmodel.font.FontCache.getFont,115,115,106,106,83,23,pseudo-tested
 14,org.apache.pdfbox.pdmodel.font.PDCIDFont.getCIDSystemInfo,3,3,1,1,0,1,pseudo-tested
 15,org.apache.pdfbox.pdmodel.font.PDCIDFontType2.codeToGID,58,38,7,7,7,0,tested
-16,org.apache.pdfbox.pdmodel.font.PDCIDFontType2.getPath,6,6,6,6,0,6,psuedo-tested
+16,org.apache.pdfbox.pdmodel.font.PDCIDFontType2.getPath,6,6,6,6,0,6,pseudo-tested
 17,org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo.getOrdering,12,12,1,1,1,0,tested
 18,org.apache.pdfbox.pdmodel.font.PDCIDSystemInfo.getRegistry,3,3,1,1,1,0,tested
 19,org.apache.pdfbox.pdmodel.font.PDFontDescriptor.getFlags,227,227,54,54,54,0,tested
@@ -45,4 +45,4 @@
 44,org.apache.pdfbox.pdmodel.PDResources.getExtGState,49,19,18,18,0,18,pseudo-tested
 45,org.apache.pdfbox.rendering.TTFGlyph2D.getPathForCharacterCode,15472,34,34,34,0,34,pseudo-tested
 46,org.apache.pdfbox.rendering.TTFGlyph2D.getPathForGID,15472,34,34,34,0,34,pseudo-tested
-*,TOTAL,121175,57567,13856,1855,1613,242,tested/partially-tested:29 + pseudo-tested:17
+*,TOTAL,121175,57563,13851,2238,2001,237,tested/partially-tested:29 + pseudo-tested:17
