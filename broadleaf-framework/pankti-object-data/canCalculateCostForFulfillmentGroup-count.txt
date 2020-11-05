@@ -1,0 +1,1 @@
+Invocation count for org.broadleafcommerce.core.pricing.service.fulfillment.provider.FixedPriceFulfillmentPricingProvider.canCalculateCostForFulfillmentGroup_org.broadleafcommerce.core.order.domain.FulfillmentGroup,org.broadleafcommerce.core.order.domain.FulfillmentOption: 4

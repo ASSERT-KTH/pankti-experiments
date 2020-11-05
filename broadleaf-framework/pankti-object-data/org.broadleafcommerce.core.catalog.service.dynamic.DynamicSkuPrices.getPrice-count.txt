@@ -1,1 +1,1 @@
-Invocation count for org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices.getPrice: 1
+Invocation count for org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices.getPrice: 4

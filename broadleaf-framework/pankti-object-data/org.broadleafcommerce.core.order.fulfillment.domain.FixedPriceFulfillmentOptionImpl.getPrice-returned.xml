@@ -1,3 +1,6 @@
 <org.broadleafcommerce.common.money.Money>
   <float>20.0</float>
 </org.broadleafcommerce.common.money.Money>
+<org.broadleafcommerce.common.money.Money>
+  <float>20.0</float>
+</org.broadleafcommerce.common.money.Money>

@@ -3,3 +3,18 @@
     <float>6.99</float>
   </retailPrice>
 </org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices>
+<org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices>
+  <retailPrice>
+    <float>4.99</float>
+  </retailPrice>
+</org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices>
+<org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices>
+  <retailPrice>
+    <float>6.99</float>
+  </retailPrice>
+</org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices>
+<org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices>
+  <retailPrice>
+    <float>4.99</float>
+  </retailPrice>
+</org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices>

@@ -1,1 +1,1 @@
-Invocation count for org.broadleafcommerce.core.catalog.domain.SkuImpl.getPriceData: 1
+Invocation count for org.broadleafcommerce.core.catalog.domain.SkuImpl.getPriceData: 4

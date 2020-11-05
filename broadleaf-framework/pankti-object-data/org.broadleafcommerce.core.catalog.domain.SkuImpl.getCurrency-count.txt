@@ -1,1 +1,1 @@
-Invocation count for org.broadleafcommerce.core.catalog.domain.SkuImpl.getCurrency: 183
+Invocation count for org.broadleafcommerce.core.catalog.domain.SkuImpl.getCurrency: 415
