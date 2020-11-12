@@ -116,3 +116,9 @@ java -jar <path-to-jacoco>/lib/jacococli.jar report ./jacoco.exec --classfiles <
 ```
 
 Note that `--classfiles` and `--sourcefiles` can be specified multiple times if you want to analyze several specific sub-modules in the project.
+___
+
+#### Target method invocations and object profile counts for Jicofo, PDFBox, and BroadLeaf
+
+![Plot](invocations.jpg)
+___
