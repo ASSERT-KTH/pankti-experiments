@@ -120,5 +120,7 @@ ___
 
 #### Target method invocations and object profile counts for Jicofo, PDFBox, and BroadLeaf
 
-![Plot](invocations.jpg)
+<p>
+  <img src="https://github.com/castor-software/pankti-experiments/blob/master/invocations.jpg" height=360>
+</p>
 ___
