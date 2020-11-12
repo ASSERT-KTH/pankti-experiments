@@ -1,1 +1,1 @@
-Invocation count for org.broadleafcommerce.core.catalog.domain.SkuImpl.isTaxable: 5
+Invocation count for org.broadleafcommerce.core.catalog.domain.SkuImpl.isTaxable: 24

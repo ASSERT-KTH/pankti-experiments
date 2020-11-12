@@ -1,1 +1,1 @@
-Invocation count for org.broadleafcommerce.core.catalog.domain.SkuImpl.getName: 175
+Invocation count for org.broadleafcommerce.core.catalog.domain.SkuImpl.getName: 394

@@ -14,19 +14,19 @@
 
 ## Number of generated test cases:
 
-158
+351
 
 ## Result of executing the test cases:
 
-- failures: 52
+- failures: 107
 - errors: 0
-- passed: 106
+- passed: 244
 
 ## Test improvement
 
 - pseudo-tested -> tested: 2
-- pseudo-tested -> partially-tested: 3
-- pseudo-tested -> pseudo-tested: 6
+- pseudo-tested -> partially-tested: 4
+- pseudo-tested -> pseudo-tested: 5
 
 ## Notes
 

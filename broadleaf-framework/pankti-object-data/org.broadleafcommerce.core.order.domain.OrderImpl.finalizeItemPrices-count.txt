@@ -1,1 +1,1 @@
-Invocation count for org.broadleafcommerce.core.order.domain.OrderImpl.finalizeItemPrices: 2
+Invocation count for org.broadleafcommerce.core.order.domain.OrderImpl.finalizeItemPrices: 6
