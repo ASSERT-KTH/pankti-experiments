@@ -23,9 +23,9 @@ JICOFO_21,org.jitsi.jicofo.JitsiMeetConfig.useRoomAsSharedDocName,3,3,,1,1,1,0,p
 JICOFO_22,org.jitsi.jicofo.JitsiMeetServices.getSipJibriDetector,3,0,No converter specified,0,0,0,0,pseudo-tested,,0.00 KB
 JICOFO_23,org.jitsi.jicofo.JitsiMeetConfig.getAudioPacketDelay,2,2,,1,1,1,0,partially-tested,,0.48 KB
 JICOFO_24,org.jitsi.jicofo.JitsiMeetConfig.getChannelLastN,2,2,,1,1,1,0,tested,,0.48 KB
-JICOFO_25,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeEgressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
-JICOFO_26,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeIngressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
-JICOFO_27,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeParticipantEgressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
-JICOFO_28,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeSenderIngressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
-JICOFO_29,org.jitsi.jicofo.JitsiMeetConferenceImpl$BridgeSession.terminate,1,0,Security alert. Marshalling rejected.,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_25,org.jitsi.jicofo.JitsiMeetConferenceImpl$BridgeSession.terminate,1,0,Security alert. Marshalling rejected.,0,0,0,0,pseudo-tested,,0.00 KB
+JICOFO_26,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeEgressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
+JICOFO_27,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeIngressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
+JICOFO_28,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeParticipantEgressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
+JICOFO_29,org.jitsi.jicofo.util.MaxPacketRateCalculator.computeSenderIngressPacketRatePps,1,1,,1,1,1,0,tested,,0.50 KB
 *,TOTAL,152,110,,20,20,20,0,tested/partially-tested:19 + pseudo-tested:10,,9.79 KB
