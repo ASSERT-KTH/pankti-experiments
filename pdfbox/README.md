@@ -23,4 +23,16 @@
   - `mvn test` should then generate `jacoco.exec` for all relevant sub-modules
   - run `mvn install`
   - merge them and generate report
+- To fix failing builds due to `java.lang.ref.Cleaner`
+```
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-compiler-plugin</artifactId>
+  <version>3.5.1</version>
+  <configuration>
+    <source>9</source>
+    <target>9</target>
+  </configuration>
+</plugin>
+```
 
