@@ -5,15 +5,15 @@ overlay_pdf="./workload/000142"
 extension=".pdf"
 jacocoagent_jar_loc="/home/user/dev/jacoco/lib/jacocoagent.jar"
 jacococli_jar_loc="/home/user/dev/jacoco/lib/jacococli.jar"
-pdfbox_jar_loc="/home/user/dev/pdfbox/app/target/pdfbox-app-2.0.21.jar"
-jacoco_exec_loc="/home/user/dev/pdfbox/app/target/jacoco.exec"
+pdfbox_jar_loc="/home/user/dev/revision/pdfbox/app/target/pdfbox-app-2.0.21.jar"
+jacoco_exec_loc="/home/user/dev/revision/pdfbox/app/target/jacoco.exec"
 jacocoagent_options="=append=true,destfile="${jacoco_exec_loc}
 
-classfiles="--classfiles /home/user/dev/pdfbox/fontbox/target/classes/org/ --classfiles /home/user/dev/pdfbox/pdfbox/target/classes/org/ --classfiles /home/user/dev/pdfbox/examples/target/classes/org --classfiles /home/user/dev/pdfbox/tools/target/classes/org --classfiles /home/user/dev/pdfbox/preflight/target/classes/org/ --classfiles /home/user/dev/pdfbox/debugger/target/classes/org/ --classfiles /home/user/dev/pdfbox/xmpbox/target/classes/org/"
+classfiles="--classfiles /home/user/dev/revision/pdfbox/fontbox/target/classes/org/ --classfiles /home/user/dev/revision/pdfbox/pdfbox/target/classes/org/ --classfiles /home/user/dev/revision/pdfbox/examples/target/classes/org --classfiles /home/user/dev/revision/pdfbox/tools/target/classes/org --classfiles /home/user/dev/revision/pdfbox/preflight/target/classes/org/ --classfiles /home/user/dev/revision/pdfbox/debugger/target/classes/org/ --classfiles /home/user/dev/revision/pdfbox/xmpbox/target/classes/org/"
 
-sourcefiles="--sourcefiles /home/user/dev/pdfbox/fontbox/src/main/java --sourcefiles /home/user/dev/pdfbox/pdfbox/src/main/java/ --sourcefiles /home/user/dev/pdfbox/examples/src/main/java/ --sourcefiles /home/user/dev/pdfbox/tools/src/main/java/ --sourcefiles /home/user/dev/pdfbox/preflight/src/main/java/ --sourcefiles /home/user/dev/pdfbox/debugger/src/main/java/ --sourcefiles /home/user/dev/pdfbox/xmpbox/src/main/java/"
+sourcefiles="--sourcefiles /home/user/dev/revision/pdfbox/fontbox/src/main/java --sourcefiles /home/user/dev/revision/pdfbox/pdfbox/src/main/java/ --sourcefiles /home/user/dev/revision/pdfbox/examples/src/main/java/ --sourcefiles /home/user/dev/revision/pdfbox/tools/src/main/java/ --sourcefiles /home/user/dev/revision/pdfbox/preflight/src/main/java/ --sourcefiles /home/user/dev/revision/pdfbox/debugger/src/main/java/ --sourcefiles /home/user/dev/revision/pdfbox/xmpbox/src/main/java/"
 
-jacoco_report_loc="/home/user/dev/pdfbox/app/target/jacoco-report"
+jacoco_report_loc="/home/user/dev/revision/pdfbox/app/target/jacoco-report"
 
 # remove pre-existing jacoco.exec file and jacoco html reports
 echo "Removing pre-existing jacoco.exec and jacoco html reports"
