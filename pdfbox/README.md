@@ -35,4 +35,5 @@
   </configuration>
 </plugin>
 ```
+- To fix failing builds due to `org.codehaus.mojo:animal-sniffer-maven-plugin`, disable it in parent POM
 
