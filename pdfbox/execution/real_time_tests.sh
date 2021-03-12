@@ -2,7 +2,7 @@
 
 : '
 This script computes the average execution time
-of `mvn clean test` over 5 executions
+(wall clock) of `mvn clean test` over 5 executions
 '
 
 N=5
