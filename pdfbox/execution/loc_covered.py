@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import re
 
-# Set the name of the directory in which to look for test classes
+# Set path of the module in which to look for test classes
 module_loc = "/home/user/dev/revision/pdfbox/fontbox"
 test_files_loc = module_loc + "/src/test/java/"
 jacoco_exec_loc = module_loc + "/target/jacoco.exec"
@@ -90,7 +90,7 @@ def main():
     # Remove existing jacoco.exec file to isolate results
     clean_module()
   df['loc_covered'] = coverage
-  # 
+  # Save output to CSV file
   df.to_csv(output_csv_loc, index=False)
 
 if __name__ == "__main__":
