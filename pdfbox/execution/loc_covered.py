@@ -5,7 +5,7 @@ import pandas as pd
 import re
 
 # Set path of the module in which to look for test classes
-module_loc = "/home/user/dev/revision/pdfbox/fontbox"
+module_loc = "/home/user/dev/revision/pdfbox/pdfbox"
 test_files_loc = module_loc + "/src/test/java/"
 jacoco_exec_loc = module_loc + "/target/jacoco.exec"
 jacoco_report_loc = module_loc + "/target/jacoco-report/"
@@ -19,10 +19,15 @@ jacococli_jar_loc = "/home/user/dev/jacoco/lib/jacococli.jar"
 classfiles = "--classfiles /home/user/dev/revision/pdfbox/fontbox/target/classes/org/ --classfiles /home/user/dev/revision/pdfbox/pdfbox/target/classes/org/ --classfiles /home/user/dev/revision/pdfbox/examples/target/classes/org --classfiles /home/user/dev/revision/pdfbox/tools/target/classes/org --classfiles /home/user/dev/revision/pdfbox/preflight/target/classes/org/ --classfiles /home/user/dev/revision/pdfbox/debugger/target/classes/org/ --classfiles /home/user/dev/revision/pdfbox/xmpbox/target/classes/org/"
 sourcefiles = "--sourcefiles /home/user/dev/revision/pdfbox/fontbox/src/main/java --sourcefiles /home/user/dev/revision/pdfbox/pdfbox/src/main/java/ --sourcefiles /home/user/dev/revision/pdfbox/examples/src/main/java/ --sourcefiles /home/user/dev/revision/pdfbox/tools/src/main/java/ --sourcefiles /home/user/dev/revision/pdfbox/preflight/src/main/java/ --sourcefiles /home/user/dev/revision/pdfbox/debugger/src/main/java/ --sourcefiles /home/user/dev/revision/pdfbox/xmpbox/src/main/java/"
 
-# Go to module location and mvn clean
+# mvn clean the module
 def clean_module():
   print("Cleaning...")
   os.system("mvn clean")
+
+# mvn test the module
+def test_module():
+  print("Testing the module and generating class files...")
+  os.system("mvn test")
 
 # Find all test files in the module
 def find_test_files():
@@ -42,7 +47,7 @@ def create_test_df(test_files):
     with open(test_files[i], "r") as f:
       for line in f:
         # find lines with *test*(*)
-        if (re.search(r'\w*test\w*\((.)*\)', line)):
+        if ("public" in line and re.search(r'\w*test\w*\((.)*\)', line)):
           dict1 = {}
           method = re.search(r'\w*test\w*', line).group(0)
           dict1.update(file_loc = test_files[i], test_class = test_files[i].name.replace(".java", ""), test_method = method)
@@ -84,6 +89,8 @@ def main():
     # Wait 5 seconds
     os.system("sleep 5")
     generate_jacoco_report()
+    # Wait 5 seconds
+    os.system("sleep 5")
     loc_covered = parse_jacoco_report()
     print("LOC covered by {}#{}: {}".format(row['test_class'], row['test_method'], loc_covered))
     coverage.append(loc_covered)
@@ -92,6 +99,8 @@ def main():
   df['loc_covered'] = coverage
   # Save output to CSV file
   df.to_csv(output_csv_loc, index=False)
+  # Test the whole module again to re-generate class files before exiting
+  test_module()
 
 if __name__ == "__main__":
   main()
