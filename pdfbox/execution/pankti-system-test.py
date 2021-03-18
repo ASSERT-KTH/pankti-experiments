@@ -21,9 +21,9 @@ and the path to the glowroot jar added to pom like so
   </configuration>
 </plugin>
 
-(For multi-module projects, add this configuration if the module pom includes
-maven-surefire-plugin. If not, add this configuration for maven-surefire-plugin
-in the parent pom.)
+(If the project has multiple modules, add this configuration to all modules
+whose pom includes maven-surefire-plugin.
+If not, add this configuration for maven-surefire-plugin in the parent pom.)
 """
 
 # mvn clean the module
