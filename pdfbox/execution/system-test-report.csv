@@ -110,4 +110,4 @@
 109,LayerUtility_importPageAsForm_PDDocument_int,1,1,1,1,0,1,pseudo-tested
 110,LayerUtility_importPageAsForm_PDDocument_PDPage,1,1,1,1,0,1,pseudo-tested
 111,PDAppearanceCharacteristicsDictionary_getRotation,1,1,1,1,1,0,well-tested
-*,TOTAL,852329,121691,18291,18291,17654,637,well-tested : 67 pseudo-tested : 46
+*,TOTAL,852329,121691,18291,18291,17654,637,well-tested : 66 pseudo-tested : 45
