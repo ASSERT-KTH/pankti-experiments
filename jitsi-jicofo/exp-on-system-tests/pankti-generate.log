@@ -1,0 +1,151 @@
+POM found at: ../../jicofo/pom.xml
+Number of Maven modules: 0
+[InstrumentedMethod{parentFQN='org.jitsi.jicofo.ProtocolProviderHandler', methodName='getXmppConnection', paramList=[], returnType='org.jitsi.protocol.xmpp.XmppConnection', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.util.MaxPacketRateCalculator', methodName='computeSenderIngressPacketRatePps', paramList=[], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.util.MaxPacketRateCalculator', methodName='computeIngressPacketRatePps', paramList=[], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.util.MaxPacketRateCalculator', methodName='computeParticipantEgressPacketRatePps', paramList=[], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.util.MaxPacketRateCalculator', methodName='computeEgressPacketRatePps', paramList=[], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='useRoomAsSharedDocName', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='isLipSyncEnabled', paramList=[], returnType='java.lang.Boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetServices', methodName='getJigasiDetector', paramList=[], returnType='org.jitsi.jicofo.jigasi.JigasiDetector', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='getMinParticipants', paramList=[], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='isOctoEnabled', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetServices', methodName='getJibriDetector', paramList=[], returnType='org.jitsi.jicofo.recording.jibri.JibriDetector', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetServices', methodName='getSipJibriDetector', paramList=[], returnType='org.jitsi.jicofo.recording.jibri.JibriDetector', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='getStartAudioMuted', paramList=[], returnType='java.lang.Integer', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='getStartVideoMuted', paramList=[], returnType='java.lang.Integer', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='getEnforcedVideobridge', paramList=[], returnType='org.jxmpp.jid.Jid', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='getChannelLastN', paramList=[], returnType='java.lang.Integer', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='getAudioPacketDelay', paramList=[], returnType='java.lang.Integer', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.Participant', methodName='hasIceSupport', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.Participant', methodName='hasDtlsSupport', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='isRtxEnabled', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.Participant', methodName='hasRtxSupport', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='stereoEnabled', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='getOpusMaxAverageBitrate', paramList=[], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='isTccEnabled', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='getMinBitrate', paramList=[], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='getStartBitrate', paramList=[], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConfig', methodName='isRembEnabled', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.impl.protocol.xmpp.colibri.ColibriConferenceImpl', methodName='hasJustAllocated', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.jitsi.jicofo.JitsiMeetConferenceImpl$BridgeSession', methodName='terminate', paramList=[org.jitsi.jicofo.AbstractParticipant], returnType='boolean', visibility='public'}]
+Number of instrumented methods: 29
+--------------------------------------------------------------
+Generating test method for: org.jitsi.impl.protocol.xmpp.colibri.ColibriConferenceImpl.hasJustAllocated
+Number of pairs/triples of object values: 0
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.jitsi.impl.protocol.xmpp.colibri.ColibriConferenceImpl.hasJustAllocated - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.useRoomAsSharedDocName
+Number of pairs/triples of object values: 11
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.isLipSyncEnabled
+Number of pairs/triples of object values: 11
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.getMinParticipants
+Number of pairs/triples of object values: 38
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.isOctoEnabled
+Number of pairs/triples of object values: 73
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.getStartAudioMuted
+Number of pairs/triples of object values: 27
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.getStartVideoMuted
+Number of pairs/triples of object values: 27
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.getEnforcedVideobridge
+Number of pairs/triples of object values: 27
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.getChannelLastN
+Number of pairs/triples of object values: 11
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.getAudioPacketDelay
+Number of pairs/triples of object values: 11
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.isRtxEnabled
+Number of pairs/triples of object values: 12
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.stereoEnabled
+Number of pairs/triples of object values: 11
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.getOpusMaxAverageBitrate
+Number of pairs/triples of object values: 10
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.isTccEnabled
+Number of pairs/triples of object values: 46
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.getMinBitrate
+Number of pairs/triples of object values: 28
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.getStartBitrate
+Number of pairs/triples of object values: 27
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConfig.isRembEnabled
+Number of pairs/triples of object values: 27
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.TestJitsiMeetConfigPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetServices.getJigasiDetector
+Number of pairs/triples of object values: 0
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.jitsi.jicofo.JitsiMeetServices.getJigasiDetector - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetServices.getJibriDetector
+Number of pairs/triples of object values: 0
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.jitsi.jicofo.JitsiMeetServices.getJibriDetector - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetServices.getSipJibriDetector
+Number of pairs/triples of object values: 0
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.jitsi.jicofo.JitsiMeetServices.getSipJibriDetector - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.Participant.hasIceSupport
+Number of pairs/triples of object values: 0
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.jitsi.jicofo.Participant.hasIceSupport - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.Participant.hasDtlsSupport
+Number of pairs/triples of object values: 0
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.jitsi.jicofo.Participant.hasDtlsSupport - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.Participant.hasRtxSupport
+Number of pairs/triples of object values: 0
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.jitsi.jicofo.Participant.hasRtxSupport - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.ProtocolProviderHandler.getXmppConnection
+Number of pairs/triples of object values: 0
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.jitsi.jicofo.ProtocolProviderHandler.getXmppConnection - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.util.MaxPacketRateCalculator.computeSenderIngressPacketRatePps
+Number of pairs/triples of object values: 11
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.util.TestMaxPacketRateCalculatorPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.util.MaxPacketRateCalculator.computeIngressPacketRatePps
+Number of pairs/triples of object values: 11
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.util.TestMaxPacketRateCalculatorPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.util.MaxPacketRateCalculator.computeParticipantEgressPacketRatePps
+Number of pairs/triples of object values: 11
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.util.TestMaxPacketRateCalculatorPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.util.MaxPacketRateCalculator.computeEgressPacketRatePps
+Number of pairs/triples of object values: 11
+Number of unique pairs/triples of object values: 1
+Generated test class: org.jitsi.jicofo.util.TestMaxPacketRateCalculatorPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.jitsi.jicofo.JitsiMeetConferenceImpl$BridgeSession.terminate
+Number of pairs/triples of object values: 0
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.jitsi.jicofo.JitsiMeetConferenceImpl$BridgeSession.terminate - SKIPPING
+--------------------------------------------------------------
+Number of new test cases: 20

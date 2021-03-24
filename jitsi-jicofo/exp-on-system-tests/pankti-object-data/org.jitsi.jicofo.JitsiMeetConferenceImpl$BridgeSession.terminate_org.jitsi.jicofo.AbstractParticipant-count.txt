@@ -1,0 +1,1 @@
+Invocation count for org.jitsi.jicofo.JitsiMeetConferenceImpl$BridgeSession.terminate_org.jitsi.jicofo.AbstractParticipant: 1

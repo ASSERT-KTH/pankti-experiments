@@ -1,0 +1,1 @@
+Invocation count for org.jitsi.jicofo.util.MaxPacketRateCalculator.computeSenderIngressPacketRatePps: 11
