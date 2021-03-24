@@ -1,0 +1,1 @@
+Invocation count for org.broadleafcommerce.core.offer.domain.OfferImpl.getMarketingMessage: 39

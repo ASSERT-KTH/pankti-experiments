@@ -28,7 +28,37 @@
 - pseudo-tested -> partially-tested: 4
 - pseudo-tested -> pseudo-tested: 5
 
-## Notes
+# Experiments on broadleaf-6.1.4-GA using system tests as workload
+
+## Extracted methods:
+
+2929
+
+## Instrumentation candidates:
+
+32
+
+## Covered by the workload:
+
+26
+
+## Number of generated test cases:
+
+692
+
+## Result of executing the test cases:
+
+- failures: 8
+- errors: 0
+- passed: 684
+
+## Test improvement
+
+- pseudo-tested -> tested: 6
+- pseudo-tested -> partially-tested: 6
+- pseudo-tested -> pseudo-tested: 14
+
+# Notes
 
 Some manual work needs to be done on the generated tests:
 

@@ -1,0 +1,3238 @@
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <salePrice>1.00</salePrice>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <salePrice>1.00</salePrice>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <salePrice>10.00</salePrice>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <salePrice>10.00</salePrice>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>1</id>
+  <retailPrice>19.99</retailPrice>
+  <name>test1</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>
+<org.broadleafcommerce.core.catalog.domain.SkuImpl>
+  <id>2</id>
+  <retailPrice>29.99</retailPrice>
+  <name>test2</name>
+  <discountable>Y</discountable>
+  <dimension/>
+  <weight/>
+  <skuMedia/>
+  <legacySkuMedia/>
+  <defaultProduct class="org.broadleafcommerce.core.catalog.domain.ProductImpl">
+    <overrideGeneratedUrl>false</overrideGeneratedUrl>
+    <isFeaturedProduct>false</isFeaturedProduct>
+    <defaultSku class="org.broadleafcommerce.core.catalog.domain.SkuImpl" reference="../.."/>
+    <canSellWithoutOptions>false</canSellWithoutOptions>
+    <skus/>
+    <crossSaleProducts/>
+    <upSaleProducts/>
+    <additionalSkus/>
+    <allParentCategoryXrefs/>
+    <productAttributes/>
+    <productOptions/>
+    <archiveStatus>
+      <archived>N</archived>
+    </archiveStatus>
+  </defaultProduct>
+  <skuAttributes/>
+  <productOptionValueXrefs/>
+  <legacyProductOptionValues/>
+  <fees/>
+  <fulfillmentFlatRates/>
+  <excludedFulfillmentOptions/>
+  <quantityAvailable>0</quantityAvailable>
+</org.broadleafcommerce.core.catalog.domain.SkuImpl>

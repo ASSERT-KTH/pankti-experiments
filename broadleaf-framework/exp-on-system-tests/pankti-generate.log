@@ -1,0 +1,131 @@
+POM found at: ../../broadleaf/BroadleafCommerce/core/broadleaf-framework/pom.xml
+Number of Maven modules: 0
+[InstrumentedMethod{parentFQN='org.broadleafcommerce.core.catalog.domain.SkuImpl', methodName='getCurrency', paramList=[], returnType='org.broadleafcommerce.common.currency.domain.BroadleafCurrency', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.catalog.domain.SkuImpl', methodName='getBaseRetailPrice', paramList=[], returnType='org.broadleafcommerce.common.money.Money', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.catalog.domain.SkuImpl', methodName='getBaseSalePrice', paramList=[], returnType='org.broadleafcommerce.common.money.Money', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.catalog.domain.SkuImpl', methodName='isTaxable', paramList=[], returnType='java.lang.Boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.catalog.domain.SkuImpl', methodName='getName', paramList=[], returnType='java.lang.String', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.catalog.domain.SkuImpl', methodName='getPriceData', paramList=[], returnType='org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices', methodName='getPrice', paramList=[], returnType='org.broadleafcommerce.common.money.Money', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.discount.OrderItemPriceComparator', methodName='compare', paramList=[org.broadleafcommerce.core.offer.service.discount.domain.PromotableOrderItem, org.broadleafcommerce.core.offer.service.discount.domain.PromotableOrderItem], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.discount.domain.PromotableOrderItemImpl', methodName='getCurrency', paramList=[], returnType='org.broadleafcommerce.common.currency.domain.BroadleafCurrency', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.domain.OfferImpl', methodName='getOrderMinSubTotal', paramList=[], returnType='org.broadleafcommerce.common.money.Money', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.domain.OfferImpl', methodName='isFutureCredit', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.domain.OfferImpl', methodName='getAdjustmentType', paramList=[], returnType='org.broadleafcommerce.core.offer.service.type.OfferAdjustmentType', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.order.domain.OrderImpl', methodName='finalizeItemPrices', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.domain.OfferImpl', methodName='getTargetMinSubTotal', paramList=[], returnType='org.broadleafcommerce.common.money.Money', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.OfferServiceUtilitiesImpl$1', methodName='compare', paramList=[org.broadleafcommerce.core.offer.service.discount.domain.PromotableOrderItemPriceDetail, org.broadleafcommerce.core.offer.service.discount.domain.PromotableOrderItemPriceDetail], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.OfferServiceUtilitiesImpl', methodName='findRelatedQualifierRoot', paramList=[org.broadleafcommerce.core.order.domain.OrderItem], returnType='org.broadleafcommerce.core.order.domain.OrderItem', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOfferImpl', methodName='getMinimumRequiredTargetQuantity', paramList=[], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.discount.PromotionDiscount', methodName='split', paramList=[int], returnType='org.broadleafcommerce.core.offer.service.discount.PromotionDiscount', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.order.domain.OrderItemImpl', methodName='isChildOrderItem', paramList=[], returnType='boolean', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOfferImpl', methodName='calculateTargetQuantityForTieredOffer', paramList=[], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.domain.OfferImpl', methodName='getMarketingMessage', paramList=[], returnType='java.lang.String', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.discount.OrderOfferComparator', methodName='compare', paramList=[org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateOrderOffer, org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateOrderOffer], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.order.domain.FulfillmentGroupImpl', methodName='getSaleFulfillmentPrice', paramList=[], returnType='org.broadleafcommerce.common.money.Money', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.discount.ItemOfferQtyOneComparator', methodName='compare', paramList=[org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOffer, org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOffer], returnType='int', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOfferImpl', methodName='getWeightedPercentSaved', paramList=[], returnType='java.math.BigDecimal', visibility='public'}, InstrumentedMethod{parentFQN='org.broadleafcommerce.core.offer.service.discount.ItemOfferWeightedPercentComparator', methodName='compare', paramList=[org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOffer, org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOffer], returnType='int', visibility='public'}]
+Number of instrumented methods: 26
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.catalog.domain.SkuImpl.getCurrency
+Number of pairs/triples of object values: 98
+Number of unique pairs/triples of object values: 5
+Generated test class: org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.catalog.domain.SkuImpl.getBaseRetailPrice
+Number of pairs/triples of object values: 46
+Number of unique pairs/triples of object values: 2
+Generated test class: org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.catalog.domain.SkuImpl.getBaseSalePrice
+Number of pairs/triples of object values: 46
+Number of unique pairs/triples of object values: 2
+Generated test class: org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.catalog.domain.SkuImpl.isTaxable
+Number of pairs/triples of object values: 46
+Number of unique pairs/triples of object values: 2
+Generated test class: org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.catalog.domain.SkuImpl.getName
+Number of pairs/triples of object values: 46
+Number of unique pairs/triples of object values: 2
+Generated test class: org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.catalog.domain.SkuImpl.getPriceData
+Number of pairs/triples of object values: 52
+Number of unique pairs/triples of object values: 5
+Generated test class: org.broadleafcommerce.core.catalog.domain.TestSkuImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.catalog.service.dynamic.DynamicSkuPrices.getPrice
+Number of pairs/triples of object values: 52
+Number of unique pairs/triples of object values: 5
+Generated test class: org.broadleafcommerce.core.catalog.service.dynamic.TestDynamicSkuPricesPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.domain.OfferImpl.getOrderMinSubTotal
+Number of pairs/triples of object values: 75
+Number of unique pairs/triples of object values: 26
+Generated test class: org.broadleafcommerce.core.offer.domain.TestOfferImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.domain.OfferImpl.isFutureCredit
+Number of pairs/triples of object values: 16
+Number of unique pairs/triples of object values: 8
+Generated test class: org.broadleafcommerce.core.offer.domain.TestOfferImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.domain.OfferImpl.getAdjustmentType
+Number of pairs/triples of object values: 49
+Number of unique pairs/triples of object values: 22
+Generated test class: org.broadleafcommerce.core.offer.domain.TestOfferImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.domain.OfferImpl.getTargetMinSubTotal
+Number of pairs/triples of object values: 59
+Number of unique pairs/triples of object values: 18
+Generated test class: org.broadleafcommerce.core.offer.domain.TestOfferImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.domain.OfferImpl.getMarketingMessage
+Number of pairs/triples of object values: 39
+Number of unique pairs/triples of object values: 14
+Generated test class: org.broadleafcommerce.core.offer.domain.TestOfferImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.service.OfferServiceUtilitiesImpl.findRelatedQualifierRoot
+Number of pairs/triples of object values: 151
+Number of unique pairs/triples of object values: 19
+Generated test class: org.broadleafcommerce.core.offer.service.TestOfferServiceUtilitiesImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.service.discount.ItemOfferQtyOneComparator.compare
+NO OBJECT FILES FOUND FOR ../../pankti-experiments/broadleaf-framework/exp-on-system-tests/pankti-object-data/org.broadleafcommerce.core.offer.service.discount.ItemOfferQtyOneComparator.compare PARAMS_org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOffer,org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOffer - SKIPPING
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.broadleafcommerce.core.offer.service.discount.ItemOfferQtyOneComparator.compare - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.service.discount.ItemOfferWeightedPercentComparator.compare
+NO OBJECT FILES FOUND FOR ../../pankti-experiments/broadleaf-framework/exp-on-system-tests/pankti-object-data/org.broadleafcommerce.core.offer.service.discount.ItemOfferWeightedPercentComparator.compare PARAMS_org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOffer,org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOffer - SKIPPING
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.broadleafcommerce.core.offer.service.discount.ItemOfferWeightedPercentComparator.compare - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.service.discount.OrderItemPriceComparator.compare
+Number of pairs/triples of object values: 43
+Number of unique pairs/triples of object values: 34
+Generated test class: org.broadleafcommerce.core.offer.service.discount.TestOrderItemPriceComparatorPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.service.discount.OrderOfferComparator.compare
+NO OBJECT FILES FOUND FOR ../../pankti-experiments/broadleaf-framework/exp-on-system-tests/pankti-object-data/org.broadleafcommerce.core.offer.service.discount.OrderOfferComparator.compare PARAMS_org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateOrderOffer,org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateOrderOffer - SKIPPING
+Number of unique pairs/triples of object values: 0
+NO OBJECTS FOUND FOR org.broadleafcommerce.core.offer.service.discount.OrderOfferComparator.compare - SKIPPING
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.service.discount.PromotionDiscount.split
+Number of pairs/triples of object values: 64
+Number of unique pairs/triples of object values: 48
+Generated test class: org.broadleafcommerce.core.offer.service.discount.TestPromotionDiscountPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOfferImpl.getMinimumRequiredTargetQuantity
+Number of pairs/triples of object values: 151
+Number of unique pairs/triples of object values: 120
+Generated test class: org.broadleafcommerce.core.offer.service.discount.domain.TestPromotableCandidateItemOfferImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOfferImpl.calculateTargetQuantityForTieredOffer
+Number of pairs/triples of object values: 283
+Number of unique pairs/triples of object values: 74
+Generated test class: org.broadleafcommerce.core.offer.service.discount.domain.TestPromotableCandidateItemOfferImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOfferImpl.getWeightedPercentSaved
+Number of pairs/triples of object values: 16
+Number of unique pairs/triples of object values: 14
+Generated test class: org.broadleafcommerce.core.offer.service.discount.domain.TestPromotableCandidateItemOfferImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.offer.service.discount.domain.PromotableOrderItemImpl.getCurrency
+Number of pairs/triples of object values: 373
+Number of unique pairs/triples of object values: 208
+Generated test class: org.broadleafcommerce.core.offer.service.discount.domain.TestPromotableOrderItemImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.order.domain.FulfillmentGroupImpl.getSaleFulfillmentPrice
+Number of pairs/triples of object values: 45
+Number of unique pairs/triples of object values: 7
+Generated test class: org.broadleafcommerce.core.order.domain.TestFulfillmentGroupImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.order.domain.OrderImpl.finalizeItemPrices
+Number of pairs/triples of object values: 27
+Number of unique pairs/triples of object values: 27
+Generated test class: org.broadleafcommerce.core.order.domain.TestOrderImplPanktiGen
+--------------------------------------------------------------
+Generating test method for: org.broadleafcommerce.core.order.domain.OrderItemImpl.isChildOrderItem
+Number of pairs/triples of object values: 89
+Number of unique pairs/triples of object values: 30
+Generated test class: org.broadleafcommerce.core.order.domain.TestOrderItemImplPanktiGen
+--------------------------------------------------------------
+Number of new test cases: 692

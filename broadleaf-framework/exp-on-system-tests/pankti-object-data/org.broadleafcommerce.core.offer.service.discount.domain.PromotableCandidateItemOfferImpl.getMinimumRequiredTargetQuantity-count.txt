@@ -1,0 +1,1 @@
+Invocation count for org.broadleafcommerce.core.offer.service.discount.domain.PromotableCandidateItemOfferImpl.getMinimumRequiredTargetQuantity: 151
