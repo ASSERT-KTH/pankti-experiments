@@ -92,7 +92,7 @@
 91,PDTerminalField_getFieldFlags,4,4,4,4,4,0,well-tested
 92,PDType3Font_getCharProc,4,4,4,4,4,0,pseudo-tested
 93,PDType3Font_getCharProcs,4,4,4,4,0,4,well-tested
-94,PDDeviceCMYK_getDefaultDecode,3,3,2,2,2,1,well-tested
+94,PDDeviceCMYK_getDefaultDecode,3,3,2,2,2,0,well-tested
 95,FDFDictionary_getFile,2,2,1,1,1,0,pseudo-tested
 96,FDFDictionary_getID,2,2,1,1,1,0,pseudo-tested
 97,PDCIDFontType0_getWidthFromFont,2,2,1,1,1,0,well-tested
@@ -110,4 +110,4 @@
 109,LayerUtility_importPageAsForm_PDDocument_int,1,1,1,1,0,1,pseudo-tested
 110,LayerUtility_importPageAsForm_PDDocument_PDPage,1,1,1,1,0,1,pseudo-tested
 111,PDAppearanceCharacteristicsDictionary_getRotation,1,1,1,1,1,0,well-tested
-*,TOTAL,852329,121691,18291,18291,17654,637,well-tested : 66 pseudo-tested : 45
+*,TOTAL,852329,121691,18291,18291,17655,636,well-tested : 66 pseudo-tested : 45
