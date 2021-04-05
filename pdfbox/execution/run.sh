@@ -4,7 +4,7 @@ workloads=(./workload/000752 ./workload/000753 ./workload/000809 ./workload/0008
 overlay_pdf="./workload/000142"
 extension=".pdf"
 glowroot_jar_loc="/home/user/glowroot/glowroot.jar"
-pdfbox_jar_loc="/home/user/dev/pdfbox/app/target/pdfbox-app-2.0.21.jar"
+pdfbox_jar_loc="./pdfbox-app-2.0.21.jar"
 
 # execute PDFBox functionalities for each workload
 for i in ${workloads[@]}
