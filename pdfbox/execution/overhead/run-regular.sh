@@ -1,9 +1,9 @@
 #!/bin/bash
 # define workload PDFs
-workloads=(./workload/000752 ./workload/000753 ./workload/000809 ./workload/000810 ./workload/000817)
-overlay_pdf="./workload/000142"
+workloads=(../workload/000752 ../workload/000753 ../workload/000809 ../workload/000810 ../workload/000817)
+overlay_pdf="../workload/000142"
 extension=".pdf"
-pdfbox_jar_loc="./pdfbox-app-2.0.21.jar"
+pdfbox_jar_loc="../pdfbox-app-2.0.21.jar"
 
 # execute PDFBox functionalities for each workload
 for i in ${workloads[@]}
