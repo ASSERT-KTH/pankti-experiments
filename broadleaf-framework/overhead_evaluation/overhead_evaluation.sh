@@ -8,7 +8,7 @@ sleep 1
 for i in {1..5}
 do
   echo "Round $i"
-  ab -t 10 -n 100 http://localhost:8080/ >> ab_normal.log 2>&1
+  ab -t 10 -n 30 http://localhost:8080/ >> ab_normal.log 2>&1
   echo "Done"
   sleep 3
 done
