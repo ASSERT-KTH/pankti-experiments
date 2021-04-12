@@ -303,15 +303,3 @@ PID,USER,PR,NI,VIRT,RES,SHR,S,%CPU,%MEM,TIME+,COMMAND
 2638946,user,20,0,7314676,182148,21252,S,14.5,1.1,0:03.51,java -javaagent:/home/user/glowroot/glowroot.jar -jar ./pdfbox-app-2.0.21.jar WriteDecodedDoc -password 123 ./workload/000817-locked.pdf ./workload/000817-decoded.pdf
 2638995,user,20,0,6843560,77472,20784,S,4.7,0.5,0:01.14,java -javaagent:/home/user/glowroot/glowroot.jar -jar ./pdfbox-app-2.0.21.jar OverlayPDF ./workload/000817.pdf ./workload/000142.pdf -position foreground ./workload/000817-overlaid.pdf
 ,,,,,,,,21.4518151815181,3.3897689768977,,
-2634668,user,20,0,6979284,61704,20952,S,2.4,0.4,0:00.58,java -jar ../pdfbox-app-2.0.21.jar Encrypt -O 123 -U 123 ../workload/000752.pdf ../workload/000752-locked.pdf
-2634708,user,20,0,7380736,85504,21564,S,15.7,0.5,0:01.38,java -jar ../pdfbox-app-2.0.21.jar ExtractText -password 123 -sort ../workload/000752-locked.pdf ../workload/000752-from-pdf.txt
-2634761,user,20,0,7820248,154780,27164,S,17.6,1,0:04.23,java -jar ../pdfbox-app-2.0.21.jar PDFToImage -password 123 -imageType png -outputPrefix workloadAsImage -time ../workload/000752-locked.pdf
-2634933,user,20,0,6972340,49712,19916,S,1.4,0.3,0:00.33,java -jar ../pdfbox-app-2.0.21.jar Decrypt -password 123 ../workload/000753-locked.pdf ../workload/000753-unlocked.pdf
-2635007,user,20,0,7684832,118904,26444,S,12.7,0.7,0:03.05,java -jar ../pdfbox-app-2.0.21.jar PDFToImage -password 123 -imageType png -outputPrefix workloadAsImage -time ../workload/000753-locked.pdf
-2635162,user,20,0,6216220,22964,15356,S,0.2,0.1,0:00.06,java -jar ../pdfbox-app-2.0.21.jar Encrypt -O 123 -U 123 ../workload/000809.pdf ../workload/000809-locked.pdf
-2635335,user,20,0,6827988,32560,18364,S,0.4,0.2,0:00.10,java -jar ../pdfbox-app-2.0.21.jar WriteDecodedDoc -password 123 ../workload/000809-locked.pdf ../workload/000809-decoded.pdf
-2635471,user,20,0,6961116,38068,18696,S,1,0.2,0:00.24,java -jar ../pdfbox-app-2.0.21.jar PDFToImage -password 123 -imageType png -outputPrefix workloadAsImage -time ../workload/000810-locked.pdf
-2635595,user,20,0,6624036,30080,18348,S,0.3,0.2,0:00.07,java -jar ../pdfbox-app-2.0.21.jar OverlayPDF ../workload/000810.pdf ../workload/000142.pdf -position foreground ../workload/000810-overlaid.pdf
-2635720,user,20,0,6624036,27004,17176,S,0.2,0.2,0:00.05,java -jar ../pdfbox-app-2.0.21.jar PDFToImage -password 123 -imageType png -outputPrefix workloadAsImage -time ../workload/000817-locked.pdf
-2635781,user,20,0,7380736,91724,21296,S,5.1,0.6,0:01.24,java -jar ../pdfbox-app-2.0.21.jar PDFSplit -password 123 -split 1 ../workload/000817-locked.pdf
-,,,,,,,,5.18181818181818,0.4,,
