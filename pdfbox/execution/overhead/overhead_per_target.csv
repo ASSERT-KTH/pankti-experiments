@@ -15,7 +15,7 @@ aspect,class_method,invocations,collected,avg_%CPU,avg_%MEM
 51,PDFontDescriptor_getFlags,227,227,29.66,1.23
 40,FontCache_getFont,115,115,29.34,1.35
 15,DefaultResourceCache_getColorSpace,72,25,30.27,1.44
-20,DefaultResourceCache_getXObject,66,15,35.12,1.43
+20,DefaultResourceCache_getXObject,66,15,27.9,1.48
 78,PDImageXObject_getInterpolate,66,8,28.33,1.31
 79,PDImageXObject_getMask,66,13,30.06,1.42
 46,PDCIDFontType2_codeToGID,58,38,30.38,1.42
