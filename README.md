@@ -9,12 +9,13 @@ Regarding the experimental targets, the following criteria is applied:
 - The project should contain a certain number of GitHub stars and commits, which indicate its popularity and complexity
 - The project can be deployed with the research lab's calculation resource, with a relatively realistic workload for experiments
 
-There are 4 projects selected for the experiments. The following table shows the descriptive metrics of each project.
+There are 3 projects selected for the experiments. The following table shows the descriptive metrics of each project.
 
 | project       | Version       | LOC   | Classes | App. Methods | Test Methods | TS Method Cov. | TS Line Cov. | WL Method Cov. | WL Line Cov. |
 | ------------- | ------------- | ----- | ------- | -------------| ------------ | -------------- | ------------ | -------------- | ------------ |
-| [jitsi-jicofo](https://github.com/jitsi/jicofo/tree/stable/jitsi-meet_4857) | stable-4857 | Sum: 28,318 <br> Java: 25,165 | 146 | 1,350 | 63 | 49.4% <br> 667/1,350 | 46.7% <br> 3,537/7,571 | 49.3% <br> 665/1,350 | 46.6% <br> 3,528/7,571 |
+| [jitsi-jicofo](https://github.com/jitsi/jicofo/tree/stable/jitsi-meet_4857) | stable-4857 | Sum: 28,318 <br> Java: 25,165 | 146 | 1,350 | 63 | 49.4% <br> 667/1,350 | 46.7% <br> 3,537/7,571 | 48.9% <br> 660/1,350 | 46.2% <br> 3,500/7,571 |
 | [PDFBox](https://github.com/apache/pdfbox/tree/2.0.21) | 2.0.21 | Sum: 728,812 <br> Java: 161,976 | 1,278 | 11,042 | 1,675 | 54.8% <br> 6,049/11,042 | 53.5% <br> 34,653/64,787 | 21.6% <br> 2,390/11,042 | 21.0% <br> 13,630/64,787 |
+| [Broadleaf](https://github.com/BroadleafCommerce/BroadleafCommerce/tree/broadleaf-6.1.4-GA) | 6.1.4-GA | Sum: 618,465 <br> Java: 211,030 | 684 | 6,173 | 197 | 23.9% <br> 1,478/6,173 | 23.7% <br> 5,846/24,667 | 23.1% <br> 1,424/6,173 | 19.2% <br> 4,735/24,667 |
 
 ### The Commands for Descriptive Metrics Measurement
 
